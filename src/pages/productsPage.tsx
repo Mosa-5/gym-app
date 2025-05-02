@@ -17,13 +17,12 @@ const Products = () => {
 
       <div>
         <div className="flex p-6 max-w-full justify-center mt-10">
-        
           <main className="flex flex-col flex-auto max-w-screen-xl">
             <div className="flex flex-col items-center mb-6 justify-evenly min-w-fit gap-4">
               <SearchBar />
               <div className="flex gap-10 w-full justify-center">
-              <SortMenu />
-              <FiltersMobile />
+                <SortMenu />
+                <FiltersMobile />
               </div>
             </div>
             <VirtualizedProductGrid searchQuery={searchQuery} />

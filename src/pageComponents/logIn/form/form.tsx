@@ -14,6 +14,7 @@ import {
 import { Input } from "@/componentsShadcn/ui/input";
 import { useSignIn } from "@/reactQuery/mutations/auth/signIn";
 import { Link } from "react-router-dom";
+import { useGuestSignIn } from "@/reactQuery/mutations/auth/signIn";
 
 const formSchema = z.object({
   email: z
@@ -41,6 +42,11 @@ const FormElement = () => {
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
     login(values);
+  }
+const { mutate: guestLogin } = useGuestSignIn();
+
+  function onGuest() {
+    guestLogin();
   }
 
   return (
@@ -80,9 +86,12 @@ const FormElement = () => {
               )}
             />
           </div>
+          <div className="flex flex-col gap-2">
           <Button className="" type="submit">
             Log In
           </Button>
+          <Button variant={"secondary"} onClick={onGuest}>Guest Account</Button>
+          </div>
           <FormDescription>
             <div className="flex justify-center gap-2">
               <h1 className="text-sm text-gray-600 dark:text-gray-500">
