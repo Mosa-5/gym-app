@@ -43,7 +43,7 @@ const FormElement = () => {
   function onSubmit(values: z.infer<typeof formSchema>) {
     login(values);
   }
-  const { mutate: guestLogin, isPending:isGuestPending } = useGuestSignIn();
+  const { mutate: guestLogin, isPending: isGuestPending } = useGuestSignIn();
 
   function onGuest() {
     guestLogin();
@@ -90,9 +90,13 @@ const FormElement = () => {
             <Button className="" type="submit">
               Log In
             </Button>
-            <Button variant={"secondary"} onClick={(e) => { 
-              e.preventDefault();
-              return onGuest()}}>
+            <Button
+              variant={"secondary"}
+              onClick={(e) => {
+                e.preventDefault();
+                return onGuest();
+              }}
+            >
               Guest Account
             </Button>
           </div>
@@ -114,11 +118,12 @@ const FormElement = () => {
         {isError && (
           <p className="text-red-500">Login failed: {String(error)}</p>
         )}
-        {isPending || isGuestPending && (
-          <h1 className="m-auto text-purple-900 font-semibold text-center text-lg">
-            Signing you in...
-          </h1>
-        )}
+        {isPending ||
+          (isGuestPending && (
+            <h1 className="m-auto text-purple-900 font-semibold text-center text-lg">
+              Signing you in...
+            </h1>
+          ))}
       </div>
     </>
   );
