@@ -43,7 +43,7 @@ const FormElement = () => {
   function onSubmit(values: z.infer<typeof formSchema>) {
     login(values);
   }
-const { mutate: guestLogin } = useGuestSignIn();
+  const { mutate: guestLogin, isPending:isGuestPending } = useGuestSignIn();
 
   function onGuest() {
     guestLogin();
@@ -87,10 +87,14 @@ const { mutate: guestLogin } = useGuestSignIn();
             />
           </div>
           <div className="flex flex-col gap-2">
-          <Button className="" type="submit">
-            Log In
-          </Button>
-          <Button variant={"secondary"} onClick={onGuest}>Guest Account</Button>
+            <Button className="" type="submit">
+              Log In
+            </Button>
+            <Button variant={"secondary"} onClick={(e) => { 
+              e.preventDefault();
+              return onGuest()}}>
+              Guest Account
+            </Button>
           </div>
           <FormDescription>
             <div className="flex justify-center gap-2">
@@ -110,7 +114,7 @@ const { mutate: guestLogin } = useGuestSignIn();
         {isError && (
           <p className="text-red-500">Login failed: {String(error)}</p>
         )}
-        {isPending && (
+        {isPending || isGuestPending && (
           <h1 className="m-auto text-purple-900 font-semibold text-center text-lg">
             Signing you in...
           </h1>

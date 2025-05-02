@@ -55,15 +55,15 @@ export const logout = async (): Promise<void> => {
 };
 
 export const GuestSignIn = async (): Promise<void> => {
-  return supabase.auth.signInWithPassword({   email: 'guest@example.com',
-    password: 'guest123', }).then((res) => {
-    if (
-      res?.error &&
-      res?.error?.status &&
-      (res?.error?.status < 200 || res?.error?.status >= 300)
-    ) {
-      throw new Error("Auth");
-    }
-  });
-}
-  
+  return supabase.auth
+    .signInWithPassword({ email: "guest@example.com", password: "guest123" })
+    .then((res) => {
+      if (
+        res?.error &&
+        res?.error?.status &&
+        (res?.error?.status < 200 || res?.error?.status >= 300)
+      ) {
+        throw new Error("Auth");
+      }
+    });
+};
