@@ -5,32 +5,32 @@ import {
   CardTitle,
 } from "@/componentsShadcn/ui/card";
 import { useAuthContext } from "@/context/auth/hooks/useAuthContext";
-import { useGetWhishlistedProducts } from "@/reactQuery/query/whishlist";
-import emptyWhishlistsSvg from "@/assets/undraw_wishlist_71gv.svg";
+import { useGetWishlistedProducts } from "@/reactQuery/query/whishlist";
+import emptyWishlistsSvg from "@/assets/undraw_wishlist_71gv.svg";
 import { Link } from "react-router-dom";
 import { Button } from "@/componentsShadcn/ui/button";
-import { useDeleteWhishlistItem } from "@/reactQuery/mutations/whishlist";
+import { useDeleteWishlistItem } from "@/reactQuery/mutations/whishlist";
 import { toast } from "sonner";
-import { mapWhishlistItemData } from "@/supabase/whishlist";
+import { mapWishlistItemData } from "@/supabase/whishlist";
 
-const Whishlist = () => {
+const Wishlist = () => {
   const { user } = useAuthContext();
 
-  const { data: whishlistProducts = [], isLoading } = useGetWhishlistedProducts(
-    { queryOptions: { select: mapWhishlistItemData } },
+  const { data: wishlistProducts = [], isLoading } = useGetWishlistedProducts(
+    { queryOptions: { select: mapWishlistItemData } },
     user?.id,
   );
 
-  const { mutate: deleteWhishlistItem } = useDeleteWhishlistItem();
+  const { mutate: deleteWishlistItem } = useDeleteWishlistItem();
 
-  const deleteWhishlist = (
+  const deleteWishlist = (
     userId: string,
     productId: number,
     e: React.MouseEvent<HTMLButtonElement>,
   ) => {
     e.preventDefault();
-    deleteWhishlistItem({ userId: userId, productId: productId });
-    toast("Whishlist Item Deleted");
+    deleteWishlistItem({ userId: userId, productId: productId });
+    toast("Wishlist Item Deleted");
   };
 
   return (
@@ -41,20 +41,20 @@ const Whishlist = () => {
         <Card className="border-none shadow-none bg-transparent dark:bg-transparent dark:border-neutral-800">
           <CardHeader>
             <CardTitle className="text-center">
-              {whishlistProducts.length}{" "}
-              {whishlistProducts.length !== 1 ? "Whishlists" : "Whishlist"}
+              {wishlistProducts.length}{" "}
+              {wishlistProducts.length !== 1 ? "Wishlists" : "Wishlist"}
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-2">
             <div className="flex gap-4 flex-wrap justify-center">
-              {whishlistProducts.length === 0 ? (
+              {wishlistProducts.length === 0 ? (
                 <img
-                  src={emptyWhishlistsSvg}
-                  alt="No whishlists"
+                  src={emptyWishlistsSvg}
+                  alt="No wishlists"
                   className="max-w-72 m-auto"
                 />
               ) : (
-                whishlistProducts.map((item) => {
+                wishlistProducts.map((item) => {
                   return (
                     <Link
                       className="w-60 transform-all duration-200 hover:-translate-y-2"
@@ -82,7 +82,7 @@ const Whishlist = () => {
                           <div className="px-2 pb-2 flex-1 flex justify-center w-full">
                             <Button
                               onClick={(e) =>
-                                deleteWhishlist(
+                                deleteWishlist(
                                   item.user_id,
                                   item.product.id,
                                   e,
@@ -108,4 +108,4 @@ const Whishlist = () => {
   );
 };
 
-export default Whishlist;
+export default Wishlist;

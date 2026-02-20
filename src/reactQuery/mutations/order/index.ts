@@ -30,14 +30,11 @@ export const usePlaceOrder = () => {
     // Updated to use the void-returning function
     onSuccess: (_, { userId }) => {
       clearCart();
-      console.log("Profile updated successfully!");
       queryClient.invalidateQueries({
         queryKey: ["Orders", userId],
         exact: true, // Ensures only the exact query is invalidated
       });
     },
-    onError: (error: Error) => {
-      console.error("Error creating user:", error);
-    },
+    onError: () => {},
   });
 };

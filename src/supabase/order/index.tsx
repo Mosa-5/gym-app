@@ -33,7 +33,6 @@ export const placeOrder = async ({
   ]);
 
   if (error) {
-    console.error("Error placing order:", error.message);
     throw new Error(error.message);
   }
 };
@@ -52,8 +51,7 @@ export const getUserOrders = async (
     .order("created_at", { ascending: false });
 
   if (error) {
-    console.error("Error fetching orders:", error.message);
-    throw new Error(error.message); // Handle or propagate the error
+    throw new Error(error.message);
   }
 
   return (data as Order[]) || [];
@@ -63,7 +61,7 @@ export const getUserSingleOrder = async (
   orderId: string | undefined,
 ): Promise<Order> => {
   if (orderId === undefined) {
-    throw new Error("User ID is required to fetch orders.");
+    throw new Error("Order ID is required to fetch order details.");
   }
 
   const { data, error } = await supabase
@@ -71,12 +69,12 @@ export const getUserSingleOrder = async (
     .select("*")
     .eq("id", Number(orderId))
     .single();
+
   if (error) {
-    console.error("Error fetching orders:", error.message);
-    throw new Error(error.message); // Handle or propagate the error
+    throw new Error(error.message);
   }
 
-  return (data as Order) || {};
+  return data as Order;
 };
 
 export type Order = {
@@ -102,7 +100,7 @@ export const mapOrdersData = (datalist: Order[]) => {
   return datalist.map((data) => ({
     status: data.status || "",
     created_at: data.created_at || "",
-    total_price: data.total_price || "",
+    total_price: data.total_price ?? 0,
     updated_at: data.updated_at || "",
     user_id: data.user_id || "",
     id: data.id,
@@ -114,7 +112,7 @@ export const mapSingleOrdersData = (data: Order) => {
   return {
     status: data.status || "",
     created_at: data.created_at || "",
-    total_price: data.total_price || "",
+    total_price: data.total_price ?? 0,
     updated_at: data.updated_at || "",
     user_id: data.user_id || "",
     id: data.id,

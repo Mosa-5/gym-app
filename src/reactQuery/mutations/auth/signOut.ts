@@ -13,9 +13,6 @@ export const useSignOut = () => {
       navigate("/auth/signin");
     },
 
-    onError: (error: Error) => {
-      console.error("Logout failed:", error);
-      throw error;
-    },
+    onError: () => {},
   });
 };

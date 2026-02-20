@@ -7,11 +7,10 @@ import {
 import ProfileHero from "@/pageComponents/forProfilePage/ProfileHero/profileHero";
 import Account from "@/pageComponents/forProfilePage/ProfileInfoSection/account/account";
 import Orders from "@/pageComponents/forProfilePage/ProfileInfoSection/orders/orders";
-import Whishlist from "@/pageComponents/forProfilePage/ProfileInfoSection/whishlist/whishlist";
+import Wishlist from "@/pageComponents/forProfilePage/ProfileInfoSection/whishlist/whishlist";
 import PersonalReviews from "@/pageComponents/forProfilePage/ProfileInfoSection/personalReviews/personalReviews";
 
 const Profile = () => {
-  console.log("profile");
   return (
     <>
       <ProfileHero />
@@ -21,7 +20,7 @@ const Profile = () => {
           <TabsList className="flex *:text-base *:p-3 flex-col gap-1 border-2 dark:border-neutral-800 *:w-full w-full h-fit sm:*:p-1 sm:p-1 sm:flex-row">
             <TabsTrigger value="account">Account</TabsTrigger>
             <TabsTrigger value="orders">Orders</TabsTrigger>
-            <TabsTrigger value="whishlist">Whishlist</TabsTrigger>
+            <TabsTrigger value="wishlist">Wishlist</TabsTrigger>
             <TabsTrigger value="reviews">Reviews</TabsTrigger>
           </TabsList>
           <TabsContent value="account">
@@ -32,8 +31,8 @@ const Profile = () => {
             <Orders />
           </TabsContent>
 
-          <TabsContent value="whishlist">
-            <Whishlist />
+          <TabsContent value="wishlist">
+            <Wishlist />
           </TabsContent>
 
           <TabsContent value="reviews">

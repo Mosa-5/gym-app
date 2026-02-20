@@ -9,6 +9,7 @@ import {
 } from "@/componentsShadcn/ui/card";
 import { usePlaceOrder } from "@/reactQuery/mutations/order";
 import { useAuthContext } from "@/context/auth/hooks/useAuthContext";
+import { toast } from "sonner";
 import emptyCartSVG from "@/assets/undraw_empty-cart_574u.svg";
 const CartPage = () => {
   const { cart, removeFromCart, clearCart, changeQuantity } = useCartContext();
@@ -24,12 +25,10 @@ const CartPage = () => {
   const { mutate: placeOrder, isPending, isError } = usePlaceOrder();
 
   const handlePlaceOrder = () => {
-    // Validate that the cart is not empty
     if (cart.length === 0) {
-      console.log("cart length is 0");
       return;
     } else if (user === null) {
-      clearCart();
+      toast.error("You need to be signed in to place an order.");
       return;
     }
 
@@ -54,7 +53,7 @@ const CartPage = () => {
   };
 
   if (isError) {
-    console.log("failed to place order");
+    toast.error("Failed to place order. Please try again.");
   }
 
   return (

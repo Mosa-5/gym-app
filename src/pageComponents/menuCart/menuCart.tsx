@@ -25,7 +25,7 @@ const ShoppingCart = () => {
 
   return (
     <Sheet>
-      <SheetTrigger>
+      <SheetTrigger asChild>
         <Button className="relative">
           <div>
             {Icons.cart}
@@ -70,7 +70,7 @@ const ShoppingCart = () => {
                         <div>
                           <h1>{product.name}</h1>
                           <h1 className="text-xs font-medium text-gray-700">
-                            Black / XS (24-31")
+                            {product.category}
                           </h1>
                         </div>
                         <h1>

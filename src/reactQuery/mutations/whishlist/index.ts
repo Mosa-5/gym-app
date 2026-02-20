@@ -14,19 +14,16 @@ export const useAddToWishlist = () => {
 
     // Updated to use the void-returning function
     onSuccess: (_, { userId }) => {
-      console.log("Profile updated successfully!");
       queryClient.invalidateQueries({
-        queryKey: ["Whishlist", userId],
-        exact: true, // Ensures only the exact query is invalidated
+        queryKey: ["Wishlist", userId],
+        exact: true,
       });
     },
-    onError: (error: Error) => {
-      console.error("Error creating user:", error);
-    },
+    onError: () => {},
   });
 };
 
-export const useDeleteWhishlistItem = () => {
+export const useDeleteWishlistItem = () => {
   const queryClient = useQueryClient();
 
   return useMutation<
@@ -37,19 +34,16 @@ export const useDeleteWhishlistItem = () => {
       productId: number;
     }
   >({
-    mutationKey: ["deleteWhishlistItem"],
+    mutationKey: ["deleteWishlistItem"],
     mutationFn: deleteFromWishlist,
 
     onSuccess: (_, { userId }) => {
-      console.log("Item deleted from wishlist successfully!");
       queryClient.invalidateQueries({
-        queryKey: ["Whishlist", userId],
+        queryKey: ["Wishlist", userId],
         exact: true,
       });
     },
 
-    onError: (error: Error) => {
-      console.error("Error deleting item from wishlist:", error);
-    },
+    onError: () => {},
   });
 };

@@ -25,7 +25,6 @@ const App: React.FC = () => {
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
-      console.log("Session: ", session);
       if (session) {
         handleSetUser({
           id: session.user.id,
@@ -40,7 +39,6 @@ const App: React.FC = () => {
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
-      console.log("Session on auth state change:", session);
       if (session) {
         handleSetUser({
           id: session.user.id,

@@ -19,12 +19,12 @@ export const useGetProfileInfo = <T>(
   return useQuery<SingleProfileData, Error, T>({
     queryKey: ["profile", id],
     queryFn: () => {
-      console.log(id);
       if (!id) {
         throw new Error("User ID is undefined");
       }
       return getProfileInfo(id);
     },
+    enabled: !!id,
     ...queryOptions,
   });
 };

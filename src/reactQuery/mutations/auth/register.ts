@@ -16,9 +16,6 @@ export const useRegister = () => {
     onSuccess: () => {
       navigate("auth/signin");
     },
-    onError: (error: Error) => {
-      console.error("Sign Up failed:", error);
-      throw error;
-    },
+    onError: () => {},
   });
 };

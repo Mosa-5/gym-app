@@ -63,8 +63,6 @@ const CaruselForPages: React.FC<CarouselProps> = ({
     }
   })();
 
-  console.log(products);
-
   return (
     <motion.div
       className={wrapper()}

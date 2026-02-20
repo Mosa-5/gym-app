@@ -4,7 +4,6 @@ import FeaturesSection from "@/pageComponents/forHome/featuresSection/featuresSe
 import HeroBanner from "@/pageComponents/forHome/heroBanner/heroBanner";
 
 const Main = () => {
-  console.log("main");
   return (
     <>
       <HeroBanner />

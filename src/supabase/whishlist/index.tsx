@@ -2,7 +2,7 @@ import { supabase } from "../supabase";
 
 export const getWishlistedProducts = async (
   userId: string | undefined,
-): Promise<WhishlistItem[]> => {
+): Promise<WishlistItem[]> => {
   if (!userId) {
     throw new Error("User ID is required to fetch wishlisted products.");
   }
@@ -25,17 +25,16 @@ export const getWishlistedProducts = async (
     `,
     )
     .eq("user_id", userId);
-  console.log(data);
+
   if (error) {
-    console.error("Error fetching wishlisted products:", error.message);
     throw new Error(error.message);
   }
 
   // Transform the response if needed (optional)
-  return (data as WhishlistItem[]) || [];
+  return (data as WishlistItem[]) || [];
 };
 
-export type WhishlistItem = {
+export type WishlistItem = {
   id: number;
   user_id: string | null;
   product: {
@@ -49,7 +48,7 @@ export type WhishlistItem = {
   };
 };
 
-export const mapWhishlistItemData = (datalist: WhishlistItem[]) => {
+export const mapWishlistItemData = (datalist: WishlistItem[]) => {
   return datalist.map((data) => ({
     id: data.id,
     user_id: data.user_id || "",
@@ -83,7 +82,6 @@ export const addToWishlist = async ({
     .insert([{ user_id: userId, product_id: Number(productId) }]);
 
   if (error) {
-    console.error("Error adding item to wishlist:", error.message);
     throw new Error(error.message);
   }
 };
@@ -108,7 +106,6 @@ export const deleteFromWishlist = async ({
     .eq("product_id", Number(productId));
 
   if (error) {
-    console.error("Error deleting item from wishlist:", error.message);
     throw new Error(error.message);
   }
 };
