@@ -25,15 +25,21 @@ export const CartContext = createContext<CartContextType | null>(null);
 export const CartProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
-  // Initialize cart state with data from localStorage or an empty array
   const [cart, setCart] = useState<CartItem[]>(() => {
-    const storedCart = localStorage.getItem("cart");
-    return storedCart ? JSON.parse(storedCart) : [];
+    try {
+      const storedCart = localStorage.getItem("cart");
+      return storedCart ? JSON.parse(storedCart) : [];
+    } catch {
+      return [];
+    }
   });
 
-  // Save cart to localStorage whenever it changes
   useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart));
+    try {
+      localStorage.setItem("cart", JSON.stringify(cart));
+    } catch {
+      // localStorage may be full or unavailable
+    }
   }, [cart]);
 
   const addToCart = (item: CartItem) => {

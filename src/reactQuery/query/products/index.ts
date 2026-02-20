@@ -20,7 +20,7 @@ export const useGetProductList = <T = Product[]>({
   return useQuery<Product[], Error, T>({
     queryKey: ["products"],
     queryFn: getProductList,
-    staleTime: 60 * 1000, // Cache for 6 mins
+    staleTime: 60 * 1000,
     ...queryOptions,
   });
 };
@@ -38,7 +38,7 @@ export const useGetProductListWithCategory = <T = Product[]>(
     queryFn: () => {
       return getProductListWithCategory(productType);
     },
-    staleTime: 60 * 1000, // Cache for 6 min
+    staleTime: 60 * 1000,
     ...queryOptions,
   });
 };
@@ -51,7 +51,7 @@ export const useGetProductListWithBestSelling = <T = Product[]>({
   return useQuery<Product[], Error, T>({
     queryKey: ["bestSellingProducts"],
     queryFn: getProductListBestSelling,
-    staleTime: 60 * 1000, // Cache for 6 min
+    staleTime: 60 * 1000,
     ...queryOptions,
   });
 };
@@ -64,7 +64,7 @@ export const useGetProductListWithWorstSelling = <T = Product[]>({
   return useQuery<Product[], Error, T>({
     queryKey: ["WorstSellingProducts"],
     queryFn: getProductListWorstSelling,
-    staleTime: 60 * 1000, // Cache for 6 min
+    staleTime: 60 * 1000,
     ...queryOptions,
   });
 };

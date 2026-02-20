@@ -19,7 +19,6 @@ export const useWriteReview = () => {
     mutationFn: writeReview,
 
     onSuccess: (_, { userId, productId }) => {
-      console.log("Review submitted successfully!");
       queryClient.invalidateQueries({
         queryKey: ["userReviews", userId],
         exact: true,
@@ -30,9 +29,7 @@ export const useWriteReview = () => {
       });
     },
 
-    onError: (error: Error) => {
-      console.error("Error submitting review:", error);
-    },
+    onError: () => {},
   });
 };
 
@@ -52,7 +49,6 @@ export const useDeleteReview = () => {
     mutationFn: async ({ reviewId }) => deleteReview(reviewId),
 
     onSuccess: (_, { userId, productId }) => {
-      console.log("Review submitted successfully!");
       queryClient.invalidateQueries({
         queryKey: ["userReviews", userId],
         exact: true,
@@ -63,9 +59,7 @@ export const useDeleteReview = () => {
       });
     },
 
-    onError: (error: Error) => {
-      console.error("Error Deleting review:", error);
-    },
+    onError: () => {},
   });
 };
 
@@ -80,11 +74,7 @@ export const useToggleLike = () => {
     mutationKey: ["toggleLike"],
     mutationFn: ({ reviewId, userId }) => toggleLike(reviewId, userId),
 
-    onSuccess: ({ liked }, { productId, userId, reviewId }) => {
-      console.log(`Like toggled: ${liked ? "Liked" : "Unliked"}`);
-      console.log("Invalidating query key:", ["productReviews", productId]);
-
-      // Optimistically update the like count in queries
+    onSuccess: (_, { productId, userId, reviewId }) => {
       queryClient.invalidateQueries({
         queryKey: ["userReviews", userId],
         exact: true,
@@ -99,8 +89,7 @@ export const useToggleLike = () => {
       });
     },
 
-    onError: (error: Error) => {
-      console.error("Error toggling like:", error);
+    onError: () => {
       toast("Must be logged in");
     },
   });

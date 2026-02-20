@@ -6,9 +6,6 @@ import { Navigate, Outlet } from "react-router-dom";
 const AuthGuardLogOut: React.FC<PropsWithChildren> = ({ children }) => {
   const { user, loading } = useAuthContext();
 
-  console.log("AuthGuardLogOut - user:", user);
-  console.log("AuthGuardLogOut - loading:", loading);
-
   if (loading) {
     return <Loader />;
   }

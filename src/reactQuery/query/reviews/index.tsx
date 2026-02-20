@@ -21,7 +21,6 @@ export const useGetProductReviews = <T = ProductReviews[],>({
     "queryKey" | "queryFn"
   >;
 }): UseQueryResult<T, Error> => {
-  console.log("Query key:", ["productReviews", productId]);
   return useQuery<ProductReviews[], Error, T>({
     queryKey: ["productReviews", productId],
     queryFn: () => getProductReviews(productId),

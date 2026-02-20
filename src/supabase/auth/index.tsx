@@ -37,12 +37,8 @@ export const login = ({
   password: string;
 }) => {
   return supabase.auth.signInWithPassword({ email, password }).then((res) => {
-    if (
-      res?.error &&
-      res?.error?.status &&
-      (res?.error?.status < 200 || res?.error?.status >= 300)
-    ) {
-      throw new Error("Auth");
+    if (res?.error) {
+      throw new Error(`Sign in failed: ${res.error.message}`);
     }
   });
 };
@@ -55,15 +51,16 @@ export const logout = async (): Promise<void> => {
 };
 
 export const GuestSignIn = async (): Promise<void> => {
-  return supabase.auth
-    .signInWithPassword({ email: "guest@example.com", password: "guest123" })
-    .then((res) => {
-      if (
-        res?.error &&
-        res?.error?.status &&
-        (res?.error?.status < 200 || res?.error?.status >= 300)
-      ) {
-        throw new Error("Auth");
-      }
-    });
+  const email = import.meta.env.VITE_GUEST_EMAIL;
+  const password = import.meta.env.VITE_GUEST_PASSWORD;
+
+  if (!email || !password) {
+    throw new Error("Guest account is not configured.");
+  }
+
+  return supabase.auth.signInWithPassword({ email, password }).then((res) => {
+    if (res?.error) {
+      throw new Error(`Guest sign in failed: ${res.error.message}`);
+    }
+  });
 };

@@ -53,17 +53,15 @@ const formSchema = z.object({
     .or(z.literal("")),
   address: z
     .string()
-    .regex(/^[a-zA-Z\s]+\/[a-zA-Z\s]+$/, {
-      message:
-        "Location must be in the format 'Country/City' (e.g., 'USA/New York').",
-    })
+    .min(3, { message: "Address must be at least 3 characters." })
+    .max(100, { message: "Address must not exceed 100 characters." })
     .optional()
     .or(z.literal("")),
   phone_number: z
     .string()
-    .regex(/^\+?[1-9]\d{1,14}$/, {
+    .regex(/^\+?[\d\s\-()]{7,20}$/, {
       message:
-        "Phone number must be a valid format, e.g., '+123456789' or '123456789'.",
+        "Phone number must be a valid format, e.g., '+1 (234) 567-8900' or '123456789'.",
     })
     .optional()
     .or(z.literal("")),
@@ -85,7 +83,6 @@ const Account = () => {
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
     if (!user?.id) {
-      console.error("ID is undefined");
       return;
     }
 

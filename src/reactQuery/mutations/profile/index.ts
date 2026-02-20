@@ -25,14 +25,11 @@ export const useFillProfile = () => {
     mutationKey: ["fill-profile-info"],
     mutationFn: fillProfileInfo, // Updated to use the void-returning function
     onSuccess: (_, { id }) => {
-      console.log("Profile updated successfully!");
       queryClient.invalidateQueries({
         queryKey: ["profile", id],
         exact: true, // Ensures only the exact query is invalidated
       });
     },
-    onError: (error: Error) => {
-      console.error("Error creating user:", error);
-    },
+    onError: () => {},
   });
 };

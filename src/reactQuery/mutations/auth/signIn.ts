@@ -12,10 +12,7 @@ export const useSignIn = () => {
     onSuccess: () => {
       navigate("/dashboard/main");
     },
-    onError: (error: Error) => {
-      console.error("Login failed:", error);
-      throw error;
-    },
+    onError: () => {},
   });
 };
 
@@ -23,15 +20,11 @@ export const useGuestSignIn = () => {
   const navigate = useNavigate();
 
   return useMutation<void, Error>({
-    mutationKey: ["login"],
+    mutationKey: ["guest-login"],
     mutationFn: GuestSignIn,
 
     onSuccess: () => {
       navigate("/dashboard/main");
-    },
-    onError: (error: Error) => {
-      console.error("Login failed:", error);
-      throw error;
     },
   });
 };

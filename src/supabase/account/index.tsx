@@ -36,17 +36,10 @@ export const fillProfileInfo = async ({
   id: string;
   values: FillProfileInfoPayload;
 }): Promise<void> => {
-  try {
-    await supabase
-      .from("profiles")
-      .upsert({ id, ...values }, { onConflict: "id" }) // Include 'id' in the payload
-      .throwOnError();
-
-    console.log("Profile updated successfully!");
-  } catch (error) {
-    console.error("Error filling profile info:", error);
-    throw error; // Optional: rethrow if you want the mutation to handle errors
-  }
+  await supabase
+    .from("profiles")
+    .upsert({ id, ...values }, { onConflict: "id" })
+    .throwOnError();
 };
 
 export const getProfileInfo = async (

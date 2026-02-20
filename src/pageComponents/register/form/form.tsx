@@ -16,7 +16,7 @@ import { useRegister } from "@/reactQuery/mutations/auth/register";
 import { Link } from "react-router-dom";
 
 const formSchema = z.object({
-  fullNameEn: z.string().nonempty({ message: "Firs Name is required" }),
+  fullNameEn: z.string().nonempty({ message: "First Name is required" }),
   fullNameKa: z.string().nonempty({ message: "Last Name is required" }),
   email: z
     .string()

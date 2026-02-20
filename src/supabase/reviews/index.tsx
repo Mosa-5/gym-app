@@ -4,7 +4,7 @@ export const getProductReviews = async (
   productId: string | undefined,
 ): Promise<ProductReviews[]> => {
   if (productId === undefined) {
-    throw new Error("User ID is required to fetch orders.");
+    throw new Error("Product ID is required to fetch reviews.");
   }
 
   const { data, error } = await supabase
@@ -19,7 +19,6 @@ export const getProductReviews = async (
     .order("like_count", { ascending: false });
 
   if (error) {
-    console.error("Error fetching orders:", error.message);
     throw new Error(error.message);
   }
 
@@ -37,11 +36,6 @@ export const writeReview = async ({
   productId: string;
   comment: string;
 }): Promise<void> => {
-  // Validate input
-  console.log("userId: ", userId);
-  console.log("productId: ", productId);
-  console.log("comment: ", comment);
-
   const { error } = await supabase.from("reviews").insert([
     {
       user_id: userId,
@@ -51,9 +45,7 @@ export const writeReview = async ({
     },
   ]);
 
-  // Handle any errors
   if (error) {
-    console.error("Error writing review:", error.message);
     throw new Error("Failed to write the review. Please try again later.");
   }
 };
@@ -62,7 +54,6 @@ export const deleteReview = async (reviewId: number): Promise<void> => {
   const { error } = await supabase.from("reviews").delete().eq("id", reviewId);
 
   if (error) {
-    console.error("Error deleting review:", error.message);
     throw new Error("Failed to delete the review. Please try again later.");
   }
 };
@@ -71,9 +62,9 @@ export const getUserReviews = async (
   id: string | undefined,
 ): Promise<Reviews[]> => {
   if (id === undefined) {
-    throw new Error("User ID is required to fetch orders.");
+    throw new Error("User ID is required to fetch reviews.");
   }
-  console.log("id: ", id);
+
   const { data, error } = await supabase
     .from("reviews")
     .select(
@@ -86,7 +77,6 @@ export const getUserReviews = async (
     .eq("user_id", id);
 
   if (error) {
-    console.error("Error fetching orders:", error.message);
     throw new Error(error.message);
   }
 
@@ -95,7 +85,6 @@ export const getUserReviews = async (
 
 export const toggleLike = async (reviewId: number, userId: string) => {
   if (!userId) throw new Error("User must be logged in.");
-  console.log("this is user id" + userId);
   // Check if the user already liked the review
   const { data: like, error: likeError } = await supabase
     .from("review_likes")
@@ -140,11 +129,11 @@ export const getLikedByUser = async (
   userId: string | undefined,
 ): Promise<{ liked: boolean }> => {
   if (userId === undefined) {
-    throw new Error("User ID is required to fetch orders.");
+    throw new Error("User ID is required to check like status.");
   }
 
   if (reviewId === undefined) {
-    throw new Error("User ID is required to fetch orders.");
+    throw new Error("Review ID is required to check like status.");
   }
 
   const { data, error } = await supabase
@@ -167,10 +156,10 @@ export const mapUserReviewsData = (datalist: Reviews[]) => {
   return datalist.map((data) => ({
     comment: data.comment || "",
     created_at: data.created_at || "",
-    like_count: data.like_count || "",
-    product_id: data.product_id || "",
+    like_count: data.like_count ?? 0,
+    product_id: data.product_id ?? 0,
     user_id: data.user_id || "",
-    rating: data.rating || "",
+    rating: data.rating ?? "0",
     product: {
       image_url: data.product.image_url || [""],
       name: data.product.name || "",

@@ -1,24 +1,25 @@
-import { getWishlistedProducts, WhishlistItem } from "@/supabase/whishlist";
+import { getWishlistedProducts, WishlistItem } from "@/supabase/whishlist";
 import {
   useQuery,
   UseQueryOptions,
   UseQueryResult,
 } from "@tanstack/react-query";
 
-export const useGetWhishlistedProducts = <T>(
+export const useGetWishlistedProducts = <T>(
   {
     queryOptions,
   }: {
-    queryOptions?: Omit<UseQueryOptions<WhishlistItem[], Error, T>, "queryKey">;
+    queryOptions?: Omit<UseQueryOptions<WishlistItem[], Error, T>, "queryKey">;
   } = {},
   id: string | undefined,
 ): UseQueryResult<T, Error> => {
-  return useQuery<WhishlistItem[], Error, T>({
-    queryKey: ["Whishlist", id],
+  return useQuery<WishlistItem[], Error, T>({
+    queryKey: ["Wishlist", id],
     queryFn: () => {
       return getWishlistedProducts(id);
     },
-    staleTime: 60 * 1000, // Cache for 6 min
+    staleTime: 60 * 1000,
+    enabled: !!id,
     ...queryOptions,
   });
 };
