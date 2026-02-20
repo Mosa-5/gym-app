@@ -58,11 +58,9 @@ export const GuestSignIn = async (): Promise<void> => {
     throw new Error("Guest account is not configured.");
   }
 
-  return supabase.auth
-    .signInWithPassword({ email, password })
-    .then((res) => {
-      if (res?.error) {
-        throw new Error(`Guest sign in failed: ${res.error.message}`);
-      }
-    });
+  return supabase.auth.signInWithPassword({ email, password }).then((res) => {
+    if (res?.error) {
+      throw new Error(`Guest sign in failed: ${res.error.message}`);
+    }
+  });
 };

@@ -82,11 +82,7 @@ const Wishlist = () => {
                           <div className="px-2 pb-2 flex-1 flex justify-center w-full">
                             <Button
                               onClick={(e) =>
-                                deleteWishlist(
-                                  item.user_id,
-                                  item.product.id,
-                                  e,
-                                )
+                                deleteWishlist(item.user_id, item.product.id, e)
                               }
                               variant={"destructive"}
                               className="bg-red-600 hover:bg-red-700"

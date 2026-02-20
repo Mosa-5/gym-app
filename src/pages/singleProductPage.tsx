@@ -59,7 +59,10 @@ const ProductDetail: React.FC = () => {
       return;
     }
     toast.success("Item Added To Favourites");
-    return addToWishlistMutate({ productId: product?.id.toString(), userId: user.id });
+    return addToWishlistMutate({
+      productId: product?.id.toString(),
+      userId: user.id,
+    });
   };
 
   if (isLoading) {
