@@ -99,14 +99,14 @@ const PersonalReviews = () => {
                             )
                           }
                           variant={"destructive"}
-                          className="bg-red-600 hover:bg-red-700"
+                          className="bg-destructive hover:bg-destructive-hover"
                         >
                           Delete Post
                         </Button>
                       </div>
                     </DialogTrigger>
 
-                    <DialogContent className="rounded-2xl max-w-md sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg border-2 border-purple-900 dark:border-purple-900">
+                    <DialogContent className="rounded-2xl max-w-md sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg border-2 border-brand dark:border-brand">
                       <DialogHeader>
                         <DialogTitle className="text-3xl dark:text-neutral-400 text-center">
                           <div>
@@ -138,7 +138,7 @@ const PersonalReviews = () => {
                                     {comment.rating}
                                   </h1>
                                   <svg
-                                    className="h-5 w-5 fill-yellow-500"
+                                    className="h-5 w-5 fill-rating"
                                     viewBox="0 0 24 24"
                                     fill=""
                                     xmlns="http://www.w3.org/2000/svg"

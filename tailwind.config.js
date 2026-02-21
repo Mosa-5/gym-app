@@ -9,7 +9,26 @@ export default {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
-      colors: {},
+      colors: {
+        brand: {
+          DEFAULT: "rgb(var(--color-brand) / <alpha-value>)",
+          hover: "rgb(var(--color-brand-hover) / <alpha-value>)",
+        },
+        destructive: {
+          DEFAULT: "rgb(var(--color-destructive) / <alpha-value>)",
+          hover: "rgb(var(--color-destructive-hover) / <alpha-value>)",
+        },
+        rating: "rgb(var(--color-rating) / <alpha-value>)",
+        surface: {
+          DEFAULT: "rgb(var(--color-surface) / <alpha-value>)",
+          secondary: "rgb(var(--color-surface-secondary) / <alpha-value>)",
+          tertiary: "rgb(var(--color-surface-tertiary) / <alpha-value>)",
+        },
+        border: "rgb(var(--color-border) / <alpha-value>)",
+        "text-primary": "rgb(var(--color-text-primary) / <alpha-value>)",
+        "text-secondary": "rgb(var(--color-text-secondary) / <alpha-value>)",
+        "text-muted": "rgb(var(--color-text-muted) / <alpha-value>)",
+      },
       keyframes: {
         "accordion-down": {
           from: {

@@ -11,7 +11,7 @@ const AuthLayout: React.FC = () => {
       </div>
       <div className="w-full flex flex-col max-h-fit items-center justify-center z-20">
         <Link className="flex" to="/dashboard/main">
-          <div className="flex gap-4 dark:text-white items-center *:hover:text-purple-900 *:hover:stroke-purple-900 hover:scale-110 transition-transform">
+          <div className="flex gap-4 dark:text-white items-center *:hover:text-brand *:hover:stroke-brand hover:scale-110 transition-transform">
             <h1 className="text-3xl md:text-4xl cursor-pointer font-bold italic  font-mono">
               GymGear
             </h1>

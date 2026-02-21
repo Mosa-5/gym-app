@@ -85,7 +85,7 @@ const Wishlist = () => {
                                 deleteWishlist(item.user_id, item.product.id, e)
                               }
                               variant={"destructive"}
-                              className="bg-red-600 hover:bg-red-700"
+                              className="bg-destructive hover:bg-destructive-hover"
                             >
                               Remove
                             </Button>

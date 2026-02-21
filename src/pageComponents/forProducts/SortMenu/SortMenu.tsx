@@ -10,15 +10,15 @@ import {
 const SortMenu = () => {
   return (
     <Select>
-      <SelectTrigger className="max-w-40 border-2 dark:text-white hover:bg-gray-100 dark:hover:bg-neutral-900 transition">
-        <SelectValue placeholder="Sort By" />
+      <SelectTrigger className="w-40 h-10 rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-sm text-neutral-900 dark:text-neutral-100 focus:ring-2 focus:ring-neutral-900 dark:focus:ring-neutral-100 shadow-none transition">
+        <SelectValue placeholder="Sort by" />
       </SelectTrigger>
-      <SelectContent>
+      <SelectContent className="rounded-xl">
         <SelectGroup>
-          <SelectItem value="asc">Accending</SelectItem>
-          <SelectItem value="desc">Descending</SelectItem>
-          <SelectItem value="new">New</SelectItem>
-          <SelectItem value="old">Old</SelectItem>
+          <SelectItem value="asc">Price: Low to High</SelectItem>
+          <SelectItem value="desc">Price: High to Low</SelectItem>
+          <SelectItem value="new">Newest</SelectItem>
+          <SelectItem value="old">Oldest</SelectItem>
         </SelectGroup>
       </SelectContent>
     </Select>

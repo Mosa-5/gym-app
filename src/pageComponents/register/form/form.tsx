@@ -122,7 +122,7 @@ const RegisterForm = () => {
                 Already have an account?
               </h1>
               <Link to="/auth/signin">
-                <h1 className="text-sm text-purple-900 font-semibold hover:underline cursor-pointer">
+                <h1 className="text-sm text-brand font-semibold hover:underline cursor-pointer">
                   Log In
                 </h1>
               </Link>
@@ -136,7 +136,7 @@ const RegisterForm = () => {
           <p className="text-red-500">Sign Up failed: {String(error)}</p>
         )}
         {isPending && (
-          <h1 className="m-auto text-purple-900 font-semibold text-center text-lg">
+          <h1 className="m-auto text-brand font-semibold text-center text-lg">
             Signing you up...
           </h1>
         )}

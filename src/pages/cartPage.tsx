@@ -144,7 +144,7 @@ const CartPage = () => {
                       <Button
                         onClick={() => removeFromCart(product.id.toString())}
                         variant="destructive"
-                        className="bg-red-600 text-white hover:bg-red-700"
+                        className="bg-destructive text-white hover:bg-destructive-hover"
                       >
                         Remove
                       </Button>
@@ -232,7 +232,7 @@ const CartPage = () => {
                       <Button
                         onClick={() => removeFromCart(product.id.toString())}
                         variant="destructive"
-                        className="bg-red-600 text-white hover:bg-red-700"
+                        className="bg-destructive text-white hover:bg-destructive-hover"
                       >
                         Remove
                       </Button>

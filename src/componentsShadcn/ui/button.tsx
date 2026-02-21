@@ -10,12 +10,12 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-purple-900 text-neutral-50 shadow hover:bg-purple-700 transition-all duration-300",
+          "bg-brand text-neutral-50 shadow hover:bg-brand-hover transition-all duration-300",
         destructive: "bg-red-500 text-neutral-50 shadow-sm hover:bg-red-500/90",
         outline:
           "border border-neutral-200 bg-white shadow-sm hover:bg-neutral-100 hover:text-neutral-900",
         secondary:
-          "bg-white border-purple-900 border-2 text-purple-900 hover:bg-slate-200 font-bold dark:bg-black dark:hover:bg-neutral-900 transition-all duration-300",
+          "bg-white border-brand border-2 text-brand hover:bg-slate-200 font-bold dark:bg-black dark:hover:bg-neutral-900 transition-all duration-300",
         ghost:
           "hover:bg-neutral-100 hover:text-neutral-900 transition-all duration-300",
         link: "text-neutral-900 underline-offset-4 hover:underline",

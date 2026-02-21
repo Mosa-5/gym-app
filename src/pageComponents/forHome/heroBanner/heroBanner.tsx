@@ -1,18 +1,18 @@
 import React from "react";
 import gymheroimg from "@/assets/pexels-binyaminmellish-17840.jpg";
-import { Button } from "../../../componentsShadcn/ui/button";
 import {
   heroSectionClass,
   overlayClass,
   contentClass,
+  subtitleClass,
   headingClass,
   paragraphClass,
   buttonContainerClass,
   buttonClass,
-  ghostButtonClass,
 } from "./heroBanner.styles";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 
 const HeroBanner: React.FC = () => {
   return (
@@ -21,35 +21,68 @@ const HeroBanner: React.FC = () => {
       style={{
         backgroundImage: `url(${gymheroimg})`,
         backgroundSize: "cover",
-        backgroundPosition: "center",
+        backgroundPosition: "70% 30%",
         backgroundRepeat: "no-repeat",
       }}
     >
       {/* Overlay */}
-      <div className={overlayClass()}></div>
+      <div className={overlayClass()} />
 
       {/* Content */}
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
+        initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
         viewport={{ once: true }}
         className={contentClass()}
       >
-        <h1 className={headingClass()}>Empower Your Fitness Journey</h1>
-        <p className={paragraphClass()}>
-          Premium gear for athletes who demand the best.
-        </p>
-        <div className={buttonContainerClass()}>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          viewport={{ once: true }}
+          className={subtitleClass()}
+        >
+          Elevate Your
+        </motion.p>
+
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          viewport={{ once: true }}
+          className={headingClass()}
+        >
+          Fitness
+          <br />
+          Journey
+        </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          viewport={{ once: true }}
+          className={paragraphClass()}
+        >
+          Premium gear for athletes who demand the best. Stylish and modern
+          equipment for those who want to reach perfection.
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          viewport={{ once: true }}
+          className={buttonContainerClass()}
+        >
           <Link to="/dashboard/products">
-            <Button variant={"default"} className={buttonClass()}>
-              Shop Now
-            </Button>
+            <button className={buttonClass()}>
+              Explore Products
+              <ArrowRight className="w-4 h-4" />
+            </button>
           </Link>
-          <Button variant={"ghost"} className={ghostButtonClass()}>
-            Learn More
-          </Button>
-        </div>
+        </motion.div>
       </motion.div>
     </section>
   );

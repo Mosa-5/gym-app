@@ -1,11 +1,23 @@
 import { cva } from "class-variance-authority";
 
-export const banner = cva("relative bg-black text-white");
-export const bannerInner = cva(
-  "relative flex items-center justify-center bg-cover bg-center bg-no-repeat h-[40vh] sm:h-[50vh]",
+export const banner = cva(
+  "relative bg-black text-white h-[50vh] md:h-[60vh] flex items-end pb-16 md:pb-20",
 );
-export const overlay = cva("absolute inset-0 bg-black opacity-50");
-export const content = cva("relative z-10 text-center p-5  sm:p-20 md:p-32");
+export const bannerInner = cva(
+  "absolute inset-0 bg-cover bg-center bg-no-repeat",
+);
+export const overlay = cva(
+  "absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/20",
+);
+export const content = cva(
+  "relative z-10 w-full max-w-screen-xl mx-auto px-6 md:px-10",
+);
+export const subtitle = cva(
+  "text-base md:text-lg font-medium italic tracking-wide text-neutral-300",
+);
 export const heading = cva(
-  "text-white text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-wider max-w-6xl font-mono",
+  "text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black uppercase leading-[0.9] tracking-tight",
+);
+export const paragraph = cva(
+  "mt-4 text-sm md:text-base italic text-neutral-400 max-w-md",
 );

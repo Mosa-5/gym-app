@@ -155,7 +155,7 @@ const VirtualizedReviewList: React.FC = () => {
                           {reviews[row.index].rating}
                         </h1>
                         <svg
-                          className="h-5 w-5 fill-yellow-500"
+                          className="h-5 w-5 fill-rating"
                           viewBox="0 0 24 24"
                           fill=""
                           xmlns="http://www.w3.org/2000/svg"
@@ -215,7 +215,7 @@ const VirtualizedReviewList: React.FC = () => {
             Add Your Review
           </Button>
         </DialogTrigger>
-        <DialogContent className="rounded-2xl border-2 border-purple-900 dark:border-purple-900 max-w-md sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg">
+        <DialogContent className="rounded-2xl border-2 border-brand dark:border-brand max-w-md sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg">
           <DialogHeader>
             <DialogTitle className="text-2xl dark:text-neutral-400 text-center">
               Add Your Review
@@ -247,7 +247,7 @@ const VirtualizedReviewList: React.FC = () => {
           open={selectedReviewId !== null}
           onOpenChange={(open) => !open && setSelectedReviewId(null)}
         >
-          <DialogContent className="rounded-2xl max-w-md sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg border-2 border-purple-900 dark:border-purple-900">
+          <DialogContent className="rounded-2xl max-w-md sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg border-2 border-brand dark:border-brand">
             {selectedReview && (
               <DialogHeader>
                 <DialogTitle className="text-3xl dark:text-neutral-400 text-center">
@@ -284,7 +284,7 @@ const VirtualizedReviewList: React.FC = () => {
                             {selectedReview.rating}
                           </h1>
                           <svg
-                            className="h-5 w-5 fill-yellow-500"
+                            className="h-5 w-5 fill-rating"
                             viewBox="0 0 24 24"
                             fill=""
                             xmlns="http://www.w3.org/2000/svg"
@@ -331,7 +331,7 @@ const VirtualizedReviewList: React.FC = () => {
                             >
                               <span>No</span>
                               <svg
-                                className="fill-purple-900"
+                                className="fill-brand"
                                 viewBox="0 0 16 16"
                                 fill="none"
                                 xmlns="http://www.w3.org/2000/svg"
@@ -350,7 +350,7 @@ const VirtualizedReviewList: React.FC = () => {
                                   ></path>{" "}
                                 </g>
                               </svg>
-                              {/* <svg className="fill-purple-900" viewBox="0 0 24 24">
+                              {/* <svg className="fill-brand" viewBox="0 0 24 24">
                           <path d="M20.2694 8.48505L20.9749 12.5648C21.1511 13.5838 20.3675 14.5158 19.3345 14.5158H14.1534C13.6399 14.5158 13.2489 14.9767 13.332 15.484L13.9947 19.5286C14.1024 20.1857 14.0716 20.858 13.9044 21.5025C13.7659 22.0364 13.354 22.465 12.8123 22.6391L12.6673 22.6856C12.3399 22.7908 11.9826 22.7663 11.6739 22.6176C11.3342 22.4539 11.0856 22.1553 10.9935 21.8001L10.5178 19.9663C10.3664 19.3828 10.146 18.8195 9.8617 18.2874C9.44634 17.5098 8.80416 16.8875 8.13663 16.3123L6.69789 15.0725C6.29223 14.7229 6.07919 14.1994 6.12535 13.6656L6.93752 4.27293C7.01201 3.41139 7.73231 2.75 8.59609 2.75H13.2447C16.726 2.75 19.697 5.17561 20.2694 8.48505Z" />
                           <path
                             opacity="0.5"

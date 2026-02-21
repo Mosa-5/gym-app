@@ -1,11 +1,5 @@
 import { Moon, Sun } from "lucide-react";
-import { Button } from "../../../componentsShadcn/ui/button";
 import { useTheme } from "../theme-provider";
-import {
-  iconClass,
-  iconClassDark,
-  themeToggleButtonClass,
-} from "./mode-toggle.styles";
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
@@ -17,14 +11,21 @@ export function ThemeToggle() {
   };
 
   return (
-    <Button
+    <button
       onClick={toggleTheme}
-      className={themeToggleButtonClass()}
       aria-label="Toggle theme"
+      className="relative w-[52px] h-7 rounded-full bg-neutral-800 transition-colors duration-300 cursor-pointer border border-neutral-700/50"
     >
-      <Sun className={iconClass({ theme: isDark ? "dark" : "light" })} />
-      <Moon className={iconClassDark({ theme: isDark ? "dark" : "light" })} />
-    </Button>
+      <div
+        className={`absolute top-[3px] left-[3px] w-[22px] h-[22px] rounded-full bg-brand shadow-sm flex items-center justify-center transition-transform duration-300 ${isDark ? "translate-x-[22px]" : "translate-x-0"}`}
+      >
+        {isDark ? (
+          <Moon className="h-3 w-3 text-white" />
+        ) : (
+          <Sun className="h-3 w-3 text-white" />
+        )}
+      </div>
+    </button>
   );
 }
 

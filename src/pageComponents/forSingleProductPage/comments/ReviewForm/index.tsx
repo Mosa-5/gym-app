@@ -57,7 +57,7 @@ const ReviewForm: React.FC<{
                           type="button"
                           className={
                             field.value === star
-                              ? "fill-yellow-500"
+                              ? "fill-rating"
                               : "fill-gray-400"
                           }
                           onClick={() => field.onChange(star)}
