@@ -34,8 +34,8 @@ const Header: React.FC = () => {
         <Menu />
 
         {/* Logo */}
-        <Link to={"/dashboard/main"} className="flex items-center gap-2 group">
-          <div className="w-7 h-7 bg-brand rounded-sm flex items-center justify-center group-hover:bg-brand-hover transition-colors">
+        <Link to={"/dashboard/main"} className="flex items-center gap-2">
+          <div className="w-7 h-7 bg-brand rounded-sm flex items-center justify-center transition-colors">
             <svg
               className="w-4 h-4"
               viewBox="0 0 512 512"

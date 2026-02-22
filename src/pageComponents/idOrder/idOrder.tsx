@@ -95,7 +95,8 @@ const IdOrder = () => {
 
                   <div className="flex items-center justify-between mt-3">
                     <span className="text-xs text-neutral-500">
-                      Qty: {product.quantity} × ${Number(product.price).toFixed(2)}
+                      Qty: {product.quantity} × $
+                      {Number(product.price).toFixed(2)}
                     </span>
                     <span className="text-sm sm:text-base font-bold text-neutral-900 dark:text-white">
                       ${(Number(product.price) * product.quantity).toFixed(2)}
@@ -115,9 +116,7 @@ const IdOrder = () => {
 
               <div className="space-y-3 text-sm">
                 <div className="flex justify-between">
-                  <span className="text-neutral-500">
-                    Items ({totalItems})
-                  </span>
+                  <span className="text-neutral-500">Items ({totalItems})</span>
                   <span className="font-semibold text-neutral-900 dark:text-white">
                     ${userOrder.total_price.toFixed(2)}
                   </span>
