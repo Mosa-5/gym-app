@@ -10,7 +10,7 @@ export const subHeading = cva(
   "text-base md:text-lg font-semibold uppercase tracking-wide",
 );
 export const heading = cva(
-  "text-purple-800 text-3xl md:text-4xl font-bold tracking-wider",
+  "text-brand text-3xl md:text-4xl font-bold tracking-wider",
 );
 export const saleText = cva(
   "text-xl md:text-2xl font-medium mt-2 tracking-wide",

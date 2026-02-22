@@ -1,7 +1,49 @@
 import { supabase } from "../supabase";
 
-export const getProductList = async () => {
-  const { data, error } = await supabase.from("product").select("*");
+export interface ProductFilters {
+  search?: string;
+  priceRange?: [number, number];
+  categories?: string[];
+  sortBy?: string;
+}
+
+export const getFilteredProducts = async (
+  filters: ProductFilters,
+): Promise<Product[]> => {
+  let query = supabase.from("product").select("*");
+
+  if (filters.search) {
+    query = query.ilike("name", `%${filters.search}%`);
+  }
+
+  if (filters.priceRange) {
+    query = query
+      .gte("price", filters.priceRange[0])
+      .lte("price", filters.priceRange[1]);
+  }
+
+  if (filters.categories && filters.categories.length > 0) {
+    query = query.in("category", filters.categories);
+  }
+
+  if (filters.sortBy) {
+    switch (filters.sortBy) {
+      case "price-asc":
+        query = query.order("price", { ascending: true });
+        break;
+      case "price-desc":
+        query = query.order("price", { ascending: false });
+        break;
+      case "name-asc":
+        query = query.order("name", { ascending: true });
+        break;
+      case "name-desc":
+        query = query.order("name", { ascending: false });
+        break;
+    }
+  }
+
+  const { data, error } = await query;
 
   if (error) {
     throw new Error(error.message);

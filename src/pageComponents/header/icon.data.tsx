@@ -1,7 +1,7 @@
 export const Icons = {
   globe: (
     <svg
-      className="w-[20px] h-[20px] fill-white"
+      className="w-[18px] h-[18px] fill-white"
       viewBox="0 0 20 20"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -11,8 +11,7 @@ export const Icons = {
   ),
   man: (
     <svg
-      width="19"
-      height="18"
+      className="w-[18px] h-[18px]"
       viewBox="0 0 19 18"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -27,8 +26,7 @@ export const Icons = {
   ),
   cart: (
     <svg
-      width="32"
-      height="32"
+      className="w-[22px] h-[22px]"
       viewBox="0 0 32 32"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

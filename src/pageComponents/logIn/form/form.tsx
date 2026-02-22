@@ -106,7 +106,7 @@ const FormElement = () => {
                 Dont't have an account?
               </h1>
               <Link to={"/auth/register"}>
-                <h1 className="text-sm text-purple-900 font-semibold hover:underline cursor-pointer">
+                <h1 className="text-sm text-brand font-semibold hover:underline cursor-pointer">
                   Register
                 </h1>
               </Link>
@@ -120,7 +120,7 @@ const FormElement = () => {
         )}
         {isPending ||
           (isGuestPending && (
-            <h1 className="m-auto text-purple-900 font-semibold text-center text-lg">
+            <h1 className="m-auto text-brand font-semibold text-center text-lg">
               Signing you in...
             </h1>
           ))}

@@ -67,6 +67,56 @@ export type SingleProfileData = {
   address: string | null;
 };
 
+export const uploadAvatar = async ({
+  userId,
+  file,
+}: {
+  userId: string;
+  file: File;
+}): Promise<string> => {
+  const fileExt = file.name.split(".").pop();
+  const filePath = `${userId}/avatar_${Date.now()}.${fileExt}`;
+
+  // Delete old avatars first
+  const { data: existingFiles } = await supabase.storage
+    .from("avatars")
+    .list(userId);
+
+  if (existingFiles && existingFiles.length > 0) {
+    const filesToDelete = existingFiles.map((f) => `${userId}/${f.name}`);
+    await supabase.storage.from("avatars").remove(filesToDelete);
+  }
+
+  const { error: uploadError } = await supabase.storage
+    .from("avatars")
+    .upload(filePath, file);
+
+  if (uploadError) {
+    throw uploadError;
+  }
+
+  const {
+    data: { publicUrl },
+  } = supabase.storage.from("avatars").getPublicUrl(filePath);
+
+  // Ensure the URL contains /public/ path segment
+  const correctedUrl = publicUrl.includes("/object/public/")
+    ? publicUrl
+    : publicUrl.replace("/object/", "/object/public/");
+
+  // Add cache-busting timestamp so browser loads the new image
+  const avatarUrl = `${correctedUrl}?t=${Date.now()}`;
+
+  // Update the profile with the new avatar URL
+  await supabase
+    .from("profiles")
+    .update({ avatar_url: avatarUrl })
+    .eq("id", userId)
+    .throwOnError();
+
+  return avatarUrl;
+};
+
 export const mapProfileTableData = (data: SingleProfileData) => ({
   avatar_url: data.avatar_url || "",
   full_name_en: data.full_name_en || "",

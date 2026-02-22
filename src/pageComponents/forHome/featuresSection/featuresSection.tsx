@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import {
   containerClass,
   featureClass,
@@ -12,10 +13,17 @@ const FeaturesSection: React.FC = () => {
     <section className={sectionClass()}>
       <div className={containerClass()}>
         {features.map((feature, index) => (
-          <div key={index} className={featureClass()}>
+          <motion.div
+            key={index}
+            className={featureClass()}
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: index * 0.1 }}
+            viewport={{ once: true }}
+          >
             <div className={iconClass()}>{feature.icon}</div>
             <h3 className={titleClass()}>{feature.title}</h3>
-          </div>
+          </motion.div>
         ))}
       </div>
     </section>

@@ -2,7 +2,7 @@ import { Link, Outlet } from "react-router-dom";
 
 const AuthLayout: React.FC = () => {
   return (
-    <div className="bg-white min-h-screen items-center justify-center flex w-full max-w-full overflow-x-hidden dark:bg-neutral-950">
+    <div className="bg-white min-h-screen items-center justify-center flex w-full max-w-full overflow-x-hidden dark:bg-[#222222]">
       <div className="absolute top-0 left-0 w-full h-full z-0">
         {/* <div className="absolute hidden lg:inline  top-0 left-1/3  w-20 h-full bg-black opacity-5 dark:bg-white"></div> */}
         <div className="absolute  top-0 left-10 md:left-20 w-20 h-full bg-black opacity-5 dark:bg-white"></div>
@@ -11,7 +11,7 @@ const AuthLayout: React.FC = () => {
       </div>
       <div className="w-full flex flex-col max-h-fit items-center justify-center z-20">
         <Link className="flex" to="/dashboard/main">
-          <div className="flex gap-4 dark:text-white items-center *:hover:text-purple-900 *:hover:stroke-purple-900 hover:scale-110 transition-transform">
+          <div className="flex gap-4 dark:text-white items-center *:hover:text-brand *:hover:stroke-brand hover:scale-110 transition-transform">
             <h1 className="text-3xl md:text-4xl cursor-pointer font-bold italic  font-mono">
               GymGear
             </h1>
