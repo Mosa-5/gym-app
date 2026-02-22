@@ -158,13 +158,6 @@ const ExperimentalCarousel: React.FC<CarouselProps> = ({
     el.addEventListener("pointerup", onUp);
   };
 
-  const handleClick = (e: React.MouseEvent) => {
-    if (isDragging.current) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-  };
-
   const getItemStyle = (index: number): SlotStyle => {
     let pos = ((index - rotation) % ringSize) + ringSize;
     pos = pos % ringSize;
