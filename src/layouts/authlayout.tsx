@@ -2,7 +2,7 @@ import { Link, Outlet } from "react-router-dom";
 
 const AuthLayout: React.FC = () => {
   return (
-    <div className="bg-white min-h-screen items-center justify-center flex w-full max-w-full overflow-x-hidden dark:bg-neutral-950">
+    <div className="bg-white min-h-screen items-center justify-center flex w-full max-w-full overflow-x-hidden dark:bg-[#222222]">
       <div className="absolute top-0 left-0 w-full h-full z-0">
         {/* <div className="absolute hidden lg:inline  top-0 left-1/3  w-20 h-full bg-black opacity-5 dark:bg-white"></div> */}
         <div className="absolute  top-0 left-10 md:left-20 w-20 h-full bg-black opacity-5 dark:bg-white"></div>

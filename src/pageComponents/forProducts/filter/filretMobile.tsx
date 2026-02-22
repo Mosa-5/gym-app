@@ -15,7 +15,10 @@ interface FiltersMobileProps {
   onFiltersChange: (filters: FilterState) => void;
 }
 
-const FiltersMobile: React.FC<FiltersMobileProps> = ({ filters, onFiltersChange }) => {
+const FiltersMobile: React.FC<FiltersMobileProps> = ({
+  filters,
+  onFiltersChange,
+}) => {
   return (
     <Dialog>
       <DialogTrigger className="w-full max-w-40 lg:hidden">

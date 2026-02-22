@@ -142,10 +142,17 @@ const App: React.FC = () => {
         <Route
           path="*"
           element={
-            <div className="w-full h-screen flex justify-center items-center">
-              <h1 className="text-7xl max-w-fit font-semibold">
-                Page Not Found 404
-              </h1>
+            <div className="w-full h-screen flex flex-col justify-center items-center gap-6">
+              <h1 className="text-7xl max-w-fit font-semibold">404</h1>
+              <p className="text-neutral-500 text-sm">
+                The page you're looking for doesn't exist.
+              </p>
+              <a
+                href="/dashboard/main"
+                className="px-6 py-2.5 bg-brand text-white text-sm font-semibold rounded-full hover:bg-brand-hover transition-colors"
+              >
+                Go back to Home
+              </a>
             </div>
           }
         />

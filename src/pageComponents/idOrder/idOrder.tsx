@@ -1,13 +1,7 @@
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/componentsShadcn/ui/card";
-
 import { useGetUserSingleOrder } from "@/reactQuery/query/order";
 import { mapSingleOrdersData } from "@/supabase/order";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
+import { Package, ArrowLeft, Truck } from "lucide-react";
 
 const IdOrder = () => {
   const { OrderId } = useParams();
@@ -39,92 +33,120 @@ const IdOrder = () => {
   );
 
   const formatTimestamp = (isoString: string) =>
-    new Date(isoString).toLocaleString();
+    new Date(isoString).toLocaleDateString("en-US", {
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+    });
+
+  const totalItems = userOrder.item.reduce(
+    (acc, item) => acc + item.quantity,
+    0,
+  );
+
+  if (isLoading) return null;
 
   return (
-    <div className="flex flex-col items-center p-10 sm:p-20 min-h-screen">
-      {!isLoading && (
-        <>
-          <h1 className="text-3xl mb-5 font-semibold dark:text-white font-mono">
-            ORDER {userOrder.id}
-          </h1>
-          <h1 className="text-gray-700 dark:text-gray-400 mb-4">
-            placed on {formatTimestamp(userOrder.created_at)}
-          </h1>
-          <table className="w-full max-w-screen-md bg-white dark:bg-neutral-950 border-separate border-4 rounded-md text-center dark:border-neutral-800 dark:text-gray-400 hidden sm:table">
-            <thead className="bg-gray-200 dark:bg-black dark:text-white text-sm font-semibold uppercase text-gray-600">
-              <tr className="*:px-2 *:border-b-2 *:dark:border-neutral-800 *:text-xs sm:*:text-base md:*:px-4  *:py-2">
-                <th>Product</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              {userOrder.item.map((product) => (
-                <tr className="border-y-2 *:px-2 *:py-2 *:text-xs *:font-semibold sm:*:px-4 sm:*:text-base ">
-                  <td className="flex items-center gap-4 flex-col sm:flex-row">
-                    <img
-                      src={product.image_url[0]}
-                      alt={product.name}
-                      className="w-16 h-16 object-cover rounded-full"
-                    />
-                    <div>
-                      <p className="wrap">{product.name}</p>
-                    </div>
-                  </td>
-                  <td>
-                    <p>{Number(product.price).toFixed(2)}$</p>
-                  </td>
-                  <td>
-                    <div className="flex items-center justify-center gap-2 sm:gap-4">
-                      <div className="text-center">{product.quantity}</div>
-                    </div>
-                  </td>
-                  <td className="">
-                    {(Number(product.price) * product.quantity).toFixed(2)}$
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+    <div className="min-h-screen bg-white dark:bg-neutral-950">
+      {/* Hero header */}
+      <div className="bg-neutral-950 py-12 px-6">
+        <div className="max-w-screen-lg mx-auto">
+          <Link
+            to="/dashboard/profilePage"
+            className="inline-flex items-center gap-1.5 text-sm text-neutral-400 hover:text-white transition-colors mb-4"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back to Profile
+          </Link>
+          <div className="flex items-center gap-3 mb-2">
+            <Package className="w-6 h-6 text-brand" />
+            <h1 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-white">
+              Order #{userOrder.id}
+            </h1>
+          </div>
+          <p className="text-sm text-neutral-400">
+            Placed on {formatTimestamp(userOrder.created_at)}
+          </p>
+        </div>
+      </div>
 
-          {/* Mobile Card View */}
-          <div className="sm:hidden space-y-4 w-full">
+      <div className="max-w-screen-lg mx-auto px-4 sm:px-6 py-8 pb-20">
+        <div className="flex flex-col lg:flex-row gap-8">
+          {/* Left: Items */}
+          <div className="flex-1 flex flex-col gap-4">
             {userOrder.item.map((product) => (
-              <Card key={product.productId} className="w-full">
-                <CardHeader className="flex flex-row items-center space-x-4 pb-2">
-                  <img
-                    src={product.image_url[0]}
-                    alt={product.name}
-                    className="w-16 h-16 object-cover rounded-full"
-                  />
-                  <div>
-                    <CardTitle className="text-base">{product.name}</CardTitle>
-                    <p className="text-sm text-gray-500">
-                      {Number(product.price).toFixed(2)}$
-                    </p>
+              <div
+                key={product.productId}
+                className="flex items-center gap-4 p-4 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900"
+              >
+                <img
+                  src={product.image_url[0]}
+                  alt={product.name}
+                  className="w-20 h-20 sm:w-24 sm:h-24 rounded-xl object-cover flex-shrink-0 bg-neutral-100 dark:bg-neutral-800"
+                />
+
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-sm sm:text-base font-bold text-neutral-900 dark:text-white truncate">
+                    {product.name}
+                  </h3>
+                  <p className="text-xs text-neutral-400 mt-0.5 uppercase tracking-wider">
+                    {product.category}
+                  </p>
+
+                  <div className="flex items-center justify-between mt-3">
+                    <span className="text-xs text-neutral-500">
+                      Qty: {product.quantity} × ${Number(product.price).toFixed(2)}
+                    </span>
+                    <span className="text-sm sm:text-base font-bold text-neutral-900 dark:text-white">
+                      ${(Number(product.price) * product.quantity).toFixed(2)}
+                    </span>
                   </div>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex justify-between items-center">
-                    <div className="flex items-center gap-2">
-                      <h1>amount:</h1>
-                      <div>{product.quantity}</div>
-                    </div>
-                    <div className="font-semibold">
-                      {(Number(product.price) * product.quantity).toFixed(2)}$
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             ))}
           </div>
-          <h1 className="text-gray-700 dark:text-gray-400 mb-4 text-xl mt-4 font-semibold">
-            Total Price: {userOrder.total_price}$
-          </h1>
-        </>
-      )}
+
+          {/* Right: Order summary */}
+          <div className="w-full lg:w-80 lg:flex-shrink-0">
+            <div className="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6 lg:sticky lg:top-24">
+              <h2 className="text-base font-black uppercase tracking-tight text-neutral-900 dark:text-white mb-5">
+                Order Summary
+              </h2>
+
+              <div className="space-y-3 text-sm">
+                <div className="flex justify-between">
+                  <span className="text-neutral-500">
+                    Items ({totalItems})
+                  </span>
+                  <span className="font-semibold text-neutral-900 dark:text-white">
+                    ${userOrder.total_price.toFixed(2)}
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-neutral-500 flex items-center gap-1.5">
+                    <Truck className="w-3.5 h-3.5" />
+                    Delivery
+                  </span>
+                  <span className="font-semibold text-neutral-900 dark:text-white">
+                    $2.00
+                  </span>
+                </div>
+
+                <div className="border-t border-neutral-100 dark:border-neutral-800 pt-3 mt-3">
+                  <div className="flex justify-between">
+                    <span className="font-bold text-neutral-900 dark:text-white">
+                      Total
+                    </span>
+                    <span className="text-lg font-black text-neutral-900 dark:text-white">
+                      ${(userOrder.total_price + 2).toFixed(2)}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback } from "react";
 import { useSearchParams } from "react-router-dom";
 import ProductsHeroBanner from "@/pageComponents/forProducts/heroBanner/hero";
 import SearchBar from "@/pageComponents/forProducts/search/search";
@@ -9,12 +9,63 @@ import FiltersMobile from "@/pageComponents/forProducts/filter/filretMobile";
 import type { FilterState } from "@/pageComponents/forProducts/filter/filter";
 
 const Products = () => {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const searchQuery = searchParams.get("searchedtext") || "";
-  const [filters, setFilters] = useState<FilterState>({
-    priceRange: [0, 1000],
-    categories: [],
-  });
+  const sortBy = searchParams.get("sort") || "";
+  const page = Number(searchParams.get("page")) || 1;
+
+  const filters: FilterState = {
+    priceRange: [
+      Number(searchParams.get("priceMin")) || 0,
+      Number(searchParams.get("priceMax")) || 1000,
+    ],
+    categories: searchParams.get("categories")
+      ? searchParams.get("categories")!.split(",")
+      : [],
+  };
+
+  const setFilters = useCallback(
+    (next: FilterState) => {
+      setSearchParams((prev) => {
+        const p = new URLSearchParams(prev);
+        if (next.priceRange[0] !== 0) p.set("priceMin", String(next.priceRange[0]));
+        else p.delete("priceMin");
+        if (next.priceRange[1] !== 1000) p.set("priceMax", String(next.priceRange[1]));
+        else p.delete("priceMax");
+        if (next.categories.length > 0) p.set("categories", next.categories.join(","));
+        else p.delete("categories");
+        p.delete("page");
+        return p;
+      }, { replace: true });
+    },
+    [setSearchParams],
+  );
+
+  const setSortBy = useCallback(
+    (value: string) => {
+      setSearchParams((prev) => {
+        const p = new URLSearchParams(prev);
+        if (value) p.set("sort", value);
+        else p.delete("sort");
+        p.delete("page");
+        return p;
+      }, { replace: true });
+    },
+    [setSearchParams],
+  );
+
+  const setPage = useCallback(
+    (pageNum: number) => {
+      setSearchParams((prev) => {
+        const p = new URLSearchParams(prev);
+        if (pageNum > 1) p.set("page", String(pageNum));
+        else p.delete("page");
+        return p;
+      }, { replace: true });
+    },
+    [setSearchParams],
+  );
 
   return (
     <>
@@ -30,10 +81,16 @@ const Products = () => {
         <main className="flex-1 min-w-0">
           <div className="flex items-center gap-3 mb-8">
             <SearchBar />
-            <SortMenu />
+            <SortMenu value={sortBy} onValueChange={setSortBy} />
             <FiltersMobile filters={filters} onFiltersChange={setFilters} />
           </div>
-          <ProductGrid searchQuery={searchQuery} filters={filters} />
+          <ProductGrid
+            searchQuery={searchQuery}
+            filters={filters}
+            sortBy={sortBy}
+            page={page}
+            setPage={setPage}
+          />
         </main>
       </div>
     </>

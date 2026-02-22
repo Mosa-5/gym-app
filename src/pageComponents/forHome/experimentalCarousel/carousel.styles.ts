@@ -4,7 +4,9 @@ export const wrapper = cva(
   "relative flex flex-col gap-7 justify-center items-center py-16 sm:py-20 lg:py-24 overflow-hidden",
 );
 
-export const heading = cva("text-xl md:text-3xl mb-5 font-bold dark:text-white tracking-widest uppercase");
+export const heading = cva(
+  "text-xl md:text-3xl mb-5 font-bold dark:text-white tracking-widest uppercase",
+);
 
 export const carousel = cva("w-[70%] sm:w-[85%] lg:w-[80%] max-w-5xl");
 

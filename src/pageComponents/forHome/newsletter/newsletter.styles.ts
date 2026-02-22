@@ -12,6 +12,4 @@ export const headingClass = cva(
 export const descriptionClass = cva(
   "text-sm text-gray-500 dark:text-gray-400 mb-6",
 );
-export const formClass = cva(
-  "flex flex-col sm:flex-row gap-3 justify-center",
-);
+export const formClass = cva("flex flex-col sm:flex-row gap-3 justify-center");

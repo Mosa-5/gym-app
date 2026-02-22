@@ -11,7 +11,10 @@ const Main = () => {
   return (
     <>
       <HeroBanner />
-      <ExperimentalCarousel headerText="Fresh Picks" carouselType="worstSelling" />
+      <ExperimentalCarousel
+        headerText="Fresh Picks"
+        carouselType="worstSelling"
+      />
       <CategoriesSection />
       <CaruselForPages
         headerText="Best Selling Lifting Gear"

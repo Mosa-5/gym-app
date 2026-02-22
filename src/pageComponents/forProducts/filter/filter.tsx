@@ -21,7 +21,9 @@ interface FiltersProps {
 
 const Filters: React.FC<FiltersProps> = ({ filters, onFiltersChange }) => {
   const { data: categories = [] } = useGetDistinctCategories();
-  const [localPrice, setLocalPrice] = useState<[number, number]>(filters.priceRange);
+  const [localPrice, setLocalPrice] = useState<[number, number]>(
+    filters.priceRange,
+  );
 
   const handlePriceCommit = (value: number[]) => {
     const range: [number, number] = [value[0], value[1]];

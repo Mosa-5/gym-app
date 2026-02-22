@@ -2,10 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { stats, missionText, secondaryText } from "./brandStory.data";
 import SectionHeading from "@/pageComponents/forHome/sectionHeading/sectionHeading";
-import {
-  sectionClass,
-  containerClass,
-} from "./brandStory.styles";
+import { sectionClass, containerClass } from "./brandStory.styles";
 import storyImg1 from "@/assets/pexels-823sl-2294361.jpg";
 import storyImg2 from "@/assets/pexels-binyaminmellish-17840.jpg";
 import storyImg3 from "@/assets/pexels-ivan-samkov-4164450.jpg";
@@ -48,7 +45,10 @@ const BrandStory = () => {
                 initial={{ opacity: 0, scale: 1.1 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ opacity: { duration: 2, ease: "easeInOut" }, scale: { duration: 6, ease: "easeOut" } }}
+                transition={{
+                  opacity: { duration: 2, ease: "easeInOut" },
+                  scale: { duration: 6, ease: "easeOut" },
+                }}
               />
             </AnimatePresence>
             {/* Dark overlay */}
@@ -60,7 +60,10 @@ const BrandStory = () => {
           {/* Left text block — top left, half overlapping image */}
           <div
             className="relative lg:absolute lg:-left-[5%] lg:top-[15%] lg:w-[35%] mt-6 lg:mt-0 rounded-2xl p-5 sm:p-6 space-y-3 shadow-xl z-10"
-            style={{ background: "linear-gradient(135deg, rgb(var(--color-brand)) 0%, rgb(140 20 20) 100%)" }}
+            style={{
+              background:
+                "linear-gradient(135deg, rgb(var(--color-brand)) 0%, rgb(140 20 20) 100%)",
+            }}
           >
             <div className="w-8 h-[2px] bg-white/60" />
             <p className="text-sm leading-relaxed text-white/90 font-light">
@@ -71,7 +74,10 @@ const BrandStory = () => {
           {/* Right text block — middle right */}
           <div
             className="relative lg:absolute lg:-right-[3%] lg:top-[50%] lg:-translate-y-1/2 lg:w-[32%] mt-4 lg:mt-0 rounded-2xl p-5 sm:p-6 space-y-3 shadow-xl z-10"
-            style={{ background: "linear-gradient(135deg, rgb(140 20 20) 0%, rgb(var(--color-brand)) 100%)" }}
+            style={{
+              background:
+                "linear-gradient(135deg, rgb(140 20 20) 0%, rgb(var(--color-brand)) 100%)",
+            }}
           >
             <div className="w-8 h-[2px] bg-white/60" />
             <p className="text-sm leading-relaxed text-white/70 italic">
@@ -108,7 +114,11 @@ const BrandStory = () => {
                         style={{ background: "rgb(var(--color-brand))" }}
                         initial={{ width: 0 }}
                         whileInView={{ width: `${stat.barPercent}%` }}
-                        transition={{ duration: 0.8, delay: 0.3 + index * 0.12, ease: "easeOut" }}
+                        transition={{
+                          duration: 0.8,
+                          delay: 0.3 + index * 0.12,
+                          ease: "easeOut",
+                        }}
                         viewport={{ once: true }}
                       />
                     </div>

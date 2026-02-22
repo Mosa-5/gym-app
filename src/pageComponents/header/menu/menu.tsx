@@ -27,7 +27,10 @@ const Menu = () => {
         <SheetTrigger className="p-1.5 rounded-md hover:bg-neutral-800 transition-colors">
           <MenuIcon className="w-5 h-5 text-neutral-300" />
         </SheetTrigger>
-        <SheetContent side="left" className="w-full dark:text-white bg-neutral-950 border-neutral-800">
+        <SheetContent
+          side="left"
+          className="w-full dark:text-white bg-neutral-950 border-neutral-800"
+        >
           <SheetHeader className="mt-8">
             <SheetTitle className="text-center text-2xl font-black uppercase tracking-tight border-b border-neutral-800 pb-4">
               <span className="text-white">Gym</span>

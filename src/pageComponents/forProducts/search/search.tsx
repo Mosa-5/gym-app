@@ -10,11 +10,16 @@ const SearchBar = () => {
 
   useEffect(() => {
     const handler = setTimeout(() => {
-      if (searchText) {
-        setSearchParams({ searchedtext: searchText });
-      } else {
-        setSearchParams({});
-      }
+      setSearchParams((prev) => {
+        const p = new URLSearchParams(prev);
+        if (searchText) {
+          p.set("searchedtext", searchText);
+        } else {
+          p.delete("searchedtext");
+        }
+        p.delete("page");
+        return p;
+      }, { replace: true });
     }, 1000);
 
     return () => clearTimeout(handler);

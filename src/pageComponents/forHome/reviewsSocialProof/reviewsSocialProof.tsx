@@ -3,15 +3,12 @@ import {
   useGetTopReviews,
   useGetReviewStats,
 } from "@/reactQuery/query/reviews/topReviews";
-import {
-  sectionClass,
-  containerClass,
-} from "./reviewsSocialProof.styles";
+import { sectionClass, containerClass } from "./reviewsSocialProof.styles";
 import SectionHeading from "@/pageComponents/forHome/sectionHeading/sectionHeading";
 
 const StarIcon = ({ filled }: { filled: boolean }) => (
   <svg
-    className={`h-5 w-5 ${filled ? "fill-rating" : "fill-neutral-600"}`}
+    className={`h-5 w-5 ${filled ? "fill-brand" : "fill-neutral-600"}`}
     viewBox="0 0 24 24"
     xmlns="http://www.w3.org/2000/svg"
   >
@@ -37,7 +34,8 @@ const ReviewsSocialProof = () => {
     <motion.section
       className={sectionClass() + " relative overflow-hidden"}
       style={{
-        background: "linear-gradient(135deg, rgb(var(--color-brand)) 0%, rgb(120 15 15) 100%)",
+        background:
+          "linear-gradient(135deg, rgb(var(--color-brand)) 0%, rgb(120 15 15) 100%)",
       }}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -53,17 +51,28 @@ const ReviewsSocialProof = () => {
       />
 
       <div className={containerClass() + " relative z-10"}>
-        <SectionHeading text="What Our Customers Say" className="!text-white [&_h2]:!text-white [&_span]:!text-white [&_span]:!opacity-20" />
+        <SectionHeading
+          text="What Our Customers Say"
+          className="!text-white [&_h2]:!text-white [&_span]:!text-white [&_span]:!opacity-20"
+        />
         {stats && (
           <div className="flex items-center justify-center gap-6 mb-10">
             <div className="text-center">
-              <span className="block text-2xl sm:text-3xl font-black text-white leading-none">{stats.totalCount}</span>
-              <span className="text-[11px] font-semibold uppercase tracking-widest text-white/50 mt-1 block">Reviews</span>
+              <span className="block text-2xl sm:text-3xl font-black text-white leading-none">
+                {stats.totalCount}
+              </span>
+              <span className="text-[11px] font-semibold uppercase tracking-widest text-white/50 mt-1 block">
+                Reviews
+              </span>
             </div>
             <div className="w-[1px] h-8 bg-white/20" />
             <div className="text-center">
-              <span className="block text-2xl sm:text-3xl font-black text-white leading-none">{stats.averageRating}</span>
-              <span className="text-[11px] font-semibold uppercase tracking-widest text-white/50 mt-1 block">Avg Rating</span>
+              <span className="block text-2xl sm:text-3xl font-black text-white leading-none">
+                {stats.averageRating}
+              </span>
+              <span className="text-[11px] font-semibold uppercase tracking-widest text-white/50 mt-1 block">
+                Avg Rating
+              </span>
             </div>
           </div>
         )}
@@ -76,8 +85,8 @@ const ReviewsSocialProof = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           viewport={{ once: true }}
         >
-            <blockquote className="relative z-10">
-            <p className="text-lg sm:text-xl md:text-2xl font-medium leading-relaxed text-white italic text-center max-w-2xl mx-auto break-words">
+          <blockquote className="relative z-10">
+            <p className="text-lg sm:text-xl md:text-2xl font-medium leading-relaxed text-white italic text-center max-w-2xl mx-auto break-all">
               {heroReview.comment}
             </p>
             <div className="w-12 h-[2px] bg-white/30 mx-auto mt-6 mb-6" />
@@ -106,12 +115,28 @@ const ReviewsSocialProof = () => {
       {/* Infinite marquee — full width */}
       <div className="relative overflow-hidden z-10">
         {/* Fade edges — match red bg */}
-        <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-24 z-10 pointer-events-none" style={{ background: "linear-gradient(to right, rgb(var(--color-brand)), transparent)" }} />
-        <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-24 z-10 pointer-events-none" style={{ background: "linear-gradient(to left, rgb(120 15 15), transparent)" }} />
+        <div
+          className="absolute left-0 top-0 bottom-0 w-16 sm:w-24 z-10 pointer-events-none"
+          style={{
+            background:
+              "linear-gradient(to right, rgb(var(--color-brand)), transparent)",
+          }}
+        />
+        <div
+          className="absolute right-0 top-0 bottom-0 w-16 sm:w-24 z-10 pointer-events-none"
+          style={{
+            background: "linear-gradient(to left, rgb(120 15 15), transparent)",
+          }}
+        />
 
         <div className="flex gap-5 animate-marquee w-max">
           {/* Quadruple the reviews for seamless gapless loop */}
-          {[...marqueeReviews, ...marqueeReviews, ...marqueeReviews, ...marqueeReviews].map((review, i) => (
+          {[
+            ...marqueeReviews,
+            ...marqueeReviews,
+            ...marqueeReviews,
+            ...marqueeReviews,
+          ].map((review, i) => (
             <div
               key={`${review.id}-${i}`}
               className="w-[300px] sm:w-[340px] flex-shrink-0 p-5 sm:p-6 rounded-2xl bg-neutral-900 border border-neutral-800 flex flex-col"
@@ -124,7 +149,9 @@ const ReviewsSocialProof = () => {
                   />
                 ))}
               </div>
-              <p className="text-sm leading-relaxed text-white mb-4 line-clamp-4 flex-1">{review.comment}</p>
+              <p className="text-sm leading-relaxed text-white mb-4 line-clamp-4 flex-1">
+                {review.comment}
+              </p>
               <div className="flex items-center gap-3 pt-3 border-t border-neutral-800">
                 <div className="w-8 h-8 rounded-full bg-neutral-800 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
                   {review.profiles?.username?.[0]?.toUpperCase() || "U"}

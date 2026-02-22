@@ -6,10 +6,7 @@ import {
 import { ProductReviews } from "@/supabase/reviews";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 
-export const useGetTopReviews = (): UseQueryResult<
-  ProductReviews[],
-  Error
-> => {
+export const useGetTopReviews = (): UseQueryResult<ProductReviews[], Error> => {
   return useQuery<ProductReviews[], Error>({
     queryKey: ["topReviews"],
     queryFn: getTopReviews,

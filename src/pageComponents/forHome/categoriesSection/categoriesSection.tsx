@@ -64,7 +64,9 @@ const CategoriesSection = () => {
                     >
                       <span
                         className={`text-white font-bold text-lg sm:text-xl tracking-wider ${
-                          isMobile ? "" : "[writing-mode:vertical-lr] rotate-180"
+                          isMobile
+                            ? ""
+                            : "[writing-mode:vertical-lr] rotate-180"
                         }`}
                       >
                         {category.name.toUpperCase()}
@@ -91,7 +93,10 @@ const CategoriesSection = () => {
                               src={category.image}
                               alt={category.name}
                               className="w-full h-auto object-contain"
-                              style={{ filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.25))" }}
+                              style={{
+                                filter:
+                                  "drop-shadow(0 4px 12px rgba(0,0,0,0.25))",
+                              }}
                             />
                           </div>
                         </motion.div>

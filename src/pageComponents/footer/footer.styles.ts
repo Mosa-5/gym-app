@@ -1,6 +1,8 @@
 import { cva } from "class-variance-authority";
 
-export const footerClass = cva("bg-neutral-950 text-white p-8 border-t border-neutral-800/50");
+export const footerClass = cva(
+  "bg-neutral-950 text-white p-8 border-t border-neutral-800/50",
+);
 export const containerClass = cva("max-w-7xl mx-auto");
 export const flexContainerClass = cva(
   "flex flex-col md:flex-row justify-between items-center sm:items-start gap-8",

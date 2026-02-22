@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 
 const DashboardLayout: React.FC = () => {
   return (
-    <div className="relative bg-neutral-100 dark:bg-neutral-950 w-full max-w-full overflow-x-hidden min-h-screen overflow-hidden">
+    <div className="relative bg-neutral-100 dark:bg-[#222222] w-full max-w-full overflow-x-hidden min-h-screen overflow-hidden">
       {/* Decorative Background Elements */}
       <div className="absolute top-0 left-0 w-full h-full z-0 pointer-events-none">
         <div className="absolute top-0 left-8 md:left-16 w-[1px] h-full bg-gradient-to-b from-transparent via-neutral-300 to-transparent dark:via-neutral-800/40" />

@@ -206,30 +206,30 @@ table {
 @layer base {
   :root {
     --radius: 0.5rem;
-  --color-brand: 180 30 30;
-  --color-brand-hover: 210 45 45;
-  --color-destructive: 239 68 68;
-  --color-destructive-hover: 220 38 38;
-  --color-rating: 250 204 21;
+    --color-brand: 180 30 30;
+    --color-brand-hover: 210 45 45;
+    --color-destructive: 239 68 68;
+    --color-destructive-hover: 220 38 38;
+    --color-rating: 250 204 21;
 
-  --color-surface: 10 10 10;
-  --color-surface-secondary: 18 18 18;
-  --color-surface-tertiary: 28 28 28;
-  --color-border: 38 38 38;
+    --color-surface: 10 10 10;
+    --color-surface-secondary: 18 18 18;
+    --color-surface-tertiary: 28 28 28;
+    --color-border: 38 38 38;
 
-  --color-text-primary: 240 240 240;
-  --color-text-secondary: 163 163 163;
-  --color-text-muted: 100 100 100;
+    --color-text-primary: 240 240 240;
+    --color-text-secondary: 163 163 163;
+    --color-text-muted: 100 100 100;
   }
 
   .dark {
-    --color-surface: 8 8 8;
-    --color-surface-secondary: 14 14 14;
-    --color-surface-tertiary: 24 24 24;
-    --color-border: 34 34 34;
+    --color-surface: 34 34 34;
+    --color-surface-secondary: 40 40 40;
+    --color-surface-tertiary: 50 50 50;
+    --color-border: 60 60 60;
     --color-text-primary: 245 245 245;
     --color-text-secondary: 163 163 163;
-    --color-text-muted: 100 100 100;
+    --color-text-muted: 115 115 115;
   }
 }
 

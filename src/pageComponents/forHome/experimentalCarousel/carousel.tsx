@@ -74,11 +74,9 @@ const ExperimentalCarousel: React.FC<CarouselProps> = ({
     queryOptions: { select: mapProductTableData },
   });
 
-  const { data: productWorstSelling = [] } = useGetProductListWithWorstSelling(
-    {
-      queryOptions: { select: mapProductTableData },
-    },
-  );
+  const { data: productWorstSelling = [] } = useGetProductListWithWorstSelling({
+    queryOptions: { select: mapProductTableData },
+  });
 
   const products = (() => {
     switch (carouselType) {
@@ -109,8 +107,7 @@ const ExperimentalCarousel: React.FC<CarouselProps> = ({
       const progress = Math.min(elapsed / duration, 1);
       // Ease out cubic
       const eased = 1 - Math.pow(1 - progress, 3);
-      const value =
-        startValue + (targetRotation.current - startValue) * eased;
+      const value = startValue + (targetRotation.current - startValue) * eased;
 
       setRotation(value);
 
@@ -164,6 +161,7 @@ const ExperimentalCarousel: React.FC<CarouselProps> = ({
   const handleClick = (e: React.MouseEvent) => {
     if (isDragging.current) {
       e.preventDefault();
+      e.stopPropagation();
     }
   };
 
@@ -184,7 +182,8 @@ const ExperimentalCarousel: React.FC<CarouselProps> = ({
     <div
       className={wrapper()}
       style={{
-        background: "linear-gradient(135deg, rgb(var(--color-brand)) 0%, rgb(120 15 15) 100%)",
+        background:
+          "linear-gradient(135deg, rgb(var(--color-brand)) 0%, rgb(120 15 15) 100%)",
         borderBottom: "1px solid rgb(var(--color-brand))",
       }}
     >
@@ -203,71 +202,79 @@ const ExperimentalCarousel: React.FC<CarouselProps> = ({
         transition={{ duration: 0.6, ease: "easeOut" }}
         viewport={{ once: true }}
       >
-        <SectionHeading text={headerText} className="!text-white [&_h2]:!text-white [&_span]:!text-white [&_span]:!opacity-20" />
+        <SectionHeading
+          text={headerText}
+          className="!text-white [&_h2]:!text-white [&_span]:!text-white [&_span]:!opacity-20"
+        />
 
         <div className="w-full max-w-3xl mx-auto">
-        {/* Carousel scene */}
-        <div
-          className="relative w-full select-none touch-none"
-          style={{ height: "340px", cursor: "grab" }}
-          onPointerDown={handlePointerDown}
-        >
-          {products.map((product, index) => {
-            const style = getItemStyle(index);
+          {/* Carousel scene */}
+          <div
+            className="relative w-full select-none touch-none"
+            style={{ height: "340px", cursor: "grab" }}
+            onPointerDown={handlePointerDown}
+          >
+            {products.map((product, index) => {
+              const style = getItemStyle(index);
 
-            return (
-              <div
-                key={product.id}
-                className="absolute left-1/2 top-0"
-                style={{
-                  transform: `translateX(calc(-50% + ${style.x}%)) translateY(${style.y}%) scale(${style.scale})`,
-                  zIndex: style.zIndex,
-                }}
-              >
-                <Link
-                  to={`/dashboard/productDetail/${product.id}`}
-                  onClick={handleClick}
-                  draggable={false}
-                  className="relative block h-64 w-64"
+              return (
+                <div
+                  key={product.id}
+                  className="absolute left-1/2 top-0"
+                  style={{
+                    transform: `translateX(calc(-50% + ${style.x}%)) translateY(${style.y}%) scale(${style.scale})`,
+                    zIndex: style.zIndex,
+                  }}
                 >
-                  {/* Solid backing to block pattern bleed-through */}
-                  <div className="absolute inset-0 rounded-full" style={{ background: "rgb(var(--color-brand))" }} />
-                  <img
-                    src={product.image_url[0]}
-                    alt={product.name}
-                    className="relative h-64 w-64 object-cover rounded-full shadow-lg"
-                    style={{ opacity: style.opacity }}
+                  <Link
+                    to={`/dashboard/productDetail/${product.id}`}
+                    onClick={handleClick}
+                    onPointerDown={(e) => e.stopPropagation()}
                     draggable={false}
-                  />
-                </Link>
-              </div>
-            );
-          })}
-        </div>
+                    className="relative block h-64 w-64 rounded-full hover:brightness-105 hover:translate-y-[-4px] transition-all duration-200"
+                    style={{ pointerEvents: style.zIndex >= 10 ? "auto" : "none" }}
+                  >
+                    {/* Solid backing to block pattern bleed-through */}
+                    <div
+                      className="absolute inset-0 rounded-full"
+                      style={{ background: "rgb(var(--color-brand))" }}
+                    />
+                    <img
+                      src={product.image_url[0]}
+                      alt={product.name}
+                      className="relative h-64 w-64 object-cover rounded-full shadow-lg"
+                      style={{ opacity: style.opacity }}
+                      draggable={false}
+                    />
+                  </Link>
+                </div>
+              );
+            })}
+          </div>
 
-        {/* Buttons below */}
-        <div className="flex justify-center gap-6 mt-8 bg-black/20 backdrop-blur-sm w-fit mx-auto rounded-full">
-          <Button
-            onClick={goPrev}
-            variant="outline"
-            size="icon"
-            className="h-12 w-12 rounded-full bg-white/15 text-white hover:bg-white/25 hover:text-white border-white/20"
-          >
-            <ArrowLeft className="h-5 w-5" />
-          </Button>
-          <span className="flex items-center text-sm font-medium text-white min-w-[120px] justify-center text-center">
-            {products[((Math.round(rotation) % total) + total) % total]?.name}
-          </span>
-          <Button
-            onClick={goNext}
-            variant="outline"
-            size="icon"
-            className="h-12 w-12 rounded-full bg-white/15 text-white hover:bg-white/25 hover:text-white border-white/20"
-          >
-            <ArrowRight className="h-5 w-5" />
-          </Button>
+          {/* Buttons below */}
+          <div className="flex justify-center gap-6 mt-8 bg-black/20 backdrop-blur-sm w-fit mx-auto rounded-full">
+            <Button
+              onClick={goPrev}
+              variant="outline"
+              size="icon"
+              className="h-12 w-12 rounded-full bg-white/15 text-white hover:bg-white/25 hover:text-white border-white/20"
+            >
+              <ArrowLeft className="h-5 w-5" />
+            </Button>
+            <span className="flex items-center text-sm font-medium text-white min-w-[120px] justify-center text-center">
+              {products[((Math.round(rotation) % total) + total) % total]?.name}
+            </span>
+            <Button
+              onClick={goNext}
+              variant="outline"
+              size="icon"
+              className="h-12 w-12 rounded-full bg-white/15 text-white hover:bg-white/25 hover:text-white border-white/20"
+            >
+              <ArrowRight className="h-5 w-5" />
+            </Button>
+          </div>
         </div>
-      </div>
       </motion.div>
     </div>
   );

@@ -1,10 +1,11 @@
 import {
-  getProductList,
+  getFilteredProducts,
   getProductListBestSelling,
   getProductListWithCategory,
   getProductListWorstSelling,
   getSingleProduct,
   Product,
+  ProductFilters,
 } from "@/supabase/products";
 import {
   useQuery,
@@ -12,15 +13,23 @@ import {
   UseQueryResult,
 } from "@tanstack/react-query";
 
-export const useGetProductList = <T = Product[]>({
+export const useGetFilteredProducts = <T = Product[]>({
   queryOptions,
+  filters,
 }: {
   queryOptions?: Omit<UseQueryOptions<Product[], Error, T>, "queryKey">;
-} = {}): UseQueryResult<T, Error> => {
+  filters: ProductFilters;
+}): UseQueryResult<T, Error> => {
   return useQuery<Product[], Error, T>({
-    queryKey: ["products"],
-    queryFn: getProductList,
-    staleTime: 60 * 1000,
+    queryKey: [
+      "filteredProducts",
+      filters.search,
+      filters.priceRange,
+      filters.categories,
+      filters.sortBy,
+    ],
+    queryFn: () => getFilteredProducts(filters),
+    staleTime: 30 * 1000,
     ...queryOptions,
   });
 };

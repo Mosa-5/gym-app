@@ -1,4 +1,4 @@
-import { fillProfileInfo } from "../../../supabase/account";
+import { fillProfileInfo, uploadAvatar } from "../../../supabase/account";
 import { FillProfileInfoPayload } from "../../../supabase/account/index.types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
@@ -31,5 +31,22 @@ export const useFillProfile = () => {
       });
     },
     onError: () => {},
+  });
+};
+
+export const useUploadAvatar = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation<string, Error, { userId: string; file: File }>({
+    mutationKey: ["upload-avatar"],
+    mutationFn: uploadAvatar,
+    onSuccess: (_, { userId }) => {
+      queryClient.invalidateQueries({
+        queryKey: ["profile", userId],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["profile"],
+      });
+    },
   });
 };
