@@ -1,4 +1,11 @@
-import { Shield, Wrench, Target, Trophy, ArrowRight, Heart } from "lucide-react";
+import {
+  Shield,
+  Wrench,
+  Target,
+  Trophy,
+  ArrowRight,
+  Heart,
+} from "lucide-react";
 
 export const whoWeAreText =
   "GymGear was built by lifters, for lifters. We started in a garage gym with one mission: create equipment that performs as hard as you do. Every product we sell has been tested under real iron — because we believe the gear you trust should never be the weakest link in your chain.";

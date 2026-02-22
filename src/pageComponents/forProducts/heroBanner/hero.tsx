@@ -1,9 +1,9 @@
 import beltimg from "@/assets/pexels-franki-frank-11513151.jpg";
+import mobileShopImg from "@/assets/mobileGear.avif";
 import { motion } from "framer-motion";
 
 import {
   banner,
-  bannerInner,
   overlay,
   content,
   subtitle,
@@ -14,13 +14,15 @@ import {
 const ProductsHeroBanner = () => {
   return (
     <div className={banner()}>
-      <div
-        className={bannerInner()}
-        style={{
-          backgroundImage: `url(${beltimg})`,
-          backgroundPosition: "50% 65%",
-        }}
-      />
+      <picture className="absolute inset-0">
+        <source media="(max-width: 767px)" srcSet={mobileShopImg} />
+        <source media="(min-width: 768px)" srcSet={beltimg} />
+        <img
+          src={beltimg}
+          alt=""
+          className="w-full h-full object-cover md:object-[50%_65%] object-center"
+        />
+      </picture>
       <div className={overlay()} />
 
       <motion.div

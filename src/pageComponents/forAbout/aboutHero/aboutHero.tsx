@@ -1,4 +1,4 @@
-import heroImg from "@/assets/pexels-823sl-2294362.jpg";
+import heroImg from "@/assets/bells.avif";
 import { motion } from "framer-motion";
 import {
   banner,

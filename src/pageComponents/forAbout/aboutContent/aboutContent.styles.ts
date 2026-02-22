@@ -7,13 +7,9 @@ export const bodyText = cva(
   "text-lg sm:text-xl leading-relaxed text-neutral-700 dark:text-neutral-300 font-light max-w-3xl mx-auto text-center",
 );
 
-export const gridFour = cva(
-  "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4",
-);
+export const gridFour = cva("grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4");
 
-export const gridThree = cva(
-  "grid grid-cols-1 sm:grid-cols-3 gap-6",
-);
+export const gridThree = cva("grid grid-cols-1 sm:grid-cols-3 gap-6");
 
 export const card = cva(
   "group relative p-6 sm:p-8 rounded-xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 hover:border-brand/30 transition-all duration-300 hover:shadow-lg hover:shadow-brand/5",

@@ -117,7 +117,7 @@ const ProductGrid: React.FC<{
       ) : (
         <>
           {/* Product grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 px-4">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5 px-0 sm:px-4">
             {currentProducts.map((product, index) => {
               const globalIndex = startIndex + index;
               return (
@@ -150,19 +150,19 @@ const ProductGrid: React.FC<{
                       }}
                     />
 
-                    <div className="relative z-10 flex flex-col items-center p-5 pb-6 gap-4">
+                    <div className="relative z-10 flex flex-col items-center p-3 pb-4 gap-2 sm:p-5 sm:pb-6 sm:gap-4">
                       <img
                         src={product.image_url[0]}
                         alt={product.name}
-                        className="h-40 object-contain rounded-full"
+                        className="h-24 sm:h-40 object-contain rounded-full"
                       />
-                      <h3 className="text-sm font-semibold text-center tracking-wide text-white truncate max-w-full">
+                      <h3 className="text-xs sm:text-sm font-semibold text-center tracking-wide text-white truncate max-w-full">
                         {product.name}
                       </h3>
-                      <p className="text-base font-black text-white">
+                      <p className="text-sm sm:text-base font-black text-white">
                         ${product.price}
                       </p>
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-2 sm:gap-3">
                         <button
                           onClick={(e) => {
                             e.stopPropagation();
@@ -170,9 +170,9 @@ const ProductGrid: React.FC<{
                             toast.success(`${product.name} added to cart`);
                             handleAddToCart(product);
                           }}
-                          className="flex items-center gap-2 bg-white/15 hover:bg-white/25 border border-white/20 text-white text-xs font-semibold uppercase tracking-wider px-4 py-2 rounded-full transition-colors duration-200 cursor-pointer"
+                          className="flex items-center gap-1.5 sm:gap-2 bg-white/15 hover:bg-white/25 border border-white/20 text-white text-[10px] sm:text-xs font-semibold uppercase tracking-wider px-2.5 py-1.5 sm:px-4 sm:py-2 rounded-full transition-colors duration-200 cursor-pointer"
                         >
-                          <ShoppingBag className="w-3.5 h-3.5" />
+                          <ShoppingBag className="w-3 h-3 sm:w-3.5 sm:h-3.5 hidden sm:block" />
                           Add to Cart
                         </button>
                         <button
@@ -189,9 +189,9 @@ const ProductGrid: React.FC<{
                             });
                             toast.success("Added to wishlist");
                           }}
-                          className="flex items-center justify-center w-9 h-9 rounded-full bg-white/15 hover:bg-white/25 border border-white/20 text-white transition-colors duration-200 cursor-pointer"
+                          className="flex items-center justify-center w-7 h-7 sm:w-9 sm:h-9 rounded-full bg-white/15 hover:bg-white/25 border border-white/20 text-white transition-colors duration-200 cursor-pointer"
                         >
-                          <Star className="w-4 h-4" />
+                          <Star className="w-3 h-3 sm:w-4 sm:h-4" />
                         </button>
                       </div>
                     </div>

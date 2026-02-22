@@ -1,5 +1,5 @@
-import React from "react";
 import gymheroimg from "@/assets/pexels-binyaminmellish-17840.jpg";
+import mobileHeroImg from "@/assets/ripped.avif";
 import {
   heroSectionClass,
   overlayClass,
@@ -16,15 +16,18 @@ import { ArrowRight } from "lucide-react";
 
 const HeroBanner: React.FC = () => {
   return (
-    <section
-      className={heroSectionClass()}
-      style={{
-        backgroundImage: `url(${gymheroimg})`,
-        backgroundSize: "cover",
-        backgroundPosition: "70% 30%",
-        backgroundRepeat: "no-repeat",
-      }}
-    >
+    <section className={heroSectionClass()}>
+      {/* Background image */}
+      <picture className="absolute inset-0">
+        <source media="(max-width: 767px)" srcSet={mobileHeroImg} />
+        <source media="(min-width: 768px)" srcSet={gymheroimg} />
+        <img
+          src={gymheroimg}
+          alt=""
+          className="w-full h-full object-cover md:object-[70%_30%] object-center"
+        />
+      </picture>
+
       {/* Overlay */}
       <div className={overlayClass()} />
 

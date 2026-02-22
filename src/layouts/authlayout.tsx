@@ -13,7 +13,10 @@ const AuthLayout: React.FC = () => {
 
       <div className="relative z-10 w-full flex flex-col items-center justify-center px-4 py-10">
         {/* Logo */}
-        <Link to="/dashboard/main" className="flex items-center gap-2 group mb-8">
+        <Link
+          to="/dashboard/main"
+          className="flex items-center gap-2 group mb-8"
+        >
           <div className="w-9 h-9 bg-brand rounded-sm flex items-center justify-center group-hover:bg-brand-hover transition-colors">
             <svg
               className="w-5 h-5"

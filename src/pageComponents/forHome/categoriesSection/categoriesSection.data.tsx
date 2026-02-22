@@ -15,7 +15,8 @@ export const categories = [
     name: "Grip Tape",
     filterKey: "grip-tape",
     color: "bg-neutral-900",
-    description: "High-quality grip tape to enhance your hold and boost your lifts.",
+    description:
+      "High-quality grip tape to enhance your hold and boost your lifts.",
     image: tapeRollImg,
   },
   {
@@ -29,7 +30,8 @@ export const categories = [
     name: "Knee Sleeves",
     filterKey: "knee-sleeves",
     color: "bg-zinc-800",
-    description: "Support and protection for your knees during intense workouts.",
+    description:
+      "Support and protection for your knees during intense workouts.",
     image: kneeSleeves,
   },
 ];

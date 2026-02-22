@@ -41,7 +41,7 @@ const Menu = () => {
               <SheetClose asChild>
                 <Link
                   to="/dashboard/main"
-                  className="text-sm font-semibold uppercase tracking-wider text-neutral-400 hover:text-white hover:bg-neutral-800/50 px-4 py-3 rounded-md transition-colors"
+                  className="text-base font-semibold uppercase tracking-wider text-neutral-400 hover:text-white hover:bg-neutral-800/50 px-4 py-4 rounded-md transition-colors"
                 >
                   Home
                 </Link>
@@ -49,7 +49,7 @@ const Menu = () => {
               <SheetClose asChild>
                 <Link
                   to="/dashboard/products"
-                  className="text-sm font-semibold uppercase tracking-wider text-neutral-400 hover:text-white hover:bg-neutral-800/50 px-4 py-3 rounded-md transition-colors"
+                  className="text-base font-semibold uppercase tracking-wider text-neutral-400 hover:text-white hover:bg-neutral-800/50 px-4 py-4 rounded-md transition-colors"
                 >
                   Shop
                 </Link>
@@ -57,7 +57,7 @@ const Menu = () => {
               <SheetClose asChild>
                 <Link
                   to="/dashboard/about"
-                  className="text-sm font-semibold uppercase tracking-wider text-neutral-400 hover:text-white hover:bg-neutral-800/50 px-4 py-3 rounded-md transition-colors"
+                  className="text-base font-semibold uppercase tracking-wider text-neutral-400 hover:text-white hover:bg-neutral-800/50 px-4 py-4 rounded-md transition-colors"
                 >
                   About
                 </Link>
@@ -77,7 +77,7 @@ const Menu = () => {
                         CN
                       </AvatarFallback>
                     </Avatar>
-                    <span className="text-sm font-semibold text-neutral-300">
+                    <span className="text-base font-semibold text-neutral-300">
                       My Profile
                     </span>
                   </Link>
@@ -85,7 +85,7 @@ const Menu = () => {
               ) : (
                 <SheetClose asChild>
                   <Link className="w-full" to="/auth/signin">
-                    <Button className="w-full text-sm font-semibold uppercase tracking-wider py-5 bg-brand hover:bg-brand-hover">
+                    <Button className="w-full text-base font-semibold uppercase tracking-wider py-6 bg-brand hover:bg-brand-hover">
                       Sign In
                     </Button>
                   </Link>
@@ -93,7 +93,7 @@ const Menu = () => {
               )}
             </div>
 
-            <div className="flex items-center justify-between px-4 pt-4 border-t border-neutral-800 mt-2">
+            <div className="flex items-center justify-between px-4 pt-4 border-t border-neutral-800 mt-2 [&_button]:scale-150">
               <LanguageChanger />
               <ThemeToggle />
             </div>

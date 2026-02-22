@@ -91,10 +91,12 @@ const Products = () => {
 
         {/* Main content */}
         <main className="flex-1 min-w-0">
-          <div className="flex items-center gap-3 mb-8">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-8">
             <SearchBar />
-            <SortMenu value={sortBy} onValueChange={setSortBy} />
-            <FiltersMobile filters={filters} onFiltersChange={setFilters} />
+            <div className="flex items-center gap-3">
+              <SortMenu value={sortBy} onValueChange={setSortBy} />
+              <FiltersMobile filters={filters} onFiltersChange={setFilters} />
+            </div>
           </div>
           <ProductGrid
             searchQuery={searchQuery}

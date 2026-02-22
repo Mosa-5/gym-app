@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import storyImg1 from "@/assets/pexels-823sl-2294361.jpg";
+import storyImg1 from "@/assets/ripped.avif";
 import storyImg2 from "@/assets/pexels-binyaminmellish-17840.jpg";
 import SectionHeading from "@/pageComponents/forHome/sectionHeading/sectionHeading";
 import {
@@ -11,11 +11,7 @@ import {
   guaranteePoints,
   ctaText,
 } from "./aboutContent.data";
-import {
-  containerClass,
-  gridFour,
-  ctaButton,
-} from "./aboutContent.styles";
+import { containerClass, gridFour, ctaButton } from "./aboutContent.styles";
 
 const fade = (delay = 0) => ({
   initial: { opacity: 0, y: 20 } as const,
@@ -45,10 +41,14 @@ const AboutContent = () => {
                     transform: "translate(4px, 4px)",
                   }}
                 >
-                  Built By<br />Lifters.
+                  Built By
+                  <br />
+                  Lifters.
                 </span>
                 <h2 className="relative text-4xl sm:text-5xl lg:text-6xl font-black uppercase leading-[0.95] text-neutral-900 dark:text-white">
-                  Built By<br />Lifters.
+                  Built By
+                  <br />
+                  Lifters.
                 </h2>
               </div>
               <div className="w-12 h-[2px] bg-brand mb-6" />
@@ -85,13 +85,20 @@ const AboutContent = () => {
       <section className="relative py-16 sm:py-20 overflow-hidden">
         <div className={containerClass() + " relative z-10"}>
           <SectionHeading text="Our Standards" className="mb-8" />
-          <div className={gridFour() + " rounded-2xl overflow-hidden border border-neutral-200 dark:border-neutral-700/50"}>
+          <div
+            className={
+              gridFour() +
+              " rounded-2xl overflow-hidden border border-neutral-200 dark:border-neutral-700/50"
+            }
+          >
             {standardsPillars.map((pillar, i) => (
               <motion.div
                 key={pillar.title}
                 {...fade(0.1 + i * 0.1)}
                 className={`relative p-6 sm:p-8 bg-white dark:bg-neutral-900/80 ${
-                  i > 0 ? "border-t sm:border-t-0 sm:border-l border-neutral-200 dark:border-neutral-700/50 lg:border-t-0 lg:border-l" : ""
+                  i > 0
+                    ? "border-t sm:border-t-0 sm:border-l border-neutral-200 dark:border-neutral-700/50 lg:border-t-0 lg:border-l"
+                    : ""
                 } ${i === 2 ? "sm:border-t sm:border-l-0 lg:border-t-0 lg:border-l" : ""}`}
               >
                 {/* Number */}
@@ -121,8 +128,7 @@ const AboutContent = () => {
         <div
           className="absolute -right-20 top-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full pointer-events-none opacity-10"
           style={{
-            background:
-              "radial-gradient(circle, white 0%, transparent 70%)",
+            background: "radial-gradient(circle, white 0%, transparent 70%)",
           }}
         />
         <div className={containerClass() + " relative z-10"}>
@@ -192,7 +198,9 @@ const AboutContent = () => {
               className="self-center bg-neutral-100 dark:bg-neutral-900 border-l-4 border-brand p-8 sm:p-10 flex flex-col gap-6"
             >
               <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black uppercase leading-tight text-neutral-900 dark:text-white">
-                Ready to Lift<br />Without Limits?
+                Ready to Lift
+                <br />
+                Without Limits?
               </h3>
               <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">
                 50+ products engineered for athletes who don't compromise. Find

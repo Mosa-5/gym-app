@@ -63,10 +63,10 @@ const ShoppingCart = () => {
               {cart.map((product) => (
                 <div
                   key={product.id}
-                  className="flex gap-4 p-3 rounded-xl bg-neutral-900 border border-neutral-800"
+                  className="flex gap-4 p-3 sm:p-3 rounded-xl bg-neutral-900 border border-neutral-800"
                 >
                   {/* Product image */}
-                  <div className="w-16 h-16 rounded-lg overflow-hidden bg-neutral-800 flex-shrink-0">
+                  <div className="w-20 h-20 sm:w-16 sm:h-16 rounded-lg overflow-hidden bg-neutral-800 flex-shrink-0">
                     <img
                       src={product.image_url[0]}
                       alt={product.name}
@@ -76,21 +76,21 @@ const ShoppingCart = () => {
 
                   {/* Product details */}
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-sm font-semibold text-white truncate">
+                    <h3 className="text-base sm:text-sm font-semibold text-white truncate">
                       {product.name}
                     </h3>
-                    <p className="text-xs text-neutral-500 mt-0.5">
+                    <p className="text-sm sm:text-xs text-neutral-500 mt-0.5">
                       {product.category}
                     </p>
 
-                    <div className="flex items-center justify-between mt-2">
+                    <div className="flex items-center justify-between mt-2 gap-3">
                       {/* Quantity controls */}
                       <div className="flex items-center gap-1">
                         <button
                           onClick={() =>
                             changeQuantity(product.id.toString(), "decrement")
                           }
-                          className="w-6 h-6 rounded-md bg-neutral-800 hover:bg-neutral-700 flex items-center justify-center transition-colors cursor-pointer"
+                          className="w-8 h-8 sm:w-6 sm:h-6 rounded-md bg-neutral-800 hover:bg-neutral-700 flex items-center justify-center transition-colors cursor-pointer"
                         >
                           <Minus className="w-3 h-3 text-neutral-300" />
                         </button>
@@ -101,7 +101,7 @@ const ShoppingCart = () => {
                           onClick={() =>
                             changeQuantity(product.id.toString(), "increment")
                           }
-                          className="w-6 h-6 rounded-md bg-neutral-800 hover:bg-neutral-700 flex items-center justify-center transition-colors cursor-pointer"
+                          className="w-8 h-8 sm:w-6 sm:h-6 rounded-md bg-neutral-800 hover:bg-neutral-700 flex items-center justify-center transition-colors cursor-pointer"
                         >
                           <Plus className="w-3 h-3 text-neutral-300" />
                         </button>
