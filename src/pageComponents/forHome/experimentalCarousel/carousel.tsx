@@ -9,7 +9,7 @@ import {
 import { mapProductTableData } from "@/supabase/products";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
 import SectionHeading from "@/pageComponents/forHome/sectionHeading/sectionHeading";
 
 interface CarouselProps {
@@ -224,16 +224,10 @@ const ExperimentalCarousel: React.FC<CarouselProps> = ({
                   style={{
                     transform: `translateX(calc(-50% + ${style.x}%)) translateY(${style.y}%) scale(${style.scale})`,
                     zIndex: style.zIndex,
+                    pointerEvents: "none",
                   }}
                 >
-                  <Link
-                    to={`/dashboard/productDetail/${product.id}`}
-                    onClick={handleClick}
-                    onPointerDown={(e) => e.stopPropagation()}
-                    draggable={false}
-                    className="relative block h-64 w-64 rounded-full hover:brightness-105 hover:translate-y-[-4px] transition-all duration-200"
-                    style={{ pointerEvents: style.zIndex >= 10 ? "auto" : "none" }}
-                  >
+                  <div className="relative h-64 w-64 rounded-full">
                     {/* Solid backing to block pattern bleed-through */}
                     <div
                       className="absolute inset-0 rounded-full"
@@ -246,7 +240,7 @@ const ExperimentalCarousel: React.FC<CarouselProps> = ({
                       style={{ opacity: style.opacity }}
                       draggable={false}
                     />
-                  </Link>
+                  </div>
                 </div>
               );
             })}
@@ -262,9 +256,13 @@ const ExperimentalCarousel: React.FC<CarouselProps> = ({
             >
               <ArrowLeft className="h-5 w-5" />
             </Button>
-            <span className="flex items-center text-sm font-medium text-white min-w-[120px] justify-center text-center">
+            <Link
+              to={`/dashboard/productDetail/${products[((Math.round(rotation) % total) + total) % total]?.id}`}
+              className="flex items-center gap-2 text-sm font-bold text-white w-[220px] justify-center text-center uppercase tracking-wider hover:underline underline-offset-4 transition-all truncate"
+            >
               {products[((Math.round(rotation) % total) + total) % total]?.name}
-            </span>
+              <ExternalLink className="w-3.5 h-3.5 shrink-0 opacity-60" />
+            </Link>
             <Button
               onClick={goNext}
               variant="outline"

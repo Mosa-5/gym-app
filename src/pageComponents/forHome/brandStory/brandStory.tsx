@@ -6,7 +6,7 @@ import { sectionClass, containerClass } from "./brandStory.styles";
 import storyImg1 from "@/assets/pexels-823sl-2294361.jpg";
 import storyImg2 from "@/assets/pexels-binyaminmellish-17840.jpg";
 import storyImg3 from "@/assets/pexels-ivan-samkov-4164450.jpg";
-import storyImg4 from "@/assets/pexels-823sl-2294362.jpg";
+import storyImg4 from "@/assets/red-reyes-Z6CqKIP_J18-unsplash.jpg";
 
 const IMAGES = [storyImg1, storyImg2, storyImg3, storyImg4];
 const INTERVAL = 6000; // 6 seconds per image
@@ -24,7 +24,7 @@ const BrandStory = () => {
   return (
     <section className={sectionClass()}>
       <div className={containerClass()}>
-        <SectionHeading text="Our Story" />
+        <SectionHeading text="Our Story" className="mb-8" />
 
         {/* Full-bleed slideshow with overlapping elements */}
         <motion.div
@@ -104,24 +104,9 @@ const BrandStory = () => {
                     <span className="text-xl sm:text-2xl md:text-3xl font-black text-brand leading-none">
                       {stat.value}
                     </span>
-                    <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-neutral-500 mt-1 mb-3">
+                    <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-neutral-500 mt-1">
                       {stat.label}
                     </span>
-                    {/* Bar */}
-                    <div className="w-full h-2 bg-neutral-200 dark:bg-neutral-700 rounded-full overflow-hidden">
-                      <motion.div
-                        className="h-full rounded-full"
-                        style={{ background: "rgb(var(--color-brand))" }}
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${stat.barPercent}%` }}
-                        transition={{
-                          duration: 0.8,
-                          delay: 0.3 + index * 0.12,
-                          ease: "easeOut",
-                        }}
-                        viewport={{ once: true }}
-                      />
-                    </div>
                   </motion.div>
                 ))}
               </div>

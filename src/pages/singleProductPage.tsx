@@ -124,7 +124,9 @@ const ProductDetail: React.FC = () => {
                     strokeLinecap="round"
                   />
                 </svg>
-                <span className="text-sm font-bold text-neutral-900 dark:text-white">5.0</span>
+                <span className="text-sm font-bold text-neutral-900 dark:text-white">
+                  5.0
+                </span>
               </div>
             </div>
 

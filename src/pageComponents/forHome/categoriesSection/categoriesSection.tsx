@@ -34,7 +34,7 @@ const CategoriesSection = () => {
       viewport={{ once: true }}
     >
       <div className={containerClass()}>
-        <SectionHeading text="Shop By Category" />
+        <SectionHeading text="Shop By Category" className="mb-8" />
         <div className={panelContainerClass()}>
           {categories.map((category, index) => {
             const isActive = activeIndex === index;
@@ -82,7 +82,7 @@ const CategoriesSection = () => {
                       <>
                         {/* Product image */}
                         <motion.div
-                          className="absolute right-4 sm:right-8 bottom-4 sm:bottom-8"
+                          className="absolute right-4 sm:right-8 bottom-4 sm:bottom-8 z-0"
                           initial={{ opacity: 0, x: 40 }}
                           animate={{ opacity: 1, x: 0 }}
                           exit={{ opacity: 0, x: 40 }}
@@ -101,9 +101,18 @@ const CategoriesSection = () => {
                           </div>
                         </motion.div>
 
+                        {/* Dark overlay behind text */}
+                        <motion.div
+                          className="absolute inset-0 z-[1] bg-gradient-to-r from-black/60 via-black/40 to-black/15"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.3 }}
+                        />
+
                         {/* Text content */}
                         <motion.div
-                          className="absolute bottom-0 left-0 w-[200px] sm:w-[380px] md:w-[500px] lg:w-[580px] p-5 sm:p-8 md:p-10"
+                          className="absolute bottom-0 left-0 w-[200px] sm:w-[380px] md:w-[500px] lg:w-[580px] p-5 sm:p-8 md:p-10 z-[2]"
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
                           exit={{ opacity: 0 }}
@@ -116,12 +125,12 @@ const CategoriesSection = () => {
                             {category.description}
                           </p>
                           <Link
-                            to={`/dashboard/products?category=${encodeURIComponent(category.name)}`}
+                            to={`/dashboard/products?categories=${encodeURIComponent(category.filterKey)}`}
                             onClick={(e) => e.stopPropagation()}
                           >
                             <Button
                               variant="secondary"
-                              className="w-fit font-semibold text-xs sm:text-sm"
+                              className="w-fit font-semibold text-xs sm:text-sm border-transparent"
                             >
                               Shop Now
                             </Button>

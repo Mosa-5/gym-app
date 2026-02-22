@@ -27,42 +27,54 @@ const Products = () => {
 
   const setFilters = useCallback(
     (next: FilterState) => {
-      setSearchParams((prev) => {
-        const p = new URLSearchParams(prev);
-        if (next.priceRange[0] !== 0) p.set("priceMin", String(next.priceRange[0]));
-        else p.delete("priceMin");
-        if (next.priceRange[1] !== 1000) p.set("priceMax", String(next.priceRange[1]));
-        else p.delete("priceMax");
-        if (next.categories.length > 0) p.set("categories", next.categories.join(","));
-        else p.delete("categories");
-        p.delete("page");
-        return p;
-      }, { replace: true });
+      setSearchParams(
+        (prev) => {
+          const p = new URLSearchParams(prev);
+          if (next.priceRange[0] !== 0)
+            p.set("priceMin", String(next.priceRange[0]));
+          else p.delete("priceMin");
+          if (next.priceRange[1] !== 1000)
+            p.set("priceMax", String(next.priceRange[1]));
+          else p.delete("priceMax");
+          if (next.categories.length > 0)
+            p.set("categories", next.categories.join(","));
+          else p.delete("categories");
+          p.delete("page");
+          return p;
+        },
+        { replace: true },
+      );
     },
     [setSearchParams],
   );
 
   const setSortBy = useCallback(
     (value: string) => {
-      setSearchParams((prev) => {
-        const p = new URLSearchParams(prev);
-        if (value) p.set("sort", value);
-        else p.delete("sort");
-        p.delete("page");
-        return p;
-      }, { replace: true });
+      setSearchParams(
+        (prev) => {
+          const p = new URLSearchParams(prev);
+          if (value) p.set("sort", value);
+          else p.delete("sort");
+          p.delete("page");
+          return p;
+        },
+        { replace: true },
+      );
     },
     [setSearchParams],
   );
 
   const setPage = useCallback(
     (pageNum: number) => {
-      setSearchParams((prev) => {
-        const p = new URLSearchParams(prev);
-        if (pageNum > 1) p.set("page", String(pageNum));
-        else p.delete("page");
-        return p;
-      }, { replace: true });
+      setSearchParams(
+        (prev) => {
+          const p = new URLSearchParams(prev);
+          if (pageNum > 1) p.set("page", String(pageNum));
+          else p.delete("page");
+          return p;
+        },
+        { replace: true },
+      );
     },
     [setSearchParams],
   );

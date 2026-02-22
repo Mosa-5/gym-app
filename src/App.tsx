@@ -19,6 +19,7 @@ const ProductDetail = lazy(() => import("./pages/singleProductPage"));
 const CartPage = lazy(() => import("./pages/cartPage"));
 const Profile = lazy(() => import("./pages/profilePage"));
 const IdOrder = lazy(() => import("./pageComponents/idOrder/idOrder"));
+const About = lazy(() => import("./pages/aboutPage"));
 
 const App: React.FC = () => {
   const { handleSetUser } = useAuthContext();
@@ -102,6 +103,14 @@ const App: React.FC = () => {
                   <Profile />
                 </Suspense>
               </AuthGuardLogOut>
+            }
+          />
+          <Route
+            path="about"
+            element={
+              <Suspense fallback={<Loader />}>
+                <About />
+              </Suspense>
             }
           />
           <Route

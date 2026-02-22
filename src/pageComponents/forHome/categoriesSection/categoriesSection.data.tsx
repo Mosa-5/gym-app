@@ -1,31 +1,35 @@
-import beltImg from "@/assets/10mm-lever-belt-black-black-main.png";
-import strapsImg from "@/assets/lifting-straps-black-black-OG.png";
-import beltHeaderImg from "@/assets/BeltHeader_1a.webp";
-import supplementImg from "@/assets/pexels-franki-frank-11513151.jpg";
+import beltImg from "@/assets/belt.png";
+import strapsImg from "@/assets/lifting-strap.png";
+import tapeRollImg from "@/assets/tape-roll.png";
+import kneeSleeves from "@/assets/sleeves.png";
 
 export const categories = [
   {
-    name: "Belts",
+    name: "Lever Belts",
+    filterKey: "lever-belts",
     color: "bg-brand",
     description: "Premium lifting belts for maximum support and performance.",
     image: beltImg,
   },
   {
-    name: "Gloves",
+    name: "Grip Tape",
+    filterKey: "grip-tape",
     color: "bg-neutral-900",
-    description: "Durable training gloves for grip and protection.",
-    image: beltHeaderImg,
+    description: "High-quality grip tape to enhance your hold and boost your lifts.",
+    image: tapeRollImg,
   },
   {
-    name: "Straps",
+    name: "Lifting Straps",
+    filterKey: "lifting-straps",
     color: "bg-red-950",
     description: "Heavy-duty straps to push your limits on every lift.",
     image: strapsImg,
   },
   {
-    name: "Supplements",
+    name: "Knee Sleeves",
+    filterKey: "knee-sleeves",
     color: "bg-zinc-800",
-    description: "Fuel your gains with our premium supplement range.",
-    image: supplementImg,
+    description: "Support and protection for your knees during intense workouts.",
+    image: kneeSleeves,
   },
 ];

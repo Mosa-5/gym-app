@@ -47,13 +47,32 @@ const RegisterForm = () => {
     register(values);
   }
 
+  if (isPending) {
+    return (
+      <div className="flex flex-col items-center justify-center gap-4 py-10 text-brand">
+        <div className="lds-circle">
+          <div></div>
+        </div>
+        <p className="font-semibold text-lg">Signing you up...</p>
+      </div>
+    );
+  }
+
   return (
-    <>
+    <div className="max-w-sm m-auto rounded-2xl p-8 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-sm flex flex-col items-center w-full">
+      <h1 className="text-2xl font-black uppercase tracking-tight text-neutral-900 dark:text-white mb-6">
+        Register
+      </h1>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className=" flex flex-col items-center space-y-6 max-w-xs *:w-full px-2 w-full dark:text-white"
+          className="flex flex-col items-center space-y-6 max-w-xs *:w-full px-2 w-full dark:text-white"
         >
+          {isError && (
+            <p className="text-red-500 text-sm text-center">
+              Sign Up failed: {String(error)}
+            </p>
+          )}
           <div className="space-y-3">
             <FormField
               control={form.control}
@@ -62,9 +81,8 @@ const RegisterForm = () => {
                 <FormItem>
                   <FormLabel>Full Name En</FormLabel>
                   <FormControl>
-                    <Input placeholder="rando1" {...field} />
+                    <Input placeholder="John" {...field} />
                   </FormControl>
-
                   <FormMessage />
                 </FormItem>
               )}
@@ -76,14 +94,12 @@ const RegisterForm = () => {
                 <FormItem>
                   <FormLabel>Full Name Ka</FormLabel>
                   <FormControl>
-                    <Input placeholder="randomadze" {...field} />
+                    <Input placeholder="Doe" {...field} />
                   </FormControl>
-
                   <FormMessage />
                 </FormItem>
               )}
             />
-
             <FormField
               control={form.control}
               name="email"
@@ -93,7 +109,6 @@ const RegisterForm = () => {
                   <FormControl>
                     <Input placeholder="something@gmail.com" {...field} />
                   </FormControl>
-
                   <FormMessage />
                 </FormItem>
               )}
@@ -107,13 +122,15 @@ const RegisterForm = () => {
                   <FormControl>
                     <Input type="password" placeholder="something" {...field} />
                   </FormControl>
-
                   <FormMessage />
                 </FormItem>
               )}
             />
           </div>
-          <Button className="" type="submit">
+          <Button
+            type="submit"
+            className="bg-brand hover:bg-brand-hover text-white font-bold uppercase tracking-wider rounded-full"
+          >
             Register
           </Button>
           <FormDescription>
@@ -130,18 +147,7 @@ const RegisterForm = () => {
           </FormDescription>
         </form>
       </Form>
-
-      <div className="absolute top-2 w-full">
-        {isError && (
-          <p className="text-red-500">Sign Up failed: {String(error)}</p>
-        )}
-        {isPending && (
-          <h1 className="m-auto text-brand font-semibold text-center text-lg">
-            Signing you up...
-          </h1>
-        )}
-      </div>
-    </>
+    </div>
   );
 };
 
