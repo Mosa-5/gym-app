@@ -14,6 +14,7 @@ import {
 import { useDeleteReview } from "@/reactQuery/mutations/reviews";
 import { toast } from "sonner";
 import { ThumbsUp, Trash2, ExternalLink } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const StarIcon = ({ filled }: { filled: boolean }) => (
   <svg
@@ -32,6 +33,7 @@ const StarIcon = ({ filled }: { filled: boolean }) => (
 
 const PersonalReviews = () => {
   const { user } = useAuthContext();
+  const { t } = useTranslation();
 
   const { data: userReviews = [], isLoading } = useGetUserReviews({
     queryOptions: { select: mapUserReviewsData },
@@ -69,11 +71,11 @@ const PersonalReviews = () => {
     <div>
       <div className="mb-6">
         <h2 className="text-xl font-black uppercase tracking-tight text-neutral-900 dark:text-white">
-          Your Reviews
+          {t("personalReviews.yourReviews")}
         </h2>
         <p className="text-sm text-neutral-500 mt-1">
-          {userReviews.length} {userReviews.length !== 1 ? "reviews" : "review"}{" "}
-          written
+          {userReviews.length} {userReviews.length !== 1 ? t("personalReviews.reviews") : t("personalReviews.review")}{" "}
+          {t("personalReviews.written")}
         </p>
       </div>
 
@@ -99,7 +101,7 @@ const PersonalReviews = () => {
             />
           </div>
           <p className="text-neutral-500 text-sm font-medium">
-            You haven't written any reviews yet.
+            {t("personalReviews.noReviews")}
           </p>
         </div>
       ) : (
@@ -217,7 +219,7 @@ const PersonalReviews = () => {
                 <DialogDescription asChild>
                   <div className="px-6 py-6">
                     <span className="block text-[11px] font-semibold uppercase tracking-widest text-neutral-400 mb-3">
-                      Your Review
+                      {t("personalReviews.yourReview")}
                     </span>
                     <div className="text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed break-all">
                       {comment.comment}
@@ -230,7 +232,7 @@ const PersonalReviews = () => {
                   <div className="flex items-center gap-1.5">
                     <ThumbsUp className="w-3.5 h-3.5 text-neutral-400" />
                     <span className="text-xs text-neutral-400">
-                      {comment.like_count} found this helpful
+                      {comment.like_count} {t("personalReviews.foundHelpful")}
                     </span>
                   </div>
 
@@ -239,7 +241,7 @@ const PersonalReviews = () => {
                     className="flex items-center gap-1.5 px-5 py-2.5 rounded-full text-xs font-semibold bg-brand hover:bg-brand-hover text-white transition-colors"
                   >
                     <ExternalLink className="w-3.5 h-3.5" />
-                    View Product
+                    {t("personalReviews.viewProduct")}
                   </Link>
                 </div>
               </DialogContent>

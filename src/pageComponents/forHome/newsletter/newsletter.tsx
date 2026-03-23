@@ -10,17 +10,19 @@ import {
   descriptionClass,
   formClass,
 } from "./newsletter.styles";
+import { useTranslation } from "react-i18next";
 
 const Newsletter = () => {
   const [email, setEmail] = useState("");
+  const { t } = useTranslation();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!email.trim()) {
-      toast.error("Please enter your email address.");
+      toast.error(t("newsletter.emptyEmail"));
       return;
     }
-    toast.success("Thanks for subscribing!");
+    toast.success(t("newsletter.success"));
     setEmail("");
   };
 
@@ -33,21 +35,20 @@ const Newsletter = () => {
       viewport={{ once: true }}
     >
       <div className={containerClass()}>
-        <SectionHeading text="Stay In The Loop" />
+        <SectionHeading text={t("newsletter.stayInTheLoop")} />
         <p className={descriptionClass()}>
-          Subscribe to our newsletter for exclusive deals, new drops, and
-          training tips.
+          {t("newsletter.description")}
         </p>
         <form onSubmit={handleSubmit} className={formClass()}>
           <Input
             type="email"
-            placeholder="Enter your email"
+            placeholder={t("newsletter.placeholder")}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="flex-1 bg-white dark:bg-neutral-950"
           />
           <Button type="submit" className="text-white">
-            Subscribe
+            {t("newsletter.subscribe")}
           </Button>
         </form>
       </div>

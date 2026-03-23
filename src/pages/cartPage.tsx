@@ -4,8 +4,10 @@ import { useAuthContext } from "@/context/auth/hooks/useAuthContext";
 import { toast } from "sonner";
 import emptyCartSVG from "@/assets/undraw_empty-cart_574u.svg";
 import { Minus, Plus, Trash2, ShoppingBag, Truck, Tag } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const CartPage = () => {
+  const { t } = useTranslation();
   const { cart, removeFromCart, clearCart, changeQuantity } = useCartContext();
   const { user } = useAuthContext();
 
@@ -23,7 +25,7 @@ const CartPage = () => {
     if (cart.length === 0) {
       return;
     } else if (user === null) {
-      toast.error("You need to be signed in to place an order.");
+      toast.error(t("cart.needSignIn"));
       return;
     }
 
@@ -46,22 +48,22 @@ const CartPage = () => {
   };
 
   if (isError) {
-    toast.error("Failed to place order. Please try again.");
+    toast.error(t("cart.orderFailed"));
   }
 
   return (
-    <div className="min-h-screen bg-white dark:bg-neutral-950">
+    <div className="min-h-screen bg-white dark:bg-surface">
       {/* Hero header */}
       <div className="bg-neutral-950 py-12 px-6">
         <div className="max-w-screen-lg mx-auto">
           <div className="flex items-center gap-3 mb-2">
             <ShoppingBag className="w-6 h-6 text-brand" />
             <h1 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-white">
-              Your Cart
+              {t("cart.yourCart")}
             </h1>
           </div>
           <p className="text-sm text-neutral-400">
-            {totalItems} {totalItems !== 1 ? "items" : "item"} in your cart
+            {totalItems} {totalItems !== 1 ? t("cart.items") : t("cart.item")} {t("cart.inYourCart")}
           </p>
         </div>
       </div>
@@ -89,7 +91,7 @@ const CartPage = () => {
               />
             </div>
             <p className="text-neutral-500 text-sm font-medium">
-              Your cart is empty.
+              {t("cart.emptyCart")}
             </p>
           </div>
         ) : (
@@ -115,7 +117,7 @@ const CartPage = () => {
                         {product.name}
                       </h3>
                       <p className="text-xs text-neutral-400 mt-0.5">
-                        ${Number(product.price).toFixed(2)} each
+                        ${Number(product.price).toFixed(2)} {t("cart.each")}
                       </p>
 
                       {/* Quantity + total row */}
@@ -168,18 +170,18 @@ const CartPage = () => {
                   <Tag className="w-4 h-4 text-neutral-400 flex-shrink-0" />
                   <input
                     type="text"
-                    placeholder="Coupon code"
+                    placeholder={t("cart.couponCode")}
                     className="flex-1 bg-transparent text-sm outline-none text-neutral-900 dark:text-white placeholder:text-neutral-400"
                   />
                 </div>
                 <button className="h-11 px-6 rounded-full bg-neutral-900 dark:bg-neutral-800 text-white text-sm font-semibold hover:bg-neutral-800 dark:hover:bg-neutral-700 transition-colors cursor-pointer">
-                  Apply
+                  {t("cart.apply")}
                 </button>
                 <button
                   onClick={clearCart}
                   className="h-11 px-6 rounded-full border border-neutral-200 dark:border-neutral-800 text-sm font-semibold text-neutral-500 hover:text-neutral-900 dark:hover:text-white hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors cursor-pointer"
                 >
-                  Clear Cart
+                  {t("cart.clearCart")}
                 </button>
               </div>
             </div>
@@ -188,13 +190,13 @@ const CartPage = () => {
             <div className="w-full lg:w-80 lg:flex-shrink-0">
               <div className="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6 lg:sticky lg:top-24">
                 <h2 className="text-base font-black uppercase tracking-tight text-neutral-900 dark:text-white mb-5">
-                  Order Summary
+                  {t("cart.orderSummary")}
                 </h2>
 
                 <div className="space-y-3 text-sm">
                   <div className="flex justify-between">
                     <span className="text-neutral-500">
-                      Subtotal ({totalItems} items)
+                      {t("cart.subtotal")} ({totalItems} {t("cart.items")})
                     </span>
                     <span className="font-semibold text-neutral-900 dark:text-white">
                       ${totalCost.toFixed(2)}
@@ -203,7 +205,7 @@ const CartPage = () => {
                   <div className="flex justify-between">
                     <span className="text-neutral-500 flex items-center gap-1.5">
                       <Truck className="w-3.5 h-3.5" />
-                      Delivery
+                      {t("cart.delivery")}
                     </span>
                     <span className="font-semibold text-neutral-900 dark:text-white">
                       ${deliveryCost.toFixed(2)}
@@ -213,7 +215,7 @@ const CartPage = () => {
                   <div className="border-t border-neutral-100 dark:border-neutral-800 pt-3 mt-3">
                     <div className="flex justify-between">
                       <span className="font-bold text-neutral-900 dark:text-white">
-                        Total
+                        {t("cart.total")}
                       </span>
                       <span className="text-lg font-black text-neutral-900 dark:text-white">
                         ${finalCost.toFixed(2)}
@@ -227,7 +229,7 @@ const CartPage = () => {
                   disabled={cart.length === 0 || isPending}
                   className="w-full mt-6 py-3.5 bg-brand hover:bg-brand-hover disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold text-sm uppercase tracking-wider rounded-full transition-colors duration-200 cursor-pointer"
                 >
-                  {isPending ? "Placing Order..." : "Place Order"}
+                  {isPending ? t("cart.placingOrder") : t("cart.placeOrder")}
                 </button>
               </div>
             </div>

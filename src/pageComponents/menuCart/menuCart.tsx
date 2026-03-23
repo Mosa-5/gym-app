@@ -10,8 +10,10 @@ import { ShoppingBag, Trash2, Minus, Plus } from "lucide-react";
 import { useCartContext } from "@/context/cart/hooks/useCartContext";
 import { Link } from "react-router-dom";
 import emptyCartSVG from "@/assets/undraw_empty-cart_574u.svg";
+import { useTranslation } from "react-i18next";
 
 const ShoppingCart = () => {
+  const { t } = useTranslation();
   const { cart, removeFromCart, changeQuantity } = useCartContext();
 
   const totalPrice = cart.reduce(
@@ -43,9 +45,9 @@ const ShoppingCart = () => {
         <SheetHeader className="px-6 pt-6 pb-4 border-b border-neutral-800 pr-14">
           <SheetTitle className="text-white text-lg font-bold uppercase tracking-wider flex items-center gap-3">
             <ShoppingBag className="w-5 h-5" />
-            Your Cart
+            {t("cart.yourCart")}
             <span className="ml-auto text-sm font-semibold text-neutral-400">
-              {totalItems} {totalItems === 1 ? "item" : "items"}
+              {totalItems} {totalItems === 1 ? t("cart.item") : t("cart.items")}
             </span>
           </SheetTitle>
         </SheetHeader>
@@ -146,7 +148,7 @@ const ShoppingCart = () => {
                 />
               </div>
               <p className="text-neutral-500 text-sm font-medium">
-                Your cart is empty
+                {t("cart.emptyCartMenu")}
               </p>
             </div>
           )}
@@ -157,7 +159,7 @@ const ShoppingCart = () => {
           <div className="px-6 py-5 border-t border-neutral-800">
             <div className="flex items-center justify-between mb-4">
               <span className="text-sm text-neutral-400 uppercase tracking-wider font-semibold">
-                Subtotal
+                {t("cart.subtotal")}
               </span>
               <span className="text-xl font-black text-white">
                 ${totalPrice.toFixed(2)}
@@ -166,7 +168,7 @@ const ShoppingCart = () => {
             <SheetClose asChild>
               <Link to="/dashboard/cartPage">
                 <button className="w-full bg-brand hover:bg-brand-hover text-white font-bold text-sm uppercase tracking-wider rounded-full py-3.5 transition-colors duration-200 cursor-pointer">
-                  Checkout
+                  {t("cart.checkout")}
                 </button>
               </Link>
             </SheetClose>

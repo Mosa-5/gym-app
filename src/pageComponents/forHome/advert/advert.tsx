@@ -12,8 +12,11 @@ import {
   button,
 } from "./advert.styles";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const LeverBeltBanner = () => {
+  const { t } = useTranslation();
+
   return (
     <motion.div
       className={banner()}
@@ -34,11 +37,11 @@ const LeverBeltBanner = () => {
           viewport={{ once: true }}
           className={content()}
         >
-          <h3 className={subHeading()}>BLK/BLK</h3>
-          <h1 className={heading()}>LEVER BELT</h1>
-          <p className={saleText()}>40% SALE</p>
+          <h3 className={subHeading()}>{t("advert.blkBlk")}</h3>
+          <h1 className={heading()}>{t("advert.leverBelt")}</h1>
+          <p className={saleText()}>{t("advert.sale")}</p>
           <Link to="/dashboard/products">
-            <Button className={button()}>SHOP NOW</Button>
+            <Button className={button()}>{t("advert.shopNow")}</Button>
           </Link>
         </motion.div>
       </div>

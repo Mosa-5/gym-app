@@ -6,8 +6,10 @@ import { useDeleteWishlistItem } from "@/reactQuery/mutations/whishlist";
 import { toast } from "sonner";
 import { mapWishlistItemData } from "@/supabase/whishlist";
 import { Trash2 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const Wishlist = () => {
+  const { t } = useTranslation();
   const { user } = useAuthContext();
 
   const { data: wishlistProducts = [], isLoading } = useGetWishlistedProducts(
@@ -24,7 +26,7 @@ const Wishlist = () => {
   ) => {
     e.preventDefault();
     deleteWishlistItem({ userId: userId, productId: productId });
-    toast("Wishlist item removed");
+    toast(t("wishlist.removed"));
   };
 
   if (isLoading) return null;
@@ -33,11 +35,11 @@ const Wishlist = () => {
     <div>
       <div className="mb-6">
         <h2 className="text-xl font-black uppercase tracking-tight text-neutral-900 dark:text-white">
-          Wishlist
+          {t("wishlist.wishlist")}
         </h2>
         <p className="text-sm text-neutral-500 mt-1">
           {wishlistProducts.length}{" "}
-          {wishlistProducts.length !== 1 ? "items" : "item"} saved
+          {wishlistProducts.length !== 1 ? t("wishlist.items") : t("wishlist.item")} {t("wishlist.saved")}
         </p>
       </div>
 
@@ -63,7 +65,7 @@ const Wishlist = () => {
             />
           </div>
           <p className="text-neutral-500 text-sm font-medium">
-            Your wishlist is empty.
+            {t("wishlist.emptyWishlist")}
           </p>
         </div>
       ) : (
@@ -97,7 +99,7 @@ const Wishlist = () => {
                       className="flex items-center gap-1.5 text-xs font-semibold text-neutral-400 hover:text-brand transition-colors cursor-pointer"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
-                      Remove
+                      {t("wishlist.remove")}
                     </button>
                   </div>
                 </div>

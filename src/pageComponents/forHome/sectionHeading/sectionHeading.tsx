@@ -12,7 +12,7 @@ const SectionHeading: React.FC<SectionHeadingProps> = ({
       {/* Shadow layer */}
       <span
         aria-hidden="true"
-        className="absolute inset-0 flex items-center justify-center text-5xl md:text-6xl font-black uppercase tracking-widest text-brand opacity-30"
+        className="absolute inset-0 flex items-center justify-center text-5xl md:text-6xl font-black uppercase tracking-widest text-brand dark:text-red-400 opacity-30 dark:opacity-50"
         style={{
           WebkitTextStroke: "1px rgba(0,0,0,0.15)",
           transform: "translate(4px, 4px)",

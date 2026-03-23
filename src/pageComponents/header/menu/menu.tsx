@@ -17,9 +17,11 @@ import {
   AvatarImage,
 } from "@/componentsShadcn/ui/avatar";
 import { Menu as MenuIcon } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const Menu = () => {
   const { user, profileData } = useAuthContext();
+  const { t } = useTranslation();
 
   return (
     <div className="flex md:hidden">
@@ -32,7 +34,7 @@ const Menu = () => {
           className="w-full dark:text-white bg-neutral-950 border-neutral-800"
         >
           <SheetHeader className="mt-8">
-            <SheetTitle className="text-center text-2xl font-black uppercase tracking-tight border-b border-neutral-800 pb-4">
+            <SheetTitle className="text-center text-2xl font-black uppercase tracking-tight border-b border-neutral-800 pb-4 font-[Inter,system-ui,sans-serif]">
               <span className="text-white">Gym</span>
               <span className="text-brand">Gear</span>
             </SheetTitle>
@@ -43,7 +45,7 @@ const Menu = () => {
                   to="/dashboard/main"
                   className="text-base font-semibold uppercase tracking-wider text-neutral-400 hover:text-white hover:bg-neutral-800/50 px-4 py-4 rounded-md transition-colors"
                 >
-                  Home
+                  {t("nav.home")}
                 </Link>
               </SheetClose>
               <SheetClose asChild>
@@ -51,7 +53,7 @@ const Menu = () => {
                   to="/dashboard/products"
                   className="text-base font-semibold uppercase tracking-wider text-neutral-400 hover:text-white hover:bg-neutral-800/50 px-4 py-4 rounded-md transition-colors"
                 >
-                  Shop
+                  {t("nav.shop")}
                 </Link>
               </SheetClose>
               <SheetClose asChild>
@@ -59,7 +61,7 @@ const Menu = () => {
                   to="/dashboard/about"
                   className="text-base font-semibold uppercase tracking-wider text-neutral-400 hover:text-white hover:bg-neutral-800/50 px-4 py-4 rounded-md transition-colors"
                 >
-                  About
+                  {t("nav.about")}
                 </Link>
               </SheetClose>
             </nav>
@@ -78,7 +80,7 @@ const Menu = () => {
                       </AvatarFallback>
                     </Avatar>
                     <span className="text-base font-semibold text-neutral-300">
-                      My Profile
+                      {t("nav.myProfile")}
                     </span>
                   </Link>
                 </SheetClose>
@@ -86,7 +88,7 @@ const Menu = () => {
                 <SheetClose asChild>
                   <Link className="w-full" to="/auth/signin">
                     <Button className="w-full text-base font-semibold uppercase tracking-wider py-6 bg-brand hover:bg-brand-hover">
-                      Sign In
+                      {t("nav.signIn")}
                     </Button>
                   </Link>
                 </SheetClose>

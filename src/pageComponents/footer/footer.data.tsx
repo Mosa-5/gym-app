@@ -1,40 +1,13 @@
-export const links = [
-  {
-    title: "About Us",
-    href: "/dashboard/about",
-  },
-  {
-    title: "Shipping & Delivery",
-    href: "#",
-  },
-  {
-    title: "Terms of service",
-    href: "#",
-  },
-  {
-    title: "Careers",
-    href: "#",
-  },
-  {
-    title: "Returns & Exchanges",
-    href: "#",
-  },
-  {
-    title: "Shipping information",
-    href: "#",
-  },
-  {
-    title: "Privacy Policy",
-    href: "#",
-  },
-  {
-    title: "Warranty Information",
-    href: "#",
-  },
-  {
-    title: "Reviews",
-    href: "#",
-  },
+export const linkKeys = [
+  { titleKey: "footer.aboutUs", href: "/dashboard/about" },
+  { titleKey: "footer.shippingDelivery", href: "#" },
+  { titleKey: "footer.termsOfService", href: "#" },
+  { titleKey: "footer.careers", href: "#" },
+  { titleKey: "footer.returnsExchanges", href: "#" },
+  { titleKey: "footer.shippingInfo", href: "#" },
+  { titleKey: "footer.privacyPolicy", href: "#" },
+  { titleKey: "footer.warrantyInfo", href: "#" },
+  { titleKey: "footer.reviewsLink", href: "#" },
 ];
 
 export const socialLinks = [

@@ -4,23 +4,42 @@ import storyImg1 from "@/assets/ripped.avif";
 import storyImg2 from "@/assets/pexels-binyaminmellish-17840.jpg";
 import SectionHeading from "@/pageComponents/forHome/sectionHeading/sectionHeading";
 import {
-  whoWeAreText,
   standardsPillars,
   metricsData,
-  trustText,
   guaranteePoints,
-  ctaText,
 } from "./aboutContent.data";
 import { containerClass, gridFour, ctaButton } from "./aboutContent.styles";
+import { useTranslation } from "react-i18next";
 
-const fade = (delay = 0) => ({
-  initial: { opacity: 0, y: 20 } as const,
-  whileInView: { opacity: 1, y: 0 } as const,
-  transition: { duration: 0.5, delay },
-  viewport: { once: true } as const,
+
+const staggerContainer = (staggerChildren = 0.1) => ({
+  initial: "hidden",
+  whileInView: "visible",
+  viewport: { once: true },
+  variants: {
+    hidden: {},
+    visible: { transition: { staggerChildren } },
+  },
 });
 
+// Child variant (used in the `variants` prop)
+const fadeVariant = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+};
+
+// Plain fade for non-staggered elements
+const fade = (delay = 0) => ({
+  initial: { opacity: 0, y: 20 },
+  whileInView: { opacity: 1, y: 0 },
+  transition: { duration: 0.5, delay },
+  viewport: { once: true },
+});
+
+
 const AboutContent = () => {
+  const { t } = useTranslation();
+
   return (
     <>
       {/* Who We Are */}
@@ -30,30 +49,26 @@ const AboutContent = () => {
             {/* Left — Text */}
             <motion.div {...fade()}>
               <span className="text-xs font-bold uppercase tracking-[0.25em] text-brand mb-4 block">
-                Who We Are
+                {t("about.whoWeAre")}
               </span>
               <div className="relative mb-6">
                 <span
                   aria-hidden="true"
-                  className="absolute text-4xl sm:text-5xl lg:text-6xl font-black uppercase leading-[0.95] text-brand opacity-30"
+                  className="absolute text-4xl sm:text-5xl lg:text-6xl ka:lg:text-5xl font-black uppercase leading-[0.95] ka:!leading-[1.2] text-brand opacity-30"
                   style={{
                     WebkitTextStroke: "1px rgba(0,0,0,0.15)",
-                    transform: "translate(4px, 4px)",
+                    transform: "translate(3px, 3px)",
                   }}
                 >
-                  Built By
-                  <br />
-                  Lifters.
+                  {t("about.builtByLifters")}
                 </span>
-                <h2 className="relative text-4xl sm:text-5xl lg:text-6xl font-black uppercase leading-[0.95] text-neutral-900 dark:text-white">
-                  Built By
-                  <br />
-                  Lifters.
+                <h2 className="relative text-4xl sm:text-5xl lg:text-6xl ka:lg:text-5xl font-black uppercase leading-[0.95] ka:!leading-[1.2] text-neutral-900 dark:text-white">
+                  {t("about.builtByLifters")}
                 </h2>
               </div>
               <div className="w-12 h-[2px] bg-brand mb-6" />
-              <p className="text-base sm:text-lg leading-relaxed text-neutral-600 dark:text-neutral-300 font-light">
-                {whoWeAreText}
+              <p className="text-base sm:text-lg ka:!text-[1rem] leading-relaxed text-neutral-600 dark:text-neutral-300 font-light">
+                {t("about.aboutText")}
               </p>
             </motion.div>
 
@@ -84,8 +99,11 @@ const AboutContent = () => {
       {/* Our Standards */}
       <section className="relative py-16 sm:py-20 overflow-hidden">
         <div className={containerClass() + " relative z-10"}>
-          <SectionHeading text="Our Standards" className="mb-8" />
-          <div
+          <SectionHeading text={t("about.ourStandards")} className="mb-8" />
+          <motion.div {...staggerContainer(0.1)}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
             className={
               gridFour() +
               " rounded-2xl overflow-hidden border border-neutral-200 dark:border-neutral-700/50"
@@ -93,8 +111,8 @@ const AboutContent = () => {
           >
             {standardsPillars.map((pillar, i) => (
               <motion.div
-                key={pillar.title}
-                {...fade(0.1 + i * 0.1)}
+                key={pillar.titleKey}
+                 variants={fadeVariant}
                 className={`relative p-6 sm:p-8 bg-white dark:bg-neutral-900/80 ${
                   i > 0
                     ? "border-t sm:border-t-0 sm:border-l border-neutral-200 dark:border-neutral-700/50 lg:border-t-0 lg:border-l"
@@ -107,15 +125,15 @@ const AboutContent = () => {
                 </span>
                 <div className="relative pt-10">
                   <h3 className="text-sm font-black uppercase tracking-wider text-neutral-900 dark:text-white mb-3">
-                    {pillar.title}
+                    {t(pillar.titleKey)}
                   </h3>
                   <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">
-                    {pillar.description}
+                    {t(pillar.descriptionKey)}
                   </p>
                 </div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -135,17 +153,21 @@ const AboutContent = () => {
           {/* Section label */}
           <motion.div {...fade()} className="flex items-center gap-4 mb-12">
             <span className="text-xs font-bold uppercase tracking-[0.25em] text-white/80">
-              By The Numbers
+              {t("about.byTheNumbers")}
             </span>
             <div className="flex-1 h-[1px] bg-white/20" />
           </motion.div>
 
           {/* Stats row */}
-          <div className="grid grid-cols-1 sm:grid-cols-3">
+          <motion.div {...staggerContainer(0.15)}
+  initial="hidden"
+  whileInView="visible"
+  viewport={{ once: true }}
+   className="grid grid-cols-1 sm:grid-cols-3">
             {metricsData.map((stat, i) => (
               <motion.div
-                key={stat.label}
-                {...fade(0.1 + i * 0.15)}
+                key={stat.labelKey}
+                variants={fadeVariant}
                 className={`flex flex-col gap-2 py-6 sm:py-0 ${
                   i > 0
                     ? "border-t sm:border-t-0 sm:border-l border-white/20 sm:pl-10"
@@ -156,11 +178,11 @@ const AboutContent = () => {
                   {stat.value}
                 </span>
                 <span className="text-xs font-bold uppercase tracking-[0.2em] text-white/70">
-                  {stat.label}
+                  {t(stat.labelKey)}
                 </span>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -170,26 +192,29 @@ const AboutContent = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
             {/* Left — Guarantee */}
             <motion.div {...fade()}>
-              <p className="text-sm sm:text-base text-neutral-500 dark:text-neutral-400 leading-relaxed mb-10 max-w-md">
-                {trustText}
+              <p className="text-sm sm:text-base ka:!text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed mb-10 max-w-md">
+                {t("about.trustText")}
               </p>
 
-              <div className="space-y-5">
-                {guaranteePoints.map((point, i) => (
+              <motion.div {...staggerContainer(0.1)}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }} className="space-y-5">
+                {guaranteePoints.map((point) => (
                   <motion.div
-                    key={point.title}
-                    {...fade(0.1 + i * 0.1)}
+                    key={point.titleKey}
+                    variants={fadeVariant}
                     className="flex items-start gap-4"
                   >
                     <div>
                       <h4 className="text-sm font-black uppercase tracking-wider text-neutral-900 dark:text-white">
-                        {point.title}
+                        {t(point.titleKey)}
                       </h4>
-                      <p className="text-sm text-neutral-500">{point.desc}</p>
+                      <p className="text-sm text-neutral-500">{t(point.descKey)}</p>
                     </div>
                   </motion.div>
                 ))}
-              </div>
+              </motion.div>
             </motion.div>
 
             {/* Right — CTA card */}
@@ -198,17 +223,14 @@ const AboutContent = () => {
               className="self-center bg-neutral-100 dark:bg-neutral-900 border-l-4 border-brand p-8 sm:p-10 flex flex-col gap-6"
             >
               <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black uppercase leading-tight text-neutral-900 dark:text-white">
-                Ready to Lift
-                <br />
-                Without Limits?
+                {t("about.readyToLift")}
               </h3>
               <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">
-                50+ products engineered for athletes who don't compromise. Find
-                your edge.
+                {t("about.readyToLiftDesc")}
               </p>
               <div className="flex flex-wrap gap-4">
                 <Link to="/dashboard/products" className={ctaButton()}>
-                  {ctaText}
+                  {t("about.shopFullLine")}
                 </Link>
               </div>
             </motion.div>

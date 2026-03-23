@@ -7,6 +7,6 @@ export const containerClass = cva(
   "w-full lg:max-w-[1024px] xl:max-w-[1280px] mx-auto flex items-center justify-between px-4 md:px-6",
 );
 export const logoClass = cva(
-  "text-[22px] md:text-[26px] cursor-pointer font-black tracking-tighter uppercase leading-none duration-200",
+  "text-[22px] md:text-[26px] cursor-pointer font-black tracking-tighter uppercase leading-none duration-200 font-[Inter,system-ui,sans-serif]",
 );
 export const rightSectionClass = cva("flex items-center gap-5");

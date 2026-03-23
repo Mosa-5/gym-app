@@ -5,6 +5,7 @@ import {
 } from "@/reactQuery/query/reviews/topReviews";
 import { sectionClass, containerClass } from "./reviewsSocialProof.styles";
 import SectionHeading from "@/pageComponents/forHome/sectionHeading/sectionHeading";
+import { useTranslation } from "react-i18next";
 
 const StarIcon = ({ filled }: { filled: boolean }) => (
   <svg
@@ -24,6 +25,7 @@ const StarIcon = ({ filled }: { filled: boolean }) => (
 const ReviewsSocialProof = () => {
   const { data: reviews = [] } = useGetTopReviews();
   const { data: stats } = useGetReviewStats();
+  const { t } = useTranslation();
 
   if (reviews.length === 0) return null;
 
@@ -52,7 +54,7 @@ const ReviewsSocialProof = () => {
 
       <div className={containerClass() + " relative z-10"}>
         <SectionHeading
-          text="What Our Customers Say"
+          text={t("reviews.whatCustomersSay")}
           className="!text-white [&_h2]:!text-white [&_span]:!text-white [&_span]:!opacity-20"
         />
         {stats && (
@@ -62,7 +64,7 @@ const ReviewsSocialProof = () => {
                 {stats.totalCount}
               </span>
               <span className="text-[11px] font-semibold uppercase tracking-widest text-white/50 mt-1 block">
-                Reviews
+                {t("reviews.reviews")}
               </span>
             </div>
             <div className="w-[1px] h-8 bg-white/20" />
@@ -71,7 +73,7 @@ const ReviewsSocialProof = () => {
                 {stats.averageRating}
               </span>
               <span className="text-[11px] font-semibold uppercase tracking-widest text-white/50 mt-1 block">
-                Avg Rating
+                {t("reviews.avgRating")}
               </span>
             </div>
           </div>

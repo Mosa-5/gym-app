@@ -7,61 +7,49 @@ import {
   Heart,
 } from "lucide-react";
 
-export const whoWeAreText =
-  "GymGear was built by lifters, for lifters. We started in a garage gym with one mission: create equipment that performs as hard as you do. Every product we sell has been tested under real iron — because we believe the gear you trust should never be the weakest link in your chain.";
-
 export const standardsPillars = [
   {
     icon: <Shield className="w-6 h-6" />,
-    title: "Competition-Grade Materials",
-    description:
-      "Premium leather, reinforced stitching, and industrial-grade hardware — built to outlast your PRs.",
+    titleKey: "about.competitionGrade",
+    descriptionKey: "about.competitionGradeDesc",
   },
   {
     icon: <Wrench className="w-6 h-6" />,
-    title: "Stress-Tested Design",
-    description:
-      "Every product is put through rigorous real-world testing before it ever reaches our shelves.",
+    titleKey: "about.stressTested",
+    descriptionKey: "about.stressTestedDesc",
   },
   {
     icon: <Target className="w-6 h-6" />,
-    title: "Purpose-Built Fit",
-    description:
-      "Engineered for function first. No gimmicks, no filler — just gear that works the way you need it to.",
+    titleKey: "about.purposeBuilt",
+    descriptionKey: "about.purposeBuiltDesc",
   },
   {
     icon: <Trophy className="w-6 h-6" />,
-    title: "Athlete-Approved",
-    description:
-      "Trusted by competitive powerlifters, bodybuilders, and CrossFit athletes worldwide.",
+    titleKey: "about.athleteApproved",
+    descriptionKey: "about.athleteApprovedDesc",
   },
 ];
 
 export const metricsData = [
-  { value: "10K+", label: "Athletes Equipped" },
-  { value: "50+", label: "Products Tested" },
-  { value: "4.9★", label: "Average Rating" },
+  { value: "10K+", labelKey: "about.athletesEquipped" },
+  { value: "50+", labelKey: "about.productsTested" },
+  { value: "4.9★", labelKey: "about.averageRating" },
 ];
-
-export const trustText =
-  "Every order is backed by our 30-day satisfaction guarantee. If it doesn't perform, we'll make it right — no questions asked.";
 
 export const guaranteePoints = [
   {
     icon: <Shield className="w-5 h-5" />,
-    title: "30-Day Guarantee",
-    desc: "Doesn't perform? Full refund. No hoops.",
+    titleKey: "about.thirtyDayGuarantee",
+    descKey: "about.thirtyDayGuaranteeDesc",
   },
   {
     icon: <ArrowRight className="w-5 h-5" />,
-    title: "Free Shipping Over $100",
-    desc: "Straight to your door, no extra charge.",
+    titleKey: "about.freeShipping",
+    descKey: "about.freeShippingDesc",
   },
   {
     icon: <Heart className="w-5 h-5" />,
-    title: "Built By Lifters",
-    desc: "We use this gear. We know what works.",
+    titleKey: "about.builtByLiftersGuarantee",
+    descKey: "about.builtByLiftersGuaranteeDesc",
   },
 ];
-
-export const ctaText = "Shop the Full Line";

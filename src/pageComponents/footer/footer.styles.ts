@@ -9,7 +9,7 @@ export const flexContainerClass = cva(
 );
 export const flexItemClass = cva("flex-1");
 export const headingClass = cva(
-  "text-3xl sm:text-4xl font-black tracking-tighter uppercase leading-none",
+  "text-3xl sm:text-4xl font-black tracking-tighter uppercase leading-none font-[Inter,system-ui,sans-serif]",
 );
 export const navClass = cva(
   "grid grid-cols-1 sm:grid-cols-3 gap-4 gap-x-20 md:gap-x-4 text-center sm:text-start",

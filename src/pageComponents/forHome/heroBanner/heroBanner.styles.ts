@@ -13,10 +13,10 @@ export const subtitleClass = cva(
   "text-sm sm:text-lg md:text-2xl font-medium italic tracking-wide text-neutral-300",
 );
 export const headingClass = cva(
-  "text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase leading-[0.9] tracking-tight",
+  "text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase leading-[0.9] tracking-tight ka:leading-[1.2] ka:text-7xl",
 );
 export const paragraphClass = cva(
-  "mt-3 sm:mt-4 text-sm md:text-base italic text-neutral-400 max-w-xs sm:max-w-sm mx-auto sm:mx-0",
+  "mt-3 sm:mt-4 text-sm md:text-base ka:md:text-sm italic text-neutral-400 max-w-xs sm:max-w-sm ka:max-w-md mx-auto sm:mx-0",
 );
 export const buttonContainerClass = cva(
   "mt-5 sm:mt-6 flex gap-4 justify-center sm:justify-start",

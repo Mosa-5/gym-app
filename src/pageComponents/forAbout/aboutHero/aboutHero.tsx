@@ -9,8 +9,11 @@ import {
   heading,
   paragraph,
 } from "./aboutHero.styles";
+import { useTranslation } from "react-i18next";
 
 const AboutHero = () => {
+  const { t } = useTranslation();
+
   return (
     <div className={banner()}>
       <div
@@ -36,7 +39,7 @@ const AboutHero = () => {
           viewport={{ once: true }}
           className={subtitle()}
         >
-          Who We Are
+          {t("about.whoWeAre")}
         </motion.p>
 
         <motion.h1
@@ -46,7 +49,7 @@ const AboutHero = () => {
           viewport={{ once: true }}
           className={heading()}
         >
-          About Us
+          {t("about.aboutUs")}
         </motion.h1>
 
         <motion.p
@@ -56,8 +59,7 @@ const AboutHero = () => {
           viewport={{ once: true }}
           className={paragraph()}
         >
-          Born in the gym, engineered for the platform — gear that performs as
-          hard as you do.
+          {t("about.heroDescription")}
         </motion.p>
       </motion.div>
     </div>

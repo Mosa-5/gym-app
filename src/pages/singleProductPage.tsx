@@ -11,8 +11,10 @@ import { mapSingleProductTableData } from "@/supabase/products";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 const ProductDetail: React.FC = () => {
+  const { t } = useTranslation();
   const { id } = useParams();
   const { user } = useAuthContext();
   const { addToCart } = useCartContext();
@@ -53,10 +55,10 @@ const ProductDetail: React.FC = () => {
 
   const handleAddToWishlist = () => {
     if (!user) {
-      toast.error("You need to be Signed In for this action!");
+      toast.error(t("common.needSignIn"));
       return;
     }
-    toast.success("Item Added To Favourites");
+    toast.success(t("common.addedToFavourites"));
     return addToWishlistMutate({
       productId: product?.id.toString(),
       userId: user.id,
@@ -139,18 +141,18 @@ const ProductDetail: React.FC = () => {
             <div className="flex flex-col gap-3 mt-8">
               <button
                 onClick={() => {
-                  toast.success(`${product?.name} added to cart`);
+                  toast.success(t("common.addedToCart", { name: product?.name }));
                   return product && handleAddToCart(product);
                 }}
                 className="w-full bg-brand hover:bg-brand-hover text-white font-bold text-sm uppercase tracking-wider rounded-full py-3.5 transition-colors duration-200 cursor-pointer"
               >
-                Add To Cart
+                {t("common.addToCart")}
               </button>
               <button
                 onClick={handleAddToWishlist}
                 className="w-full bg-transparent hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-900 dark:text-white font-bold text-sm uppercase tracking-wider rounded-full py-3.5 border border-neutral-300 dark:border-neutral-700 transition-colors duration-200 cursor-pointer"
               >
-                Add To Favourites
+                {t("common.addToFavourites")}
               </button>
             </div>
           </div>
@@ -158,12 +160,12 @@ const ProductDetail: React.FC = () => {
       </div>
       <CaruselForPages
         productType={product?.category}
-        headerText="Your May Also Like"
+        headerText={t("common.youMayAlsoLike")}
         carouselType="category"
       />
       <div className="flex mb-20 flex-col items-center px-6 md:px-20 gap-6">
         <h2 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-neutral-900 dark:text-white w-full max-w-screen-lg text-center">
-          Reviews
+          {t("reviews.reviews")}
         </h2>
         <ReviewList />
       </div>

@@ -2,8 +2,10 @@ import { useGetUserSingleOrder } from "@/reactQuery/query/order";
 import { mapSingleOrdersData } from "@/supabase/order";
 import { useParams, Link } from "react-router-dom";
 import { Package, ArrowLeft, Truck } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const IdOrder = () => {
+  const { t } = useTranslation();
   const { OrderId } = useParams();
   const {
     data: userOrder = {
@@ -56,16 +58,16 @@ const IdOrder = () => {
             className="inline-flex items-center gap-1.5 text-sm text-neutral-400 hover:text-white transition-colors mb-4"
           >
             <ArrowLeft className="w-4 h-4" />
-            Back to Profile
+            {t("orders.backToProfile")}
           </Link>
           <div className="flex items-center gap-3 mb-2">
             <Package className="w-6 h-6 text-brand" />
             <h1 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-white">
-              Order #{userOrder.id}
+              {t("orders.orderNumber")}{userOrder.id}
             </h1>
           </div>
           <p className="text-sm text-neutral-400">
-            Placed on {formatTimestamp(userOrder.created_at)}
+            {t("orders.placedOn")} {formatTimestamp(userOrder.created_at)}
           </p>
         </div>
       </div>
@@ -95,7 +97,7 @@ const IdOrder = () => {
 
                   <div className="flex items-center justify-between mt-3">
                     <span className="text-xs text-neutral-500">
-                      Qty: {product.quantity} × $
+                      {t("orders.qty")}: {product.quantity} × $
                       {Number(product.price).toFixed(2)}
                     </span>
                     <span className="text-sm sm:text-base font-bold text-neutral-900 dark:text-white">
@@ -111,12 +113,12 @@ const IdOrder = () => {
           <div className="w-full lg:w-80 lg:flex-shrink-0">
             <div className="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6 lg:sticky lg:top-24">
               <h2 className="text-base font-black uppercase tracking-tight text-neutral-900 dark:text-white mb-5">
-                Order Summary
+                {t("cart.orderSummary")}
               </h2>
 
               <div className="space-y-3 text-sm">
                 <div className="flex justify-between">
-                  <span className="text-neutral-500">Items ({totalItems})</span>
+                  <span className="text-neutral-500">{t("orders.items")} ({totalItems})</span>
                   <span className="font-semibold text-neutral-900 dark:text-white">
                     ${userOrder.total_price.toFixed(2)}
                   </span>
@@ -124,7 +126,7 @@ const IdOrder = () => {
                 <div className="flex justify-between">
                   <span className="text-neutral-500 flex items-center gap-1.5">
                     <Truck className="w-3.5 h-3.5" />
-                    Delivery
+                    {t("cart.delivery")}
                   </span>
                   <span className="font-semibold text-neutral-900 dark:text-white">
                     $2.00
@@ -134,7 +136,7 @@ const IdOrder = () => {
                 <div className="border-t border-neutral-100 dark:border-neutral-800 pt-3 mt-3">
                   <div className="flex justify-between">
                     <span className="font-bold text-neutral-900 dark:text-white">
-                      Total
+                      {t("cart.total")}
                     </span>
                     <span className="text-lg font-black text-neutral-900 dark:text-white">
                       ${(userOrder.total_price + 2).toFixed(2)}

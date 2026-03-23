@@ -1,18 +1,20 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { stats, missionText, secondaryText } from "./brandStory.data";
+import { statsKeys } from "./brandStory.data";
 import SectionHeading from "@/pageComponents/forHome/sectionHeading/sectionHeading";
 import { sectionClass, containerClass } from "./brandStory.styles";
 import storyImg1 from "@/assets/pexels-823sl-2294361.jpg";
 import storyImg2 from "@/assets/pexels-binyaminmellish-17840.jpg";
 import storyImg3 from "@/assets/pexels-ivan-samkov-4164450.jpg";
 import storyImg4 from "@/assets/red-reyes-Z6CqKIP_J18-unsplash.jpg";
+import { useTranslation } from "react-i18next";
 
 const IMAGES = [storyImg1, storyImg2, storyImg3, storyImg4];
 const INTERVAL = 6000; // 6 seconds per image
 
 const BrandStory = () => {
   const [current, setCurrent] = useState(0);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -24,7 +26,7 @@ const BrandStory = () => {
   return (
     <section className={sectionClass()}>
       <div className={containerClass()}>
-        <SectionHeading text="Our Story" className="mb-8" />
+        <SectionHeading text={t("brandStory.ourStory")} className="mb-8" />
 
         {/* Full-bleed slideshow with overlapping elements */}
         <motion.div
@@ -67,7 +69,7 @@ const BrandStory = () => {
           >
             <div className="w-8 h-[2px] bg-white/60" />
             <p className="text-sm leading-relaxed text-white/90 font-light">
-              {missionText}
+              {t("brandStory.slide1")}
             </p>
           </div>
 
@@ -81,7 +83,7 @@ const BrandStory = () => {
           >
             <div className="w-8 h-[2px] bg-white/60" />
             <p className="text-sm leading-relaxed text-white/70 italic">
-              {secondaryText}
+              {t("brandStory.slide2")}
             </p>
           </div>
 
@@ -92,9 +94,9 @@ const BrandStory = () => {
               style={{ background: "rgba(255,255,255,0.95)" }}
             >
               <div className="grid grid-cols-4 gap-4 sm:gap-6">
-                {stats.map((stat, index) => (
+                {statsKeys.map((stat, index) => (
                   <motion.div
-                    key={stat.label}
+                    key={stat.labelKey}
                     className="flex flex-col items-center text-center"
                     initial={{ opacity: 0, y: 15 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -102,10 +104,10 @@ const BrandStory = () => {
                     viewport={{ once: true }}
                   >
                     <span className="text-xl sm:text-2xl md:text-3xl font-black text-brand leading-none">
-                      {stat.value}
+                      {t(stat.valueKey)}
                     </span>
                     <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-neutral-500 mt-1">
-                      {stat.label}
+                      {t(stat.labelKey)}
                     </span>
                   </motion.div>
                 ))}

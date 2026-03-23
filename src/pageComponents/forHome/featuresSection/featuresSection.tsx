@@ -7,8 +7,11 @@ import {
   titleClass,
 } from "./featuresSection.styles";
 import { features } from "./featuresSection.data";
+import { useTranslation } from "react-i18next";
 
 const FeaturesSection: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
     <section className={sectionClass()}>
       <div className={containerClass()}>
@@ -22,7 +25,7 @@ const FeaturesSection: React.FC = () => {
             viewport={{ once: true }}
           >
             <div className={iconClass()}>{feature.icon}</div>
-            <h3 className={titleClass()}>{feature.title}</h3>
+            <h3 className={titleClass()}>{t(feature.titleKey)}</h3>
           </motion.div>
         ))}
       </div>

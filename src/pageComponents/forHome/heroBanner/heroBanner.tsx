@@ -13,8 +13,10 @@ import {
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const HeroBanner: React.FC = () => {
+  const { t } = useTranslation();
   return (
     <section className={heroSectionClass()}>
       {/* Background image */}
@@ -46,7 +48,7 @@ const HeroBanner: React.FC = () => {
           viewport={{ once: true }}
           className={subtitleClass()}
         >
-          Elevate Your
+          {t("hero.elevateYour")}
         </motion.p>
 
         <motion.h1
@@ -56,9 +58,9 @@ const HeroBanner: React.FC = () => {
           viewport={{ once: true }}
           className={headingClass()}
         >
-          Fitness
+          {t("hero.fitnessJourneyLine1")}
           <br />
-          Journey
+          {t("hero.fitnessJourneyLine2")}
         </motion.h1>
 
         <motion.p
@@ -68,8 +70,7 @@ const HeroBanner: React.FC = () => {
           viewport={{ once: true }}
           className={paragraphClass()}
         >
-          Premium gear for athletes who demand the best. Stylish and modern
-          equipment for those who want to reach perfection.
+          {t("hero.heroDescription")}
         </motion.p>
 
         <motion.div
@@ -81,7 +82,7 @@ const HeroBanner: React.FC = () => {
         >
           <Link to="/dashboard/products">
             <button className={buttonClass()}>
-              Explore Products
+              {t("hero.exploreProducts")}
               <ArrowRight className="w-4 h-4" />
             </button>
           </Link>

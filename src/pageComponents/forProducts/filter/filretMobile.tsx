@@ -9,6 +9,7 @@ import {
 } from "@/componentsShadcn/ui/dialog";
 import Filters from "./filter";
 import type { FilterState } from "./filter";
+import { useTranslation } from "react-i18next";
 
 interface FiltersMobileProps {
   filters: FilterState;
@@ -19,15 +20,17 @@ const FiltersMobile: React.FC<FiltersMobileProps> = ({
   filters,
   onFiltersChange,
 }) => {
+  const { t } = useTranslation();
+
   return (
     <Dialog>
       <DialogTrigger className="w-full max-w-40 lg:hidden">
-        <Button className="w-full">Filter</Button>
+        <Button className="w-full">{t("products.filter", "Filter")}</Button>
       </DialogTrigger>
       <DialogContent className="rounded-2xl max-w-xs sm:max-w-lg">
         <DialogHeader>
           <DialogTitle className="text-2xl dark:text-neutral-400 text-center">
-            Filter
+            {t("products.filter", "Filter")}
           </DialogTitle>
           <DialogDescription asChild>
             <div className="text-left">

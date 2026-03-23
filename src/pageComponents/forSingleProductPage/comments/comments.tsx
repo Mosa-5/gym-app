@@ -18,6 +18,7 @@ import {
 import { toast } from "sonner";
 import { ThumbsUp, MessageSquarePlus } from "lucide-react";
 import ReviewForm from "./ReviewForm";
+import { useTranslation } from "react-i18next";
 
 const StarIcon = ({ filled }: { filled: boolean }) => (
   <svg
@@ -36,6 +37,7 @@ const StarIcon = ({ filled }: { filled: boolean }) => (
 
 const ReviewList: React.FC = () => {
   const { user } = useAuthContext();
+  const { t } = useTranslation();
   const { mutate: writeReview, isError, error, isPending } = useWriteReview();
   const { id } = useParams<{ id: string }>();
   const [open, setOpen] = useState(false);
@@ -66,15 +68,15 @@ const ReviewList: React.FC = () => {
 
   const onSubmit = (values: { rating: number; description: string }) => {
     if (values.description.trim() === "") {
-      toast("Message empty");
+      toast(t("reviews.messageEmpty"));
       return;
     }
     if (!user || !user.id) {
-      toast("You need to be signed in for this action!");
+      toast(t("reviews.needSignIn"));
       return;
     }
     if (!id) {
-      toast("Invalid product ID");
+      toast(t("reviews.invalidProductId"));
       return;
     }
 
@@ -88,10 +90,10 @@ const ReviewList: React.FC = () => {
       {
         onSuccess: () => {
           setOpen(false);
-          toast.success("Review submitted successfully!");
+          toast.success(t("reviews.submitSuccess"));
         },
         onError: () => {
-          toast.error("Failed to submit review. Please try again.");
+          toast.error(t("reviews.submitFailed"));
         },
       },
     );
@@ -162,7 +164,7 @@ const ReviewList: React.FC = () => {
                     <div className="flex items-center gap-1.5 mt-3">
                       <ThumbsUp className="w-3.5 h-3.5 text-neutral-400" />
                       <span className="text-xs text-neutral-400">
-                        {review.like_count} found helpful
+                        {review.like_count} {t("reviews.foundHelpful")}
                       </span>
                     </div>
                   )}
@@ -193,7 +195,7 @@ const ReviewList: React.FC = () => {
             />
           </div>
           <p className="text-neutral-500 text-sm font-medium">
-            No reviews yet. Be the first!
+            {t("reviews.noReviews")}
           </p>
         </div>
       )}
@@ -206,7 +208,7 @@ const ReviewList: React.FC = () => {
             className="w-full max-w-md bg-brand hover:bg-brand-hover text-white font-bold text-sm uppercase tracking-wider rounded-full py-3.5 transition-colors duration-200 cursor-pointer flex items-center justify-center gap-2"
           >
             <MessageSquarePlus className="w-4 h-4" />
-            Write a Review
+            {t("reviews.writeReview")}
           </button>
         </DialogTrigger>
         <DialogContent className="rounded-3xl border-none bg-white dark:bg-neutral-950 p-0 max-w-md sm:max-w-lg overflow-hidden shadow-2xl">
@@ -214,10 +216,10 @@ const ReviewList: React.FC = () => {
           <div className="px-6 pt-6 pb-5 bg-neutral-50 dark:bg-neutral-900 border-b border-neutral-100 dark:border-neutral-800">
             <DialogHeader>
               <DialogTitle className="text-lg font-black uppercase tracking-tight text-neutral-900 dark:text-white text-center">
-                Write a Review
+                {t("reviews.writeReview")}
               </DialogTitle>
               <p className="text-xs text-neutral-400 text-center mt-1">
-                Share your experience with this product
+                {t("reviews.shareExperience")}
               </p>
             </DialogHeader>
           </div>
@@ -233,7 +235,7 @@ const ReviewList: React.FC = () => {
               ) : (
                 <div className="py-8 text-center">
                   <p className="text-neutral-500 text-sm">
-                    You need to be logged in to write a review.
+                    {t("reviews.needLogIn")}
                   </p>
                 </div>
               )}
@@ -302,7 +304,7 @@ const ReviewList: React.FC = () => {
                 <DialogDescription asChild>
                   <div className="px-6 py-6">
                     <span className="block text-[11px] font-semibold uppercase tracking-widest text-neutral-400 mb-3">
-                      Review
+                      {t("reviews.review")}
                     </span>
                     <div
                       className="text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed break-all overflow-y-auto max-h-64 sm:max-h-80"
@@ -321,7 +323,7 @@ const ReviewList: React.FC = () => {
                   <div className="flex items-center gap-1.5">
                     <ThumbsUp className="w-3.5 h-3.5 text-neutral-400" />
                     <span className="text-xs text-neutral-400">
-                      {selectedReview.like_count} found this helpful
+                      {selectedReview.like_count} {t("reviews.foundHelpful")}
                     </span>
                   </div>
 
@@ -338,7 +340,7 @@ const ReviewList: React.FC = () => {
                       disabled={likePending}
                     >
                       <ThumbsUp className="w-3.5 h-3.5 fill-brand text-brand" />
-                      Liked
+                      {t("reviews.liked")}
                     </button>
                   ) : (
                     <button
@@ -353,7 +355,7 @@ const ReviewList: React.FC = () => {
                       disabled={likePending}
                     >
                       <ThumbsUp className="w-3.5 h-3.5" />
-                      Helpful
+                      {t("reviews.helpful")}
                     </button>
                   )}
                 </div>

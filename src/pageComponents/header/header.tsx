@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import ThemeToggle from "../../componentsShadcn/theme/themeButton/mode-toggle";
 import Menu from "./menu/menu";
 import LanguageChanger from "./language/language";
@@ -18,14 +19,15 @@ import {
 import { Link } from "react-router-dom";
 import { User } from "lucide-react";
 
-const navLinks = [
-  { label: "Home", to: "/dashboard/main" },
-  { label: "Shop", to: "/dashboard/products" },
-  { label: "About", to: "/dashboard/about" },
-];
-
 const Header: React.FC = () => {
   const { user, profileData } = useAuthContext();
+  const { t } = useTranslation();
+
+  const navLinks = [
+    { label: t("nav.home"), to: "/dashboard/main" },
+    { label: t("nav.shop"), to: "/dashboard/products" },
+    { label: t("nav.about"), to: "/dashboard/about" },
+  ];
 
   return (
     <header className={headerClass()}>

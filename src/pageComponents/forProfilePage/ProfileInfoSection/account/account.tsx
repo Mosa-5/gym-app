@@ -14,6 +14,7 @@ import {
 } from "@/componentsShadcn/ui/form";
 
 import { useFillProfile } from "@/reactQuery/mutations/profile";
+import { useTranslation } from "react-i18next";
 
 const formSchema = z.object({
   username: z
@@ -52,6 +53,7 @@ const formSchema = z.object({
 
 const Account = () => {
   const { user, profileData } = useAuthContext();
+  const { t } = useTranslation();
 
   const { mutate: fillProfileInfo } = useFillProfile();
 
@@ -83,10 +85,10 @@ const Account = () => {
     <div>
       <div className="mb-6">
         <h2 className="text-xl font-black uppercase tracking-tight text-neutral-900 dark:text-white">
-          Account Settings
+          {t("profile.accountSettings")}
         </h2>
         <p className="text-sm text-neutral-500 mt-1">
-          Update your personal information below.
+          {t("profile.updateInfo")}
         </p>
       </div>
 
@@ -99,7 +101,7 @@ const Account = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
-                    Full Name (EN)
+                    {t("profile.fullNameEn")}
                   </FormLabel>
                   <FormControl>
                     <Input
@@ -118,7 +120,7 @@ const Account = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
-                    Full Name (KA)
+                    {t("profile.fullNameKa")}
                   </FormLabel>
                   <FormControl>
                     <Input
@@ -140,7 +142,7 @@ const Account = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
-                    Username
+                    {t("profile.username")}
                   </FormLabel>
                   <FormControl>
                     <Input
@@ -159,7 +161,7 @@ const Account = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
-                    Phone Number
+                    {t("profile.phoneNumber")}
                   </FormLabel>
                   <FormControl>
                     <Input
@@ -181,7 +183,7 @@ const Account = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
-                    Address
+                    {t("profile.address")}
                   </FormLabel>
                   <FormControl>
                     <Input
@@ -200,7 +202,7 @@ const Account = () => {
             type="submit"
             className="w-full sm:w-auto px-10 py-3 bg-brand hover:bg-brand-hover text-white font-bold text-sm uppercase tracking-wider rounded-full transition-colors duration-200 cursor-pointer"
           >
-            Update Profile
+            {t("profile.updateProfile")}
           </button>
         </form>
       </Form>

@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const LanguageChanger = () => {
-  const [lang, setLang] = useState<"EN" | "KA">("EN");
+  const { i18n } = useTranslation();
 
   const toggle = () => {
-    setLang((prev) => (prev === "EN" ? "KA" : "EN"));
+    const newLang = i18n.language === "ka" ? "en" : "ka";
+    i18n.changeLanguage(newLang);
   };
 
   return (
@@ -12,7 +13,7 @@ const LanguageChanger = () => {
       onClick={toggle}
       className="text-[13px] font-bold uppercase tracking-wider text-neutral-400 hover:text-white transition-colors duration-200 cursor-pointer outline-none"
     >
-      {lang}
+      {i18n.language === "ka" ? "KA" : "EN"}
     </button>
   );
 };

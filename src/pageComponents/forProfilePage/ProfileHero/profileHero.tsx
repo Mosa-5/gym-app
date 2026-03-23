@@ -6,8 +6,10 @@ import { AvatarImage } from "@radix-ui/react-avatar";
 import { LogOut, Camera, MapPin } from "lucide-react";
 import { useRef } from "react";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 const ProfileHero = () => {
+  const { t } = useTranslation();
   const { user, profileData } = useAuthContext();
   const { mutate: logout } = useSignOut();
   const { mutate: uploadAvatar, isPending: isUploading } = useUploadAvatar();
@@ -26,20 +28,20 @@ const ProfileHero = () => {
     if (!file || !user?.id) return;
 
     if (!file.type.startsWith("image/")) {
-      toast.error("Please select an image file");
+      toast.error(t("profile.selectImage"));
       return;
     }
 
     if (file.size > 5 * 1024 * 1024) {
-      toast.error("Image must be under 5MB");
+      toast.error(t("profile.imageTooLarge"));
       return;
     }
 
     uploadAvatar(
       { userId: user.id, file },
       {
-        onSuccess: () => toast.success("Avatar updated!"),
-        onError: () => toast.error("Failed to upload avatar"),
+        onSuccess: () => toast.success(t("profile.avatarUpdated")),
+        onError: () => toast.error(t("profile.avatarFailed")),
       },
     );
 
@@ -75,7 +77,7 @@ const ProfileHero = () => {
               <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center gap-1">
                 <Camera className="w-5 h-5 text-white" />
                 <span className="text-[10px] font-semibold text-white uppercase tracking-wider">
-                  {isUploading ? "Uploading..." : "Edit"}
+                  {isUploading ? t("profile.uploading") : t("profile.edit")}
                 </span>
               </div>
             </button>
@@ -116,7 +118,7 @@ const ProfileHero = () => {
             className="flex items-center gap-2 px-6 py-2.5 rounded-full border border-neutral-700 text-sm font-semibold text-neutral-300 hover:text-white hover:border-neutral-500 transition-colors cursor-pointer"
           >
             <LogOut className="w-4 h-4" />
-            Sign Out
+            {t("nav.signOut")}
           </button>
         </div>
       </div>

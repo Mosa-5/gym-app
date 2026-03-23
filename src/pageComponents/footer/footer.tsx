@@ -1,4 +1,4 @@
-import { links, socialLinks } from "./footer.data";
+import { linkKeys, socialLinks } from "./footer.data";
 import {
   borderClass,
   containerClass,
@@ -12,8 +12,11 @@ import {
   socialLabelClass,
   socialLinkClass,
 } from "./footer.styles";
+import { useTranslation } from "react-i18next";
 
 const Footer = () => {
+  const { t } = useTranslation();
+
   return (
     <footer className={footerClass()}>
       <div className={containerClass()}>
@@ -26,9 +29,9 @@ const Footer = () => {
 
           <div className={flexItemClass()}>
             <nav className={navClass()}>
-              {links.map((link, index) => (
+              {linkKeys.map((link, index) => (
                 <a key={index} href={link.href} className={linkClass()}>
-                  {link.title}
+                  {t(link.titleKey)}
                 </a>
               ))}
             </nav>
@@ -37,7 +40,7 @@ const Footer = () => {
 
         <div className={borderClass()}>
           <div className={socialContainerClass()}>
-            <span className={socialLabelClass()}>Follow us:</span>
+            <span className={socialLabelClass()}>{t("footer.followUs")}</span>
             {socialLinks.map((social, index) => (
               <a key={index} href={social.href} className={socialLinkClass()}>
                 {social.icon}

@@ -11,6 +11,22 @@ import { useAddToWishlist } from "@/reactQuery/mutations/whishlist";
 import type { FilterState } from "@/pageComponents/forProducts/filter/filter";
 import noDataSVG from "@/assets/undraw_no-data_ig65.svg";
 import "@/pageComponents/loader/loader.css";
+import { useTranslation } from "react-i18next";
+
+
+const gridContainer = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.02,
+    },
+  },
+};
+
+const gridItem = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 },
+};
 
 const ITEMS_PER_PAGE = 9;
 
@@ -25,6 +41,7 @@ const ProductGrid: React.FC<{
   const { addToCart } = useCartContext();
   const { user } = useAuthContext();
   const { mutate: addToWishlist } = useAddToWishlist();
+  const { t } = useTranslation();
 
   const handleAddToCart = (product: {
     id: number;
@@ -86,7 +103,7 @@ const ProductGrid: React.FC<{
       ) : isError || !productList ? (
         <div className="flex items-center justify-center min-h-[60vh]">
           <span className="text-sm text-neutral-400">
-            Failed to load products.
+            {t("products.failedToLoad")}
           </span>
         </div>
       ) : productList.length === 0 ? (
@@ -111,13 +128,18 @@ const ProductGrid: React.FC<{
             />
           </div>
           <p className="text-sm text-neutral-400">
-            No products match your filters.
+            {t("products.noMatch")}
           </p>
         </div>
       ) : (
         <>
           {/* Product grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5 px-0 sm:px-4">
+          <motion.div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5 px-0 sm:px-4"
+          key={page}
+          variants={gridContainer}
+  initial="hidden"
+  animate="visible"
+  viewport={{ once: true }}>
             {currentProducts.map((product, index) => {
               const globalIndex = startIndex + index;
               return (
@@ -126,10 +148,7 @@ const ProductGrid: React.FC<{
                   to={`/dashboard/productDetail/${product.id}`}
                 >
                   <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: index * 0.05 }}
-                    viewport={{ once: true }}
+                    variants={gridItem}
                     className="group relative rounded-2xl overflow-hidden cursor-pointer hover:brightness-110 transition-all duration-300"
                   >
                     {/* Alternating bg */}
@@ -167,27 +186,27 @@ const ProductGrid: React.FC<{
                           onClick={(e) => {
                             e.stopPropagation();
                             e.preventDefault();
-                            toast.success(`${product.name} added to cart`);
+                            toast.success(t("products.addedToCart", { name: product.name }));
                             handleAddToCart(product);
                           }}
                           className="flex items-center gap-1.5 sm:gap-2 bg-white/15 hover:bg-white/25 border border-white/20 text-white text-[10px] sm:text-xs font-semibold uppercase tracking-wider px-2.5 py-1.5 sm:px-4 sm:py-2 rounded-full transition-colors duration-200 cursor-pointer"
                         >
                           <ShoppingBag className="w-3 h-3 sm:w-3.5 sm:h-3.5 hidden sm:block" />
-                          Add to Cart
+                          {t("products.addToCart")}
                         </button>
                         <button
                           onClick={(e) => {
                             e.stopPropagation();
                             e.preventDefault();
                             if (!user) {
-                              toast.error("Please log in to add to wishlist");
+                              toast.error(t("products.loginForWishlist"));
                               return;
                             }
                             addToWishlist({
                               userId: user.id,
                               productId: String(product.id),
                             });
-                            toast.success("Added to wishlist");
+                            toast.success(t("products.addedToWishlist"));
                           }}
                           className="flex items-center justify-center w-7 h-7 sm:w-9 sm:h-9 rounded-full bg-white/15 hover:bg-white/25 border border-white/20 text-white transition-colors duration-200 cursor-pointer"
                         >
@@ -199,7 +218,7 @@ const ProductGrid: React.FC<{
                 </Link>
               );
             })}
-          </div>
+          </motion.div>
 
           {/* Pagination */}
           {totalPages > 1 && (
@@ -207,7 +226,7 @@ const ProductGrid: React.FC<{
               <button
                 onClick={() => setPage(Math.max(1, page - 1))}
                 disabled={page === 1}
-                className="w-10 h-10 rounded-full bg-neutral-900 text-white flex items-center justify-center disabled:opacity-30 hover:bg-neutral-800 transition-colors cursor-pointer disabled:cursor-not-allowed"
+                className="w-10 h-10 rounded-full bg-neutral-900 dark:bg-neutral-200 text-white dark:text-black flex items-center justify-center disabled:opacity-30 hover:bg-neutral-800 dark:hover:bg-neutral-300 transition-colors cursor-pointer disabled:cursor-not-allowed"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
@@ -229,7 +248,7 @@ const ProductGrid: React.FC<{
               <button
                 onClick={() => setPage(Math.min(totalPages, page + 1))}
                 disabled={page === totalPages}
-                className="w-10 h-10 rounded-full bg-neutral-900 text-white flex items-center justify-center disabled:opacity-30 hover:bg-neutral-800 transition-colors cursor-pointer disabled:cursor-not-allowed"
+                className="w-10 h-10 rounded-full bg-neutral-900 dark:bg-neutral-200 text-white dark:text-black flex items-center justify-center disabled:opacity-30 hover:bg-neutral-800 dark:hover:bg-neutral-300 transition-colors cursor-pointer disabled:cursor-not-allowed"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>

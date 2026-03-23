@@ -16,8 +16,8 @@ export const subtitle = cva(
   "text-base md:text-lg font-medium italic tracking-wide text-neutral-300",
 );
 export const heading = cva(
-  "text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black uppercase leading-[0.9] tracking-tight",
+  "text-3xl py-1 sm:text-5xl md:text-6xl lg:text-7xl ka:lg:text-6xl font-black uppercase leading-[0.9] ka:leading-[1.2] tracking-tight",
 );
 export const paragraph = cva(
-  "mt-4 text-sm md:text-base italic text-neutral-400 max-w-md",
+  "mt-4 text-sm md:text-base ka:md:text-sm italic text-neutral-400 max-w-md",
 );

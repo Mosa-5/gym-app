@@ -5,33 +5,31 @@ import kneeSleeves from "@/assets/sleeves.png";
 
 export const categories = [
   {
-    name: "Lever Belts",
+    nameKey: "categories.leverBelts",
+    descriptionKey: "categories.leverBeltsDesc",
     filterKey: "lever-belts",
     color: "bg-brand",
-    description: "Premium lifting belts for maximum support and performance.",
     image: beltImg,
   },
   {
-    name: "Grip Tape",
+    nameKey: "categories.gripTape",
+    descriptionKey: "categories.gripTapeDesc",
     filterKey: "grip-tape",
-    color: "bg-neutral-900",
-    description:
-      "High-quality grip tape to enhance your hold and boost your lifts.",
+    color: "bg-neutral-900 dark:bg-neutral-700",
     image: tapeRollImg,
   },
   {
-    name: "Lifting Straps",
+    nameKey: "categories.liftingStraps",
+    descriptionKey: "categories.liftingStrapsDesc",
     filterKey: "lifting-straps",
     color: "bg-red-950",
-    description: "Heavy-duty straps to push your limits on every lift.",
     image: strapsImg,
   },
   {
-    name: "Knee Sleeves",
+    nameKey: "categories.kneeSleeves",
+    descriptionKey: "categories.kneeSleevesDesc",
     filterKey: "knee-sleeves",
-    color: "bg-zinc-800",
-    description:
-      "Support and protection for your knees during intense workouts.",
+    color: "bg-zinc-800 dark:bg-zinc-600",
     image: kneeSleeves,
   },
 ];

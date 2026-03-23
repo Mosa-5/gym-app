@@ -2,7 +2,7 @@ import { Link, Outlet } from "react-router-dom";
 
 const AuthLayout: React.FC = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center w-full max-w-full overflow-x-hidden bg-neutral-50 dark:bg-neutral-950">
+    <div className="min-h-screen flex items-center justify-center w-full max-w-full overflow-x-hidden bg-neutral-50 dark:bg-surface">
       {/* Pattern background */}
       <div
         className="absolute inset-0 pointer-events-none opacity-[0.03] dark:opacity-[0.06]"
@@ -29,7 +29,7 @@ const AuthLayout: React.FC = () => {
               />
             </svg>
           </div>
-          <span className="text-[26px] font-black tracking-tighter uppercase leading-none text-neutral-900 dark:text-white">
+          <span className="text-[26px] font-black tracking-tighter uppercase leading-none text-neutral-900 dark:text-white font-[Inter,system-ui,sans-serif]">
             Gym<span className="text-brand">Gear</span>
           </span>
         </Link>

@@ -1,6 +1,7 @@
 import beltimg from "@/assets/pexels-franki-frank-11513151.jpg";
 import mobileShopImg from "@/assets/mobileGear.avif";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 import {
   banner,
@@ -12,6 +13,7 @@ import {
 } from "./hero.styles";
 
 const ProductsHeroBanner = () => {
+  const { t } = useTranslation();
   return (
     <div className={banner()}>
       <picture className="absolute inset-0">
@@ -39,7 +41,7 @@ const ProductsHeroBanner = () => {
           viewport={{ once: true }}
           className={subtitle()}
         >
-          Browse Our
+          {t("shopHero.browseOur")}
         </motion.p>
 
         <motion.h1
@@ -49,7 +51,7 @@ const ProductsHeroBanner = () => {
           viewport={{ once: true }}
           className={heading()}
         >
-          Shop
+          {t("shopHero.shop")}
         </motion.h1>
 
         <motion.p
@@ -59,8 +61,7 @@ const ProductsHeroBanner = () => {
           viewport={{ once: true }}
           className={paragraph()}
         >
-          Quality, long-lasting fitness equipment and active wear to help your
-          healthy lifestyle.
+          {t("shopHero.description")}
         </motion.p>
       </motion.div>
     </div>

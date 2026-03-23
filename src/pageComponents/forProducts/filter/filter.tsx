@@ -8,6 +8,7 @@ import {
   AccordionTrigger,
 } from "@/componentsShadcn/ui/accordion";
 import { useGetDistinctCategories } from "@/reactQuery/query/categories";
+import { useTranslation } from "react-i18next";
 
 export interface FilterState {
   priceRange: [number, number];
@@ -21,6 +22,7 @@ interface FiltersProps {
 
 const Filters: React.FC<FiltersProps> = ({ filters, onFiltersChange }) => {
   const { data: categories = [] } = useGetDistinctCategories();
+  const { t } = useTranslation();
   const [localPrice, setLocalPrice] = useState<[number, number]>(
     filters.priceRange,
   );
@@ -48,7 +50,7 @@ const Filters: React.FC<FiltersProps> = ({ filters, onFiltersChange }) => {
       <div className="pb-6 border-b border-neutral-200 dark:border-neutral-700">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-sm font-bold tracking-wide uppercase text-neutral-900 dark:text-neutral-100">
-            Price
+            {t("products.price")}
           </h3>
           <span className="text-sm font-semibold text-neutral-700 dark:text-neutral-300">
             {localPrice[0]} - {localPrice[1]}
@@ -68,8 +70,8 @@ const Filters: React.FC<FiltersProps> = ({ filters, onFiltersChange }) => {
       {/* Product Category */}
       <Accordion type="multiple" defaultValue={["category"]}>
         <AccordionItem value="category">
-          <AccordionTrigger className="text-sm font-bold tracking-wide uppercase hover:no-underline">
-            Product Category
+          <AccordionTrigger className="text-sm font-bold tracking-wide uppercase hover:no-underline dark:text-white">
+            {t("products.productCategory")}
           </AccordionTrigger>
           <AccordionContent>
             <div className="space-y-3 pl-1">
