@@ -17,7 +17,7 @@ const ProductsHeroBanner = () => {
   const { t } = useTranslation();
   return (
     <div className={banner()}>
-      <picture className="absolute inset-0">
+      <picture className="absolute inset-0 hero-animate">
         <source
           media="(max-width: 767px)"
           srcSet={mobileShopImg}

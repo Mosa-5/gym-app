@@ -21,7 +21,7 @@ const HeroBanner: React.FC = () => {
   return (
     <section className={heroSectionClass()}>
       {/* Background image */}
-      <picture className="absolute inset-0">
+      <picture className="absolute inset-0 hero-animate">
         <source
           media="(max-width: 767px)"
           srcSet={mobileHeroImg}

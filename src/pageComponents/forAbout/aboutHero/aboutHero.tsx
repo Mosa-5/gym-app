@@ -17,7 +17,7 @@ const AboutHero = () => {
   return (
     <div className={banner()}>
       <div
-        className={bannerInner()}
+        className={bannerInner() + " hero-animate"}
         style={{
           backgroundImage: `url(${heroImg})`,
           backgroundPosition: "50% 40%",
