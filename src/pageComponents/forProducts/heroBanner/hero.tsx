@@ -18,8 +18,16 @@ const ProductsHeroBanner = () => {
   return (
     <div className={banner()}>
       <picture className="absolute inset-0">
-        <source media="(max-width: 767px)" srcSet={mobileShopImg} type="image/avif" />
-        <source media="(min-width: 768px)" srcSet={beltimgWebp} type="image/webp" />
+        <source
+          media="(max-width: 767px)"
+          srcSet={mobileShopImg}
+          type="image/avif"
+        />
+        <source
+          media="(min-width: 768px)"
+          srcSet={beltimgWebp}
+          type="image/webp"
+        />
         <img
           src={beltimg}
           alt=""

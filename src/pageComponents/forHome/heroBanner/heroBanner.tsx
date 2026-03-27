@@ -22,8 +22,16 @@ const HeroBanner: React.FC = () => {
     <section className={heroSectionClass()}>
       {/* Background image */}
       <picture className="absolute inset-0">
-        <source media="(max-width: 767px)" srcSet={mobileHeroImg} type="image/avif" />
-        <source media="(min-width: 768px)" srcSet={gymheroimgWebp} type="image/webp" />
+        <source
+          media="(max-width: 767px)"
+          srcSet={mobileHeroImg}
+          type="image/avif"
+        />
+        <source
+          media="(min-width: 768px)"
+          srcSet={gymheroimgWebp}
+          type="image/webp"
+        />
         <img
           src={gymheroimg}
           alt=""
