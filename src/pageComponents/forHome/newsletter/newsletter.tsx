@@ -36,9 +36,7 @@ const Newsletter = () => {
     >
       <div className={containerClass()}>
         <SectionHeading text={t("newsletter.stayInTheLoop")} />
-        <p className={descriptionClass()}>
-          {t("newsletter.description")}
-        </p>
+        <p className={descriptionClass()}>{t("newsletter.description")}</p>
         <form onSubmit={handleSubmit} className={formClass()}>
           <Input
             type="email"

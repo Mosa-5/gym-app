@@ -47,7 +47,9 @@ const Profile = () => {
               className="flex-1 flex items-center justify-center gap-2 rounded-full py-2.5 text-sm font-semibold data-[state=active]:bg-white dark:data-[state=active]:bg-neutral-800 data-[state=active]:shadow-sm transition-all cursor-pointer"
             >
               <MessageSquare className="w-4 h-4" />
-              <span className="hidden sm:inline">{t("profile.reviewsTab")}</span>
+              <span className="hidden sm:inline">
+                {t("profile.reviewsTab")}
+              </span>
             </TabsTrigger>
           </TabsList>
 

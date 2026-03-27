@@ -1,4 +1,5 @@
 import beltimg from "@/assets/pexels-franki-frank-11513151.jpg";
+import beltimgWebp from "@/assets/pexels-franki-frank-11513151.webp";
 import mobileShopImg from "@/assets/mobileGear.avif";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
@@ -17,11 +18,12 @@ const ProductsHeroBanner = () => {
   return (
     <div className={banner()}>
       <picture className="absolute inset-0">
-        <source media="(max-width: 767px)" srcSet={mobileShopImg} />
-        <source media="(min-width: 768px)" srcSet={beltimg} />
+        <source media="(max-width: 767px)" srcSet={mobileShopImg} type="image/avif" />
+        <source media="(min-width: 768px)" srcSet={beltimgWebp} type="image/webp" />
         <img
           src={beltimg}
           alt=""
+          fetchPriority="high"
           className="w-full h-full object-cover md:object-[50%_65%] object-center"
         />
       </picture>

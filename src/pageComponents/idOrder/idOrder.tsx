@@ -63,7 +63,8 @@ const IdOrder = () => {
           <div className="flex items-center gap-3 mb-2">
             <Package className="w-6 h-6 text-brand" />
             <h1 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-white">
-              {t("orders.orderNumber")}{userOrder.id}
+              {t("orders.orderNumber")}
+              {userOrder.id}
             </h1>
           </div>
           <p className="text-sm text-neutral-400">
@@ -118,7 +119,9 @@ const IdOrder = () => {
 
               <div className="space-y-3 text-sm">
                 <div className="flex justify-between">
-                  <span className="text-neutral-500">{t("orders.items")} ({totalItems})</span>
+                  <span className="text-neutral-500">
+                    {t("orders.items")} ({totalItems})
+                  </span>
                   <span className="font-semibold text-neutral-900 dark:text-white">
                     ${userOrder.total_price.toFixed(2)}
                   </span>

@@ -51,7 +51,8 @@ const Orders = () => {
           {t("orders.yourOrders")}
         </h2>
         <p className="text-sm text-neutral-500 mt-1">
-          {userOrders.length} {userOrders.length !== 1 ? t("orders.orders") : t("orders.order")}{" "}
+          {userOrders.length}{" "}
+          {userOrders.length !== 1 ? t("orders.orders") : t("orders.order")}{" "}
           {t("orders.placed")}
         </p>
       </div>
@@ -77,7 +78,9 @@ const Orders = () => {
               className="relative w-24 h-24 object-contain"
             />
           </div>
-          <p className="text-neutral-500 text-sm font-medium">{t("orders.noOrders")}</p>
+          <p className="text-neutral-500 text-sm font-medium">
+            {t("orders.noOrders")}
+          </p>
         </div>
       ) : (
         <div className="flex flex-col gap-3">
@@ -95,7 +98,8 @@ const Orders = () => {
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
                     <span className="text-sm font-bold text-neutral-900 dark:text-white">
-                      {t("orders.orderNumber")}{order.id}
+                      {t("orders.orderNumber")}
+                      {order.id}
                     </span>
                     <span className="text-xs text-neutral-400">
                       {formatTimestamp(order.created_at)}
@@ -107,7 +111,10 @@ const Orders = () => {
                     </span>
                     <span className="text-xs text-neutral-400">
                       ({order.item.length}{" "}
-                      {order.item.length === 1 ? t("cart.item") : t("cart.items")})
+                      {order.item.length === 1
+                        ? t("cart.item")
+                        : t("cart.items")}
+                      )
                     </span>
                   </div>
                 </div>

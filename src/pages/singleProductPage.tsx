@@ -141,7 +141,9 @@ const ProductDetail: React.FC = () => {
             <div className="flex flex-col gap-3 mt-8">
               <button
                 onClick={() => {
-                  toast.success(t("common.addedToCart", { name: product?.name }));
+                  toast.success(
+                    t("common.addedToCart", { name: product?.name }),
+                  );
                   return product && handleAddToCart(product);
                 }}
                 className="w-full bg-brand hover:bg-brand-hover text-white font-bold text-sm uppercase tracking-wider rounded-full py-3.5 transition-colors duration-200 cursor-pointer"

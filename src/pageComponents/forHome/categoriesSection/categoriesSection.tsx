@@ -36,7 +36,10 @@ const CategoriesSection = () => {
       viewport={{ once: true }}
     >
       <div className={containerClass()}>
-        <SectionHeading text={t("categories.shopByCategory")} className="mb-8" />
+        <SectionHeading
+          text={t("categories.shopByCategory")}
+          className="mb-8"
+        />
         <div className={panelContainerClass()}>
           {categories.map((category, index) => {
             const isActive = activeIndex === index;
@@ -94,6 +97,7 @@ const CategoriesSection = () => {
                             <img
                               src={category.image}
                               alt={t(category.nameKey)}
+                              loading="lazy"
                               className="w-full h-auto object-contain"
                               style={{
                                 filter:

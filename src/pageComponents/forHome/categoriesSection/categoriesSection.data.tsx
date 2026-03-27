@@ -1,7 +1,7 @@
-import beltImg from "@/assets/belt.png";
+import beltImg from "@/assets/belt.webp";
 import strapsImg from "@/assets/lifting-strap.png";
-import tapeRollImg from "@/assets/tape-roll.png";
-import kneeSleeves from "@/assets/sleeves.png";
+import tapeRollImg from "@/assets/tape-roll.webp";
+import kneeSleeves from "@/assets/sleeves.webp";
 
 export const categories = [
   {

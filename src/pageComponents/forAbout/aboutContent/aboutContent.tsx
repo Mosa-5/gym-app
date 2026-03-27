@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import storyImg1 from "@/assets/ripped.avif";
-import storyImg2 from "@/assets/pexels-binyaminmellish-17840.jpg";
+import storyImg2 from "@/assets/pexels-binyaminmellish-17840.webp";
 import SectionHeading from "@/pageComponents/forHome/sectionHeading/sectionHeading";
 import {
   standardsPillars,
@@ -10,7 +10,6 @@ import {
 } from "./aboutContent.data";
 import { containerClass, gridFour, ctaButton } from "./aboutContent.styles";
 import { useTranslation } from "react-i18next";
-
 
 const staggerContainer = (staggerChildren = 0.1) => ({
   initial: "hidden",
@@ -35,7 +34,6 @@ const fade = (delay = 0) => ({
   transition: { duration: 0.5, delay },
   viewport: { once: true },
 });
-
 
 const AboutContent = () => {
   const { t } = useTranslation();
@@ -81,6 +79,7 @@ const AboutContent = () => {
                 <img
                   src={storyImg1}
                   alt="Gym training"
+                  loading="lazy"
                   className="absolute inset-0 w-full h-full object-cover"
                 />
               </div>
@@ -88,6 +87,7 @@ const AboutContent = () => {
                 <img
                   src={storyImg2}
                   alt="Athlete lifting"
+                  loading="lazy"
                   className="absolute inset-0 w-full h-full object-cover"
                 />
               </div>
@@ -100,10 +100,11 @@ const AboutContent = () => {
       <section className="relative py-16 sm:py-20 overflow-hidden">
         <div className={containerClass() + " relative z-10"}>
           <SectionHeading text={t("about.ourStandards")} className="mb-8" />
-          <motion.div {...staggerContainer(0.1)}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
+          <motion.div
+            {...staggerContainer(0.1)}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
             className={
               gridFour() +
               " rounded-2xl overflow-hidden border border-neutral-200 dark:border-neutral-700/50"
@@ -112,7 +113,7 @@ const AboutContent = () => {
             {standardsPillars.map((pillar, i) => (
               <motion.div
                 key={pillar.titleKey}
-                 variants={fadeVariant}
+                variants={fadeVariant}
                 className={`relative p-6 sm:p-8 bg-white dark:bg-neutral-900/80 ${
                   i > 0
                     ? "border-t sm:border-t-0 sm:border-l border-neutral-200 dark:border-neutral-700/50 lg:border-t-0 lg:border-l"
@@ -159,11 +160,13 @@ const AboutContent = () => {
           </motion.div>
 
           {/* Stats row */}
-          <motion.div {...staggerContainer(0.15)}
-  initial="hidden"
-  whileInView="visible"
-  viewport={{ once: true }}
-   className="grid grid-cols-1 sm:grid-cols-3">
+          <motion.div
+            {...staggerContainer(0.15)}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 sm:grid-cols-3"
+          >
             {metricsData.map((stat, i) => (
               <motion.div
                 key={stat.labelKey}
@@ -196,10 +199,13 @@ const AboutContent = () => {
                 {t("about.trustText")}
               </p>
 
-              <motion.div {...staggerContainer(0.1)}
+              <motion.div
+                {...staggerContainer(0.1)}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true }} className="space-y-5">
+                viewport={{ once: true }}
+                className="space-y-5"
+              >
                 {guaranteePoints.map((point) => (
                   <motion.div
                     key={point.titleKey}
@@ -210,7 +216,9 @@ const AboutContent = () => {
                       <h4 className="text-sm font-black uppercase tracking-wider text-neutral-900 dark:text-white">
                         {t(point.titleKey)}
                       </h4>
-                      <p className="text-sm text-neutral-500">{t(point.descKey)}</p>
+                      <p className="text-sm text-neutral-500">
+                        {t(point.descKey)}
+                      </p>
                     </div>
                   </motion.div>
                 ))}

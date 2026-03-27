@@ -13,7 +13,6 @@ import noDataSVG from "@/assets/undraw_no-data_ig65.svg";
 import "@/pageComponents/loader/loader.css";
 import { useTranslation } from "react-i18next";
 
-
 const gridContainer = {
   hidden: {},
   visible: {
@@ -127,19 +126,19 @@ const ProductGrid: React.FC<{
               className="relative w-28 h-28 object-contain"
             />
           </div>
-          <p className="text-sm text-neutral-400">
-            {t("products.noMatch")}
-          </p>
+          <p className="text-sm text-neutral-400">{t("products.noMatch")}</p>
         </div>
       ) : (
         <>
           {/* Product grid */}
-          <motion.div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5 px-0 sm:px-4"
-          key={page}
-          variants={gridContainer}
-  initial="hidden"
-  animate="visible"
-  viewport={{ once: true }}>
+          <motion.div
+            className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5 px-0 sm:px-4"
+            key={page}
+            variants={gridContainer}
+            initial="hidden"
+            animate="visible"
+            viewport={{ once: true }}
+          >
             {currentProducts.map((product, index) => {
               const globalIndex = startIndex + index;
               return (
@@ -173,6 +172,7 @@ const ProductGrid: React.FC<{
                       <img
                         src={product.image_url[0]}
                         alt={product.name}
+                        loading="lazy"
                         className="h-24 sm:h-40 object-contain rounded-full"
                       />
                       <h3 className="text-xs sm:text-sm font-semibold text-center tracking-wide text-white truncate max-w-full">
@@ -186,7 +186,9 @@ const ProductGrid: React.FC<{
                           onClick={(e) => {
                             e.stopPropagation();
                             e.preventDefault();
-                            toast.success(t("products.addedToCart", { name: product.name }));
+                            toast.success(
+                              t("products.addedToCart", { name: product.name }),
+                            );
                             handleAddToCart(product);
                           }}
                           className="flex items-center gap-1.5 sm:gap-2 bg-white/15 hover:bg-white/25 border border-white/20 text-white text-[10px] sm:text-xs font-semibold uppercase tracking-wider px-2.5 py-1.5 sm:px-4 sm:py-2 rounded-full transition-colors duration-200 cursor-pointer"

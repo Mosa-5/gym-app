@@ -3,10 +3,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { statsKeys } from "./brandStory.data";
 import SectionHeading from "@/pageComponents/forHome/sectionHeading/sectionHeading";
 import { sectionClass, containerClass } from "./brandStory.styles";
-import storyImg1 from "@/assets/pexels-823sl-2294361.jpg";
-import storyImg2 from "@/assets/pexels-binyaminmellish-17840.jpg";
-import storyImg3 from "@/assets/pexels-ivan-samkov-4164450.jpg";
-import storyImg4 from "@/assets/red-reyes-Z6CqKIP_J18-unsplash.jpg";
+import storyImg1 from "@/assets/pexels-823sl-2294361.webp";
+import storyImg2 from "@/assets/pexels-binyaminmellish-17840.webp";
+import storyImg3 from "@/assets/pexels-ivan-samkov-4164450.webp";
+import storyImg4 from "@/assets/red-reyes-Z6CqKIP_J18-unsplash.webp";
 import { useTranslation } from "react-i18next";
 
 const IMAGES = [storyImg1, storyImg2, storyImg3, storyImg4];

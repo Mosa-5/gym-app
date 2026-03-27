@@ -229,6 +229,7 @@ const ExperimentalCarousel: React.FC<CarouselProps> = ({
                     <img
                       src={product.image_url[0]}
                       alt={product.name}
+                      loading="lazy"
                       className="relative h-64 w-64 object-cover rounded-full shadow-lg"
                       style={{ opacity: style.opacity }}
                       draggable={false}

@@ -63,7 +63,8 @@ const CartPage = () => {
             </h1>
           </div>
           <p className="text-sm text-neutral-400">
-            {totalItems} {totalItems !== 1 ? t("cart.items") : t("cart.item")} {t("cart.inYourCart")}
+            {totalItems} {totalItems !== 1 ? t("cart.items") : t("cart.item")}{" "}
+            {t("cart.inYourCart")}
           </p>
         </div>
       </div>

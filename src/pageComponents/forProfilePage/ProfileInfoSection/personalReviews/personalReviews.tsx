@@ -74,7 +74,10 @@ const PersonalReviews = () => {
           {t("personalReviews.yourReviews")}
         </h2>
         <p className="text-sm text-neutral-500 mt-1">
-          {userReviews.length} {userReviews.length !== 1 ? t("personalReviews.reviews") : t("personalReviews.review")}{" "}
+          {userReviews.length}{" "}
+          {userReviews.length !== 1
+            ? t("personalReviews.reviews")
+            : t("personalReviews.review")}{" "}
           {t("personalReviews.written")}
         </p>
       </div>

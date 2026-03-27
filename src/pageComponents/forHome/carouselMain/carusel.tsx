@@ -148,6 +148,7 @@ const CaruselForPages: React.FC<CarouselProps> = ({
                         <img
                           src={product.image_url[0]}
                           alt={product.name}
+                          loading="lazy"
                           className={image()}
                         />
                         <p className={productName()}>{product.name}</p>

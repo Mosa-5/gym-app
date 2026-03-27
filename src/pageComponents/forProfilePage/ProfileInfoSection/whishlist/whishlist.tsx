@@ -39,7 +39,10 @@ const Wishlist = () => {
         </h2>
         <p className="text-sm text-neutral-500 mt-1">
           {wishlistProducts.length}{" "}
-          {wishlistProducts.length !== 1 ? t("wishlist.items") : t("wishlist.item")} {t("wishlist.saved")}
+          {wishlistProducts.length !== 1
+            ? t("wishlist.items")
+            : t("wishlist.item")}{" "}
+          {t("wishlist.saved")}
         </p>
       </div>
 

@@ -23,8 +23,12 @@ const SortMenu: React.FC<SortMenuProps> = ({ value, onValueChange }) => {
       </SelectTrigger>
       <SelectContent className="rounded-xl">
         <SelectGroup>
-          <SelectItem value="price-asc">{t("products.priceLowHigh")}</SelectItem>
-          <SelectItem value="price-desc">{t("products.priceHighLow")}</SelectItem>
+          <SelectItem value="price-asc">
+            {t("products.priceLowHigh")}
+          </SelectItem>
+          <SelectItem value="price-desc">
+            {t("products.priceHighLow")}
+          </SelectItem>
           <SelectItem value="name-asc">{t("products.nameAZ")}</SelectItem>
           <SelectItem value="name-desc">{t("products.nameZA")}</SelectItem>
         </SelectGroup>

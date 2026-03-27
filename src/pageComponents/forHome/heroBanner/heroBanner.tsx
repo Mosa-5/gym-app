@@ -1,4 +1,5 @@
 import gymheroimg from "@/assets/pexels-binyaminmellish-17840.jpg";
+import gymheroimgWebp from "@/assets/pexels-binyaminmellish-17840.webp";
 import mobileHeroImg from "@/assets/ripped.avif";
 import {
   heroSectionClass,
@@ -21,11 +22,12 @@ const HeroBanner: React.FC = () => {
     <section className={heroSectionClass()}>
       {/* Background image */}
       <picture className="absolute inset-0">
-        <source media="(max-width: 767px)" srcSet={mobileHeroImg} />
-        <source media="(min-width: 768px)" srcSet={gymheroimg} />
+        <source media="(max-width: 767px)" srcSet={mobileHeroImg} type="image/avif" />
+        <source media="(min-width: 768px)" srcSet={gymheroimgWebp} type="image/webp" />
         <img
           src={gymheroimg}
           alt=""
+          fetchPriority="high"
           className="w-full h-full object-cover md:object-[70%_30%] object-center"
         />
       </picture>
