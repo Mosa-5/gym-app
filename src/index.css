@@ -8,9 +8,11 @@ body {
   overflow-x: hidden;
   padding: 0;
   width: 100%;
+  font-family: "Noto Sans", system-ui, sans-serif;
 }
 
-html[lang="ka"] {
+html[lang="ka"],
+html[lang="ka"] body {
   font-family: "Noto Sans Georgian", system-ui, sans-serif;
 }
 
