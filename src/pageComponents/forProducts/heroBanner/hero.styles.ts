@@ -1,7 +1,7 @@
 import { cva } from "class-variance-authority";
 
 export const banner = cva(
-  "relative bg-black text-white h-[50vh] md:h-[60vh] flex items-end pb-16 md:pb-20",
+  "relative bg-black text-white overflow-hidden h-[50vh] md:h-[60vh] flex items-end pb-16 md:pb-20",
 );
 export const bannerInner = cva(
   "absolute inset-0 bg-cover bg-center bg-no-repeat",
