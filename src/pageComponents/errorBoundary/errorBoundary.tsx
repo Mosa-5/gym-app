@@ -26,7 +26,9 @@ class ErrorBoundary extends Component<Props, State> {
     if (this.state.hasError) {
       return (
         <div className="w-full h-screen flex flex-col justify-center items-center gap-4 2xl:gap-6 bg-white dark:bg-neutral-950">
-          <h1 className="text-4xl 2xl:text-6xl font-semibold text-neutral-900 dark:text-white">Something went wrong</h1>
+          <h1 className="text-4xl 2xl:text-6xl font-semibold text-neutral-900 dark:text-white">
+            Something went wrong
+          </h1>
           <p className="text-gray-600 dark:text-gray-400 2xl:text-xl">
             An unexpected error occurred. Please try again.
           </p>

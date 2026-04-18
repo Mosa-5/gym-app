@@ -152,7 +152,9 @@ const App: React.FC = () => {
           path="*"
           element={
             <div className="w-full h-screen flex flex-col justify-center items-center gap-6 bg-white dark:bg-neutral-950">
-              <h1 className="text-7xl 2xl:text-9xl max-w-fit font-semibold text-neutral-900 dark:text-white">404</h1>
+              <h1 className="text-7xl 2xl:text-9xl max-w-fit font-semibold text-neutral-900 dark:text-white">
+                404
+              </h1>
               <p className="text-neutral-500 dark:text-neutral-400 text-sm 2xl:text-lg">
                 The page you're looking for doesn't exist.
               </p>

@@ -85,7 +85,11 @@ const RegisterForm = () => {
                 <FormItem>
                   <FormLabel className={labelClass()}>Full Name En</FormLabel>
                   <FormControl>
-                    <Input placeholder="John" className={inputClass()} {...field} />
+                    <Input
+                      placeholder="John"
+                      className={inputClass()}
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -98,7 +102,11 @@ const RegisterForm = () => {
                 <FormItem>
                   <FormLabel className={labelClass()}>Full Name Ka</FormLabel>
                   <FormControl>
-                    <Input placeholder="Doe" className={inputClass()} {...field} />
+                    <Input
+                      placeholder="Doe"
+                      className={inputClass()}
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -111,7 +119,11 @@ const RegisterForm = () => {
                 <FormItem>
                   <FormLabel className={labelClass()}>Email</FormLabel>
                   <FormControl>
-                    <Input placeholder="something@gmail.com" className={inputClass()} {...field} />
+                    <Input
+                      placeholder="something@gmail.com"
+                      className={inputClass()}
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -124,7 +136,12 @@ const RegisterForm = () => {
                 <FormItem>
                   <FormLabel className={labelClass()}>Password</FormLabel>
                   <FormControl>
-                    <Input type="password" placeholder="something" className={inputClass()} {...field} />
+                    <Input
+                      type="password"
+                      placeholder="something"
+                      className={inputClass()}
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

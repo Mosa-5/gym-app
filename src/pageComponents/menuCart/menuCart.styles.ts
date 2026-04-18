@@ -71,7 +71,9 @@ export const subtotalLabelClass = cva(
   "text-sm 2xl:text-base text-neutral-400 uppercase tracking-wider font-semibold",
 );
 
-export const subtotalValueClass = cva("text-xl 2xl:text-2xl font-black text-white");
+export const subtotalValueClass = cva(
+  "text-xl 2xl:text-2xl font-black text-white",
+);
 
 export const checkoutButtonClass = cva([
   "w-full rounded-full font-bold uppercase tracking-wider cursor-pointer",

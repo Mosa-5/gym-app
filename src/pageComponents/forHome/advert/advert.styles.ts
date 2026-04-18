@@ -15,4 +15,6 @@ export const heading = cva(
 export const saleText = cva(
   "text-xl md:text-2xl 2xl:text-3xl font-medium mt-2 tracking-wide",
 );
-export const button = cva("mt-4 px-8 py-6 2xl:px-12 2xl:py-8 2xl:text-lg text-white font-bold");
+export const button = cva(
+  "mt-4 px-8 py-6 2xl:px-12 2xl:py-8 2xl:text-lg text-white font-bold",
+);

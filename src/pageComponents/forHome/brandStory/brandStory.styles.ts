@@ -1,7 +1,9 @@
 import { cva } from "class-variance-authority";
 
 export const sectionClass = cva("py-16 sm:py-20 lg:py-28 2xl:py-36");
-export const containerClass = cva("container mx-auto px-4 max-w-6xl 2xl:max-w-[1560px]");
+export const containerClass = cva(
+  "container mx-auto px-4 max-w-6xl 2xl:max-w-[1560px]",
+);
 export const headingClass = cva("");
 
 export const contentGridClass = cva(

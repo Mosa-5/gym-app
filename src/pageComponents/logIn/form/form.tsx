@@ -87,7 +87,11 @@ const FormElement = () => {
                 <FormItem>
                   <FormLabel className={labelClass()}>Email</FormLabel>
                   <FormControl>
-                    <Input placeholder="something@gmail.com" className={inputClass()} {...field} />
+                    <Input
+                      placeholder="something@gmail.com"
+                      className={inputClass()}
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -100,7 +104,12 @@ const FormElement = () => {
                 <FormItem>
                   <FormLabel className={labelClass()}>Password</FormLabel>
                   <FormControl>
-                    <Input type="password" placeholder="something" className={inputClass()} {...field} />
+                    <Input
+                      type="password"
+                      placeholder="something"
+                      className={inputClass()}
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

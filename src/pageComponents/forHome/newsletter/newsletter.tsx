@@ -45,7 +45,10 @@ const Newsletter = () => {
             onChange={(e) => setEmail(e.target.value)}
             className="flex-1 bg-white dark:bg-neutral-950 2xl:h-12 2xl:text-base"
           />
-          <Button type="submit" className="text-white 2xl:px-8 2xl:text-base 2xl:h-12">
+          <Button
+            type="submit"
+            className="text-white 2xl:px-8 2xl:text-base 2xl:h-12"
+          >
             {t("newsletter.subscribe")}
           </Button>
         </form>

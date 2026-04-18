@@ -43,7 +43,10 @@ const Metrics = () => {
         }}
       />
       <div className="container mx-auto px-4 max-w-6xl 2xl:max-w-[1560px] 2xl:px-16 relative z-10">
-        <motion.div {...fade()} className="flex items-center gap-4 2xl:gap-6 mb-12 2xl:mb-16">
+        <motion.div
+          {...fade()}
+          className="flex items-center gap-4 2xl:gap-6 mb-12 2xl:mb-16"
+        >
           <span className="text-xs 2xl:text-sm font-bold uppercase tracking-[0.25em] text-white/80">
             {t("about.byTheNumbers")}
           </span>

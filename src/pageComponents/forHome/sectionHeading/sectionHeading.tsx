@@ -8,7 +8,9 @@ const SectionHeading: React.FC<SectionHeadingProps> = ({
   className = "",
 }) => {
   return (
-    <div className={`relative text-center py-8 2xl:py-10 select-none ${className}`}>
+    <div
+      className={`relative text-center py-8 2xl:py-10 select-none ${className}`}
+    >
       {/* Shadow layer */}
       <span
         aria-hidden="true"

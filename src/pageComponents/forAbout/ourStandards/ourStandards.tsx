@@ -29,7 +29,10 @@ const OurStandards = () => {
   return (
     <section className="relative py-16 sm:py-20 2xl:py-36 overflow-hidden">
       <div className="container mx-auto px-4 max-w-6xl 2xl:max-w-[1560px] 2xl:px-16 relative z-10">
-        <SectionHeading text={t("about.ourStandards")} className="mb-8 2xl:mb-12" />
+        <SectionHeading
+          text={t("about.ourStandards")}
+          className="mb-8 2xl:mb-12"
+        />
         <motion.div
           {...staggerContainer(0.1)}
           initial="hidden"

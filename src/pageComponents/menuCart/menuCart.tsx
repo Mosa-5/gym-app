@@ -52,9 +52,7 @@ const ShoppingCart = () => {
     <Sheet>
       <SheetTrigger className={triggerClass()}>
         <ShoppingBag className="w-4 h-4 2xl:w-5 2xl:h-5 text-neutral-300" />
-        {totalItems > 0 && (
-          <span className={badgeClass()}>{totalItems}</span>
-        )}
+        {totalItems > 0 && <span className={badgeClass()}>{totalItems}</span>}
       </SheetTrigger>
 
       <SheetContent side="right" className={sheetContentClass()}>
@@ -169,7 +167,9 @@ const ShoppingCart = () => {
           <div className={footerClass()}>
             <div className="flex items-center justify-between mb-4">
               <span className={subtotalLabelClass()}>{t("cart.subtotal")}</span>
-              <span className={subtotalValueClass()}>${totalPrice.toFixed(2)}</span>
+              <span className={subtotalValueClass()}>
+                ${totalPrice.toFixed(2)}
+              </span>
             </div>
             <SheetClose asChild>
               <Link to="/dashboard/cartPage">

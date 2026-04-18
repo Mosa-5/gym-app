@@ -106,7 +106,7 @@ const CategoriesSection = () => {
                             />
                           </div>
                         </motion.div>
- 
+
                         {/* Dark overlay behind text */}
                         <motion.div
                           className="absolute inset-0 z-[1] bg-gradient-to-r from-black/60 via-black/40 to-black/15"
@@ -125,9 +125,15 @@ const CategoriesSection = () => {
                           transition={{ duration: 0.3, delay: 0.15 }}
                         >
                           <h3 className="text-white font-bold text-2xl sm:text-4xl md:text-5xl lg:text-6xl 2xl:text-8xl ka:lg:text-5xl tracking-wide mb-1 sm:mb-2">
-                            {t(category.nameKey).toUpperCase().split(" ").map((word, i, arr) => (
-                              <span key={i}>{word}{i < arr.length - 1 && <br />}</span>
-                            ))}
+                            {t(category.nameKey)
+                              .toUpperCase()
+                              .split(" ")
+                              .map((word, i, arr) => (
+                                <span key={i}>
+                                  {word}
+                                  {i < arr.length - 1 && <br />}
+                                </span>
+                              ))}
                           </h3>
                           <p className="text-white/80 text-xs sm:text-base 2xl:text-lg ka:sm:text-sm mb-3 sm:mb-4 line-clamp-2 sm:line-clamp-none">
                             {t(category.descriptionKey)}

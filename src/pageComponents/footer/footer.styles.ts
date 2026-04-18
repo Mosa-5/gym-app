@@ -17,7 +17,9 @@ export const navClass = cva(
 export const linkClass = cva(
   "text-sm 2xl:text-base hover:underline hover:text-brand transition",
 );
-export const borderClass = cva("mt-8 pt-8 2xl:mt-12 2xl:pt-12 border-t border-neutral-800");
+export const borderClass = cva(
+  "mt-8 pt-8 2xl:mt-12 2xl:pt-12 border-t border-neutral-800",
+);
 export const socialContainerClass = cva(
   "flex items-center justify-center sm:justify-start gap-4 2xl:gap-6",
 );
