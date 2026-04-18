@@ -37,9 +37,9 @@ const Header: React.FC = () => {
 
         {/* Logo */}
         <Link to={"/dashboard/main"} className="flex items-center gap-2">
-          <div className="w-9 h-9 bg-brand rounded-full flex items-center justify-center transition-colors">
+          <div className="w-9 h-9 2xl:w-11 2xl:h-11 bg-brand rounded-full flex items-center justify-center transition-colors">
             <svg
-              className="w-6 h-6"
+              className="w-6 h-6 2xl:w-7 2xl:h-7"
               viewBox="0 0 512 512"
               xmlns="http://www.w3.org/2000/svg"
             >
@@ -60,7 +60,7 @@ const Header: React.FC = () => {
             <Link
               key={link.to}
               to={link.to}
-              className="relative px-4 py-2 text-[13px] font-semibold uppercase tracking-wider text-neutral-400 hover:text-white transition-colors duration-200 after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-0 after:h-[2px] after:bg-brand after:transition-all after:duration-300 hover:after:w-2/3"
+              className="relative px-4 py-2 2xl:px-6 2xl:py-3 text-[13px] 2xl:text-[16px] font-semibold uppercase tracking-wider text-neutral-400 hover:text-white transition-colors duration-200 after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-0 after:h-[2px] after:bg-brand after:transition-all after:duration-300 hover:after:w-2/3"
             >
               {link.label}
             </Link>
@@ -74,11 +74,11 @@ const Header: React.FC = () => {
           </div>
 
           {/* Divider */}
-          <div className="hidden md:block w-px h-5 bg-neutral-700" />
+          <div className="hidden md:block w-px h-5 2xl:h-7 bg-neutral-700" />
 
           {user ? (
             <Link className="hidden md:flex" to={"/dashboard/profilePage"}>
-              <Avatar className="h-8 w-8 ring-2 ring-brand/50 hover:ring-brand transition-all duration-200">
+              <Avatar className="h-8 w-8 2xl:h-10 2xl:w-10 ring-2 ring-brand/50 hover:ring-brand transition-all duration-200">
                 <AvatarImage src={profileData?.avatar_url} />
                 <AvatarFallback className="bg-neutral-800 text-xs font-bold text-neutral-300">
                   CN
@@ -87,10 +87,10 @@ const Header: React.FC = () => {
             </Link>
           ) : (
             <Link
-              className="hidden md:flex items-center justify-center w-8 h-8 rounded-full bg-neutral-800/80 hover:bg-neutral-700 transition-colors duration-200"
+              className="hidden md:flex items-center justify-center w-8 h-8 2xl:w-10 2xl:h-10 rounded-full bg-neutral-800/80 hover:bg-neutral-700 transition-colors duration-200"
               to={"/auth/signin"}
             >
-              <User className="w-4 h-4 text-neutral-300" />
+              <User className="w-4 h-4 2xl:w-5 2xl:h-5 text-neutral-300" />
             </Link>
           )}
 

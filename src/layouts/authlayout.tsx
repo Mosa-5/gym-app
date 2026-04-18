@@ -15,11 +15,11 @@ const AuthLayout: React.FC = () => {
         {/* Logo */}
         <Link
           to="/dashboard/main"
-          className="flex items-center gap-2 group mb-8"
+          className="flex items-center gap-2 mb-8"
         >
-          <div className="w-9 h-9 bg-brand rounded-sm flex items-center justify-center group-hover:bg-brand-hover transition-colors">
+          <div className="w-9 h-9 2xl:w-12 2xl:h-12 bg-brand rounded-full flex items-center justify-center transition-colors">
             <svg
-              className="w-5 h-5"
+              className="w-5 h-5 2xl:w-7 2xl:h-7"
               viewBox="0 0 512 512"
               xmlns="http://www.w3.org/2000/svg"
             >
@@ -29,7 +29,7 @@ const AuthLayout: React.FC = () => {
               />
             </svg>
           </div>
-          <span className="text-[26px] font-black tracking-tighter uppercase leading-none text-neutral-900 dark:text-white font-[Inter,system-ui,sans-serif]">
+          <span className="text-[26px] 2xl:text-[34px] font-black tracking-tighter uppercase leading-none text-neutral-900 dark:text-white font-[Inter,system-ui,sans-serif]">
             Gym<span className="text-brand">Gear</span>
           </span>
         </Link>

@@ -51,57 +51,57 @@ const IdOrder = () => {
   return (
     <div className="min-h-screen bg-white dark:bg-neutral-950">
       {/* Hero header */}
-      <div className="bg-neutral-950 py-12 px-6">
-        <div className="max-w-screen-lg mx-auto">
+      <div className="bg-neutral-950 py-12 2xl:py-16 px-6 2xl:px-8">
+        <div className="max-w-screen-lg 2xl:max-w-[1400px] mx-auto">
           <Link
             to="/dashboard/profilePage"
-            className="inline-flex items-center gap-1.5 text-sm text-neutral-400 hover:text-white transition-colors mb-4"
+            className="inline-flex items-center gap-1.5 text-sm 2xl:text-base text-neutral-400 hover:text-white transition-colors mb-4"
           >
-            <ArrowLeft className="w-4 h-4" />
+            <ArrowLeft className="w-4 h-4 2xl:w-5 2xl:h-5" />
             {t("orders.backToProfile")}
           </Link>
           <div className="flex items-center gap-3 mb-2">
-            <Package className="w-6 h-6 text-brand" />
-            <h1 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-white">
+            <Package className="w-6 h-6 2xl:w-8 2xl:h-8 text-brand" />
+            <h1 className="text-2xl sm:text-3xl 2xl:text-4xl font-black uppercase tracking-tight text-white">
               {t("orders.orderNumber")}
               {userOrder.id}
             </h1>
           </div>
-          <p className="text-sm text-neutral-400">
+          <p className="text-sm 2xl:text-base text-neutral-400">
             {t("orders.placedOn")} {formatTimestamp(userOrder.created_at)}
           </p>
         </div>
       </div>
 
-      <div className="max-w-screen-lg mx-auto px-4 sm:px-6 py-8 pb-20">
-        <div className="flex flex-col lg:flex-row gap-8">
+      <div className="max-w-screen-lg 2xl:max-w-[1400px] mx-auto px-4 sm:px-6 2xl:px-8 py-8 2xl:py-12 pb-20 2xl:pb-28">
+        <div className="flex flex-col lg:flex-row gap-8 2xl:gap-12">
           {/* Left: Items */}
           <div className="flex-1 flex flex-col gap-4">
             {userOrder.item.map((product) => (
               <div
                 key={product.productId}
-                className="flex items-center gap-4 p-4 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900"
+                className="flex items-center gap-4 2xl:gap-6 p-4 2xl:p-6 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900"
               >
                 <img
                   src={product.image_url[0]}
                   alt={product.name}
-                  className="w-20 h-20 sm:w-24 sm:h-24 rounded-xl object-cover flex-shrink-0 bg-neutral-100 dark:bg-neutral-800"
+                  className="w-20 h-20 sm:w-24 sm:h-24 2xl:w-32 2xl:h-32 rounded-xl object-cover flex-shrink-0 bg-neutral-100 dark:bg-neutral-800"
                 />
 
                 <div className="flex-1 min-w-0">
-                  <h3 className="text-sm sm:text-base font-bold text-neutral-900 dark:text-white truncate">
+                  <h3 className="text-sm sm:text-base 2xl:text-lg font-bold text-neutral-900 dark:text-white truncate">
                     {product.name}
                   </h3>
-                  <p className="text-xs text-neutral-400 mt-0.5 uppercase tracking-wider">
+                  <p className="text-xs 2xl:text-sm text-neutral-400 mt-0.5 uppercase tracking-wider">
                     {product.category}
                   </p>
 
                   <div className="flex items-center justify-between mt-3">
-                    <span className="text-xs text-neutral-500">
+                    <span className="text-xs 2xl:text-sm text-neutral-500">
                       {t("orders.qty")}: {product.quantity} × $
                       {Number(product.price).toFixed(2)}
                     </span>
-                    <span className="text-sm sm:text-base font-bold text-neutral-900 dark:text-white">
+                    <span className="text-sm sm:text-base 2xl:text-lg font-bold text-neutral-900 dark:text-white">
                       ${(Number(product.price) * product.quantity).toFixed(2)}
                     </span>
                   </div>
@@ -111,13 +111,13 @@ const IdOrder = () => {
           </div>
 
           {/* Right: Order summary */}
-          <div className="w-full lg:w-80 lg:flex-shrink-0">
-            <div className="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6 lg:sticky lg:top-24">
-              <h2 className="text-base font-black uppercase tracking-tight text-neutral-900 dark:text-white mb-5">
+          <div className="w-full lg:w-80 2xl:w-[420px] lg:flex-shrink-0">
+            <div className="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6 2xl:p-8 lg:sticky lg:top-24">
+              <h2 className="text-base 2xl:text-xl font-black uppercase tracking-tight text-neutral-900 dark:text-white mb-5 2xl:mb-7">
                 {t("cart.orderSummary")}
               </h2>
 
-              <div className="space-y-3 text-sm">
+              <div className="space-y-3 2xl:space-y-4 text-sm 2xl:text-base">
                 <div className="flex justify-between">
                   <span className="text-neutral-500">
                     {t("orders.items")} ({totalItems})
@@ -128,7 +128,7 @@ const IdOrder = () => {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-neutral-500 flex items-center gap-1.5">
-                    <Truck className="w-3.5 h-3.5" />
+                    <Truck className="w-3.5 h-3.5 2xl:w-4 2xl:h-4" />
                     {t("cart.delivery")}
                   </span>
                   <span className="font-semibold text-neutral-900 dark:text-white">
@@ -141,7 +141,7 @@ const IdOrder = () => {
                     <span className="font-bold text-neutral-900 dark:text-white">
                       {t("cart.total")}
                     </span>
-                    <span className="text-lg font-black text-neutral-900 dark:text-white">
+                    <span className="text-lg 2xl:text-2xl font-black text-neutral-900 dark:text-white">
                       ${(userOrder.total_price + 2).toFixed(2)}
                     </span>
                   </div>

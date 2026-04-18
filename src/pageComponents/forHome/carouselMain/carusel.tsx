@@ -156,14 +156,14 @@ const CaruselForPages: React.FC<CarouselProps> = ({
                         <div className="flex items-center gap-3 mt-1">
                           <button
                             onClick={(e) => handleAddToCart(e, product)}
-                            className="flex items-center gap-2 bg-white/15 hover:bg-white/25 border border-white/20 text-white text-xs font-semibold uppercase tracking-wider px-4 py-2 rounded-full transition-colors duration-200 cursor-pointer"
+                            className="flex items-center gap-2 bg-white/15 hover:bg-white/25 border border-white/20 text-white text-xs 2xl:text-sm font-semibold uppercase tracking-wider px-4 py-2 2xl:px-5 2xl:py-2.5 rounded-full transition-colors duration-200 cursor-pointer"
                           >
                             <ShoppingBag className="w-3.5 h-3.5" />
                             Add to Cart
                           </button>
                           <button
                             onClick={(e) => handleFavourite(e, product.id)}
-                            className="flex items-center justify-center w-9 h-9 rounded-full bg-white/15 hover:bg-white/25 border border-white/20 text-white transition-colors duration-200 cursor-pointer"
+                            className="flex items-center justify-center w-9 h-9 2xl:w-11 2xl:h-11 rounded-full bg-white/15 hover:bg-white/25 border border-white/20 text-white transition-colors duration-200 cursor-pointer"
                           >
                             <Star className="w-4 h-4" />
                           </button>

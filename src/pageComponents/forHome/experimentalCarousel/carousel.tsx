@@ -200,11 +200,11 @@ const ExperimentalCarousel: React.FC<CarouselProps> = ({
           className="!text-white [&_h2]:!text-white [&_span]:!text-white [&_span]:!opacity-20"
         />
 
-        <div className="w-full max-w-3xl mx-auto">
+        <div className="w-full max-w-3xl 2xl:max-w-5xl mx-auto">
           {/* Carousel scene */}
           <div
-            className="relative w-full select-none touch-none"
-            style={{ height: "340px", cursor: "grab" }}
+            className="relative w-full select-none touch-none h-[340px] 2xl:h-[420px]"
+            style={{ cursor: "grab" }}
             onPointerDown={handlePointerDown}
           >
             {products.map((product, index) => {
@@ -220,7 +220,7 @@ const ExperimentalCarousel: React.FC<CarouselProps> = ({
                     pointerEvents: "none",
                   }}
                 >
-                  <div className="relative h-64 w-64 rounded-full">
+                  <div className="relative h-64 w-64 2xl:h-80 2xl:w-80 rounded-full">
                     {/* Solid backing to block pattern bleed-through */}
                     <div
                       className="absolute inset-0 rounded-full"
@@ -230,7 +230,7 @@ const ExperimentalCarousel: React.FC<CarouselProps> = ({
                       src={product.image_url[0]}
                       alt={product.name}
                       loading="lazy"
-                      className="relative h-64 w-64 object-cover rounded-full shadow-lg"
+                      className="relative h-64 w-64 2xl:h-80 2xl:w-80 object-cover rounded-full shadow-lg"
                       style={{ opacity: style.opacity }}
                       draggable={false}
                     />
@@ -241,18 +241,18 @@ const ExperimentalCarousel: React.FC<CarouselProps> = ({
           </div>
 
           {/* Buttons below */}
-          <div className="flex justify-center gap-6 mt-8 bg-black/20 backdrop-blur-sm w-fit mx-auto rounded-full">
+          <div className="flex justify-center gap-6 2xl:gap-5 mt-8 2xl:mt-10 bg-black/20 backdrop-blur-sm w-fit mx-auto rounded-full">
             <Button
               onClick={goPrev}
               variant="outline"
               size="icon"
-              className="h-12 w-12 rounded-full bg-white/15 text-white hover:bg-white/25 hover:text-white border-white/20"
+              className="h-12 w-12 2xl:h-16 2xl:w-16 rounded-full bg-white/15 text-white hover:bg-white/25 hover:text-white border-white/20"
             >
-              <ArrowLeft className="h-5 w-5" />
+              <ArrowLeft className="h-5 w-5 2xl:h-7 2xl:w-7" />
             </Button>
             <Link
               to={`/dashboard/productDetail/${products[((Math.round(rotation) % total) + total) % total]?.id}`}
-              className="flex items-center gap-2 text-sm font-bold text-white w-[220px] justify-center text-center uppercase tracking-wider hover:underline underline-offset-4 transition-all truncate"
+              className="flex items-center gap-2 text-sm 2xl:text-lg font-bold text-white w-[220px] 2xl:w-[320px] justify-center text-center uppercase tracking-wider hover:underline underline-offset-4 transition-all truncate"
             >
               {products[((Math.round(rotation) % total) + total) % total]?.name}
               <ExternalLink className="w-3.5 h-3.5 shrink-0 opacity-60" />
@@ -261,9 +261,9 @@ const ExperimentalCarousel: React.FC<CarouselProps> = ({
               onClick={goNext}
               variant="outline"
               size="icon"
-              className="h-12 w-12 rounded-full bg-white/15 text-white hover:bg-white/25 hover:text-white border-white/20"
+              className="h-12 w-12 2xl:h-16 2xl:w-16 rounded-full bg-white/15 text-white hover:bg-white/25 hover:text-white border-white/20"
             >
-              <ArrowRight className="h-5 w-5" />
+              <ArrowRight className="h-5 w-5 2xl:h-7 2xl:w-7" />
             </Button>
           </div>
         </div>

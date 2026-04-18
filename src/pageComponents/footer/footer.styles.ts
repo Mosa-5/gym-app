@@ -1,25 +1,25 @@
 import { cva } from "class-variance-authority";
 
 export const footerClass = cva(
-  "bg-neutral-950 text-white p-8 border-t border-neutral-800/50",
+  "bg-neutral-950 text-white p-8 2xl:p-12 border-t border-neutral-800/50",
 );
-export const containerClass = cva("max-w-7xl mx-auto");
+export const containerClass = cva("max-w-7xl 2xl:max-w-[1560px] mx-auto");
 export const flexContainerClass = cva(
   "flex flex-col md:flex-row justify-between items-center sm:items-start gap-8",
 );
 export const flexItemClass = cva("flex-1");
 export const headingClass = cva(
-  "text-3xl sm:text-4xl font-black tracking-tighter uppercase leading-none font-[Inter,system-ui,sans-serif]",
+  "text-3xl sm:text-4xl 2xl:text-5xl font-black tracking-tighter uppercase leading-none font-[Inter,system-ui,sans-serif]",
 );
 export const navClass = cva(
   "grid grid-cols-1 sm:grid-cols-3 gap-4 gap-x-20 md:gap-x-4 text-center sm:text-start",
 );
 export const linkClass = cva(
-  "text-sm hover:underline hover:text-brand transition",
+  "text-sm 2xl:text-base hover:underline hover:text-brand transition",
 );
-export const borderClass = cva("mt-8 pt-8 border-t border-neutral-800");
+export const borderClass = cva("mt-8 pt-8 2xl:mt-12 2xl:pt-12 border-t border-neutral-800");
 export const socialContainerClass = cva(
-  "flex items-center justify-center sm:justify-start gap-4",
+  "flex items-center justify-center sm:justify-start gap-4 2xl:gap-6",
 );
 export const socialLinkClass = cva("text-white hover:text-gray-300 transition");
-export const socialLabelClass = cva("text-sm");
+export const socialLabelClass = cva("text-sm 2xl:text-base");

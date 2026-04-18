@@ -83,9 +83,9 @@ const Products = () => {
     <>
       <ProductsHeroBanner />
 
-      <div className="flex p-6 max-w-screen-xl mx-auto mt-10 gap-8">
+      <div className="flex p-6 2xl:p-10 max-w-screen-xl 2xl:max-w-[1560px] mx-auto mt-10 2xl:mt-14 gap-8 2xl:gap-12">
         {/* Desktop sidebar */}
-        <aside className="hidden lg:block w-64 shrink-0 sticky top-24 self-start">
+        <aside className="hidden lg:block w-64 2xl:w-80 shrink-0 sticky top-24 2xl:top-28 self-start">
           <Filters filters={filters} onFiltersChange={setFilters} />
         </aside>
 

@@ -47,12 +47,12 @@ const Filters: React.FC<FiltersProps> = ({ filters, onFiltersChange }) => {
   return (
     <div className="w-full">
       {/* Price Range */}
-      <div className="pb-6 border-b border-neutral-200 dark:border-neutral-700">
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="text-sm font-bold tracking-wide uppercase text-neutral-900 dark:text-neutral-100">
+      <div className="pb-6 2xl:pb-8 border-b border-neutral-200 dark:border-neutral-700">
+        <div className="flex items-center justify-between mb-4 2xl:mb-6">
+          <h3 className="text-sm 2xl:text-base font-bold tracking-wide uppercase text-neutral-900 dark:text-neutral-100">
             {t("products.price")}
           </h3>
-          <span className="text-sm font-semibold text-neutral-700 dark:text-neutral-300">
+          <span className="text-sm 2xl:text-base font-semibold text-neutral-700 dark:text-neutral-300">
             {localPrice[0]} - {localPrice[1]}
           </span>
         </div>
@@ -70,21 +70,22 @@ const Filters: React.FC<FiltersProps> = ({ filters, onFiltersChange }) => {
       {/* Product Category */}
       <Accordion type="multiple" defaultValue={["category"]}>
         <AccordionItem value="category">
-          <AccordionTrigger className="text-sm font-bold tracking-wide uppercase hover:no-underline dark:text-white">
+          <AccordionTrigger className="text-sm 2xl:text-base font-bold tracking-wide uppercase hover:no-underline dark:text-white">
             {t("products.productCategory")}
           </AccordionTrigger>
           <AccordionContent>
-            <div className="space-y-3 pl-1">
+            <div className="space-y-3 2xl:space-y-4 pl-1">
               {categories.map((category) => (
                 <label
                   key={category}
-                  className="flex items-center gap-3 cursor-pointer"
+                  className="flex items-center gap-3 2xl:gap-4 cursor-pointer"
                 >
                   <Checkbox
                     checked={filters.categories.includes(category)}
                     onCheckedChange={() => handleCategoryToggle(category)}
+                    className="2xl:w-5 2xl:h-5"
                   />
-                  <span className="text-sm text-neutral-700 dark:text-neutral-300">
+                  <span className="text-sm 2xl:text-base text-neutral-700 dark:text-neutral-300">
                     {category}
                   </span>
                 </label>

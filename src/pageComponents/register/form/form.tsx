@@ -14,6 +14,17 @@ import {
 import { Input } from "@/componentsShadcn/ui/input";
 import { useRegister } from "@/reactQuery/mutations/auth/register";
 import { Link } from "react-router-dom";
+import {
+  cardClass,
+  headingClass,
+  formClass,
+  fieldsClass,
+  inputClass,
+  labelClass,
+  submitButtonClass,
+  descriptionTextClass,
+  descriptionLinkClass,
+} from "./form.styles";
 
 const formSchema = z.object({
   fullNameEn: z.string().nonempty({ message: "First Name is required" }),
@@ -29,7 +40,6 @@ const formSchema = z.object({
 });
 
 const RegisterForm = () => {
-  // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -42,7 +52,6 @@ const RegisterForm = () => {
 
   const { mutate: register, isError, error, isPending } = useRegister();
 
-  // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
     register(values);
   }
@@ -59,29 +68,24 @@ const RegisterForm = () => {
   }
 
   return (
-    <div className="max-w-sm m-auto rounded-2xl p-8 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-sm flex flex-col items-center w-full">
-      <h1 className="text-2xl font-black uppercase tracking-tight text-neutral-900 dark:text-white mb-6">
-        Register
-      </h1>
+    <div className={cardClass()}>
+      <h1 className={headingClass()}>Register</h1>
       <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col items-center space-y-6 max-w-xs *:w-full px-2 w-full dark:text-white"
-        >
+        <form onSubmit={form.handleSubmit(onSubmit)} className={formClass()}>
           {isError && (
             <p className="text-red-500 text-sm text-center">
               Sign Up failed: {String(error)}
             </p>
           )}
-          <div className="space-y-3">
+          <div className={fieldsClass()}>
             <FormField
               control={form.control}
               name="fullNameEn"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Full Name En</FormLabel>
+                  <FormLabel className={labelClass()}>Full Name En</FormLabel>
                   <FormControl>
-                    <Input placeholder="John" {...field} />
+                    <Input placeholder="John" className={inputClass()} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -92,9 +96,9 @@ const RegisterForm = () => {
               name="fullNameKa"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Full Name Ka</FormLabel>
+                  <FormLabel className={labelClass()}>Full Name Ka</FormLabel>
                   <FormControl>
-                    <Input placeholder="Doe" {...field} />
+                    <Input placeholder="Doe" className={inputClass()} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -105,9 +109,9 @@ const RegisterForm = () => {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel className={labelClass()}>Email</FormLabel>
                   <FormControl>
-                    <Input placeholder="something@gmail.com" {...field} />
+                    <Input placeholder="something@gmail.com" className={inputClass()} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -118,30 +122,25 @@ const RegisterForm = () => {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel className={labelClass()}>Password</FormLabel>
                   <FormControl>
-                    <Input type="password" placeholder="something" {...field} />
+                    <Input type="password" placeholder="something" className={inputClass()} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
           </div>
-          <Button
-            type="submit"
-            className="bg-brand hover:bg-brand-hover text-white font-bold uppercase tracking-wider rounded-full"
-          >
+          <Button type="submit" className={submitButtonClass()}>
             Register
           </Button>
           <FormDescription>
             <div className="flex justify-center gap-2">
-              <h1 className="text-sm text-gray-600 dark:text-gray-500">
+              <span className={descriptionTextClass()}>
                 Already have an account?
-              </h1>
+              </span>
               <Link to="/auth/signin">
-                <h1 className="text-sm text-brand font-semibold hover:underline cursor-pointer">
-                  Log In
-                </h1>
+                <span className={descriptionLinkClass()}>Log In</span>
               </Link>
             </div>
           </FormDescription>

@@ -2,7 +2,7 @@ import { Avatar, AvatarFallback } from "@/componentsShadcn/ui/avatar";
 import { useAuthContext } from "@/context/auth/hooks/useAuthContext";
 import { useSignOut } from "@/reactQuery/mutations/auth/signOut";
 import { useUploadAvatar } from "@/reactQuery/mutations/profile";
-import { AvatarImage } from "@radix-ui/react-avatar";
+import { AvatarImage } from "@/componentsShadcn/ui/avatar";
 import { LogOut, Camera, MapPin } from "lucide-react";
 import { useRef } from "react";
 import { toast } from "sonner";
@@ -61,16 +61,16 @@ const ProfileHero = () => {
         }}
       />
 
-      <div className="relative max-w-screen-lg mx-auto px-6 sm:px-10 py-12 sm:py-16">
-        <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-8">
+      <div className="relative max-w-screen-lg 2xl:max-w-[1400px] mx-auto px-6 sm:px-10 2xl:px-16 py-12 sm:py-16 2xl:py-20">
+        <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-8 2xl:gap-12">
           {/* Avatar with edit overlay */}
           <div className="relative group">
-            <Avatar className="w-28 h-28 sm:w-32 sm:h-32 ring-4 ring-neutral-800 group-hover:ring-brand/50 transition-all duration-300">
+            <Avatar className="w-28 h-28 sm:w-32 sm:h-32 2xl:w-44 2xl:h-44 ring-4 ring-neutral-800 group-hover:ring-brand/50 transition-all duration-300">
               <AvatarImage
                 src={profileData?.avatar_url}
-                className="object-cover"
+                className="w-full h-full object-cover"
               />
-              <AvatarFallback className="bg-neutral-800 text-white text-3xl font-bold">
+              <AvatarFallback className="bg-neutral-800 text-white text-3xl 2xl:text-5xl font-bold">
                 {profileData?.full_name_en?.charAt(0) || "U"}
               </AvatarFallback>
             </Avatar>
@@ -82,7 +82,7 @@ const ProfileHero = () => {
               className="absolute inset-0 rounded-full bg-black/0 group-hover:bg-black/50 flex items-center justify-center transition-all duration-300 cursor-pointer"
             >
               <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center gap-1">
-                <Camera className="w-5 h-5 text-white" />
+                <Camera className="w-5 h-5 2xl:w-7 2xl:h-7 text-white" />
                 <span className="text-[10px] font-semibold text-white uppercase tracking-wider">
                   {isUploading ? t("profile.uploading") : t("profile.edit")}
                 </span>
@@ -101,18 +101,18 @@ const ProfileHero = () => {
 
           {/* Info */}
           <div className="flex-1 text-center sm:text-left">
-            <h1 className="text-white text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight">
+            <h1 className="text-white text-2xl sm:text-3xl md:text-4xl 2xl:text-5xl font-black uppercase tracking-tight">
               {profileData?.full_name_en || "User"}
             </h1>
             {profileData?.username && (
-              <p className="text-neutral-500 text-sm mt-1">
+              <p className="text-neutral-500 text-sm 2xl:text-base mt-1">
                 @{profileData.username}
               </p>
             )}
             {profileData?.address && (
               <div className="flex items-center justify-center sm:justify-start gap-1.5 mt-2">
-                <MapPin className="w-3.5 h-3.5 text-neutral-500" />
-                <span className="text-sm text-neutral-400">
+                <MapPin className="w-3.5 h-3.5 2xl:w-5 2xl:h-5 text-neutral-500" />
+                <span className="text-sm 2xl:text-base text-neutral-400">
                   {profileData.address}
                 </span>
               </div>
@@ -122,9 +122,9 @@ const ProfileHero = () => {
           {/* Sign out */}
           <button
             onClick={handleLogout}
-            className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-surface border border-neutral-700 text-sm font-semibold text-neutral-300 hover:text-white hover:border-neutral-500 transition-colors cursor-pointer"
+            className="flex items-center gap-2 px-6 2xl:px-8 py-2.5 2xl:py-3 rounded-full bg-surface border border-neutral-700 text-sm 2xl:text-base font-semibold text-neutral-300 hover:text-white hover:border-neutral-500 transition-colors cursor-pointer"
           >
-            <LogOut className="w-4 h-4" />
+            <LogOut className="w-4 h-4 2xl:w-5 2xl:h-5" />
             {t("nav.signOut")}
           </button>
         </div>

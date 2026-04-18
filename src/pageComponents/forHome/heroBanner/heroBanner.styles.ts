@@ -1,26 +1,26 @@
 import { cva } from "class-variance-authority";
 
 export const heroSectionClass = cva(
-  "relative bg-black text-white h-[70vh] sm:h-[80vh] md:h-[90vh] flex items-center sm:items-end pb-0 sm:pb-20 md:pb-28",
+  "relative bg-black text-white h-[70vh] sm:h-[80vh] md:h-[90vh] 2xl:h-[92vh] flex items-center sm:items-end pb-0 sm:pb-20 md:pb-28 2xl:pb-40",
 );
 export const overlayClass = cva(
   "absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/30 sm:from-black sm:via-black/60 sm:to-black/20",
 );
 export const contentClass = cva(
-  "relative z-10 w-full max-w-screen-xl mx-auto px-5 sm:px-6 md:px-10 text-center sm:text-left",
+  "relative z-10 w-full max-w-screen-xl 2xl:max-w-[1560px] mx-auto px-5 sm:px-6 md:px-10 2xl:px-16 text-center sm:text-left",
 );
 export const subtitleClass = cva(
-  "text-sm sm:text-lg md:text-2xl font-medium italic tracking-wide text-neutral-300",
+  "text-sm sm:text-lg md:text-2xl 2xl:text-3xl font-medium italic tracking-wide text-neutral-300",
 );
 export const headingClass = cva(
-  "text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase leading-[0.9] tracking-tight ka:leading-[1.2] ka:text-7xl",
+  "text-5xl sm:text-6xl md:text-7xl lg:text-8xl 2xl:text-[110px] font-black uppercase leading-[0.9] tracking-tight ka:leading-[1.2] ka:text-7xl",
 );
 export const paragraphClass = cva(
-  "mt-3 sm:mt-4 text-sm md:text-base ka:md:text-sm italic text-neutral-400 max-w-xs sm:max-w-sm ka:max-w-md mx-auto sm:mx-0",
+  "mt-3 sm:mt-4 text-sm md:text-base 2xl:text-lg ka:md:text-sm italic text-neutral-400 max-w-xs sm:max-w-sm 2xl:max-w-md ka:max-w-md mx-auto sm:mx-0",
 );
 export const buttonContainerClass = cva(
   "mt-5 sm:mt-6 flex gap-4 justify-center sm:justify-start",
 );
 export const buttonClass = cva(
-  "bg-brand hover:bg-brand-hover text-white font-bold text-xs uppercase tracking-wider rounded-full px-7 py-3.5 transition-all duration-200 flex items-center gap-2 border border-neutral-700/50",
+  "bg-brand hover:bg-brand-hover text-white font-bold text-xs 2xl:text-sm uppercase tracking-wider rounded-full px-7 py-3.5 2xl:px-9 2xl:py-5 transition-all duration-200 flex items-center gap-2 border border-neutral-700/50",
 );

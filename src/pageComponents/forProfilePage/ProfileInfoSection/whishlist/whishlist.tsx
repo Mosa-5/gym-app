@@ -34,10 +34,10 @@ const Wishlist = () => {
   return (
     <div>
       <div className="mb-6">
-        <h2 className="text-xl font-black uppercase tracking-tight text-neutral-900 dark:text-white">
+        <h2 className="text-xl 2xl:text-2xl font-black uppercase tracking-tight text-neutral-900 dark:text-white">
           {t("wishlist.wishlist")}
         </h2>
-        <p className="text-sm text-neutral-500 mt-1">
+        <p className="text-sm 2xl:text-base text-neutral-500 mt-1">
           {wishlistProducts.length}{" "}
           {wishlistProducts.length !== 1
             ? t("wishlist.items")
@@ -49,7 +49,7 @@ const Wishlist = () => {
       {wishlistProducts.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-12 gap-5">
           <div
-            className="relative w-44 h-44 rounded-full flex items-center justify-center overflow-hidden"
+            className="relative w-44 h-44 2xl:w-64 2xl:h-64 rounded-full flex items-center justify-center overflow-hidden"
             style={{
               background:
                 "linear-gradient(135deg, rgb(var(--color-brand)) 0%, rgb(120 15 15) 100%)",
@@ -64,15 +64,15 @@ const Wishlist = () => {
             <img
               src={emptyWishlistsSvg}
               alt=""
-              className="relative w-24 h-24 object-contain"
+              className="relative w-24 h-24 2xl:w-36 2xl:h-36 object-contain"
             />
           </div>
-          <p className="text-neutral-500 text-sm font-medium">
+          <p className="text-neutral-500 text-sm 2xl:text-base font-medium">
             {t("wishlist.emptyWishlist")}
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 2xl:grid-cols-5 gap-4 2xl:gap-6">
           {wishlistProducts.map((item) => (
             <Link
               key={item.id}
@@ -85,13 +85,13 @@ const Wishlist = () => {
                   <img
                     src={item.product.image_url[0]}
                     alt={item.product.name}
-                    className="w-28 h-28 object-contain rounded-full group-hover:scale-105 transition-transform duration-300"
+                    className="w-28 h-28 2xl:w-36 2xl:h-36 object-contain rounded-full"
                   />
                 </div>
 
                 {/* Info */}
-                <div className="p-3">
-                  <h3 className="text-sm font-semibold text-neutral-900 dark:text-white truncate">
+                <div className="p-3 text-center">
+                  <h3 className="text-sm 2xl:text-base font-semibold text-neutral-900 dark:text-white truncate">
                     {item.product.name}
                   </h3>
                   <div className="mt-2">
@@ -99,9 +99,9 @@ const Wishlist = () => {
                       onClick={(e) =>
                         deleteWishlist(item.user_id, item.product.id, e)
                       }
-                      className="flex items-center gap-1.5 text-xs font-semibold text-neutral-400 hover:text-brand transition-colors cursor-pointer"
+                      className="flex items-center justify-center gap-1.5 w-full text-xs 2xl:text-sm font-semibold text-neutral-400 hover:text-brand transition-colors cursor-pointer"
                     >
-                      <Trash2 className="w-3.5 h-3.5" />
+                      <Trash2 className="w-3.5 h-3.5 2xl:w-4 2xl:h-4" />
                       {t("wishlist.remove")}
                     </button>
                   </div>

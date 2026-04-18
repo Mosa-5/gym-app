@@ -87,13 +87,13 @@ const CategoriesSection = () => {
                       <>
                         {/* Product image */}
                         <motion.div
-                          className="absolute right-4 sm:right-8 bottom-4 sm:bottom-8 z-0"
+                          className="absolute right-4 sm:right-8 bottom-4 sm:bottom-8 z-0 2xl:mb-6"
                           initial={{ opacity: 0, x: 40 }}
                           animate={{ opacity: 1, x: 0 }}
                           exit={{ opacity: 0, x: 40 }}
                           transition={{ duration: 0.4, delay: 0.2 }}
                         >
-                          <div className="w-[220px] sm:w-[220px] md:w-[280px] lg:w-[320px]">
+                          <div className="w-[220px] sm:w-[220px] md:w-[280px] lg:w-[320px] 2xl:w-[400px]">
                             <img
                               src={category.image}
                               alt={t(category.nameKey)}
@@ -106,7 +106,7 @@ const CategoriesSection = () => {
                             />
                           </div>
                         </motion.div>
-
+ 
                         {/* Dark overlay behind text */}
                         <motion.div
                           className="absolute inset-0 z-[1] bg-gradient-to-r from-black/60 via-black/40 to-black/15"
@@ -118,16 +118,18 @@ const CategoriesSection = () => {
 
                         {/* Text content */}
                         <motion.div
-                          className="absolute bottom-0 left-0 w-full sm:w-[380px] md:w-[500px] lg:w-[580px] p-5 sm:p-8 md:p-10 z-[2]"
+                          className="absolute bottom-0 left-0 w-full sm:w-[380px] md:w-[500px] lg:w-[580px] 2xl:w-[680px] p-5 sm:p-8 md:p-10 2xl:p-14 2xl:mb-6 z-[2]"
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
                           exit={{ opacity: 0 }}
                           transition={{ duration: 0.3, delay: 0.15 }}
                         >
-                          <h3 className="text-white font-bold text-2xl sm:text-4xl md:text-5xl lg:text-6xl ka:lg:text-5xl tracking-wide mb-1 sm:mb-2">
-                            {t(category.nameKey).toUpperCase()}
+                          <h3 className="text-white font-bold text-2xl sm:text-4xl md:text-5xl lg:text-6xl 2xl:text-8xl ka:lg:text-5xl tracking-wide mb-1 sm:mb-2">
+                            {t(category.nameKey).toUpperCase().split(" ").map((word, i, arr) => (
+                              <span key={i}>{word}{i < arr.length - 1 && <br />}</span>
+                            ))}
                           </h3>
-                          <p className="text-white/80 text-xs sm:text-base  ka:sm:text-sm mb-3 sm:mb-4 line-clamp-2 sm:line-clamp-none">
+                          <p className="text-white/80 text-xs sm:text-base 2xl:text-lg ka:sm:text-sm mb-3 sm:mb-4 line-clamp-2 sm:line-clamp-none">
                             {t(category.descriptionKey)}
                           </p>
                           <Link
@@ -136,7 +138,7 @@ const CategoriesSection = () => {
                           >
                             <Button
                               variant="secondary"
-                              className="w-fit font-semibold text-xs sm:text-sm border-white/30 bg-white/15 text-white hover:bg-white/25 dark:bg-white/15 dark:hover:bg-white/25"
+                              className="w-fit font-semibold text-xs sm:text-sm 2xl:text-base 2xl:px-6 2xl:py-5 border-white/30 bg-white/15 text-white hover:bg-white/25 dark:bg-white/15 dark:hover:bg-white/25"
                             >
                               {t("categories.shopNow")}
                             </Button>

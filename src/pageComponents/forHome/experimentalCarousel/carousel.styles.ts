@@ -1,7 +1,7 @@
 import { cva } from "class-variance-authority";
 
 export const wrapper = cva(
-  "relative flex flex-col gap-7 justify-center items-center py-16 sm:py-20 lg:py-24 overflow-hidden",
+  "relative flex flex-col gap-7 justify-center items-center py-16 sm:py-20 lg:py-24 2xl:py-32 overflow-hidden",
 );
 
 export const heading = cva(

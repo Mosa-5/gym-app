@@ -44,7 +44,7 @@ const ReviewForm: React.FC<{
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col gap-6 w-full dark:text-white"
+        className="flex flex-col gap-6 2xl:gap-8 w-full dark:text-white"
       >
         {/* Rating Field */}
         <FormField
@@ -52,7 +52,7 @@ const ReviewForm: React.FC<{
           name="rating"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-sm font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
+              <FormLabel className="text-sm 2xl:text-base font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
                 {t("common.yourRating")}
               </FormLabel>
               <FormControl>
@@ -65,7 +65,7 @@ const ReviewForm: React.FC<{
                       className="p-0.5 cursor-pointer transition-transform hover:scale-110"
                     >
                       <svg
-                        className={`h-8 w-8 ${
+                        className={`h-8 w-8 2xl:h-10 2xl:w-10 ${
                           star <= currentRating
                             ? "fill-brand"
                             : "fill-neutral-200 dark:fill-neutral-700"
@@ -83,7 +83,7 @@ const ReviewForm: React.FC<{
                     </button>
                   ))}
                   {currentRating > 0 && (
-                    <span className="ml-2 text-sm font-bold text-neutral-900 dark:text-white">
+                    <span className="ml-2 text-sm 2xl:text-base font-bold text-neutral-900 dark:text-white">
                       {currentRating}.0
                     </span>
                   )}
@@ -104,13 +104,13 @@ const ReviewForm: React.FC<{
                 <FormLabel className="text-sm font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
                   {t("common.yourReview")}
                 </FormLabel>
-                <span className="text-xs text-neutral-400">
+                <span className="text-xs 2xl:text-sm text-neutral-400">
                   {field.value.length}/600
                 </span>
               </div>
               <FormControl>
                 <Textarea
-                  className="min-h-32 rounded-xl border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800/50 text-sm leading-relaxed resize-none focus:ring-2 focus:ring-neutral-900 dark:focus:ring-neutral-100"
+                  className="min-h-32 2xl:min-h-48 rounded-xl border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800/50 text-sm 2xl:text-base leading-relaxed resize-none focus:ring-2 focus:ring-neutral-900 dark:focus:ring-neutral-100"
                   placeholder={t("common.reviewPlaceholder")}
                   maxLength={600}
                   {...field}
@@ -124,7 +124,7 @@ const ReviewForm: React.FC<{
         <button
           type="submit"
           disabled={isPending}
-          className="w-full bg-brand hover:bg-brand-hover text-white font-bold text-sm uppercase tracking-wider rounded-full py-3.5 transition-colors duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full bg-brand hover:bg-brand-hover text-white font-bold text-sm 2xl:text-base uppercase tracking-wider rounded-full py-3.5 2xl:py-5 transition-colors duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isPending ? t("common.submitting") : t("common.submitReview")}
         </button>

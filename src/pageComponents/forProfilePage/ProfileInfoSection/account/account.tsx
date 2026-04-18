@@ -84,30 +84,30 @@ const Account = () => {
   return (
     <div>
       <div className="mb-6">
-        <h2 className="text-xl font-black uppercase tracking-tight text-neutral-900 dark:text-white">
+        <h2 className="text-xl 2xl:text-2xl font-black uppercase tracking-tight text-neutral-900 dark:text-white">
           {t("profile.accountSettings")}
         </h2>
-        <p className="text-sm text-neutral-500 mt-1">
+        <p className="text-sm 2xl:text-base text-neutral-500 mt-1">
           {t("profile.updateInfo")}
         </p>
       </div>
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 2xl:gap-8">
             <FormField
               control={form.control}
               name="full_name_en"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
+                  <FormLabel className="text-xs 2xl:text-sm font-semibold uppercase tracking-wider text-neutral-500">
                     {t("profile.fullNameEn")}
                   </FormLabel>
                   <FormControl>
                     <Input
                       placeholder={profileData.full_name_en}
                       {...field}
-                      className="rounded-xl bg-white dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800 h-11"
+                      className="rounded-xl bg-white dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800 h-11 2xl:h-12 2xl:text-base"
                     />
                   </FormControl>
                   <FormMessage />
@@ -119,14 +119,14 @@ const Account = () => {
               name="full_name_ka"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
+                  <FormLabel className="text-xs 2xl:text-sm font-semibold uppercase tracking-wider text-neutral-500">
                     {t("profile.fullNameKa")}
                   </FormLabel>
                   <FormControl>
                     <Input
                       placeholder={profileData.full_name_ka}
                       {...field}
-                      className="rounded-xl bg-white dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800 h-11"
+                      className="rounded-xl bg-white dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800 h-11 2xl:h-12 2xl:text-base"
                     />
                   </FormControl>
                   <FormMessage />
@@ -135,20 +135,20 @@ const Account = () => {
             />
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 2xl:gap-8">
             <FormField
               control={form.control}
               name="username"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
+                  <FormLabel className="text-xs 2xl:text-sm font-semibold uppercase tracking-wider text-neutral-500">
                     {t("profile.username")}
                   </FormLabel>
                   <FormControl>
                     <Input
                       placeholder={profileData.username}
                       {...field}
-                      className="rounded-xl bg-white dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800 h-11"
+                      className="rounded-xl bg-white dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800 h-11 2xl:h-12 2xl:text-base"
                     />
                   </FormControl>
                   <FormMessage />
@@ -160,14 +160,14 @@ const Account = () => {
               name="phone_number"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
+                  <FormLabel className="text-xs 2xl:text-sm font-semibold uppercase tracking-wider text-neutral-500">
                     {t("profile.phoneNumber")}
                   </FormLabel>
                   <FormControl>
                     <Input
                       placeholder={profileData.phone_number}
                       {...field}
-                      className="rounded-xl bg-white dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800 h-11"
+                      className="rounded-xl bg-white dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800 h-11 2xl:h-12 2xl:text-base"
                     />
                   </FormControl>
                   <FormMessage />
@@ -176,20 +176,20 @@ const Account = () => {
             />
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 2xl:gap-8">
             <FormField
               control={form.control}
               name="address"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
+                  <FormLabel className="text-xs 2xl:text-sm font-semibold uppercase tracking-wider text-neutral-500">
                     {t("profile.address")}
                   </FormLabel>
                   <FormControl>
                     <Input
                       placeholder={profileData.address}
                       {...field}
-                      className="rounded-xl bg-white dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800 h-11"
+                      className="rounded-xl bg-white dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800 h-11 2xl:h-12 2xl:text-base"
                     />
                   </FormControl>
                   <FormMessage />
@@ -200,7 +200,7 @@ const Account = () => {
 
           <button
             type="submit"
-            className="w-full sm:w-auto px-10 py-3 bg-brand hover:bg-brand-hover text-white font-bold text-sm uppercase tracking-wider rounded-full transition-colors duration-200 cursor-pointer"
+            className="w-full sm:w-auto px-10 2xl:px-14 py-3 2xl:py-4 bg-brand hover:bg-brand-hover text-white font-bold text-sm 2xl:text-base uppercase tracking-wider rounded-full transition-colors duration-200 cursor-pointer"
           >
             {t("profile.updateProfile")}
           </button>

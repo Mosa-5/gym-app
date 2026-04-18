@@ -61,34 +61,34 @@ const BrandStory = () => {
 
           {/* Left text block — top left, half overlapping image */}
           <div
-            className="relative lg:absolute lg:-left-[5%] lg:top-[15%] lg:w-[35%] mt-6 lg:mt-0 rounded-2xl p-5 sm:p-6 space-y-3 shadow-xl z-10"
+            className="relative lg:absolute lg:-left-[5%] lg:top-[15%] lg:w-[35%] mt-6 lg:mt-0 rounded-2xl p-5 sm:p-6 2xl:p-8 space-y-3 shadow-xl z-10"
             style={{
               background:
                 "linear-gradient(135deg, rgb(var(--color-brand)) 0%, rgb(140 20 20) 100%)",
             }}
           >
             <div className="w-8 h-[2px] bg-white/60" />
-            <p className="text-sm leading-relaxed text-white/90 font-light">
+            <p className="text-sm 2xl:text-base leading-relaxed text-white/90 font-light">
               {t("brandStory.slide1")}
             </p>
           </div>
 
           {/* Right text block — middle right */}
           <div
-            className="relative lg:absolute lg:-right-[3%] lg:top-[50%] lg:-translate-y-1/2 lg:w-[32%] mt-4 lg:mt-0 rounded-2xl p-5 sm:p-6 space-y-3 shadow-xl z-10"
+            className="relative lg:absolute lg:-right-[3%] lg:top-[50%] lg:-translate-y-1/2 lg:w-[32%] mt-4 lg:mt-0 rounded-2xl p-5 sm:p-6 2xl:p-8 space-y-3 shadow-xl z-10"
             style={{
               background:
                 "linear-gradient(135deg, rgb(140 20 20) 0%, rgb(var(--color-brand)) 100%)",
             }}
           >
             <div className="w-8 h-[2px] bg-white/60" />
-            <p className="text-sm leading-relaxed text-white/70 italic">
+            <p className="text-sm 2xl:text-base leading-relaxed text-white/70 italic">
               {t("brandStory.slide2")}
             </p>
           </div>
 
           {/* Stats bar chart — overlapping bottom of image */}
-          <div className="relative lg:absolute lg:bottom-0 lg:left-1/2 lg:-translate-x-1/2 lg:translate-y-[50%] lg:w-[70%] mt-8 lg:mt-0 z-10">
+          <div className="relative lg:absolute lg:bottom-0 lg:left-1/2 lg:-translate-x-1/2 lg:translate-y-[50%] lg:w-[70%] 2xl:w-[65%] mt-8 lg:mt-0 z-10">
             <div
               className="rounded-2xl p-6 sm:p-8 shadow-xl border border-neutral-200 dark:border-neutral-800"
               style={{ background: "rgba(255,255,255,0.95)" }}
@@ -103,10 +103,10 @@ const BrandStory = () => {
                     transition={{ duration: 0.4, delay: 0.2 + index * 0.1 }}
                     viewport={{ once: true }}
                   >
-                    <span className="text-xl sm:text-2xl md:text-3xl font-black text-brand leading-none">
+                    <span className="text-xl sm:text-2xl md:text-3xl 2xl:text-4xl font-black text-brand leading-none">
                       {t(stat.valueKey)}
                     </span>
-                    <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-neutral-500 mt-1">
+                    <span className="text-[10px] sm:text-xs 2xl:text-sm font-semibold uppercase tracking-wider text-neutral-500 mt-1">
                       {t(stat.labelKey)}
                     </span>
                   </motion.div>

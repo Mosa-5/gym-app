@@ -91,7 +91,7 @@ const ProductGrid: React.FC<{
   return (
     <div
       ref={gridRef}
-      className="m-auto max-w-sm sm:max-w-screen-lg w-full pt-5 min-h-screen"
+      className="m-auto max-w-sm sm:max-w-screen-lg 2xl:max-w-none w-full pt-5 min-h-screen"
     >
       {isLoading ? (
         <div className="flex items-center justify-center min-h-[60vh] text-brand">
@@ -132,7 +132,7 @@ const ProductGrid: React.FC<{
         <>
           {/* Product grid */}
           <motion.div
-            className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5 px-0 sm:px-4"
+            className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5 2xl:gap-6 px-0 sm:px-4"
             key={page}
             variants={gridContainer}
             initial="hidden"
@@ -168,17 +168,17 @@ const ProductGrid: React.FC<{
                       }}
                     />
 
-                    <div className="relative z-10 flex flex-col items-center p-3 pb-4 gap-2 sm:p-5 sm:pb-6 sm:gap-4">
+                    <div className="relative z-10 flex flex-col items-center p-3 pb-4 gap-2 sm:p-5 sm:pb-6 sm:gap-4 2xl:p-6 2xl:pb-8">
                       <img
                         src={product.image_url[0]}
                         alt={product.name}
                         loading="lazy"
-                        className="h-24 sm:h-40 object-contain rounded-full"
+                        className="h-24 sm:h-40 2xl:h-52 object-contain rounded-full"
                       />
-                      <h3 className="text-xs sm:text-sm font-semibold text-center tracking-wide text-white truncate max-w-full">
+                      <h3 className="text-xs sm:text-sm 2xl:text-base font-semibold text-center tracking-wide text-white truncate max-w-full">
                         {product.name}
                       </h3>
-                      <p className="text-sm sm:text-base font-black text-white">
+                      <p className="text-sm sm:text-base 2xl:text-lg font-black text-white">
                         ${product.price}
                       </p>
                       <div className="flex items-center gap-2 sm:gap-3">
@@ -191,7 +191,7 @@ const ProductGrid: React.FC<{
                             );
                             handleAddToCart(product);
                           }}
-                          className="flex items-center gap-1.5 sm:gap-2 bg-white/15 hover:bg-white/25 border border-white/20 text-white text-[10px] sm:text-xs font-semibold uppercase tracking-wider px-2.5 py-1.5 sm:px-4 sm:py-2 rounded-full transition-colors duration-200 cursor-pointer"
+                          className="flex items-center gap-1.5 sm:gap-2 bg-white/15 hover:bg-white/25 border border-white/20 text-white text-[10px] sm:text-xs 2xl:text-sm font-semibold uppercase tracking-wider px-2.5 py-1.5 sm:px-4 sm:py-2 2xl:px-5 2xl:py-2.5 rounded-full transition-colors duration-200 cursor-pointer"
                         >
                           <ShoppingBag className="w-3 h-3 sm:w-3.5 sm:h-3.5 hidden sm:block" />
                           {t("products.addToCart")}
@@ -210,7 +210,7 @@ const ProductGrid: React.FC<{
                             });
                             toast.success(t("products.addedToWishlist"));
                           }}
-                          className="flex items-center justify-center w-7 h-7 sm:w-9 sm:h-9 rounded-full bg-white/15 hover:bg-white/25 border border-white/20 text-white transition-colors duration-200 cursor-pointer"
+                          className="flex items-center justify-center w-7 h-7 sm:w-9 sm:h-9 2xl:w-11 2xl:h-11 rounded-full bg-white/15 hover:bg-white/25 border border-white/20 text-white transition-colors duration-200 cursor-pointer"
                         >
                           <Star className="w-3 h-3 sm:w-4 sm:h-4" />
                         </button>
@@ -228,7 +228,7 @@ const ProductGrid: React.FC<{
               <button
                 onClick={() => setPage(Math.max(1, page - 1))}
                 disabled={page === 1}
-                className="w-10 h-10 rounded-full bg-neutral-900 dark:bg-neutral-200 text-white dark:text-black flex items-center justify-center disabled:opacity-30 hover:bg-neutral-800 dark:hover:bg-neutral-300 transition-colors cursor-pointer disabled:cursor-not-allowed"
+                className="w-10 h-10 2xl:w-12 2xl:h-12 rounded-full bg-neutral-900 dark:bg-neutral-200 text-white dark:text-black flex items-center justify-center disabled:opacity-30 hover:bg-neutral-800 dark:hover:bg-neutral-300 transition-colors cursor-pointer disabled:cursor-not-allowed"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
@@ -237,7 +237,7 @@ const ProductGrid: React.FC<{
                 <button
                   key={p}
                   onClick={() => setPage(p)}
-                  className={`w-10 h-10 rounded-full text-sm font-bold transition-colors cursor-pointer ${
+                  className={`w-10 h-10 2xl:w-12 2xl:h-12 rounded-full text-sm 2xl:text-base font-bold transition-colors cursor-pointer ${
                     p === page
                       ? "bg-brand text-white"
                       : "bg-neutral-200 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-300 dark:hover:bg-neutral-700"
@@ -250,7 +250,7 @@ const ProductGrid: React.FC<{
               <button
                 onClick={() => setPage(Math.min(totalPages, page + 1))}
                 disabled={page === totalPages}
-                className="w-10 h-10 rounded-full bg-neutral-900 dark:bg-neutral-200 text-white dark:text-black flex items-center justify-center disabled:opacity-30 hover:bg-neutral-800 dark:hover:bg-neutral-300 transition-colors cursor-pointer disabled:cursor-not-allowed"
+                className="w-10 h-10 2xl:w-12 2xl:h-12 rounded-full bg-neutral-900 dark:bg-neutral-200 text-white dark:text-black flex items-center justify-center disabled:opacity-30 hover:bg-neutral-800 dark:hover:bg-neutral-300 transition-colors cursor-pointer disabled:cursor-not-allowed"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>

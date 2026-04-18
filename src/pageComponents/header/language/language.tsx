@@ -11,7 +11,7 @@ const LanguageChanger = () => {
   return (
     <button
       onClick={toggle}
-      className="text-[13px] font-bold uppercase tracking-wider text-neutral-400 hover:text-white transition-colors duration-200 cursor-pointer outline-none"
+      className="text-[13px] 2xl:text-[16px] font-bold uppercase tracking-wider text-neutral-400 hover:text-white transition-colors duration-200 cursor-pointer outline-none"
     >
       {i18n.language === "ka" ? "KA" : "EN"}
     </button>

@@ -12,9 +12,20 @@ import {
   FormMessage,
 } from "@/componentsShadcn/ui/form";
 import { Input } from "@/componentsShadcn/ui/input";
-import { useSignIn } from "@/reactQuery/mutations/auth/signIn";
+import { useSignIn, useGuestSignIn } from "@/reactQuery/mutations/auth/signIn";
 import { Link } from "react-router-dom";
-import { useGuestSignIn } from "@/reactQuery/mutations/auth/signIn";
+import {
+  cardClass,
+  headingClass,
+  formClass,
+  fieldsClass,
+  inputClass,
+  labelClass,
+  submitButtonClass,
+  guestButtonClass,
+  descriptionTextClass,
+  descriptionLinkClass,
+} from "./form.styles";
 
 const formSchema = z.object({
   email: z
@@ -28,7 +39,6 @@ const formSchema = z.object({
 });
 
 const FormElement = () => {
-  // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -38,12 +48,11 @@ const FormElement = () => {
   });
 
   const { mutate: login, isError, error, isPending } = useSignIn();
+  const { mutate: guestLogin, isPending: isGuestPending } = useGuestSignIn();
 
-  // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
     login(values);
   }
-  const { mutate: guestLogin, isPending: isGuestPending } = useGuestSignIn();
 
   function onGuest() {
     guestLogin();
@@ -61,29 +70,24 @@ const FormElement = () => {
   }
 
   return (
-    <div className="max-w-sm m-auto rounded-2xl p-8 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-sm flex flex-col items-center w-full">
-      <h1 className="text-2xl font-black uppercase tracking-tight text-neutral-900 dark:text-white mb-6">
-        Log In
-      </h1>
+    <div className={cardClass()}>
+      <h1 className={headingClass()}>Log In</h1>
       <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col items-center space-y-6 max-w-xs *:w-full px-2 w-full dark:text-white"
-        >
+        <form onSubmit={form.handleSubmit(onSubmit)} className={formClass()}>
           {isError && (
             <p className="text-red-500 text-sm text-center">
               Login failed: {String(error)}
             </p>
           )}
-          <div className="space-y-3">
+          <div className={fieldsClass()}>
             <FormField
               control={form.control}
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel className={labelClass()}>Email</FormLabel>
                   <FormControl>
-                    <Input placeholder="something@gmail.com" {...field} />
+                    <Input placeholder="something@gmail.com" className={inputClass()} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -94,9 +98,9 @@ const FormElement = () => {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel className={labelClass()}>Password</FormLabel>
                   <FormControl>
-                    <Input type="password" placeholder="something" {...field} />
+                    <Input type="password" placeholder="something" className={inputClass()} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -104,15 +108,12 @@ const FormElement = () => {
             />
           </div>
           <div className="flex flex-col gap-2">
-            <Button
-              type="submit"
-              className="bg-brand hover:bg-brand-hover text-white font-bold uppercase tracking-wider rounded-full"
-            >
+            <Button type="submit" className={submitButtonClass()}>
               Log In
             </Button>
             <Button
               variant="outline"
-              className="rounded-full font-semibold"
+              className={guestButtonClass()}
               onClick={(e) => {
                 e.preventDefault();
                 return onGuest();
@@ -123,13 +124,11 @@ const FormElement = () => {
           </div>
           <FormDescription>
             <div className="flex justify-center gap-2">
-              <h1 className="text-sm text-gray-600 dark:text-gray-500">
+              <span className={descriptionTextClass()}>
                 Don't have an account?
-              </h1>
-              <Link to={"/auth/register"}>
-                <h1 className="text-sm text-brand font-semibold hover:underline cursor-pointer">
-                  Register
-                </h1>
+              </span>
+              <Link to="/auth/register">
+                <span className={descriptionLinkClass()}>Register</span>
               </Link>
             </div>
           </FormDescription>

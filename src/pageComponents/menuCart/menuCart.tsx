@@ -11,6 +11,28 @@ import { useCartContext } from "@/context/cart/hooks/useCartContext";
 import { Link } from "react-router-dom";
 import emptyCartSVG from "@/assets/undraw_empty-cart_574u.svg";
 import { useTranslation } from "react-i18next";
+import {
+  triggerClass,
+  badgeClass,
+  sheetContentClass,
+  headerClass,
+  titleClass,
+  itemCountClass,
+  scrollAreaClass,
+  itemListClass,
+  itemCardClass,
+  itemImageClass,
+  itemNameClass,
+  itemCategoryClass,
+  qtyButtonClass,
+  qtyCountClass,
+  itemPriceClass,
+  removeButtonClass,
+  footerClass,
+  subtotalLabelClass,
+  subtotalValueClass,
+  checkoutButtonClass,
+} from "./menuCart.styles";
 
 const ShoppingCart = () => {
   const { t } = useTranslation();
@@ -28,25 +50,20 @@ const ShoppingCart = () => {
 
   return (
     <Sheet>
-      <SheetTrigger className="relative flex items-center justify-center w-8 h-8 rounded-full bg-neutral-800/80 hover:bg-neutral-700 transition-colors duration-200 cursor-pointer">
-        <ShoppingBag className="w-4 h-4 text-neutral-300" />
+      <SheetTrigger className={triggerClass()}>
+        <ShoppingBag className="w-4 h-4 2xl:w-5 2xl:h-5 text-neutral-300" />
         {totalItems > 0 && (
-          <span className="absolute -top-0.5 -right-0.5 bg-brand text-white text-[10px] w-4 h-4 flex justify-center items-center rounded-full font-bold leading-none">
-            {totalItems}
-          </span>
+          <span className={badgeClass()}>{totalItems}</span>
         )}
       </SheetTrigger>
 
-      <SheetContent
-        side="right"
-        className="w-full max-w-full sm:max-w-md bg-neutral-950 border-l border-neutral-800 text-white p-0 flex flex-col"
-      >
+      <SheetContent side="right" className={sheetContentClass()}>
         {/* Header */}
-        <SheetHeader className="px-6 pt-6 pb-4 border-b border-neutral-800 pr-14">
-          <SheetTitle className="text-white text-lg font-bold uppercase tracking-wider flex items-center gap-3">
-            <ShoppingBag className="w-5 h-5" />
+        <SheetHeader className={headerClass()}>
+          <SheetTitle className={titleClass()}>
+            <ShoppingBag className="w-5 h-5 2xl:w-6 2xl:h-6" />
             {t("cart.yourCart")}
-            <span className="ml-auto text-sm font-semibold text-neutral-400">
+            <span className={itemCountClass()}>
               {totalItems} {totalItems === 1 ? t("cart.item") : t("cart.items")}
             </span>
           </SheetTitle>
@@ -54,21 +71,18 @@ const ShoppingCart = () => {
 
         {/* Cart items */}
         <div
-          className="flex-1 overflow-y-auto px-6 py-4"
+          className={scrollAreaClass()}
           style={{
             scrollbarWidth: "thin",
             scrollbarColor: "#404040 transparent",
           }}
         >
           {cart.length > 0 ? (
-            <div className="flex flex-col gap-4">
+            <div className={itemListClass()}>
               {cart.map((product) => (
-                <div
-                  key={product.id}
-                  className="flex gap-4 p-3 sm:p-3 rounded-xl bg-neutral-900 border border-neutral-800"
-                >
+                <div key={product.id} className={itemCardClass()}>
                   {/* Product image */}
-                  <div className="w-20 h-20 sm:w-16 sm:h-16 rounded-lg overflow-hidden bg-neutral-800 flex-shrink-0">
+                  <div className={itemImageClass()}>
                     <img
                       src={product.image_url[0]}
                       alt={product.name}
@@ -78,12 +92,8 @@ const ShoppingCart = () => {
 
                   {/* Product details */}
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-base sm:text-sm font-semibold text-white truncate">
-                      {product.name}
-                    </h3>
-                    <p className="text-sm sm:text-xs text-neutral-500 mt-0.5">
-                      {product.category}
-                    </p>
+                    <h3 className={itemNameClass()}>{product.name}</h3>
+                    <p className={itemCategoryClass()}>{product.category}</p>
 
                     <div className="flex items-center justify-between mt-2 gap-3">
                       {/* Quantity controls */}
@@ -92,25 +102,25 @@ const ShoppingCart = () => {
                           onClick={() =>
                             changeQuantity(product.id.toString(), "decrement")
                           }
-                          className="w-8 h-8 sm:w-6 sm:h-6 rounded-md bg-neutral-800 hover:bg-neutral-700 flex items-center justify-center transition-colors cursor-pointer"
+                          className={qtyButtonClass()}
                         >
-                          <Minus className="w-3 h-3 text-neutral-300" />
+                          <Minus className="w-3 h-3 2xl:w-4 2xl:h-4 text-neutral-300" />
                         </button>
-                        <span className="w-8 text-center text-xs font-bold text-white">
+                        <span className={qtyCountClass()}>
                           {product.quantity}
                         </span>
                         <button
                           onClick={() =>
                             changeQuantity(product.id.toString(), "increment")
                           }
-                          className="w-8 h-8 sm:w-6 sm:h-6 rounded-md bg-neutral-800 hover:bg-neutral-700 flex items-center justify-center transition-colors cursor-pointer"
+                          className={qtyButtonClass()}
                         >
-                          <Plus className="w-3 h-3 text-neutral-300" />
+                          <Plus className="w-3 h-3 2xl:w-4 2xl:h-4 text-neutral-300" />
                         </button>
                       </div>
 
                       {/* Price */}
-                      <span className="text-sm font-bold text-white">
+                      <span className={itemPriceClass()}>
                         ${(Number(product.price) * product.quantity).toFixed(2)}
                       </span>
                     </div>
@@ -119,9 +129,9 @@ const ShoppingCart = () => {
                   {/* Remove button */}
                   <button
                     onClick={() => removeFromCart(product.id.toString())}
-                    className="self-start p-1.5 rounded-md hover:bg-neutral-800 text-neutral-500 hover:text-red-400 transition-colors cursor-pointer"
+                    className={removeButtonClass()}
                   >
-                    <Trash2 className="w-3.5 h-3.5" />
+                    <Trash2 className="w-3.5 h-3.5 2xl:w-5 2xl:h-5" />
                   </button>
                 </div>
               ))}
@@ -129,7 +139,7 @@ const ShoppingCart = () => {
           ) : (
             <div className="flex flex-col items-center justify-center h-full gap-5 py-10">
               <div
-                className="relative w-40 h-40 rounded-full flex items-center justify-center overflow-hidden"
+                className="relative w-40 h-40 2xl:w-52 2xl:h-52 rounded-full flex items-center justify-center overflow-hidden"
                 style={{
                   background:
                     "linear-gradient(135deg, rgb(var(--color-brand)) 0%, rgb(120 15 15) 100%)",
@@ -144,10 +154,10 @@ const ShoppingCart = () => {
                 <img
                   src={emptyCartSVG}
                   alt=""
-                  className="relative w-24 h-24 object-contain"
+                  className="relative w-24 h-24 2xl:w-32 2xl:h-32 object-contain"
                 />
               </div>
-              <p className="text-neutral-500 text-sm font-medium">
+              <p className="text-neutral-500 text-sm 2xl:text-base font-medium">
                 {t("cart.emptyCartMenu")}
               </p>
             </div>
@@ -156,18 +166,14 @@ const ShoppingCart = () => {
 
         {/* Footer */}
         {cart.length > 0 && (
-          <div className="px-6 py-5 border-t border-neutral-800">
+          <div className={footerClass()}>
             <div className="flex items-center justify-between mb-4">
-              <span className="text-sm text-neutral-400 uppercase tracking-wider font-semibold">
-                {t("cart.subtotal")}
-              </span>
-              <span className="text-xl font-black text-white">
-                ${totalPrice.toFixed(2)}
-              </span>
+              <span className={subtotalLabelClass()}>{t("cart.subtotal")}</span>
+              <span className={subtotalValueClass()}>${totalPrice.toFixed(2)}</span>
             </div>
             <SheetClose asChild>
               <Link to="/dashboard/cartPage">
-                <button className="w-full bg-brand hover:bg-brand-hover text-white font-bold text-sm uppercase tracking-wider rounded-full py-3.5 transition-colors duration-200 cursor-pointer">
+                <button className={checkoutButtonClass()}>
                   {t("cart.checkout")}
                 </button>
               </Link>
