@@ -9,7 +9,12 @@ import {
 } from "@/componentsShadcn/ui/accordion";
 import { useTranslation } from "react-i18next";
 
-const CATEGORIES = ["lever-belts", "grip-tape", "lifting-straps", "knee-sleeves"];
+const CATEGORIES = [
+  "lever-belts",
+  "grip-tape",
+  "lifting-straps",
+  "knee-sleeves",
+];
 
 export interface FilterState {
   priceRange: [number, number];
@@ -65,7 +70,9 @@ const Filters: React.FC<FiltersProps> = ({ filters, onFiltersChange }) => {
           </h3>
           <div className="flex items-center gap-2">
             <div className="flex-1 relative">
-              <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-xs text-neutral-400">$</span>
+              <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-xs text-neutral-400">
+                $
+              </span>
               <input
                 type="number"
                 min={0}
@@ -77,7 +84,9 @@ const Filters: React.FC<FiltersProps> = ({ filters, onFiltersChange }) => {
             </div>
             <span className="text-neutral-400 text-sm">—</span>
             <div className="flex-1 relative">
-              <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-xs text-neutral-400">$</span>
+              <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-xs text-neutral-400">
+                $
+              </span>
               <input
                 type="number"
                 min={localPrice[0]}

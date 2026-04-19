@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
 import ProductsHeroBanner from "@/pageComponents/forProducts/heroBanner/hero";
 import SearchBar from "@/pageComponents/forProducts/search/search";
@@ -10,6 +10,21 @@ import type { FilterState } from "@/pageComponents/forProducts/filter/filter";
 
 const Products = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const mainRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const hasFilters =
+      searchParams.get("categories") ||
+      searchParams.get("searchedtext") ||
+      searchParams.get("sort") ||
+      searchParams.get("priceMin") ||
+      searchParams.get("priceMax");
+
+    if (hasFilters && mainRef.current) {
+      const top = mainRef.current.getBoundingClientRect().top + window.scrollY - 95;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
+  }, []);
 
   const searchQuery = searchParams.get("searchedtext") || "";
   const sortBy = searchParams.get("sort") || "";
@@ -90,7 +105,7 @@ const Products = () => {
         </aside>
 
         {/* Main content */}
-        <main className="flex-1 min-w-0">
+        <main ref={mainRef} className="flex-1 min-w-0">
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-8">
             <SearchBar />
             <div className="flex items-center gap-3">

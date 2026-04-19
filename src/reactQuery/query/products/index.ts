@@ -18,10 +18,7 @@ export const useGetFilteredProducts = <T = PaginatedProducts>({
   queryOptions,
   filters,
 }: {
-  queryOptions?: Omit<
-    UseQueryOptions<PaginatedProducts, Error, T>,
-    "queryKey"
-  >;
+  queryOptions?: Omit<UseQueryOptions<PaginatedProducts, Error, T>, "queryKey">;
   filters: ProductFilters;
 }): UseQueryResult<T, Error> => {
   return useQuery<PaginatedProducts, Error, T>({

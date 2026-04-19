@@ -40,7 +40,7 @@ const LeverBeltBanner = () => {
           <h3 className={subHeading()}>{t("advert.blkBlk")}</h3>
           <h1 className={heading()}>{t("advert.leverBelt")}</h1>
           <p className={saleText()}>{t("advert.sale")}</p>
-          <Link to="/dashboard/products">
+          <Link to="/dashboard/products?categories=lever-belts">
             <Button className={button()}>{t("advert.shopNow")}</Button>
           </Link>
         </motion.div>
