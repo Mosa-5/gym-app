@@ -35,16 +35,15 @@ const App: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
-    if (!searchParams.get("lang")) {
-      setSearchParams(
-        (prev) => {
-          const next = new URLSearchParams(prev);
-          next.set("lang", i18n.language);
-          return next;
-        },
-        { replace: true },
-      );
-    }
+    if (location.pathname === "/" || searchParams.get("lang")) return;
+    setSearchParams(
+      (prev) => {
+        const next = new URLSearchParams(prev);
+        next.set("lang", i18n.language);
+        return next;
+      },
+      { replace: true },
+    );
   }, [location.pathname]);
 
   useEffect(() => {
