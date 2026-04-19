@@ -168,9 +168,7 @@ const RegisterForm = () => {
               {t("auth.haveAccount")}
             </span>
             <Link to="/auth/signin">
-              <span className={descriptionLinkClass()}>
-                {t("auth.logIn")}
-              </span>
+              <span className={descriptionLinkClass()}>{t("auth.logIn")}</span>
             </Link>
           </div>
         </form>

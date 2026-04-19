@@ -1,5 +1,11 @@
 import { lazy, Suspense, useEffect } from "react";
-import { Navigate, Route, Routes, useLocation, useSearchParams } from "react-router-dom";
+import {
+  Navigate,
+  Route,
+  Routes,
+  useLocation,
+  useSearchParams,
+} from "react-router-dom";
 import DashboardLayout from "./layouts/dashboardLayout";
 import { ThemeProvider } from "./componentsShadcn/theme/theme-provider";
 import AuthGuardLogIn from "./pageComponents/route-guards/auth/forSignIn";
