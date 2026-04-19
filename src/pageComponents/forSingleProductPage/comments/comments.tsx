@@ -160,11 +160,11 @@ const ReviewList: React.FC = () => {
                   </p>
 
                   {/* Helpful count */}
-                  {(review.like_count ?? 0) > 0 && (
+                  {(review.review_likes?.length ?? 0) > 0 && (
                     <div className="flex items-center gap-1.5 mt-3">
                       <ThumbsUp className="w-3.5 h-3.5 2xl:w-5 2xl:h-5 text-neutral-400" />
                       <span className="text-xs 2xl:text-sm text-neutral-400">
-                        {review.like_count} {t("reviews.foundHelpful")}
+                        {review.review_likes?.length} {t("reviews.foundHelpful")}
                       </span>
                     </div>
                   )}
@@ -320,7 +320,7 @@ const ReviewList: React.FC = () => {
                   <div className="flex items-center gap-1.5">
                     <ThumbsUp className="w-3.5 h-3.5 2xl:w-5 2xl:h-5 text-neutral-400" />
                     <span className="text-xs 2xl:text-sm text-neutral-400">
-                      {selectedReview.like_count} {t("reviews.foundHelpful")}
+                      {selectedReview.review_likes?.length ?? 0} {t("reviews.foundHelpful")}
                     </span>
                   </div>
 

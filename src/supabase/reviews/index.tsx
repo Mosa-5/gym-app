@@ -12,7 +12,8 @@ export const getProductReviews = async (
     .select(
       `
       *,
-      profiles!reviews_user_id_fkey ( avatar_url, username )
+      profiles!reviews_user_id_fkey ( avatar_url, username ),
+      review_likes ( id )
     `,
     )
     .eq("product_id", Number(productId))
@@ -194,4 +195,5 @@ export type ProductReviews = {
     avatar_url: string | null;
     username: string | null;
   };
+  review_likes: { id: number }[] | null;
 };

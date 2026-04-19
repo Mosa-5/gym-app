@@ -54,27 +54,20 @@ const ProductGrid: React.FC<{
     addToCart({ ...product, quantity: 1 });
   };
 
-  const {
-    data: productList = [],
-    isLoading,
-    isError,
-  } = useGetFilteredProducts({
-    queryOptions: { select: mapProductTableData },
+  const { data, isLoading, isError } = useGetFilteredProducts({
     filters: {
       search: searchQuery || undefined,
       priceRange: filters.priceRange,
       categories:
         filters.categories.length > 0 ? filters.categories : undefined,
       sortBy: sortBy || undefined,
+      page,
+      pageSize: ITEMS_PER_PAGE,
     },
   });
 
-  const totalPages = Math.ceil(productList.length / ITEMS_PER_PAGE);
-  const startIndex = (page - 1) * ITEMS_PER_PAGE;
-  const currentProducts = productList.slice(
-    startIndex,
-    startIndex + ITEMS_PER_PAGE,
-  );
+  const currentProducts = mapProductTableData(data?.data ?? []);
+  const totalPages = Math.ceil((data?.totalCount ?? 0) / ITEMS_PER_PAGE);
 
   // Scroll to top of grid when page changes (only on user interaction)
   const prevPage = React.useRef(page);
@@ -99,13 +92,13 @@ const ProductGrid: React.FC<{
             <div></div>
           </div>
         </div>
-      ) : isError || !productList ? (
+      ) : isError ? (
         <div className="flex items-center justify-center min-h-[60vh]">
           <span className="text-sm text-neutral-400">
             {t("products.failedToLoad")}
           </span>
         </div>
-      ) : productList.length === 0 ? (
+      ) : currentProducts.length === 0 ? (
         <div className="flex flex-col items-center justify-center min-h-[60vh] gap-5">
           <div
             className="relative w-52 h-52 rounded-full flex items-center justify-center overflow-hidden"
@@ -140,7 +133,7 @@ const ProductGrid: React.FC<{
             viewport={{ once: true }}
           >
             {currentProducts.map((product, index) => {
-              const globalIndex = startIndex + index;
+              const globalIndex = (page - 1) * ITEMS_PER_PAGE + index;
               return (
                 <Link
                   key={product.id}

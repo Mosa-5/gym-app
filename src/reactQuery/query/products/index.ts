@@ -4,6 +4,7 @@ import {
   getProductListWithCategory,
   getProductListWorstSelling,
   getSingleProduct,
+  PaginatedProducts,
   Product,
   ProductFilters,
 } from "@/supabase/products";
@@ -13,20 +14,24 @@ import {
   UseQueryResult,
 } from "@tanstack/react-query";
 
-export const useGetFilteredProducts = <T = Product[]>({
+export const useGetFilteredProducts = <T = PaginatedProducts>({
   queryOptions,
   filters,
 }: {
-  queryOptions?: Omit<UseQueryOptions<Product[], Error, T>, "queryKey">;
+  queryOptions?: Omit<
+    UseQueryOptions<PaginatedProducts, Error, T>,
+    "queryKey"
+  >;
   filters: ProductFilters;
 }): UseQueryResult<T, Error> => {
-  return useQuery<Product[], Error, T>({
+  return useQuery<PaginatedProducts, Error, T>({
     queryKey: [
       "filteredProducts",
       filters.search,
       filters.priceRange,
       filters.categories,
       filters.sortBy,
+      filters.page,
     ],
     queryFn: () => getFilteredProducts(filters),
     staleTime: 30 * 1000,

@@ -9,7 +9,14 @@ import { AuthProvider } from "./context/auth/index.tsx";
 import { CartProvider } from "./context/cart/index.tsx";
 import ErrorBoundary from "./pageComponents/errorBoundary/errorBoundary.tsx";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

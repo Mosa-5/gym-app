@@ -27,6 +27,8 @@ export const useWriteReview = () => {
         queryKey: ["productReviews", productId],
         exact: true,
       });
+      queryClient.invalidateQueries({ queryKey: ["topReviews"], exact: true });
+      queryClient.invalidateQueries({ queryKey: ["reviewStats"], exact: true });
     },
 
     onError: () => {},

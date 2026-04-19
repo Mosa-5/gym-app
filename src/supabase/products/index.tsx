@@ -5,12 +5,24 @@ export interface ProductFilters {
   priceRange?: [number, number];
   categories?: string[];
   sortBy?: string;
+  page?: number;
+  pageSize?: number;
 }
+
+export type PaginatedProducts = {
+  data: Product[];
+  totalCount: number;
+};
 
 export const getFilteredProducts = async (
   filters: ProductFilters,
-): Promise<Product[]> => {
-  let query = supabase.from("product").select("*");
+): Promise<PaginatedProducts> => {
+  const page = filters.page ?? 1;
+  const pageSize = filters.pageSize ?? 9;
+  const from = (page - 1) * pageSize;
+  const to = from + pageSize - 1;
+
+  let query = supabase.from("product").select("*", { count: "exact" });
 
   if (filters.search) {
     query = query.ilike("name", `%${filters.search}%`);
@@ -43,13 +55,13 @@ export const getFilteredProducts = async (
     }
   }
 
-  const { data, error } = await query;
+  const { data, error, count } = await query.range(from, to);
 
   if (error) {
     throw new Error(error.message);
   }
 
-  return data as Product[];
+  return { data: (data as Product[]) || [], totalCount: count ?? 0 };
 };
 
 export type Product = {
