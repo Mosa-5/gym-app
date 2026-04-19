@@ -72,6 +72,7 @@ export type Product = {
   image_url: string[] | null;
   name: string | null;
   price: number | null;
+  sales_number: number | null;
 };
 
 export const mapProductTableData = (datalist: Product[]) => {
