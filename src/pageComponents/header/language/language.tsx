@@ -1,11 +1,29 @@
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { useSearchParams } from "react-router-dom";
 
 const LanguageChanger = () => {
   const { i18n } = useTranslation();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  useEffect(() => {
+    const lang = searchParams.get("lang");
+    if ((lang === "en" || lang === "ka") && lang !== i18n.language) {
+      i18n.changeLanguage(lang);
+    }
+  }, []);
 
   const toggle = () => {
     const newLang = i18n.language === "ka" ? "en" : "ka";
     i18n.changeLanguage(newLang);
+    setSearchParams(
+      (prev) => {
+        const next = new URLSearchParams(prev);
+        next.set("lang", newLang);
+        return next;
+      },
+      { replace: true },
+    );
   };
 
   return (

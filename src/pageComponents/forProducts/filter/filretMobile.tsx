@@ -24,8 +24,8 @@ const FiltersMobile: React.FC<FiltersMobileProps> = ({
 
   return (
     <Dialog>
-      <DialogTrigger className="w-full max-w-40 lg:hidden">
-        <Button className="w-full">{t("products.filter", "Filter")}</Button>
+      <DialogTrigger asChild>
+        <Button className="w-full max-w-40 lg:hidden">{t("products.filter", "Filter")}</Button>
       </DialogTrigger>
       <DialogContent className="rounded-2xl max-w-xs sm:max-w-lg">
         <DialogHeader>

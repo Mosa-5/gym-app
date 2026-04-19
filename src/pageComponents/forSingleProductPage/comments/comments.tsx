@@ -202,10 +202,9 @@ const ReviewList: React.FC = () => {
 
       {/* Add review button */}
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger className="w-full flex justify-center mt-6">
+        <DialogTrigger asChild>
           <button
-            onClick={() => setOpen(true)}
-            className="w-full max-w-md 2xl:max-w-xl bg-brand hover:bg-brand-hover text-white font-bold text-sm 2xl:text-base uppercase tracking-wider rounded-full py-3.5 2xl:py-5 transition-colors duration-200 cursor-pointer flex items-center justify-center gap-2"
+            className="w-full max-w-md 2xl:max-w-xl mt-6 mx-auto bg-brand hover:bg-brand-hover text-white font-bold text-sm 2xl:text-base uppercase tracking-wider rounded-full py-3.5 2xl:py-5 transition-colors duration-200 cursor-pointer flex items-center justify-center gap-2"
           >
             <MessageSquarePlus className="w-4 h-4 2xl:w-5 2xl:h-5" />
             {t("reviews.writeReview")}

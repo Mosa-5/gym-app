@@ -55,7 +55,7 @@ const ShoppingCart = () => {
         {totalItems > 0 && <span className={badgeClass()}>{totalItems}</span>}
       </SheetTrigger>
 
-      <SheetContent side="right" className={sheetContentClass()}>
+      <SheetContent side="right" className={sheetContentClass()} aria-describedby={undefined}>
         {/* Header */}
         <SheetHeader className={headerClass()}>
           <SheetTitle className={titleClass()}>

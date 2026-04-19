@@ -5,7 +5,6 @@ import { Button } from "@/componentsShadcn/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -88,9 +87,12 @@ const FormElement = () => {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className={labelClass()}>{t("auth.email")}</FormLabel>
+                  <FormLabel className={labelClass()}>
+                    {t("auth.email")}
+                  </FormLabel>
                   <FormControl>
                     <Input
+                      autoComplete="username"
                       placeholder={t("auth.emailPlaceholder")}
                       className={inputClass()}
                       {...field}
@@ -105,10 +107,13 @@ const FormElement = () => {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className={labelClass()}>{t("auth.password")}</FormLabel>
+                  <FormLabel className={labelClass()}>
+                    {t("auth.password")}
+                  </FormLabel>
                   <FormControl>
                     <Input
                       type="password"
+                      autoComplete="current-password"
                       placeholder={t("auth.passwordPlaceholder")}
                       className={inputClass()}
                       {...field}
@@ -134,16 +139,16 @@ const FormElement = () => {
               {t("auth.guestAccount")}
             </Button>
           </div>
-          <FormDescription>
-            <div className="flex justify-center gap-2">
-              <span className={descriptionTextClass()}>
-                {t("auth.noAccount")}
+          <div className="flex justify-center gap-2">
+            <span className={descriptionTextClass()}>
+              {t("auth.noAccount")}
+            </span>
+            <Link to="/auth/register">
+              <span className={descriptionLinkClass()}>
+                {t("auth.register")}
               </span>
-              <Link to="/auth/register">
-                <span className={descriptionLinkClass()}>{t("auth.register")}</span>
-              </Link>
-            </div>
-          </FormDescription>
+            </Link>
+          </div>
         </form>
       </Form>
     </div>

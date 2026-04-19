@@ -5,7 +5,6 @@ import { Button } from "@/componentsShadcn/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -86,7 +85,9 @@ const RegisterForm = () => {
               name="fullNameEn"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className={labelClass()}>{t("auth.fullNameEn")}</FormLabel>
+                  <FormLabel className={labelClass()}>
+                    {t("auth.fullNameEn")}
+                  </FormLabel>
                   <FormControl>
                     <Input
                       placeholder={t("auth.fullNameEnPlaceholder")}
@@ -103,7 +104,9 @@ const RegisterForm = () => {
               name="fullNameKa"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className={labelClass()}>{t("auth.fullNameKa")}</FormLabel>
+                  <FormLabel className={labelClass()}>
+                    {t("auth.fullNameKa")}
+                  </FormLabel>
                   <FormControl>
                     <Input
                       placeholder={t("auth.fullNameKaPlaceholder")}
@@ -120,9 +123,12 @@ const RegisterForm = () => {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className={labelClass()}>{t("auth.email")}</FormLabel>
+                  <FormLabel className={labelClass()}>
+                    {t("auth.email")}
+                  </FormLabel>
                   <FormControl>
                     <Input
+                      autoComplete="username"
                       placeholder={t("auth.emailPlaceholder")}
                       className={inputClass()}
                       {...field}
@@ -137,10 +143,13 @@ const RegisterForm = () => {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className={labelClass()}>{t("auth.password")}</FormLabel>
+                  <FormLabel className={labelClass()}>
+                    {t("auth.password")}
+                  </FormLabel>
                   <FormControl>
                     <Input
                       type="password"
+                      autoComplete="new-password"
                       placeholder={t("auth.passwordPlaceholder")}
                       className={inputClass()}
                       {...field}
@@ -154,16 +163,16 @@ const RegisterForm = () => {
           <Button type="submit" className={submitButtonClass()}>
             {t("auth.register")}
           </Button>
-          <FormDescription>
-            <div className="flex justify-center gap-2">
-              <span className={descriptionTextClass()}>
-                {t("auth.haveAccount")}
+          <div className="flex justify-center gap-2">
+            <span className={descriptionTextClass()}>
+              {t("auth.haveAccount")}
+            </span>
+            <Link to="/auth/signin">
+              <span className={descriptionLinkClass()}>
+                {t("auth.logIn")}
               </span>
-              <Link to="/auth/signin">
-                <span className={descriptionLinkClass()}>{t("auth.logIn")}</span>
-              </Link>
-            </div>
-          </FormDescription>
+            </Link>
+          </div>
         </form>
       </Form>
     </div>

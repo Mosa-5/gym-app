@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect } from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation, useSearchParams } from "react-router-dom";
 import DashboardLayout from "./layouts/dashboardLayout";
 import { ThemeProvider } from "./componentsShadcn/theme/theme-provider";
 import AuthGuardLogIn from "./pageComponents/route-guards/auth/forSignIn";
@@ -10,6 +10,7 @@ import { useAuthContext } from "./context/auth/hooks/useAuthContext";
 import { supabase } from "./supabase/supabase";
 import ScrollToTop from "./convenienceTools/scrollTop";
 import { Toaster } from "./componentsShadcn/ui/sonner";
+import { useTranslation } from "react-i18next";
 
 const LogIn = lazy(() => import("./pageComponents/logIn/logIn"));
 const Register = lazy(() => import("./pageComponents/register/register"));
@@ -23,6 +24,22 @@ const About = lazy(() => import("./pages/aboutPage"));
 
 const App: React.FC = () => {
   const { handleSetUser } = useAuthContext();
+  const { i18n } = useTranslation();
+  const location = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  useEffect(() => {
+    if (!searchParams.get("lang")) {
+      setSearchParams(
+        (prev) => {
+          const next = new URLSearchParams(prev);
+          next.set("lang", i18n.language);
+          return next;
+        },
+        { replace: true },
+      );
+    }
+  }, [location.pathname]);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
