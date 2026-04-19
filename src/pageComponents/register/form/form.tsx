@@ -14,6 +14,7 @@ import {
 import { Input } from "@/componentsShadcn/ui/input";
 import { useRegister } from "@/reactQuery/mutations/auth/register";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import {
   cardClass,
   headingClass,
@@ -40,6 +41,8 @@ const formSchema = z.object({
 });
 
 const RegisterForm = () => {
+  const { t } = useTranslation();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -62,19 +65,19 @@ const RegisterForm = () => {
         <div className="lds-circle">
           <div></div>
         </div>
-        <p className="font-semibold text-lg">Signing you up...</p>
+        <p className="font-semibold text-lg">{t("auth.signingUp")}</p>
       </div>
     );
   }
 
   return (
     <div className={cardClass()}>
-      <h1 className={headingClass()}>Register</h1>
+      <h1 className={headingClass()}>{t("auth.register")}</h1>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className={formClass()}>
           {isError && (
             <p className="text-red-500 text-sm text-center">
-              Sign Up failed: {String(error)}
+              {t("auth.signUpFailed")} {String(error)}
             </p>
           )}
           <div className={fieldsClass()}>
@@ -83,10 +86,10 @@ const RegisterForm = () => {
               name="fullNameEn"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className={labelClass()}>Full Name En</FormLabel>
+                  <FormLabel className={labelClass()}>{t("auth.fullNameEn")}</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="John"
+                      placeholder={t("auth.fullNameEnPlaceholder")}
                       className={inputClass()}
                       {...field}
                     />
@@ -100,10 +103,10 @@ const RegisterForm = () => {
               name="fullNameKa"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className={labelClass()}>Full Name Ka</FormLabel>
+                  <FormLabel className={labelClass()}>{t("auth.fullNameKa")}</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Doe"
+                      placeholder={t("auth.fullNameKaPlaceholder")}
                       className={inputClass()}
                       {...field}
                     />
@@ -117,10 +120,10 @@ const RegisterForm = () => {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className={labelClass()}>Email</FormLabel>
+                  <FormLabel className={labelClass()}>{t("auth.email")}</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="something@gmail.com"
+                      placeholder={t("auth.emailPlaceholder")}
                       className={inputClass()}
                       {...field}
                     />
@@ -134,11 +137,11 @@ const RegisterForm = () => {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className={labelClass()}>Password</FormLabel>
+                  <FormLabel className={labelClass()}>{t("auth.password")}</FormLabel>
                   <FormControl>
                     <Input
                       type="password"
-                      placeholder="something"
+                      placeholder={t("auth.passwordPlaceholder")}
                       className={inputClass()}
                       {...field}
                     />
@@ -149,15 +152,15 @@ const RegisterForm = () => {
             />
           </div>
           <Button type="submit" className={submitButtonClass()}>
-            Register
+            {t("auth.register")}
           </Button>
           <FormDescription>
             <div className="flex justify-center gap-2">
               <span className={descriptionTextClass()}>
-                Already have an account?
+                {t("auth.haveAccount")}
               </span>
               <Link to="/auth/signin">
-                <span className={descriptionLinkClass()}>Log In</span>
+                <span className={descriptionLinkClass()}>{t("auth.logIn")}</span>
               </Link>
             </div>
           </FormDescription>

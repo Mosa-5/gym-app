@@ -14,6 +14,7 @@ import {
 import { Input } from "@/componentsShadcn/ui/input";
 import { useSignIn, useGuestSignIn } from "@/reactQuery/mutations/auth/signIn";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import {
   cardClass,
   headingClass,
@@ -39,6 +40,8 @@ const formSchema = z.object({
 });
 
 const FormElement = () => {
+  const { t } = useTranslation();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -64,19 +67,19 @@ const FormElement = () => {
         <div className="lds-circle">
           <div></div>
         </div>
-        <p className="font-semibold text-lg">Signing you in...</p>
+        <p className="font-semibold text-lg">{t("auth.signingIn")}</p>
       </div>
     );
   }
 
   return (
     <div className={cardClass()}>
-      <h1 className={headingClass()}>Log In</h1>
+      <h1 className={headingClass()}>{t("auth.logIn")}</h1>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className={formClass()}>
           {isError && (
             <p className="text-red-500 text-sm text-center">
-              Login failed: {String(error)}
+              {t("auth.loginFailed")} {String(error)}
             </p>
           )}
           <div className={fieldsClass()}>
@@ -85,10 +88,10 @@ const FormElement = () => {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className={labelClass()}>Email</FormLabel>
+                  <FormLabel className={labelClass()}>{t("auth.email")}</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="something@gmail.com"
+                      placeholder={t("auth.emailPlaceholder")}
                       className={inputClass()}
                       {...field}
                     />
@@ -102,11 +105,11 @@ const FormElement = () => {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className={labelClass()}>Password</FormLabel>
+                  <FormLabel className={labelClass()}>{t("auth.password")}</FormLabel>
                   <FormControl>
                     <Input
                       type="password"
-                      placeholder="something"
+                      placeholder={t("auth.passwordPlaceholder")}
                       className={inputClass()}
                       {...field}
                     />
@@ -118,7 +121,7 @@ const FormElement = () => {
           </div>
           <div className="flex flex-col gap-2">
             <Button type="submit" className={submitButtonClass()}>
-              Log In
+              {t("auth.logIn")}
             </Button>
             <Button
               variant="outline"
@@ -128,16 +131,16 @@ const FormElement = () => {
                 return onGuest();
               }}
             >
-              Guest Account
+              {t("auth.guestAccount")}
             </Button>
           </div>
           <FormDescription>
             <div className="flex justify-center gap-2">
               <span className={descriptionTextClass()}>
-                Don't have an account?
+                {t("auth.noAccount")}
               </span>
               <Link to="/auth/register">
-                <span className={descriptionLinkClass()}>Register</span>
+                <span className={descriptionLinkClass()}>{t("auth.register")}</span>
               </Link>
             </div>
           </FormDescription>

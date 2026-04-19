@@ -74,22 +74,11 @@ export const uploadAvatar = async ({
   userId: string;
   file: File;
 }): Promise<string> => {
-  const fileExt = file.name.split(".").pop();
-  const filePath = `${userId}/avatar_${Date.now()}.${fileExt}`;
-
-  // Delete old avatars first
-  const { data: existingFiles } = await supabase.storage
-    .from("avatars")
-    .list(userId);
-
-  if (existingFiles && existingFiles.length > 0) {
-    const filesToDelete = existingFiles.map((f) => `${userId}/${f.name}`);
-    await supabase.storage.from("avatars").remove(filesToDelete);
-  }
+  const filePath = `${userId}/avatar`;
 
   const { error: uploadError } = await supabase.storage
     .from("avatars")
-    .upload(filePath, file);
+    .upload(filePath, file, { upsert: true });
 
   if (uploadError) {
     throw uploadError;
@@ -99,15 +88,8 @@ export const uploadAvatar = async ({
     data: { publicUrl },
   } = supabase.storage.from("avatars").getPublicUrl(filePath);
 
-  // Ensure the URL contains /public/ path segment
-  const correctedUrl = publicUrl.includes("/object/public/")
-    ? publicUrl
-    : publicUrl.replace("/object/", "/object/public/");
+  const avatarUrl = `${publicUrl}?t=${Date.now()}`;
 
-  // Add cache-busting timestamp so browser loads the new image
-  const avatarUrl = `${correctedUrl}?t=${Date.now()}`;
-
-  // Update the profile with the new avatar URL
   await supabase
     .from("profiles")
     .update({ avatar_url: avatarUrl })
