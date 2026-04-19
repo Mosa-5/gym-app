@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import emptyCartSVG from "@/assets/undraw_empty-cart_574u.svg";
 import { Minus, Plus, Trash2, ShoppingBag, Truck, Tag } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { crosshatchPattern } from '@/lib/crosshatchPattern';
+import { crosshatchPattern } from "@/lib/crosshatchPattern";
 
 const CartPage = () => {
   const { t } = useTranslation();

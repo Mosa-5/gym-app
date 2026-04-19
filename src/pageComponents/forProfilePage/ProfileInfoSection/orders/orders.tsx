@@ -5,7 +5,7 @@ import { useAuthContext } from "@/context/auth/hooks/useAuthContext";
 import emptyOrdersSvg from "@/assets/undraw_empty_4zx0.svg";
 import { ChevronRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { crosshatchPattern } from '@/lib/crosshatchPattern';
+import { crosshatchPattern } from "@/lib/crosshatchPattern";
 
 const Orders = () => {
   const { t } = useTranslation();

@@ -12,7 +12,7 @@ import type { FilterState } from "@/pageComponents/forProducts/filter/filter";
 import noDataSVG from "@/assets/undraw_no-data_ig65.svg";
 import "@/pageComponents/loader/loader.css";
 import { useTranslation } from "react-i18next";
-import { crosshatchPattern } from '@/lib/crosshatchPattern';
+import { crosshatchPattern } from "@/lib/crosshatchPattern";
 
 const gridContainer = {
   hidden: {},

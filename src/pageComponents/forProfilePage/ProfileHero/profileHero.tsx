@@ -7,7 +7,7 @@ import { LogOut, Camera, MapPin } from "lucide-react";
 import { useRef } from "react";
 import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
-import { crosshatchPattern } from '@/lib/crosshatchPattern';
+import { crosshatchPattern } from "@/lib/crosshatchPattern";
 
 const ProfileHero = () => {
   const { t } = useTranslation();

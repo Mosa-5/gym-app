@@ -19,7 +19,7 @@ import { toast } from "sonner";
 import { ThumbsUp, MessageSquarePlus } from "lucide-react";
 import ReviewForm from "./ReviewForm";
 import { useTranslation } from "react-i18next";
-import { crosshatchPattern } from '@/lib/crosshatchPattern';
+import { crosshatchPattern } from "@/lib/crosshatchPattern";
 
 const StarIcon = ({ filled }: { filled: boolean }) => (
   <svg

@@ -30,7 +30,7 @@ import { useCartContext } from "@/context/cart/hooks/useCartContext";
 import { useAuthContext } from "@/context/auth/hooks/useAuthContext";
 import { useAddToWishlist } from "@/reactQuery/mutations/whishlist";
 import SectionHeading from "@/pageComponents/forHome/sectionHeading/sectionHeading";
-import { crosshatchPattern } from '@/lib/crosshatchPattern';
+import { crosshatchPattern } from "@/lib/crosshatchPattern";
 
 interface CarouselProps {
   productType?: string;

@@ -1,6 +1,6 @@
 import { Link, Outlet } from "react-router-dom";
 import LanguageChanger from "@/pageComponents/header/language/language";
-import { crosshatchPattern } from '@/lib/crosshatchPattern';
+import { crosshatchPattern } from "@/lib/crosshatchPattern";
 
 const AuthLayout: React.FC = () => {
   return (

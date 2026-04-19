@@ -7,7 +7,7 @@ import { toast } from "sonner";
 import { mapWishlistItemData } from "@/supabase/whishlist";
 import { Trash2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { crosshatchPattern } from '@/lib/crosshatchPattern';
+import { crosshatchPattern } from "@/lib/crosshatchPattern";
 
 const Wishlist = () => {
   const { t } = useTranslation();

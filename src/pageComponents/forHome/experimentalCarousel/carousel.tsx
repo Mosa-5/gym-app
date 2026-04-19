@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
 import SectionHeading from "@/pageComponents/forHome/sectionHeading/sectionHeading";
-import { crosshatchPattern } from '@/lib/crosshatchPattern';
+import { crosshatchPattern } from "@/lib/crosshatchPattern";
 
 interface CarouselProps {
   productType?: string;

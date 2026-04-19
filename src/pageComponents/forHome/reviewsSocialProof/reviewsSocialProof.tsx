@@ -6,7 +6,7 @@ import {
 import { sectionClass, containerClass } from "./reviewsSocialProof.styles";
 import SectionHeading from "@/pageComponents/forHome/sectionHeading/sectionHeading";
 import { useTranslation } from "react-i18next";
-import { crosshatchPattern } from '@/lib/crosshatchPattern';
+import { crosshatchPattern } from "@/lib/crosshatchPattern";
 
 const StarIcon = ({ filled }: { filled: boolean }) => (
   <svg

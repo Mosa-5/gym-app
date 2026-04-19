@@ -21,7 +21,8 @@ const Products = () => {
       searchParams.get("priceMax");
 
     if (hasFilters && mainRef.current) {
-      const top = mainRef.current.getBoundingClientRect().top + window.scrollY - 95;
+      const top =
+        mainRef.current.getBoundingClientRect().top + window.scrollY - 95;
       window.scrollTo({ top, behavior: "smooth" });
     }
   }, []);

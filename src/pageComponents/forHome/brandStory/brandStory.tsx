@@ -89,10 +89,7 @@ const BrandStory = () => {
 
           {/* Stats bar chart — overlapping bottom of image */}
           <div className="relative lg:absolute lg:bottom-0 lg:left-1/2 lg:-translate-x-1/2 lg:translate-y-[50%] lg:w-[70%] 2xl:w-[65%] mt-8 lg:mt-0 z-10">
-            <div
-              className="rounded-2xl p-6 sm:p-8 shadow-xl border border-neutral-200 dark:border-neutral-800"
-              style={{ background: "rgba(255,255,255,0.95)" }}
-            >
+            <div className="rounded-2xl p-6 sm:p-8 shadow-xl border bg-[rgba(255,255,255,0.95)] dark:bg-[rgba(0,0,0,0.75)] border-neutral-200 dark:border-neutral-800">
               <div className="grid grid-cols-4 gap-4 sm:gap-6">
                 {statsKeys.map((stat, index) => (
                   <motion.div

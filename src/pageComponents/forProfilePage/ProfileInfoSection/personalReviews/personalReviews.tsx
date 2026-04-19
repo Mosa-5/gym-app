@@ -15,7 +15,7 @@ import { useDeleteReview } from "@/reactQuery/mutations/reviews";
 import { toast } from "sonner";
 import { ThumbsUp, Trash2, ExternalLink } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { crosshatchPattern } from '@/lib/crosshatchPattern';
+import { crosshatchPattern } from "@/lib/crosshatchPattern";
 
 const StarIcon = ({ filled }: { filled: boolean }) => (
   <svg
