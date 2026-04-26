@@ -1,16 +1,107 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { statsKeys } from "./brandStory.data";
 import SectionHeading from "@/pageComponents/forHome/sectionHeading/sectionHeading";
 import { sectionClass, containerClass } from "./brandStory.styles";
 import storyImg1 from "@/assets/pexels-823sl-2294361.webp";
 import storyImg2 from "@/assets/pexels-binyaminmellish-17840.webp";
-import storyImg3 from "@/assets/pexels-ivan-samkov-4164450.webp";
-import storyImg4 from "@/assets/red-reyes-Z6CqKIP_J18-unsplash.webp";
+import storyImg3 from "@/assets/pexels-franki-frank-11513151.webp";
+import equipImg1 from "@/assets/bells.avif";
+import equipImg2 from "@/assets/mobileGear.avif";
+import equipImg3 from "@/assets/BeltHeader_1a.webp";
 import { useTranslation } from "react-i18next";
+import "./brandStory.css";
 
-const IMAGES = [storyImg1, storyImg2, storyImg3, storyImg4];
-const INTERVAL = 6000; // 6 seconds per image
+const INTERVAL = 9000;
+const PEOPLE_IMAGES = [storyImg1, storyImg2, storyImg3];
+const EQUIP_IMAGES = [equipImg1, equipImg2, equipImg3];
+const RADIUS = 13;
+const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
+
+const fade = (delay = 0) => ({
+  initial: { opacity: 0, y: 20 },
+  whileInView: { opacity: 1, y: 0 },
+  transition: { duration: 0.5, delay },
+  viewport: { once: true },
+});
+
+const ImagePair = ({
+  images,
+  flip,
+  current,
+}: {
+  images: string[];
+  flip?: boolean;
+  current: number;
+}) => {
+  const idx = current % images.length;
+  const front = images[idx];
+  const mid = images[(idx + 1) % images.length];
+  const back = images[(idx + 2) % images.length];
+
+  return (
+    <div className="relative h-[300px] sm:h-[380px] 2xl:h-[460px]">
+      {/* Back card */}
+      <div
+        className={`absolute inset-0 rounded-2xl overflow-hidden shadow-md ${
+          flip ? "translate-x-0 lg:-translate-x-10" : "translate-x-0 lg:translate-x-10"
+        } translate-y-5 lg:translate-y-10`}
+      >
+        <img src={back} alt="" loading="lazy" className="w-full h-full object-cover" />
+      </div>
+
+      {/* Middle card */}
+      <div
+        className={`absolute inset-0 rounded-2xl overflow-hidden shadow-lg z-[5] ${
+          flip ? "translate-x-0 lg:-translate-x-5" : "translate-x-0 lg:translate-x-5"
+        } translate-y-2 lg:translate-y-5`}
+      >
+        <img src={mid} alt="" loading="lazy" className="w-full h-full object-cover" />
+      </div>
+
+      {/* Front card — animates in */}
+      <AnimatePresence mode="sync">
+        <motion.div
+          key={idx}
+          className="absolute inset-0 rounded-2xl overflow-hidden shadow-2xl z-10"
+          initial={{ opacity: 0, scale: 1.04 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.97 }}
+          transition={{ duration: 0.7, ease: "easeInOut" }}
+        >
+          <img src={front} alt="" loading="lazy" className="w-full h-full object-cover" />
+
+          {/* Circular timer */}
+          <div className="absolute bottom-3 right-3 z-20 w-10 h-10">
+            <svg viewBox="0 0 32 32" className="w-full h-full -rotate-90">
+              <circle
+                cx="16"
+                cy="16"
+                r={RADIUS}
+                fill="none"
+                stroke="rgba(255,255,255,0.2)"
+                strokeWidth="2.5"
+              />
+              <circle
+                key={idx}
+                cx="16"
+                cy="16"
+                r={RADIUS}
+                fill="none"
+                stroke="rgb(var(--color-brand))"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeDasharray={CIRCUMFERENCE}
+                style={{
+                  animation: `timer-ring ${INTERVAL / 1000}s linear forwards`,
+                }}
+              />
+            </svg>
+          </div>
+        </motion.div>
+      </AnimatePresence>
+    </div>
+  );
+};
 
 const BrandStory = () => {
   const [current, setCurrent] = useState(0);
@@ -18,7 +109,7 @@ const BrandStory = () => {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % IMAGES.length);
+      setCurrent((prev) => (prev + 1) % 3);
     }, INTERVAL);
     return () => clearInterval(timer);
   }, []);
@@ -26,92 +117,41 @@ const BrandStory = () => {
   return (
     <section className={sectionClass()}>
       <div className={containerClass()}>
-        <SectionHeading text={t("brandStory.ourStory")} className="mb-8" />
+        <SectionHeading text={t("brandStory.ourStory")} className="mb-12" />
 
-        {/* Full-bleed slideshow with overlapping elements */}
-        <motion.div
-          className="relative mb-20 lg:mb-32"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          viewport={{ once: true }}
-        >
-          {/* Image slideshow with Ken Burns zoom */}
-          <div className="relative lg:mx-auto lg:w-[95%] rounded-2xl overflow-hidden aspect-[2/1]">
-            <AnimatePresence mode="popLayout">
-              <motion.img
-                key={current}
-                src={IMAGES[current]}
-                alt="Our Story"
-                className="absolute inset-0 w-full h-full object-cover"
-                initial={{ opacity: 0, scale: 1.1 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{
-                  opacity: { duration: 2, ease: "easeInOut" },
-                  scale: { duration: 6, ease: "easeOut" },
-                }}
-              />
-            </AnimatePresence>
-            {/* Dark overlay */}
-            <div className="absolute inset-0 bg-black/40 z-[1]" />
-            {/* Bottom gradient for depth */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent z-[1]" />
-          </div>
-
-          {/* Left text block — top left, half overlapping image */}
-          <div
-            className="relative lg:absolute lg:-left-[5%] lg:top-[15%] lg:w-[35%] mt-6 lg:mt-0 rounded-2xl p-5 sm:p-6 2xl:p-8 space-y-3 shadow-xl z-10"
-            style={{
-              background:
-                "linear-gradient(135deg, rgb(var(--color-brand)) 0%, rgb(140 20 20) 100%)",
-            }}
-          >
-            <div className="w-8 h-[2px] bg-white/60" />
-            <p className="text-sm 2xl:text-base leading-relaxed text-white/90 font-light">
+        {/* Row 1: text left — people images right */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 2xl:gap-20 items-center mb-16 lg:mb-24 2xl:mb-32">
+          <motion.div {...fade()} className="space-y-5">
+            <div className="w-12 h-[2px] bg-brand" />
+            <p className="text-lg sm:text-xl 2xl:text-2xl leading-relaxed text-neutral-800 dark:text-neutral-100 font-medium">
               {t("brandStory.slide1")}
             </p>
-          </div>
+            <p className="text-sm 2xl:text-base font-semibold text-brand">
+              - {t("brandStory.slide1Author")}
+            </p>
+          </motion.div>
 
-          {/* Right text block — middle right */}
-          <div
-            className="relative lg:absolute lg:-right-[3%] lg:top-[50%] lg:-translate-y-1/2 lg:w-[32%] mt-4 lg:mt-0 rounded-2xl p-5 sm:p-6 2xl:p-8 space-y-3 shadow-xl z-10"
-            style={{
-              background:
-                "linear-gradient(135deg, rgb(140 20 20) 0%, rgb(var(--color-brand)) 100%)",
-            }}
-          >
-            <div className="w-8 h-[2px] bg-white/60" />
-            <p className="text-sm 2xl:text-base leading-relaxed text-white/70 italic">
+          <motion.div {...fade(0.2)} className="lg:pr-8">
+            <ImagePair images={PEOPLE_IMAGES} current={current} />
+          </motion.div>
+        </div>
+
+        {/* Row 2: equipment images left — text right */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 2xl:gap-20 items-center">
+          <motion.div {...fade(0.1)} className="order-2 lg:order-1 lg:pl-8">
+            <ImagePair images={EQUIP_IMAGES} current={current} flip />
+          </motion.div>
+
+          <motion.div {...fade(0.2)} className="space-y-5 order-1 lg:order-2">
+            <div className="w-12 h-[2px] bg-brand" />
+            <p className="text-lg sm:text-xl 2xl:text-2xl leading-relaxed text-neutral-800 dark:text-neutral-100 font-medium">
               {t("brandStory.slide2")}
             </p>
-          </div>
-
-          {/* Stats bar chart — overlapping bottom of image */}
-          <div className="relative lg:absolute lg:bottom-0 lg:left-1/2 lg:-translate-x-1/2 lg:translate-y-[50%] lg:w-[70%] 2xl:w-[65%] mt-8 lg:mt-0 z-10">
-            <div className="rounded-2xl p-6 sm:p-8 shadow-xl border bg-[rgba(255,255,255,0.95)] dark:bg-[rgba(0,0,0,0.75)] border-neutral-200 dark:border-neutral-800">
-              <div className="grid grid-cols-4 gap-4 sm:gap-6">
-                {statsKeys.map((stat, index) => (
-                  <motion.div
-                    key={stat.labelKey}
-                    className="flex flex-col items-center text-center"
-                    initial={{ opacity: 0, y: 15 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: 0.2 + index * 0.1 }}
-                    viewport={{ once: true }}
-                  >
-                    <span className="text-xl sm:text-2xl md:text-3xl 2xl:text-4xl font-black text-brand leading-none">
-                      {t(stat.valueKey)}
-                    </span>
-                    <span className="text-[10px] sm:text-xs 2xl:text-sm font-semibold uppercase tracking-wider text-neutral-500 mt-1">
-                      {t(stat.labelKey)}
-                    </span>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </motion.div>
+            <p className="text-sm 2xl:text-base font-semibold text-brand">
+              - {t("brandStory.slide2Author")}
+            </p>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
