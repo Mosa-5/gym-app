@@ -4,7 +4,7 @@ import { mapProductTableData } from "@/supabase/products";
 import { Link } from "react-router-dom";
 import { useCartContext } from "@/context/cart/hooks/useCartContext";
 import { motion } from "framer-motion";
-import { ShoppingBag, Star, ChevronLeft, ChevronRight } from "lucide-react";
+import { ShoppingBag, Star, Heart, ChevronLeft, ChevronRight } from "lucide-react";
 import { toast } from "sonner";
 import { useAuthContext } from "@/context/auth/hooks/useAuthContext";
 import { useAddToWishlist } from "@/reactQuery/mutations/whishlist";
@@ -169,13 +169,32 @@ const ProductGrid: React.FC<{
                         loading="lazy"
                         className="h-24 sm:h-40 2xl:h-52 object-contain rounded-full"
                       />
-                      <h3 className="text-xs sm:text-sm 2xl:text-base font-semibold text-center tracking-wide text-white truncate max-w-full">
+                      <h3 className="text-xs sm:text-sm 2xl:text-lg font-semibold text-start w-full max-w-60 tracking-wide text-white truncate">
                         {product.name}
                       </h3>
-                      <p className="text-sm sm:text-base 2xl:text-lg font-black text-white">
-                        ${product.price}
-                      </p>
-                      <div className="flex items-center gap-2 sm:gap-3">
+                      <div className="flex flex-col items-stretch gap-2 sm:gap-3 w-full max-w-60">
+                        <div className="flex items-center justify-between gap-3 sm:gap-5">
+                          <p className="text-xl sm:text-2xl 2xl:text-3xl font-black text-white">
+                            ${Number(product.price).toFixed(2)}
+                          </p>
+                          <div className="flex items-center gap-1">
+                            <div className="flex items-center gap-0.5">
+                              {[1, 2, 3, 4, 5].map((star) => (
+                                <Star
+                                  key={star}
+                                  className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${
+                                    product.avgRating !== null &&
+                                    star <= Math.round(product.avgRating)
+                                      ? "fill-yellow-400 text-yellow-400"
+                                      : "fill-white/20 text-white/20"
+                                  }`}
+                                />
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                        <div className="h-[1px] bg-white/15" />
+                        <div className="flex items-center justify-between gap-2 sm:gap-4">
                         <button
                           onClick={(e) => {
                             e.stopPropagation();
@@ -185,7 +204,7 @@ const ProductGrid: React.FC<{
                             );
                             handleAddToCart(product);
                           }}
-                          className="flex items-center gap-1.5 sm:gap-2 bg-white/15 hover:bg-white/25 border border-white/20 text-white text-[10px] sm:text-xs 2xl:text-sm font-semibold uppercase tracking-wider px-2.5 py-1.5 sm:px-4 sm:py-2 2xl:px-5 2xl:py-2.5 rounded-full transition-colors duration-200 cursor-pointer"
+                          className="flex items-center justify-center gap-1.5 sm:gap-2 bg-white hover:bg-neutral-300 text-neutral-900 text-[10px] sm:text-xs 2xl:text-sm font-semibold uppercase tracking-wider px-2.5 py-1.5 sm:px-4 sm:py-2 2xl:px-5 2xl:py-2.5 w-full rounded-full transition-colors duration-200 cursor-pointer"
                         >
                           <ShoppingBag className="w-3 h-3 sm:w-3.5 sm:h-3.5 hidden sm:block" />
                           {t("products.addToCart")}
@@ -204,10 +223,11 @@ const ProductGrid: React.FC<{
                             });
                             toast.success(t("products.addedToWishlist"));
                           }}
-                          className="flex items-center justify-center w-7 h-7 sm:w-9 sm:h-9 2xl:w-11 2xl:h-11 rounded-full bg-white/15 hover:bg-white/25 border border-white/20 text-white transition-colors duration-200 cursor-pointer"
+                          className="flex items-center justify-center text-white/70 hover:text-white transition-colors duration-200 cursor-pointer"
                         >
-                          <Star className="w-3 h-3 sm:w-4 sm:h-4" />
+                          <Heart className="w-5 h-5 sm:w-7 sm:h-7" />
                         </button>
+                      </div>
                       </div>
                     </div>
                   </motion.div>

@@ -43,19 +43,33 @@ const ImagePair = ({
       {/* Back card */}
       <div
         className={`absolute inset-0 rounded-2xl overflow-hidden shadow-md ${
-          flip ? "translate-x-0 lg:-translate-x-10" : "translate-x-0 lg:translate-x-10"
+          flip
+            ? "translate-x-0 lg:-translate-x-10"
+            : "translate-x-0 lg:translate-x-10"
         } translate-y-5 lg:translate-y-10`}
       >
-        <img src={back} alt="" loading="lazy" className="w-full h-full object-cover" />
+        <img
+          src={back}
+          alt=""
+          loading="lazy"
+          className="w-full h-full object-cover"
+        />
       </div>
 
       {/* Middle card */}
       <div
         className={`absolute inset-0 rounded-2xl overflow-hidden shadow-lg z-[5] ${
-          flip ? "translate-x-0 lg:-translate-x-5" : "translate-x-0 lg:translate-x-5"
+          flip
+            ? "translate-x-0 lg:-translate-x-5"
+            : "translate-x-0 lg:translate-x-5"
         } translate-y-2 lg:translate-y-5`}
       >
-        <img src={mid} alt="" loading="lazy" className="w-full h-full object-cover" />
+        <img
+          src={mid}
+          alt=""
+          loading="lazy"
+          className="w-full h-full object-cover"
+        />
       </div>
 
       {/* Front card — animates in */}
@@ -68,7 +82,12 @@ const ImagePair = ({
           exit={{ opacity: 0, scale: 0.97 }}
           transition={{ duration: 0.7, ease: "easeInOut" }}
         >
-          <img src={front} alt="" loading="lazy" className="w-full h-full object-cover" />
+          <img
+            src={front}
+            alt=""
+            loading="lazy"
+            className="w-full h-full object-cover"
+          />
 
           {/* Circular timer */}
           <div className="absolute bottom-3 right-3 z-20 w-10 h-10">

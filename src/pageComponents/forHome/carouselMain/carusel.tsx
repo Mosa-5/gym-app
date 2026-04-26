@@ -13,8 +13,6 @@ import {
   card,
   cardContent,
   image,
-  productName,
-  productPrice,
 } from "./carousel.styles";
 import {
   useGetProductListWithBestSelling,
@@ -24,7 +22,7 @@ import {
 import { mapProductTableData } from "@/supabase/products";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ShoppingBag, Star } from "lucide-react";
+import { ShoppingBag, Star, Heart } from "lucide-react";
 import { toast } from "sonner";
 import { useCartContext } from "@/context/cart/hooks/useCartContext";
 import { useAuthContext } from "@/context/auth/hooks/useAuthContext";
@@ -152,22 +150,46 @@ const CaruselForPages: React.FC<CarouselProps> = ({
                           loading="lazy"
                           className={image()}
                         />
-                        <p className={productName()}>{product.name}</p>
-                        <p className={productPrice()}>{product.price}$</p>
-                        <div className="flex items-center gap-3 mt-1">
-                          <button
-                            onClick={(e) => handleAddToCart(e, product)}
-                            className="flex items-center gap-2 bg-white/15 hover:bg-white/25 border border-white/20 text-white text-xs 2xl:text-sm font-semibold uppercase tracking-wider px-4 py-2 2xl:px-5 2xl:py-2.5 rounded-full transition-colors duration-200 cursor-pointer"
-                          >
-                            <ShoppingBag className="w-3.5 h-3.5" />
-                            Add to Cart
-                          </button>
-                          <button
-                            onClick={(e) => handleFavourite(e, product.id)}
-                            className="flex items-center justify-center w-9 h-9 2xl:w-11 2xl:h-11 rounded-full bg-white/15 hover:bg-white/25 border border-white/20 text-white transition-colors duration-200 cursor-pointer"
-                          >
-                            <Star className="w-4 h-4" />
-                          </button>
+                        <p className="text-sm 2xl:text-lg font-semibold text-start w-full max-w-60 tracking-wide text-white truncate">
+                          {product.name}
+                        </p>
+                        <div className="flex flex-col items-stretch gap-2 w-full max-w-60">
+                          <div className="flex items-center justify-between gap-3">
+                            <p className="text-xl sm:text-2xl 2xl:text-3xl font-black text-white">
+                              ${Number(product.price).toFixed(2)}
+                            </p>
+                            <div className="flex items-center gap-1">
+                              <div className="flex items-center gap-0.5">
+                                {[1, 2, 3, 4, 5].map((star) => (
+                                  <Star
+                                    key={star}
+                                    className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${
+                                      product.avgRating !== null &&
+                                      star <= Math.round(product.avgRating)
+                                        ? "fill-yellow-400 text-yellow-400"
+                                        : "fill-white/20 text-white/20"
+                                    }`}
+                                  />
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                          <div className="h-[1px] bg-white/15" />
+                          <div className="flex items-center justify-between gap-2 sm:gap-4">
+                            <button
+                              onClick={(e) => handleAddToCart(e, product)}
+                              className="flex items-center justify-center gap-2 bg-white hover:bg-neutral-300 text-neutral-900 text-xs 2xl:text-sm font-semibold uppercase tracking-wider px-4 py-2 2xl:px-5 2xl:py-2.5 w-full rounded-full transition-colors duration-200 cursor-pointer"
+                            >
+                              <ShoppingBag className="w-3.5 h-3.5 hidden sm:block" />
+                              Add to Cart
+                            </button>
+                            <button
+                              onClick={(e) => handleFavourite(e, product.id)}
+                              className="flex items-center justify-center text-white/70 hover:text-white transition-colors duration-200 cursor-pointer"
+                            >
+                              <Heart className="w-5 h-5 sm:w-7 sm:h-7" />
+                            </button>
+                          </div>
                         </div>
                       </CardContent>
                     </Card>

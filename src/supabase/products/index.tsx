@@ -22,7 +22,9 @@ export const getFilteredProducts = async (
   const from = (page - 1) * pageSize;
   const to = from + pageSize - 1;
 
-  let query = supabase.from("product").select("*", { count: "exact" });
+  let query = supabase
+    .from("product")
+    .select("*, reviews(rating)", { count: "exact" });
 
   if (filters.search) {
     query = query.ilike("name", `%${filters.search}%`);
@@ -73,18 +75,31 @@ export type Product = {
   name: string | null;
   price: number | null;
   sales_number: number | null;
+  reviews?: { rating: number | null }[];
 };
 
 export const mapProductTableData = (datalist: Product[]) => {
-  return datalist.map((data) => ({
-    category: data.category || "",
-    created_at: data.created_at || "",
-    description: data.description || "",
-    image_url: data.image_url || [],
-    name: data.name || "",
-    price: data.price ?? 0,
-    id: data.id,
-  }));
+  return datalist.map((data) => {
+    const reviews = data.reviews ?? [];
+    const avgRating =
+      reviews.length > 0
+        ? Math.round(
+            (reviews.reduce((sum, r) => sum + (r.rating ?? 0), 0) /
+              reviews.length) *
+              10,
+          ) / 10
+        : null;
+    return {
+      category: data.category || "",
+      created_at: data.created_at || "",
+      description: data.description || "",
+      image_url: data.image_url || [],
+      name: data.name || "",
+      price: data.price ?? 0,
+      id: data.id,
+      avgRating,
+    };
+  });
 };
 
 export const getSingleProduct = async (id: string) => {
@@ -116,7 +131,7 @@ export const getProductListWithCategory = async (
 ) => {
   const { data, error } = await supabase
     .from("product")
-    .select("*")
+    .select("*, reviews(rating)")
     .ilike("category", productType || "");
 
   if (error) {
@@ -129,7 +144,7 @@ export const getProductListWithCategory = async (
 export const getProductListBestSelling = async () => {
   const { data, error } = await supabase
     .from("product")
-    .select("*")
+    .select("*, reviews(rating)")
     .order("sales_number", { ascending: false })
     .limit(5);
 
@@ -143,7 +158,7 @@ export const getProductListBestSelling = async () => {
 export const getProductListWorstSelling = async () => {
   const { data, error } = await supabase
     .from("product")
-    .select("*")
+    .select("*, reviews(rating)")
     .order("sales_number", { ascending: true })
     .limit(5);
 
