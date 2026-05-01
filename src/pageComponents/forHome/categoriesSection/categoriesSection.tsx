@@ -144,7 +144,7 @@ const CategoriesSection = () => {
                           >
                             <Button
                               variant="secondary"
-                              className="w-fit font-semibold text-xs sm:text-sm 2xl:text-base 2xl:px-6 2xl:py-5 border-white/30 bg-white/15 text-white hover:bg-white/25 dark:bg-white/15 dark:hover:bg-white/25"
+                              className="w-fit font-semibold text-xs sm:text-sm 2xl:text-base 2xl:px-6 2xl:py-5 border-white/30 bg-white/15 text-white hover:bg-white/25 dark:bg-white/15 dark:hover:bg-white/25 rounded-full"
                             >
                               {t("categories.shopNow")}
                             </Button>

@@ -4,7 +4,13 @@ import { mapProductTableData } from "@/supabase/products";
 import { Link } from "react-router-dom";
 import { useCartContext } from "@/context/cart/hooks/useCartContext";
 import { motion } from "framer-motion";
-import { ShoppingBag, Star, Heart, ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  ShoppingBag,
+  Star,
+  Heart,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 import { toast } from "sonner";
 import { useAuthContext } from "@/context/auth/hooks/useAuthContext";
 import { useAddToWishlist } from "@/reactQuery/mutations/whishlist";
@@ -195,39 +201,41 @@ const ProductGrid: React.FC<{
                         </div>
                         <div className="h-[1px] bg-white/15" />
                         <div className="flex items-center justify-between gap-2 sm:gap-4">
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            e.preventDefault();
-                            toast.success(
-                              t("products.addedToCart", { name: product.name }),
-                            );
-                            handleAddToCart(product);
-                          }}
-                          className="flex items-center justify-center gap-1.5 sm:gap-2 bg-white hover:bg-neutral-300 text-neutral-900 text-[10px] sm:text-xs 2xl:text-sm font-semibold uppercase tracking-wider px-2.5 py-1.5 sm:px-4 sm:py-2 2xl:px-5 2xl:py-2.5 w-full rounded-full transition-colors duration-200 cursor-pointer"
-                        >
-                          <ShoppingBag className="w-3 h-3 sm:w-3.5 sm:h-3.5 hidden sm:block" />
-                          {t("products.addToCart")}
-                        </button>
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            e.preventDefault();
-                            if (!user) {
-                              toast.error(t("products.loginForWishlist"));
-                              return;
-                            }
-                            addToWishlist({
-                              userId: user.id,
-                              productId: String(product.id),
-                            });
-                            toast.success(t("products.addedToWishlist"));
-                          }}
-                          className="flex items-center justify-center text-white/70 hover:text-white transition-colors duration-200 cursor-pointer"
-                        >
-                          <Heart className="w-5 h-5 sm:w-7 sm:h-7" />
-                        </button>
-                      </div>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              e.preventDefault();
+                              toast.success(
+                                t("products.addedToCart", {
+                                  name: product.name,
+                                }),
+                              );
+                              handleAddToCart(product);
+                            }}
+                            className="flex items-center justify-center gap-1.5 sm:gap-2 bg-white hover:bg-neutral-300 text-neutral-900 text-[10px] sm:text-xs 2xl:text-sm font-semibold uppercase tracking-wider px-2.5 py-1.5 sm:px-4 sm:py-2 2xl:px-5 2xl:py-2.5 w-full rounded-full transition-colors duration-200 cursor-pointer"
+                          >
+                            <ShoppingBag className="w-3 h-3 sm:w-3.5 sm:h-3.5 hidden sm:block" />
+                            {t("products.addToCart")}
+                          </button>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              e.preventDefault();
+                              if (!user) {
+                                toast.error(t("products.loginForWishlist"));
+                                return;
+                              }
+                              addToWishlist({
+                                userId: user.id,
+                                productId: String(product.id),
+                              });
+                              toast.success(t("products.addedToWishlist"));
+                            }}
+                            className="flex items-center justify-center text-white/70 hover:text-white transition-colors duration-200 cursor-pointer"
+                          >
+                            <Heart className="w-5 h-5 sm:w-7 sm:h-7" />
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </motion.div>

@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import { crosshatchPattern } from "@/lib/crosshatchPattern";
 import { Checkbox } from "@/componentsShadcn/ui/checkbox";
 import { Slider } from "@/componentsShadcn/ui/slider";
 import {
@@ -31,14 +32,20 @@ const Filters: React.FC<FiltersProps> = ({ filters, onFiltersChange }) => {
   const [localPrice, setLocalPrice] = useState<[number, number]>(
     filters.priceRange,
   );
+  const inputChanged = useRef(false);
 
-  const handlePriceCommit = (value: number[]) => {
-    const range: [number, number] = [value[0], value[1]];
-    setLocalPrice(range);
-    onFiltersChange({ ...filters, priceRange: range });
-  };
+  useEffect(() => {
+    if (!inputChanged.current) return;
+    const handler = setTimeout(() => {
+      onFiltersChange({ ...filters, priceRange: localPrice });
+      inputChanged.current = false;
+    }, 500);
+    return () => clearTimeout(handler);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [localPrice]);
 
   const handlePriceChange = (value: number[]) => {
+    inputChanged.current = true;
     setLocalPrice([value[0], value[1]]);
   };
 
@@ -49,8 +56,8 @@ const Filters: React.FC<FiltersProps> = ({ filters, onFiltersChange }) => {
     const next: [number, number] = [localPrice[0], localPrice[1]];
     next[index] = clamped;
     if (next[0] > next[1]) return;
+    inputChanged.current = true;
     setLocalPrice(next);
-    onFiltersChange({ ...filters, priceRange: next });
   };
 
   const handleCategoryToggle = (category: string) => {
@@ -64,13 +71,23 @@ const Filters: React.FC<FiltersProps> = ({ filters, onFiltersChange }) => {
     <div className="w-full">
       {/* Price Range */}
       <div className="pb-6 2xl:pb-8 border-b border-neutral-200 dark:border-neutral-700">
-        <div className="rounded-xl border border-neutral-200 dark:border-neutral-700 p-4 2xl:p-5 mb-4 2xl:mb-5">
-          <h3 className="text-sm 2xl:text-base font-bold tracking-wide uppercase text-neutral-900 dark:text-neutral-100 mb-3 2xl:mb-4">
+        <div
+          className="rounded-xl overflow-hidden p-4 2xl:p-5 mb-4 2xl:mb-5 relative"
+          style={{
+            background:
+              "linear-gradient(135deg, rgb(35 35 35) 0%, rgb(10 10 10) 100%)",
+          }}
+        >
+          <div
+            className="absolute inset-0 pointer-events-none opacity-[0.06]"
+            style={{ backgroundImage: crosshatchPattern }}
+          />
+          <h3 className="relative text-sm 2xl:text-base font-bold tracking-wide uppercase text-white mb-3 2xl:mb-4">
             {t("products.price")}
           </h3>
-          <div className="flex items-center gap-2">
+          <div className="relative flex items-center gap-2">
             <div className="flex-1 relative">
-              <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-xs text-neutral-400">
+              <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-xs text-white/60">
                 $
               </span>
               <input
@@ -79,12 +96,12 @@ const Filters: React.FC<FiltersProps> = ({ filters, onFiltersChange }) => {
                 max={localPrice[1]}
                 value={localPrice[0]}
                 onChange={(e) => handleInputChange(0, e.target.value)}
-                className="w-full pl-6 pr-2 py-1.5 2xl:py-2 text-sm 2xl:text-base rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-brand"
+                className="w-full pl-6 pr-2 py-1.5 2xl:py-2 text-sm 2xl:text-base rounded-lg border border-white/20 bg-black/20 text-white placeholder-white/40 focus:outline-none focus:ring-1 focus:ring-white/50 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
               />
             </div>
-            <span className="text-neutral-400 text-sm">—</span>
+            <span className="text-white/50 text-sm">—</span>
             <div className="flex-1 relative">
-              <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-xs text-neutral-400">
+              <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-xs text-white/60">
                 $
               </span>
               <input
@@ -93,7 +110,7 @@ const Filters: React.FC<FiltersProps> = ({ filters, onFiltersChange }) => {
                 max={1000}
                 value={localPrice[1]}
                 onChange={(e) => handleInputChange(1, e.target.value)}
-                className="w-full pl-6 pr-2 py-1.5 2xl:py-2 text-sm 2xl:text-base rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-brand"
+                className="w-full pl-6 pr-2 py-1.5 2xl:py-2 text-sm 2xl:text-base rounded-lg border border-white/20 bg-black/20 text-white placeholder-white/40 focus:outline-none focus:ring-1 focus:ring-white/50 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
               />
             </div>
           </div>
@@ -101,7 +118,6 @@ const Filters: React.FC<FiltersProps> = ({ filters, onFiltersChange }) => {
         <Slider
           value={localPrice}
           onValueChange={handlePriceChange}
-          onValueCommit={handlePriceCommit}
           min={0}
           max={1000}
           step={10}

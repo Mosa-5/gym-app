@@ -117,7 +117,8 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
               ))}
               {reviews.length > 0 && (
                 <span className="ml-1.5 text-sm 2xl:text-base font-semibold text-neutral-500 dark:text-neutral-400">
-                  ({reviews.length} {reviews.length === 1 ? "review" : "reviews"})
+                  ({reviews.length}{" "}
+                  {reviews.length === 1 ? "review" : "reviews"})
                 </span>
               )}
             </div>
