@@ -17,7 +17,7 @@ export const carouselItem = cva(
 );
 
 export const card = cva(
-  "group min-h-[340px] lg:min-h-[432px] 2xl:min-h-[480px] cursor-pointer relative overflow-hidden transition-transform duration-300 ease-out hover:-translate-y-3",
+  "group min-h-[340px] lg:min-h-[432px] 2xl:min-h-[480px] cursor-pointer relative overflow-hidden transition-transform duration-300 ease-out sm:hover:-translate-y-3",
 );
 
 export const cardContent = cva(

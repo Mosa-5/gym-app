@@ -134,29 +134,49 @@ const ExperimentalCarousel: React.FC<CarouselProps> = ({
     const el = e.currentTarget;
     el.setPointerCapture(e.pointerId);
 
-    const onMove = (ev: PointerEvent) => {
-      const delta = ev.clientX - startX;
-      if (Math.abs(delta) > 5) isDragging.current = true;
-      setRotation(startRotation - delta / DRAG_SENSITIVITY);
-    };
+    const controller = new AbortController();
+    const { signal } = controller;
 
-    const onUp = (ev: PointerEvent) => {
-      el.removeEventListener("pointermove", onMove);
-      el.removeEventListener("pointerup", onUp);
-      el.releasePointerCapture(ev.pointerId);
-
-      const current = startRotation - (ev.clientX - startX) / DRAG_SENSITIVITY;
+    const settle = (clientX: number) => {
+      const current = startRotation - (clientX - startX) / DRAG_SENSITIVITY;
       const snapped = Math.round(current);
       targetRotation.current = snapped;
       animateTo(snapped);
-
       setTimeout(() => {
         isDragging.current = false;
       }, 50);
     };
 
-    el.addEventListener("pointermove", onMove);
-    el.addEventListener("pointerup", onUp);
+    el.addEventListener(
+      "pointermove",
+      (ev: PointerEvent) => {
+        const delta = ev.clientX - startX;
+        if (Math.abs(delta) > 5) isDragging.current = true;
+        setRotation(startRotation - delta / DRAG_SENSITIVITY);
+      },
+      { signal },
+    );
+
+    el.addEventListener(
+      "pointerup",
+      (ev: PointerEvent) => {
+        controller.abort();
+        el.releasePointerCapture(ev.pointerId);
+        settle(ev.clientX);
+      },
+      { signal },
+    );
+
+    // Browser fires this when it takes over for vertical page scroll
+    // (touch-action: pan-y); snap back to start since no horizontal drag happened.
+    el.addEventListener(
+      "pointercancel",
+      () => {
+        controller.abort();
+        settle(startX);
+      },
+      { signal },
+    );
   };
 
   const getItemStyle = (index: number): SlotStyle => {
@@ -204,7 +224,7 @@ const ExperimentalCarousel: React.FC<CarouselProps> = ({
         <div className="w-full max-w-3xl 2xl:max-w-5xl mx-auto">
           {/* Carousel scene */}
           <div
-            className="relative w-full select-none touch-none h-[340px] 2xl:h-[420px]"
+            className="relative w-full select-none touch-pan-y h-[240px] sm:h-[340px] 2xl:h-[420px]"
             style={{ cursor: "grab" }}
             onPointerDown={handlePointerDown}
           >
@@ -221,7 +241,7 @@ const ExperimentalCarousel: React.FC<CarouselProps> = ({
                     pointerEvents: "none",
                   }}
                 >
-                  <div className="relative h-64 w-64 2xl:h-80 2xl:w-80 rounded-full">
+                  <div className="relative h-44 w-44 sm:h-64 sm:w-64 2xl:h-80 2xl:w-80 rounded-full">
                     {/* Solid backing to block pattern bleed-through */}
                     <div
                       className="absolute inset-0 rounded-full"
@@ -231,7 +251,7 @@ const ExperimentalCarousel: React.FC<CarouselProps> = ({
                       src={product.image_url[0]}
                       alt={product.name}
                       loading="lazy"
-                      className="relative h-64 w-64 2xl:h-80 2xl:w-80 object-cover rounded-full shadow-lg"
+                      className="relative h-44 w-44 sm:h-64 sm:w-64 2xl:h-80 2xl:w-80 object-cover rounded-full shadow-lg"
                       style={{ opacity: style.opacity }}
                       draggable={false}
                     />
