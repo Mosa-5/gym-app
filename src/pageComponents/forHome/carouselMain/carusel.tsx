@@ -1,5 +1,7 @@
+import { useEffect, useState } from "react";
 import { Card, CardContent } from "@/componentsShadcn/ui/card";
 import {
+  type CarouselApi,
   Carousel,
   CarouselContent,
   CarouselItem,
@@ -41,6 +43,25 @@ const CaruselForPages: React.FC<CarouselProps> = ({
   headerText,
   carouselType,
 }) => {
+  const [api, setApi] = useState<CarouselApi>();
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+
+  useEffect(() => {
+    if (!api) return;
+    const update = () => {
+      setScrollSnaps(api.scrollSnapList());
+      setSelectedIndex(api.selectedScrollSnap());
+    };
+    update();
+    api.on("select", update);
+    api.on("reInit", update);
+    return () => {
+      api.off("select", update);
+      api.off("reInit", update);
+    };
+  }, [api]);
+
   const { data: productWithCategory = [] } = useGetProductListWithCategory(
     { queryOptions: { select: mapProductTableData } },
     productType,
@@ -114,15 +135,16 @@ const CaruselForPages: React.FC<CarouselProps> = ({
         opts={{
           align: "start",
         }}
+        setApi={setApi}
         className={carousel()}
       >
-        <CarouselContent>
+        <CarouselContent className="ml-0 sm:-ml-4">
           {products.map((product, index) => {
             const isRed = index % 2 === 0;
             return (
               <CarouselItem key={index} className={carouselItem()}>
                 <Link to={`/dashboard/productDetail/${product.id}`}>
-                  <div className="p-1">
+                  <div className="p-0.5 sm:p-1">
                     <Card className={card()}>
                       {/* Alternating bg + pattern */}
                       <div
@@ -153,17 +175,33 @@ const CaruselForPages: React.FC<CarouselProps> = ({
                         <p className="text-sm 2xl:text-lg font-semibold text-start w-full max-w-60 tracking-wide text-white truncate">
                           {product.name}
                         </p>
-                        <div className="flex flex-col items-stretch gap-2 w-full max-w-60">
-                          <div className="flex items-center justify-between gap-3">
-                            <p className="text-xl sm:text-2xl 2xl:text-3xl font-black text-white">
+                        <div className="flex flex-col items-stretch gap-2 sm:gap-3 w-full max-w-60">
+                          <div className="flex items-center justify-between gap-3 sm:gap-5">
+                            <p className="text-2xl 2xl:text-3xl font-black text-white">
                               ${Number(product.price).toFixed(2)}
                             </p>
                             <div className="flex items-center gap-1">
-                              <div className="flex items-center gap-0.5">
+                              {/* Mobile: single star + numeric rating */}
+                              <div className="flex sm:hidden items-center gap-1">
+                                <Star
+                                  className={`w-4 h-4 ${
+                                    product.avgRating !== null
+                                      ? "fill-yellow-400 text-yellow-400"
+                                      : "fill-white/20 text-white/20"
+                                  }`}
+                                />
+                                <span className="text-sm font-semibold text-white/90">
+                                  {product.avgRating !== null
+                                    ? product.avgRating.toFixed(1)
+                                    : "—"}
+                                </span>
+                              </div>
+                              {/* Desktop: full 5-star row */}
+                              <div className="hidden sm:flex items-center gap-0.5">
                                 {[1, 2, 3, 4, 5].map((star) => (
                                   <Star
                                     key={star}
-                                    className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${
+                                    className={`sm:w-4 sm:h-4 ${
                                       product.avgRating !== null &&
                                       star <= Math.round(product.avgRating)
                                         ? "fill-yellow-400 text-yellow-400"
@@ -178,9 +216,9 @@ const CaruselForPages: React.FC<CarouselProps> = ({
                           <div className="flex items-center justify-between gap-2 sm:gap-4">
                             <button
                               onClick={(e) => handleAddToCart(e, product)}
-                              className="flex items-center justify-center gap-2 bg-white hover:bg-neutral-300 text-neutral-900 text-xs 2xl:text-sm font-semibold uppercase tracking-wider px-4 py-2 2xl:px-5 2xl:py-2.5 w-full rounded-full transition-colors duration-200 cursor-pointer"
+                              className="flex items-center justify-center gap-1.5 sm:gap-2 bg-white hover:bg-neutral-300 text-neutral-900 text-xs 2xl:text-sm font-semibold uppercase tracking-wider px-3 py-2.5 sm:px-4 sm:py-2 2xl:px-5 2xl:py-2.5 w-full rounded-full transition-colors duration-200 cursor-pointer"
                             >
-                              <ShoppingBag className="w-3.5 h-3.5 hidden sm:block" />
+                              <ShoppingBag className="w-3 h-3 sm:w-3.5 sm:h-3.5 hidden sm:block" />
                               Add to Cart
                             </button>
                             <button
@@ -199,9 +237,28 @@ const CaruselForPages: React.FC<CarouselProps> = ({
             );
           })}
         </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
+        <CarouselPrevious className="hidden sm:flex" />
+        <CarouselNext className="hidden sm:flex" />
       </Carousel>
+
+      {/* Mobile scroll indicator (replaces arrows on phones) */}
+      {scrollSnaps.length > 1 && (
+        <div className="flex sm:hidden items-center justify-center gap-2">
+          {scrollSnaps.map((_, index) => (
+            <button
+              key={index}
+              type="button"
+              aria-label={`Go to slide ${index + 1}`}
+              onClick={() => api?.scrollTo(index)}
+              className={`h-2 rounded-full transition-all duration-300 ${
+                index === selectedIndex
+                  ? "w-6 bg-brand"
+                  : "w-2 bg-neutral-400/50 dark:bg-neutral-600"
+              }`}
+            />
+          ))}
+        </div>
+      )}
     </motion.div>
   );
 };

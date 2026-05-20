@@ -13,7 +13,6 @@ import {
 } from "./heroBanner.styles";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 const HeroBanner: React.FC = () => {
@@ -93,7 +92,6 @@ const HeroBanner: React.FC = () => {
           <Link to="/dashboard/products">
             <button className={buttonClass()}>
               {t("hero.exploreProducts")}
-              <ArrowRight className="w-4 h-4" />
             </button>
           </Link>
         </motion.div>

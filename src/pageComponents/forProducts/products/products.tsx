@@ -168,12 +168,12 @@ const ProductGrid: React.FC<{
                       }}
                     />
 
-                    <div className="relative z-10 flex flex-col items-center p-3 pb-4 gap-2 sm:p-5 sm:pb-6 sm:gap-4 2xl:p-6 2xl:pb-8">
+                    <div className="relative z-10 flex flex-col items-center p-3 pb-4 gap-1 sm:p-5 sm:pb-6 sm:gap-2 2xl:p-6 2xl:pb-8">
                       <img
                         src={product.image_url[0]}
                         alt={product.name}
                         loading="lazy"
-                        className="h-24 sm:h-40 2xl:h-52 object-contain rounded-full"
+                        className="h-24 sm:h-40 2xl:h-52 object-contain rounded-full mb-4 sm:mb-6"
                       />
                       <h3 className="text-xs sm:text-sm 2xl:text-lg font-semibold text-start w-full max-w-60 tracking-wide text-white truncate">
                         {product.name}
@@ -184,11 +184,27 @@ const ProductGrid: React.FC<{
                             ${Number(product.price).toFixed(2)}
                           </p>
                           <div className="flex items-center gap-1">
-                            <div className="flex items-center gap-0.5">
+                            {/* Mobile: single star + numeric rating */}
+                            <div className="flex sm:hidden items-center gap-1">
+                              <Star
+                                className={`w-3.5 h-3.5 ${
+                                  product.avgRating !== null
+                                    ? "fill-yellow-400 text-yellow-400"
+                                    : "fill-white/20 text-white/20"
+                                }`}
+                              />
+                              <span className="text-xs font-semibold text-white/90">
+                                {product.avgRating !== null
+                                  ? product.avgRating.toFixed(1)
+                                  : "—"}
+                              </span>
+                            </div>
+                            {/* Desktop: full 5-star row */}
+                            <div className="hidden sm:flex items-center gap-0.5">
                               {[1, 2, 3, 4, 5].map((star) => (
                                 <Star
                                   key={star}
-                                  className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${
+                                  className={`sm:w-4 sm:h-4 ${
                                     product.avgRating !== null &&
                                     star <= Math.round(product.avgRating)
                                       ? "fill-yellow-400 text-yellow-400"
@@ -212,7 +228,7 @@ const ProductGrid: React.FC<{
                               );
                               handleAddToCart(product);
                             }}
-                            className="flex items-center justify-center gap-1.5 sm:gap-2 bg-white hover:bg-neutral-300 text-neutral-900 text-[10px] sm:text-xs 2xl:text-sm font-semibold uppercase tracking-wider px-2.5 py-1.5 sm:px-4 sm:py-2 2xl:px-5 2xl:py-2.5 w-full rounded-full transition-colors duration-200 cursor-pointer"
+                            className="flex items-center justify-center gap-1.5 sm:gap-2 bg-white hover:bg-neutral-300 text-neutral-900 text-[10px] sm:text-xs 2xl:text-sm font-semibold uppercase tracking-wider px-2.5 py-2.5 sm:px-4 sm:py-2 2xl:px-5 2xl:py-2.5 w-full rounded-full transition-colors duration-200 cursor-pointer"
                           >
                             <ShoppingBag className="w-3 h-3 sm:w-3.5 sm:h-3.5 hidden sm:block" />
                             {t("products.addToCart")}

@@ -51,7 +51,7 @@ const CategoriesSection = () => {
                 initial={false}
                 animate={
                   isMobile
-                    ? { height: isActive ? 280 : 56, flex: "none" }
+                    ? { height: isActive ? 280 : 64, flex: "none" }
                     : { flex: isActive ? 4 : 1, height: "auto" }
                 }
                 transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
@@ -124,7 +124,7 @@ const CategoriesSection = () => {
                           exit={{ opacity: 0 }}
                           transition={{ duration: 0.3, delay: 0.15 }}
                         >
-                          <h3 className="text-white font-bold text-2xl sm:text-4xl md:text-5xl lg:text-6xl 2xl:text-8xl ka:lg:text-5xl tracking-wide mb-1 sm:mb-2">
+                          <h3 className="text-white font-bold text-4xl sm:text-4xl md:text-5xl lg:text-6xl 2xl:text-8xl ka:lg:text-5xl tracking-wide mb-1 sm:mb-2">
                             {t(category.nameKey)
                               .toUpperCase()
                               .split(" ")
