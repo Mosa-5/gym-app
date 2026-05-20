@@ -102,6 +102,8 @@ export const mapProductTableData = (datalist: Product[]) => {
   });
 };
 
+export type MappedProduct = ReturnType<typeof mapProductTableData>[number];
+
 export const getSingleProduct = async (id: string) => {
   const { data, error } = await supabase
     .from("product")
