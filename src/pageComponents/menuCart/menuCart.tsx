@@ -134,7 +134,7 @@ const ShoppingCart = () => {
                     onClick={() => removeFromCart(product.id.toString())}
                     className={removeButtonClass()}
                   >
-                    <Trash2 className="w-3.5 h-3.5 2xl:w-5 2xl:h-5" />
+                    <Trash2 className="w-[1.125rem] h-[1.125rem] 2xl:w-6 2xl:h-6" />
                   </button>
                 </div>
               ))}

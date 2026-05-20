@@ -109,7 +109,7 @@ const CategoriesSection = () => {
 
                         {/* Dark overlay behind text */}
                         <motion.div
-                          className="absolute inset-0 z-[1] bg-gradient-to-r from-black/60 via-black/40 to-black/15"
+                          className="absolute inset-0 z-[1] bg-gradient-to-t from-black/75 via-black/30 to-transparent sm:bg-gradient-to-r sm:from-black/60 sm:via-black/40 sm:to-black/15"
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
                           exit={{ opacity: 0 }}
@@ -124,7 +124,7 @@ const CategoriesSection = () => {
                           exit={{ opacity: 0 }}
                           transition={{ duration: 0.3, delay: 0.15 }}
                         >
-                          <h3 className="text-white font-bold text-4xl sm:text-4xl md:text-5xl lg:text-6xl 2xl:text-8xl ka:lg:text-5xl tracking-wide mb-1 sm:mb-2">
+                          <h3 className="text-white font-bold text-4xl sm:text-4xl md:text-5xl lg:text-6xl 2xl:text-8xl ka:lg:text-5xl tracking-wide mb-1 sm:mb-2 [text-shadow:0_1px_3px_rgba(0,0,0,0.7),0_2px_10px_rgba(0,0,0,0.45)]">
                             {t(category.nameKey)
                               .toUpperCase()
                               .split(" ")
@@ -135,7 +135,7 @@ const CategoriesSection = () => {
                                 </span>
                               ))}
                           </h3>
-                          <p className="text-white/80 text-xs sm:text-base 2xl:text-lg ka:sm:text-sm mb-3 sm:mb-4 line-clamp-2 sm:line-clamp-none">
+                          <p className="text-white/90 text-sm sm:text-base 2xl:text-lg ka:sm:text-sm mb-3 sm:mb-4 line-clamp-2 sm:line-clamp-none [text-shadow:0_1px_2px_rgba(0,0,0,0.95),0_2px_6px_rgba(0,0,0,0.8),0_2px_14px_rgba(0,0,0,0.6)]">
                             {t(category.descriptionKey)}
                           </p>
                           <Link
@@ -144,7 +144,7 @@ const CategoriesSection = () => {
                           >
                             <Button
                               variant="secondary"
-                              className="w-fit font-semibold text-xs sm:text-sm 2xl:text-base 2xl:px-6 2xl:py-5 border-white/30 bg-white/15 text-white hover:bg-white/25 dark:bg-white/15 dark:hover:bg-white/25 rounded-full"
+                              className="w-fit font-semibold h-10 sm:h-11 2xl:h-12 px-6 2xl:px-8 text-sm sm:text-base 2xl:text-lg border-white/30 bg-white/15 text-white hover:bg-white/25 dark:bg-white/15 dark:hover:bg-white/25 rounded-full"
                             >
                               {t("categories.shopNow")}
                             </Button>
