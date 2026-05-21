@@ -55,7 +55,9 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
 
           <div className="border-t border-neutral-100 dark:border-neutral-800 pt-3 mt-3">
             <div className="flex justify-between">
-              <span className={summaryTotalLabelClass()}>{t("cart.total")}</span>
+              <span className={summaryTotalLabelClass()}>
+                {t("cart.total")}
+              </span>
               <span className={summaryTotalValueClass()}>
                 ${finalCost.toFixed(2)}
               </span>
