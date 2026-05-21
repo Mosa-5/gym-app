@@ -1,99 +1,22 @@
-import { useCallback, useEffect, useRef } from "react";
-import { useSearchParams } from "react-router-dom";
 import ProductsHeroBanner from "@/pageComponents/forProducts/heroBanner/hero";
 import SearchBar from "@/pageComponents/forProducts/search/search";
 import SortMenu from "@/pageComponents/forProducts/SortMenu/SortMenu";
 import ProductGrid from "@/pageComponents/forProducts/products/products";
 import Filters from "@/pageComponents/forProducts/filter/filter";
 import FiltersMobile from "@/pageComponents/forProducts/filter/filretMobile";
-import type { FilterState } from "@/pageComponents/forProducts/filter/filter";
+import { useProductFilters } from "@/pageComponents/forProducts/hooks/useProductFilters";
 
 const Products = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const mainRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const hasFilters =
-      searchParams.get("categories") ||
-      searchParams.get("searchedtext") ||
-      searchParams.get("sort") ||
-      searchParams.get("priceMin") ||
-      searchParams.get("priceMax");
-
-    if (hasFilters && mainRef.current) {
-      const top =
-        mainRef.current.getBoundingClientRect().top + window.scrollY - 95;
-      window.scrollTo({ top, behavior: "smooth" });
-    }
-  }, []);
-
-  const searchQuery = searchParams.get("searchedtext") || "";
-  const sortBy = searchParams.get("sort") || "";
-  const page = Number(searchParams.get("page")) || 1;
-
-  const filters: FilterState = {
-    priceRange: [
-      Number(searchParams.get("priceMin")) || 0,
-      Number(searchParams.get("priceMax")) || 1000,
-    ],
-    categories: searchParams.get("categories")
-      ? searchParams.get("categories")!.split(",")
-      : [],
-  };
-
-  const setFilters = useCallback(
-    (next: FilterState) => {
-      setSearchParams(
-        (prev) => {
-          const p = new URLSearchParams(prev);
-          if (next.priceRange[0] !== 0)
-            p.set("priceMin", String(next.priceRange[0]));
-          else p.delete("priceMin");
-          if (next.priceRange[1] !== 1000)
-            p.set("priceMax", String(next.priceRange[1]));
-          else p.delete("priceMax");
-          if (next.categories.length > 0)
-            p.set("categories", next.categories.join(","));
-          else p.delete("categories");
-          p.delete("page");
-          return p;
-        },
-        { replace: true },
-      );
-    },
-    [setSearchParams],
-  );
-
-  const setSortBy = useCallback(
-    (value: string) => {
-      setSearchParams(
-        (prev) => {
-          const p = new URLSearchParams(prev);
-          if (value) p.set("sort", value);
-          else p.delete("sort");
-          p.delete("page");
-          return p;
-        },
-        { replace: true },
-      );
-    },
-    [setSearchParams],
-  );
-
-  const setPage = useCallback(
-    (pageNum: number) => {
-      setSearchParams(
-        (prev) => {
-          const p = new URLSearchParams(prev);
-          if (pageNum > 1) p.set("page", String(pageNum));
-          else p.delete("page");
-          return p;
-        },
-        { replace: true },
-      );
-    },
-    [setSearchParams],
-  );
+  const {
+    mainRef,
+    searchQuery,
+    sortBy,
+    page,
+    filters,
+    setFilters,
+    setSortBy,
+    setPage,
+  } = useProductFilters();
 
   return (
     <>
