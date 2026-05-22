@@ -73,7 +73,7 @@ Create a `.env` file in the project root:
 
 ```env
 VITE_SUPABASE_URL=https://your-project-id.supabase.co
-VITE_SUPABASE_ANON_KEY=your-anon-key
+VITE_SUPABASE_PUBLISHABLE_KEY=your-publishable-key
 ```
 
 Both values are found in your Supabase project under **Settings → API**.
@@ -128,7 +128,7 @@ Add these secrets to your GitHub repository under **Settings → Secrets and var
 | Secret              | Value                                               |
 | ------------------- | --------------------------------------------------- |
 | `SUPABASE_URL`      | `https://your-project-id.supabase.co`               |
-| `SUPABASE_ANON_KEY` | your anon/public key from Supabase → Settings → API |
+| `SUPABASE_PUBLISHABLE_KEY` | your publishable key from Supabase → Settings → API Keys |
 
 ---
 
