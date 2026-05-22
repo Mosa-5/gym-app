@@ -125,9 +125,9 @@ The project includes a GitHub Actions workflow (`.github/workflows/keep-supabase
 
 Add these secrets to your GitHub repository under **Settings → Secrets and variables → Actions**:
 
-| Secret              | Value                                               |
-| ------------------- | --------------------------------------------------- |
-| `SUPABASE_URL`      | `https://your-project-id.supabase.co`               |
+| Secret                     | Value                                                    |
+| -------------------------- | -------------------------------------------------------- |
+| `SUPABASE_URL`             | `https://your-project-id.supabase.co`                    |
 | `SUPABASE_PUBLISHABLE_KEY` | your publishable key from Supabase → Settings → API Keys |
 
 ---
