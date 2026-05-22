@@ -12,7 +12,7 @@ export const getTopReviews = async (): Promise<ProductReviews[]> => {
     .select(
       `
       *,
-      profiles!reviews_user_id_fkey ( avatar_url, username )
+      profiles:public_profiles!user_id ( avatar_url, username )
     `,
     )
     .order("like_count", { ascending: false })

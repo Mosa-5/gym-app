@@ -12,7 +12,7 @@ export const getProductReviews = async (
     .select(
       `
       *,
-      profiles!reviews_user_id_fkey ( avatar_url, username ),
+      profiles:public_profiles!user_id ( avatar_url, username ),
       review_likes ( id )
     `,
     )
