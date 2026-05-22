@@ -5,6 +5,7 @@ import { CarouselItem } from "@/componentsShadcn/ui/carousel";
 import type { MappedProduct } from "@/supabase/products";
 import { carouselItem, card, cardContent, image } from "./carousel.styles";
 import { crosshatchPattern } from "@/lib/crosshatchPattern";
+import { useTranslation } from "react-i18next";
 
 interface CarouselCardProps {
   product: MappedProduct;
@@ -20,6 +21,8 @@ const CarouselCard: React.FC<CarouselCardProps> = ({
   onAddToCart,
   onAddToWishlist,
 }) => {
+  const { t } = useTranslation();
+
   return (
     <CarouselItem className={carouselItem()}>
       <Link to={`/dashboard/productDetail/${product.id}`}>
@@ -98,7 +101,7 @@ const CarouselCard: React.FC<CarouselCardProps> = ({
                     className="flex items-center justify-center gap-1.5 sm:gap-2 bg-white hover:bg-neutral-300 text-neutral-900 text-xs 2xl:text-sm font-semibold uppercase tracking-wider px-3 py-2.5 sm:px-4 sm:py-2 2xl:px-5 2xl:py-2.5 w-full rounded-full transition-colors duration-200 cursor-pointer"
                   >
                     <ShoppingBag className="w-3 h-3 sm:w-3.5 sm:h-3.5 hidden sm:block" />
-                    Add to Cart
+                    {t("common.addToCart")}
                   </button>
                   <button
                     onClick={(e) => onAddToWishlist(e, product.id)}

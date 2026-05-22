@@ -20,6 +20,7 @@ import { useAuthContext } from "@/context/auth/hooks/useAuthContext";
 import { useAddToWishlist } from "@/reactQuery/mutations/whishlist";
 import SectionHeading from "@/pageComponents/forHome/sectionHeading/sectionHeading";
 import CarouselCard from "./carouselCard";
+import { useTranslation } from "react-i18next";
 
 interface CarouselProps {
   productType?: string;
@@ -32,6 +33,7 @@ const CaruselForPages: React.FC<CarouselProps> = ({
   headerText,
   carouselType,
 }) => {
+  const { t } = useTranslation();
   const [api, setApi] = useState<CarouselApi>();
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
@@ -81,18 +83,18 @@ const CaruselForPages: React.FC<CarouselProps> = ({
       description: product.description,
       image_url: product.image_url,
     });
-    toast.success(`${product.name} added to cart`);
+    toast.success(t("common.addedToCart", { name: product.name }));
   };
 
   const handleFavourite = (e: React.MouseEvent, productId: number) => {
     e.preventDefault();
     e.stopPropagation();
     if (!user) {
-      toast.error("Please log in to add to wishlist");
+      toast.error(t("products.loginForWishlist"));
       return;
     }
     addToWishlist({ userId: user.id, productId: String(productId) });
-    toast.success("Added to wishlist");
+    toast.success(t("products.addedToWishlist"));
   };
 
   // Select the products based on carouselType
@@ -146,7 +148,7 @@ const CaruselForPages: React.FC<CarouselProps> = ({
             <button
               key={index}
               type="button"
-              aria-label={`Go to slide ${index + 1}`}
+              aria-label={t("common.goToSlide", { number: index + 1 })}
               onClick={() => api?.scrollTo(index)}
               className={`h-2 rounded-full transition-all duration-300 ${
                 index === selectedIndex
