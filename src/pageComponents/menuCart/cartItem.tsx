@@ -42,18 +42,14 @@ const CartItem: React.FC<CartItemProps> = ({
           {/* Quantity controls */}
           <div className="flex items-center gap-1">
             <button
-              onClick={() =>
-                changeQuantity(product.id.toString(), "decrement")
-              }
+              onClick={() => changeQuantity(product.id.toString(), "decrement")}
               className={qtyButtonClass()}
             >
               <Minus className="w-3 h-3 2xl:w-4 2xl:h-4 text-neutral-300" />
             </button>
             <span className={qtyCountClass()}>{product.quantity}</span>
             <button
-              onClick={() =>
-                changeQuantity(product.id.toString(), "increment")
-              }
+              onClick={() => changeQuantity(product.id.toString(), "increment")}
               className={qtyButtonClass()}
             >
               <Plus className="w-3 h-3 2xl:w-4 2xl:h-4 text-neutral-300" />
