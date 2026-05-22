@@ -20,9 +20,7 @@ const formSchema = z.object({
   username: z
     .string()
     .min(2, { message: "Username must be at least 2 characters." })
-    .max(20, { message: "Username must not exceed 20 characters." })
-    .optional()
-    .or(z.literal("")),
+    .max(20, { message: "Username must not exceed 20 characters." }),
   full_name_en: z
     .string()
     .min(2, { message: "Full Name En must be at least 2 characters." })
@@ -59,9 +57,18 @@ const Account = () => {
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      ...profileData,
+    // Sync with the (async) loaded profile so existing values are pre-filled.
+    // Leaving a field untouched keeps its current value — e.g. an existing
+    // username passes validation without retyping. keepDirtyValues preserves
+    // in-progress edits if the profile refetches in the background.
+    values: {
+      username: profileData.username ?? "",
+      full_name_en: profileData.full_name_en ?? "",
+      full_name_ka: profileData.full_name_ka ?? "",
+      address: profileData.address ?? "",
+      phone_number: profileData.phone_number ?? "",
     },
+    resetOptions: { keepDirtyValues: true },
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
