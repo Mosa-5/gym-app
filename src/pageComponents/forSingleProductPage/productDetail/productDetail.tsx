@@ -76,17 +76,22 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
           </div>
           <div className="flex gap-3 2xl:gap-4 mt-4 2xl:mt-6">
             {images.map((img, index) => (
-              <img
+              <button
                 key={index}
-                src={img}
-                alt={`Thumbnail ${index + 1}`}
-                className={`w-16 h-16 2xl:w-20 2xl:h-20 object-cover cursor-pointer border-2 rounded-lg transition-all duration-300 hover:border-black dark:hover:border-white hover:scale-110 ${
-                  mainImage === img
-                    ? "border-black dark:border-white border-2 scale-110"
-                    : "border-gray-300"
-                }`}
+                type="button"
                 onClick={() => setMainImage(img)}
-              />
+                className="rounded-lg"
+              >
+                <img
+                  src={img}
+                  alt={`Thumbnail ${index + 1}`}
+                  className={`w-16 h-16 2xl:w-20 2xl:h-20 object-cover cursor-pointer border-2 rounded-lg transition-all duration-300 hover:border-black dark:hover:border-white hover:scale-110 ${
+                    mainImage === img
+                      ? "border-black dark:border-white border-2 scale-110"
+                      : "border-gray-300"
+                  }`}
+                />
+              </button>
             ))}
           </div>
         </div>

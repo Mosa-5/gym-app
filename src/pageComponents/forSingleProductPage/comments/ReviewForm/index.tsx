@@ -60,6 +60,7 @@ const ReviewForm: React.FC<{
                       key={star}
                       type="button"
                       onClick={() => field.onChange(star)}
+                      aria-label={t("a11y.rateStars", { count: star })}
                       className="p-0.5 cursor-pointer transition-transform hover:scale-110"
                     >
                       <Star

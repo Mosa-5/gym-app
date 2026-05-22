@@ -271,5 +271,16 @@
     "reviewPlaceholder": "გაუზიარე შენი გამოცდილება ამ პროდუქტზე...",
     "goToSlide": "გადასვლა სლაიდზე {{number}}",
     "toggleTheme": "თემის გადართვა"
+  },
+  "a11y": {
+    "openMenu": "მენიუს გახსნა",
+    "openCart": "კალათის გახსნა",
+    "decreaseQuantity": "რაოდენობის შემცირება",
+    "increaseQuantity": "რაოდენობის გაზრდა",
+    "removeItem": "ნივთის წაშლა",
+    "addToWishlist": "სურვილების სიაში დამატება",
+    "rateStars": "შეფასება {{count}} ვარსკვლავით",
+    "previousPage": "წინა გვერდი",
+    "nextPage": "შემდეგი გვერდი"
   }
 }

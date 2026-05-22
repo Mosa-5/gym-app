@@ -122,8 +122,16 @@ const ReviewList: React.FC = () => {
             {reviews.map((review) => (
               <div
                 key={review.id}
+                role="button"
+                tabIndex={0}
                 className="p-5 2xl:p-8 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 cursor-pointer hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors"
                 onClick={() => setSelectedReviewId(review.id)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    setSelectedReviewId(review.id);
+                  }
+                }}
               >
                 <div className="flex items-start gap-4 2xl:gap-6">
                   {/* Avatar */}

@@ -271,5 +271,16 @@
     "reviewPlaceholder": "Share your experience with this product...",
     "goToSlide": "Go to slide {{number}}",
     "toggleTheme": "Toggle theme"
+  },
+  "a11y": {
+    "openMenu": "Open menu",
+    "openCart": "Open cart",
+    "decreaseQuantity": "Decrease quantity",
+    "increaseQuantity": "Increase quantity",
+    "removeItem": "Remove item",
+    "addToWishlist": "Add to wishlist",
+    "rateStars": "Rate {{count}} stars",
+    "previousPage": "Previous page",
+    "nextPage": "Next page"
   }
 }

@@ -44,7 +44,7 @@ const ShoppingCart = () => {
 
   return (
     <Sheet>
-      <SheetTrigger className={triggerClass()}>
+      <SheetTrigger aria-label={t("a11y.openCart")} className={triggerClass()}>
         <ShoppingBag className="w-4 h-4 2xl:w-5 2xl:h-5 text-neutral-300" />
         {totalItems > 0 && <span className={badgeClass()}>{totalItems}</span>}
       </SheetTrigger>

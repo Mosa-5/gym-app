@@ -47,6 +47,7 @@ const CartItemRow: React.FC<CartItemRowProps> = ({
           <div className="flex items-center gap-1">
             <button
               onClick={() => changeQuantity(product.id.toString(), "decrement")}
+              aria-label={t("a11y.decreaseQuantity")}
               className={qtyButtonClass()}
             >
               <Minus className={qtyIconClass()} />
@@ -54,6 +55,7 @@ const CartItemRow: React.FC<CartItemRowProps> = ({
             <span className={qtyCountClass()}>{product.quantity}</span>
             <button
               onClick={() => changeQuantity(product.id.toString(), "increment")}
+              aria-label={t("a11y.increaseQuantity")}
               className={qtyButtonClass()}
             >
               <Plus className={qtyIconClass()} />
@@ -69,6 +71,7 @@ const CartItemRow: React.FC<CartItemRowProps> = ({
       {/* Remove */}
       <button
         onClick={() => removeFromCart(product.id.toString())}
+        aria-label={t("a11y.removeItem")}
         className={removeButtonClass()}
       >
         <Trash2 className="w-4 h-4 2xl:w-5 2xl:h-5" />

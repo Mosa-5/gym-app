@@ -105,6 +105,7 @@ const CarouselCard: React.FC<CarouselCardProps> = ({
                   </button>
                   <button
                     onClick={(e) => onAddToWishlist(e, product.id)}
+                    aria-label={t("a11y.addToWishlist")}
                     className="flex items-center justify-center text-white/70 hover:text-white transition-colors duration-200 cursor-pointer"
                   >
                     <Heart className="w-5 h-5 sm:w-7 sm:h-7" />

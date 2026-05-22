@@ -1,4 +1,5 @@
 import { Trash2, Minus, Plus } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import type { CartItem as CartItemData } from "@/context/cart";
 import {
   itemCardClass,
@@ -22,6 +23,8 @@ const CartItem: React.FC<CartItemProps> = ({
   changeQuantity,
   removeFromCart,
 }) => {
+  const { t } = useTranslation();
+
   return (
     <div className={itemCardClass()}>
       {/* Product image */}
@@ -43,6 +46,7 @@ const CartItem: React.FC<CartItemProps> = ({
           <div className="flex items-center gap-1">
             <button
               onClick={() => changeQuantity(product.id.toString(), "decrement")}
+              aria-label={t("a11y.decreaseQuantity")}
               className={qtyButtonClass()}
             >
               <Minus className="w-3 h-3 2xl:w-4 2xl:h-4 text-neutral-300" />
@@ -50,6 +54,7 @@ const CartItem: React.FC<CartItemProps> = ({
             <span className={qtyCountClass()}>{product.quantity}</span>
             <button
               onClick={() => changeQuantity(product.id.toString(), "increment")}
+              aria-label={t("a11y.increaseQuantity")}
               className={qtyButtonClass()}
             >
               <Plus className="w-3 h-3 2xl:w-4 2xl:h-4 text-neutral-300" />
@@ -66,6 +71,7 @@ const CartItem: React.FC<CartItemProps> = ({
       {/* Remove button */}
       <button
         onClick={() => removeFromCart(product.id.toString())}
+        aria-label={t("a11y.removeItem")}
         className={removeButtonClass()}
       >
         <Trash2 className="w-[1.125rem] h-[1.125rem] 2xl:w-6 2xl:h-6" />

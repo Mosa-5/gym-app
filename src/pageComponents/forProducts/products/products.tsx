@@ -159,6 +159,7 @@ const ProductGrid: React.FC<{
               <button
                 onClick={() => setPage(Math.max(1, page - 1))}
                 disabled={page === 1}
+                aria-label={t("a11y.previousPage")}
                 className="w-10 h-10 2xl:w-12 2xl:h-12 rounded-full bg-neutral-900 dark:bg-neutral-200 text-white dark:text-black flex items-center justify-center disabled:opacity-30 hover:bg-neutral-800 dark:hover:bg-neutral-300 transition-colors cursor-pointer disabled:cursor-not-allowed"
               >
                 <ChevronLeft className="w-5 h-5" />
@@ -181,6 +182,7 @@ const ProductGrid: React.FC<{
               <button
                 onClick={() => setPage(Math.min(totalPages, page + 1))}
                 disabled={page === totalPages}
+                aria-label={t("a11y.nextPage")}
                 className="w-10 h-10 2xl:w-12 2xl:h-12 rounded-full bg-neutral-900 dark:bg-neutral-200 text-white dark:text-black flex items-center justify-center disabled:opacity-30 hover:bg-neutral-800 dark:hover:bg-neutral-300 transition-colors cursor-pointer disabled:cursor-not-allowed"
               >
                 <ChevronRight className="w-5 h-5" />

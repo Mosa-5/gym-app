@@ -26,7 +26,10 @@ const Menu = () => {
   return (
     <div className="flex md:hidden">
       <Sheet>
-        <SheetTrigger className="p-1.5 rounded-md hover:bg-neutral-800 transition-colors">
+        <SheetTrigger
+          aria-label={t("a11y.openMenu")}
+          className="p-1.5 rounded-md hover:bg-neutral-800 transition-colors"
+        >
           <MenuIcon className="w-5 h-5 text-neutral-300" />
         </SheetTrigger>
         <SheetContent
