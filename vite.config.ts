@@ -17,4 +17,17 @@ export default defineConfig({
       "@": "/src",
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        // Split heavy vendors into their own chunks so they cache separately
+        // from app code and the main bundle stays under the size warning.
+        manualChunks: {
+          "react-vendor": ["react", "react-dom", "react-router-dom"],
+          supabase: ["@supabase/supabase-js"],
+          "framer-motion": ["framer-motion"],
+        },
+      },
+    },
+  },
 });
