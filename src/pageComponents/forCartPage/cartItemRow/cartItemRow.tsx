@@ -15,8 +15,8 @@ import {
 
 interface CartItemRowProps {
   product: CartItemData;
-  changeQuantity: (id: string, action: "increment" | "decrement") => void;
-  removeFromCart: (id: string) => void;
+  changeQuantity: (id: number, action: "increment" | "decrement") => void;
+  removeFromCart: (id: number) => void;
 }
 
 const CartItemRow: React.FC<CartItemRowProps> = ({
@@ -46,7 +46,7 @@ const CartItemRow: React.FC<CartItemRowProps> = ({
         <div className="flex items-center justify-between mt-3">
           <div className="flex items-center gap-1">
             <button
-              onClick={() => changeQuantity(product.id.toString(), "decrement")}
+              onClick={() => changeQuantity(product.id, "decrement")}
               aria-label={t("a11y.decreaseQuantity")}
               className={qtyButtonClass()}
             >
@@ -54,7 +54,7 @@ const CartItemRow: React.FC<CartItemRowProps> = ({
             </button>
             <span className={qtyCountClass()}>{product.quantity}</span>
             <button
-              onClick={() => changeQuantity(product.id.toString(), "increment")}
+              onClick={() => changeQuantity(product.id, "increment")}
               aria-label={t("a11y.increaseQuantity")}
               className={qtyButtonClass()}
             >
@@ -70,7 +70,7 @@ const CartItemRow: React.FC<CartItemRowProps> = ({
 
       {/* Remove */}
       <button
-        onClick={() => removeFromCart(product.id.toString())}
+        onClick={() => removeFromCart(product.id)}
         aria-label={t("a11y.removeItem")}
         className={removeButtonClass()}
       >

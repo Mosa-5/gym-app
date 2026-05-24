@@ -14,9 +14,9 @@ export type CartItem = {
 interface CartContextType {
   cart: CartItem[];
   addToCart: (item: CartItem) => void;
-  removeFromCart: (id: string) => void;
+  removeFromCart: (id: number) => void;
   clearCart: () => void;
-  changeQuantity: (id: string, action: "increment" | "decrement") => void;
+  changeQuantity: (id: number, action: "increment" | "decrement") => void;
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -58,10 +58,10 @@ export const CartProvider: React.FC<React.PropsWithChildren> = ({
     });
   };
 
-  const changeQuantity = (id: string, action: "increment" | "decrement") => {
+  const changeQuantity = (id: number, action: "increment" | "decrement") => {
     setCart((prevCart) =>
       prevCart.map((item) =>
-        item.id === Number(id)
+        item.id === id
           ? {
               ...item,
               quantity:
@@ -74,8 +74,8 @@ export const CartProvider: React.FC<React.PropsWithChildren> = ({
     );
   };
 
-  const removeFromCart = (id: string) => {
-    setCart((prevCart) => prevCart.filter((item) => item.id !== Number(id)));
+  const removeFromCart = (id: number) => {
+    setCart((prevCart) => prevCart.filter((item) => item.id !== id));
   };
 
   const clearCart = () => {
