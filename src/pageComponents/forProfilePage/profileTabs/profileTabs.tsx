@@ -8,7 +8,7 @@ import { User, Package, Heart, MessageSquare } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import Account from "@/pageComponents/forProfilePage/ProfileInfoSection/account/account";
 import Orders from "@/pageComponents/forProfilePage/ProfileInfoSection/orders/orders";
-import Wishlist from "@/pageComponents/forProfilePage/ProfileInfoSection/whishlist/whishlist";
+import Wishlist from "@/pageComponents/forProfilePage/ProfileInfoSection/wishlist/wishlist";
 import PersonalReviews from "@/pageComponents/forProfilePage/ProfileInfoSection/personalReviews/personalReviews";
 import {
   tabsListClass,

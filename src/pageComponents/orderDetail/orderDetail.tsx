@@ -4,7 +4,7 @@ import { useParams, Link } from "react-router-dom";
 import { Package, ArrowLeft, Truck } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
-const IdOrder = () => {
+const OrderDetail = () => {
   const { t } = useTranslation();
   const { OrderId } = useParams();
   const {
@@ -155,4 +155,4 @@ const IdOrder = () => {
   );
 };
 
-export default IdOrder;
+export default OrderDetail;

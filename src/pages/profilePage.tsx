@@ -1,4 +1,4 @@
-import ProfileHero from "@/pageComponents/forProfilePage/ProfileHero/profileHero";
+import ProfileHero from "@/pageComponents/forProfilePage/profileHero/profileHero";
 import ProfileTabs from "@/pageComponents/forProfilePage/profileTabs/profileTabs";
 
 const Profile = () => {

@@ -1,4 +1,4 @@
-import { getWishlistedProducts, WishlistItem } from "@/supabase/whishlist";
+import { getWishlistedProducts, WishlistItem } from "@/supabase/wishlist";
 import {
   useQuery,
   UseQueryOptions,

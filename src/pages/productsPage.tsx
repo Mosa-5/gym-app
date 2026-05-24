@@ -1,9 +1,9 @@
 import ProductsHeroBanner from "@/pageComponents/forProducts/heroBanner/hero";
 import SearchBar from "@/pageComponents/forProducts/search/search";
-import SortMenu from "@/pageComponents/forProducts/SortMenu/SortMenu";
+import SortMenu from "@/pageComponents/forProducts/sortMenu/sortMenu";
 import ProductGrid from "@/pageComponents/forProducts/products/products";
 import Filters from "@/pageComponents/forProducts/filter/filter";
-import FiltersMobile from "@/pageComponents/forProducts/filter/filretMobile";
+import FiltersMobile from "@/pageComponents/forProducts/filter/filterMobile";
 import { useProductFilters } from "@/pageComponents/forProducts/hooks/useProductFilters";
 
 const Products = () => {

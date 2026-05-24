@@ -1,10 +1,10 @@
 import { useAuthContext } from "@/context/auth/hooks/useAuthContext";
-import { useGetWishlistedProducts } from "@/reactQuery/query/whishlist";
+import { useGetWishlistedProducts } from "@/reactQuery/query/wishlist";
 import emptyWishlistsSvg from "@/assets/undraw_wishlist_71gv.svg";
 import { Link } from "react-router-dom";
-import { useDeleteWishlistItem } from "@/reactQuery/mutations/whishlist";
+import { useDeleteWishlistItem } from "@/reactQuery/mutations/wishlist";
 import { toast } from "sonner";
-import { mapWishlistItemData } from "@/supabase/whishlist";
+import { mapWishlistItemData } from "@/supabase/wishlist";
 import { Trash2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { crosshatchPattern } from "@/lib/crosshatchPattern";

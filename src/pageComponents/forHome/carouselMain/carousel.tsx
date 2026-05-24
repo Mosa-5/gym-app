@@ -17,7 +17,7 @@ import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { useCartContext } from "@/context/cart/hooks/useCartContext";
 import { useAuthContext } from "@/context/auth/hooks/useAuthContext";
-import { useAddToWishlist } from "@/reactQuery/mutations/whishlist";
+import { useAddToWishlist } from "@/reactQuery/mutations/wishlist";
 import SectionHeading from "@/pageComponents/forHome/sectionHeading/sectionHeading";
 import CarouselCard from "./carouselCard";
 import { useTranslation } from "react-i18next";
@@ -28,7 +28,7 @@ interface CarouselProps {
   carouselType: "bestSelling" | "category" | "worstSelling";
 }
 
-const CaruselForPages: React.FC<CarouselProps> = ({
+const CarouselForPages: React.FC<CarouselProps> = ({
   productType,
   headerText,
   carouselType,
@@ -163,4 +163,4 @@ const CaruselForPages: React.FC<CarouselProps> = ({
   );
 };
 
-export default CaruselForPages;
+export default CarouselForPages;

@@ -1,11 +1,11 @@
 import LeverBeltBanner from "@/pageComponents/forHome/advert/advert";
-import CaruselForPages from "@/pageComponents/forHome/carouselMain/carusel";
+import CarouselForPages from "@/pageComponents/forHome/carouselMain/carousel";
 import HeroBanner from "@/pageComponents/forHome/heroBanner/heroBanner";
 import CategoriesSection from "@/pageComponents/forHome/categoriesSection/categoriesSection";
 import BrandStory from "@/pageComponents/forHome/brandStory/brandStory";
 import ReviewsSocialProof from "@/pageComponents/forHome/reviewsSocialProof/reviewsSocialProof";
 import Newsletter from "@/pageComponents/forHome/newsletter/newsletter";
-import ExperimentalCarousel from "@/pageComponents/forHome/experimentalCarousel/carousel";
+import FreshPicksCarousel from "@/pageComponents/forHome/freshPicksCarousel/carousel";
 import { useTranslation } from "react-i18next";
 
 const Main = () => {
@@ -14,12 +14,12 @@ const Main = () => {
   return (
     <>
       <HeroBanner />
-      <ExperimentalCarousel
+      <FreshPicksCarousel
         headerText={t("common.freshPicks", "Fresh Picks")}
         carouselType="worstSelling"
       />
       <CategoriesSection />
-      <CaruselForPages
+      <CarouselForPages
         headerText={t("common.bestSelling", "Best Selling Lifting Gear")}
         carouselType="bestSelling"
       />

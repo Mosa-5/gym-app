@@ -10,7 +10,7 @@ import DashboardLayout from "./layouts/dashboardLayout";
 import { ThemeProvider } from "./componentsShadcn/theme/theme-provider";
 import AuthGuardLogIn from "./pageComponents/route-guards/auth/forSignIn";
 import AuthGuardLogOut from "./pageComponents/route-guards/auth/forSignOut";
-import AuthLayout from "./layouts/authlayout";
+import AuthLayout from "./layouts/authLayout";
 import { Loader } from "./pageComponents/loader/loader";
 import { useAuthContext } from "./context/auth/hooks/useAuthContext";
 import { supabase } from "./supabase/supabase";
@@ -25,7 +25,9 @@ const Products = lazy(() => import("./pages/productsPage"));
 const ProductDetail = lazy(() => import("./pages/singleProductPage"));
 const CartPage = lazy(() => import("./pages/cartPage"));
 const Profile = lazy(() => import("./pages/profilePage"));
-const IdOrder = lazy(() => import("./pageComponents/idOrder/idOrder"));
+const OrderDetail = lazy(
+  () => import("./pageComponents/orderDetail/orderDetail"),
+);
 const About = lazy(() => import("./pages/aboutPage"));
 
 const App: React.FC = () => {
@@ -139,7 +141,7 @@ const App: React.FC = () => {
             path="orders/:OrderId"
             element={
               <Suspense fallback={<Loader />}>
-                <IdOrder />
+                <OrderDetail />
               </Suspense>
             }
           />

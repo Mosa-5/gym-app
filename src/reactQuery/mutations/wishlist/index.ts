@@ -1,4 +1,4 @@
-import { addToWishlist, deleteFromWishlist } from "@/supabase/whishlist";
+import { addToWishlist, deleteFromWishlist } from "@/supabase/wishlist";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export const useAddToWishlist = () => {

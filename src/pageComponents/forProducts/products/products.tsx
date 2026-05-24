@@ -7,7 +7,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import ProductCard from "./productCard";
 import { toast } from "sonner";
 import { useAuthContext } from "@/context/auth/hooks/useAuthContext";
-import { useAddToWishlist } from "@/reactQuery/mutations/whishlist";
+import { useAddToWishlist } from "@/reactQuery/mutations/wishlist";
 import type { FilterState } from "@/pageComponents/forProducts/filter/filter";
 import noDataSVG from "@/assets/undraw_no-data_ig65.svg";
 import "@/pageComponents/loader/loader.css";

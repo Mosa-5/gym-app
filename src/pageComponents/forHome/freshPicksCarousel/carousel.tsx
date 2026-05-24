@@ -52,7 +52,7 @@ function lerpSlot(a: SlotStyle, b: SlotStyle, t: number): SlotStyle {
 
 const DRAG_SENSITIVITY = 200;
 
-const ExperimentalCarousel: React.FC<CarouselProps> = ({
+const FreshPicksCarousel: React.FC<CarouselProps> = ({
   productType,
   headerText,
   carouselType,
@@ -293,4 +293,4 @@ const ExperimentalCarousel: React.FC<CarouselProps> = ({
   );
 };
 
-export default ExperimentalCarousel;
+export default FreshPicksCarousel;

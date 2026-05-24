@@ -4,7 +4,7 @@ import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
 import { useAuthContext } from "@/context/auth/hooks/useAuthContext";
 import { useCartContext } from "@/context/cart/hooks/useCartContext";
-import { useAddToWishlist } from "@/reactQuery/mutations/whishlist";
+import { useAddToWishlist } from "@/reactQuery/mutations/wishlist";
 import { useGetProductReviews } from "@/reactQuery/query/reviews";
 
 interface Product {
