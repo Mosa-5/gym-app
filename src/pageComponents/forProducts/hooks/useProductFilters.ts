@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
 import type { FilterState } from "@/pageComponents/forProducts/filter/filter";
+import { PRICE_MIN, PRICE_MAX } from "@/lib/constants";
 
 /**
  * Owns the products page's URL-driven state: reads the current search/sort/
@@ -36,8 +37,8 @@ export const useProductFilters = () => {
 
   const filters: FilterState = {
     priceRange: [
-      Number(searchParams.get("priceMin")) || 0,
-      Number(searchParams.get("priceMax")) || 1000,
+      Number(searchParams.get("priceMin")) || PRICE_MIN,
+      Number(searchParams.get("priceMax")) || PRICE_MAX,
     ],
     categories: searchParams.get("categories")
       ? searchParams.get("categories")!.split(",")
@@ -49,10 +50,10 @@ export const useProductFilters = () => {
       setSearchParams(
         (prev) => {
           const p = new URLSearchParams(prev);
-          if (next.priceRange[0] !== 0)
+          if (next.priceRange[0] !== PRICE_MIN)
             p.set("priceMin", String(next.priceRange[0]));
           else p.delete("priceMin");
-          if (next.priceRange[1] !== 1000)
+          if (next.priceRange[1] !== PRICE_MAX)
             p.set("priceMax", String(next.priceRange[1]));
           else p.delete("priceMax");
           if (next.categories.length > 0)

@@ -40,18 +40,3 @@ export const useGetUserSingleOrder = <T>(
     ...queryOptions,
   });
 };
-
-// export const fetchUserOrders = async (userId: string) => {
-//         const { data, error } = await supabase
-//           .from('orders')
-//           .select('*')
-//           .eq('user_id', userId)
-//           .order('created_at', { ascending: false });
-
-//         if (error) {
-//           console.error('Error fetching orders:', error.message);
-//           return null;
-//         }
-
-//         return data;
-//       };

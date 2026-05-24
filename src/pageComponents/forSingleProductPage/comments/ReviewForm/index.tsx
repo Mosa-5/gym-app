@@ -12,12 +12,15 @@ import {
 import { Textarea } from "@/componentsShadcn/ui/textarea";
 import { Star } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { REVIEW_MIN_LENGTH, REVIEW_MAX_LENGTH } from "@/lib/constants";
 
 const formSchema = z.object({
   rating: z.number().min(1, { message: "Please select a rating" }),
   description: z
     .string()
-    .min(40, { message: "Description must be at least 40 characters." })
+    .min(REVIEW_MIN_LENGTH, {
+      message: `Description must be at least ${REVIEW_MIN_LENGTH} characters.`,
+    })
     .nonempty({ message: "Description is required" }),
 });
 
@@ -95,14 +98,14 @@ const ReviewForm: React.FC<{
                   {t("common.yourReview")}
                 </FormLabel>
                 <span className="text-xs 2xl:text-sm text-neutral-400">
-                  {field.value.length}/600
+                  {field.value.length}/{REVIEW_MAX_LENGTH}
                 </span>
               </div>
               <FormControl>
                 <Textarea
                   className="min-h-32 2xl:min-h-48 rounded-xl border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800/50 text-sm 2xl:text-base leading-relaxed resize-none focus:ring-2 focus:ring-neutral-900 dark:focus:ring-neutral-100"
                   placeholder={t("common.reviewPlaceholder")}
-                  maxLength={600}
+                  maxLength={REVIEW_MAX_LENGTH}
                   {...field}
                 />
               </FormControl>

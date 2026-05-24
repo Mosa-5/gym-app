@@ -9,6 +9,7 @@ import {
   AccordionTrigger,
 } from "@/componentsShadcn/ui/accordion";
 import { useTranslation } from "react-i18next";
+import { PRICE_MIN, PRICE_MAX } from "@/lib/constants";
 
 const CATEGORIES = [
   "lever-belts",
@@ -52,7 +53,7 @@ const Filters: React.FC<FiltersProps> = ({ filters, onFiltersChange }) => {
   const handleInputChange = (index: 0 | 1, raw: string) => {
     const num = parseInt(raw, 10);
     if (isNaN(num)) return;
-    const clamped = Math.min(Math.max(num, 0), 1000);
+    const clamped = Math.min(Math.max(num, PRICE_MIN), PRICE_MAX);
     const next: [number, number] = [localPrice[0], localPrice[1]];
     next[index] = clamped;
     if (next[0] > next[1]) return;
@@ -92,7 +93,7 @@ const Filters: React.FC<FiltersProps> = ({ filters, onFiltersChange }) => {
               </span>
               <input
                 type="number"
-                min={0}
+                min={PRICE_MIN}
                 max={localPrice[1]}
                 value={localPrice[0]}
                 onChange={(e) => handleInputChange(0, e.target.value)}
@@ -107,7 +108,7 @@ const Filters: React.FC<FiltersProps> = ({ filters, onFiltersChange }) => {
               <input
                 type="number"
                 min={localPrice[0]}
-                max={1000}
+                max={PRICE_MAX}
                 value={localPrice[1]}
                 onChange={(e) => handleInputChange(1, e.target.value)}
                 className="w-full pl-6 pr-2 py-1.5 2xl:py-2 text-sm 2xl:text-base rounded-lg border border-white/20 bg-black/20 text-white placeholder-white/40 focus:outline-none focus:ring-1 focus:ring-white/50 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"

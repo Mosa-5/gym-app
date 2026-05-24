@@ -119,31 +119,3 @@ export const mapSingleOrdersData = (data: Order) => {
     item: data.item || [],
   };
 };
-
-// export const fetchOrderDetails = async (orderId: number) => {
-//     const { data: order, error } = await supabase
-//       .from('orders')
-//       .select('id, created_at, total_price, user_id, item')
-//       .eq('id', orderId)
-//       .single();
-//     console.log(order)
-
-//     if (error) {
-//       console.error('Error fetching order details:', error.message);
-//       return null;
-//     }
-
-//     const productIds = order?.item.map((item: any) => item.productId);
-
-//     const { data: products, error: productsError } = await supabase
-//       .from('product')
-//       .select('id, name, price, image_url')
-//       .in('id', productIds);
-
-//     if (productsError) {
-//       console.error('Error fetching product details:', productsError.message);
-//       return { order, products };
-//     }
-
-//     return { order, products };
-//   };
