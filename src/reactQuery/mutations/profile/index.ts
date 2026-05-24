@@ -3,18 +3,6 @@ import { FillProfileInfoPayload } from "../../../supabase/account/index.types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
-// useMutation({
-//     mutationKey: ["fill-profile-info"],
-//     mutationFn: fillProfileInfo,
-//     onSuccess: () => {
-//       setIsEditing(false);
-//       console.log("Profile updated successfully!");
-//     },
-//     onError: (error: any) => {
-//       console.log(`Error updating profile: ${error.message}`);
-//     },
-//   })
-
 export const useFillProfile = () => {
   const queryClient = useQueryClient();
 
@@ -23,7 +11,7 @@ export const useFillProfile = () => {
     Error,
     { id: string; values: FillProfileInfoPayload }
   >({
-    mutationKey: ["fill-profile-info"],
+    mutationKey: ["fillProfileInfo"],
     mutationFn: fillProfileInfo, // Updated to use the void-returning function
     onSuccess: (_, { id }) => {
       queryClient.invalidateQueries({
@@ -42,7 +30,7 @@ export const useUploadAvatar = () => {
   const queryClient = useQueryClient();
 
   return useMutation<string, Error, { userId: string; file: File }>({
-    mutationKey: ["upload-avatar"],
+    mutationKey: ["uploadAvatar"],
     mutationFn: uploadAvatar,
     onSuccess: (_, { userId }) => {
       queryClient.invalidateQueries({

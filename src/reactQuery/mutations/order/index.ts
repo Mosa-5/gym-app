@@ -31,7 +31,7 @@ export const usePlaceOrder = () => {
     onSuccess: (_, { userId }) => {
       clearCart();
       queryClient.invalidateQueries({
-        queryKey: ["Orders", userId],
+        queryKey: ["orders", userId],
         exact: true, // Ensures only the exact query is invalidated
       });
     },

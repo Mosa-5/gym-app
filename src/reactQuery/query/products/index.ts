@@ -73,7 +73,7 @@ export const useGetProductListWithWorstSelling = <T = Product[]>({
   queryOptions?: Omit<UseQueryOptions<Product[], Error, T>, "queryKey">;
 } = {}): UseQueryResult<T, Error> => {
   return useQuery<Product[], Error, T>({
-    queryKey: ["WorstSellingProducts"],
+    queryKey: ["worstSellingProducts"],
     queryFn: getProductListWorstSelling,
     staleTime: 60 * 1000,
     ...queryOptions,

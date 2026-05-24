@@ -14,7 +14,7 @@ export const useGetUserOrders = <T>(
   id: string | undefined,
 ): UseQueryResult<T, Error> => {
   return useQuery<Order[], Error, T>({
-    queryKey: ["Orders", id],
+    queryKey: ["orders", id],
     queryFn: () => {
       return getUserOrders(id);
     },
@@ -32,7 +32,7 @@ export const useGetUserSingleOrder = <T>(
   id: string | undefined,
 ): UseQueryResult<T, Error> => {
   return useQuery<Order, Error, T>({
-    queryKey: ["SingleOrder", id],
+    queryKey: ["singleOrder", id],
     queryFn: () => {
       return getUserSingleOrder(id);
     },

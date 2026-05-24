@@ -15,7 +15,7 @@ export const useAddToWishlist = () => {
     // Updated to use the void-returning function
     onSuccess: (_, { userId }) => {
       queryClient.invalidateQueries({
-        queryKey: ["Wishlist", userId],
+        queryKey: ["wishlist", userId],
         exact: true,
       });
     },
@@ -39,7 +39,7 @@ export const useDeleteWishlistItem = () => {
 
     onSuccess: (_, { userId }) => {
       queryClient.invalidateQueries({
-        queryKey: ["Wishlist", userId],
+        queryKey: ["wishlist", userId],
         exact: true,
       });
     },

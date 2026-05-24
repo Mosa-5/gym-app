@@ -20,7 +20,7 @@ export const useGuestSignIn = () => {
   const navigate = useNavigate();
 
   return useMutation<void, Error>({
-    mutationKey: ["guest-login"],
+    mutationKey: ["guestLogin"],
     mutationFn: GuestSignIn,
 
     onSuccess: () => {

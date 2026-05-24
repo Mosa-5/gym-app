@@ -14,7 +14,7 @@ export const useGetWishlistedProducts = <T>(
   id: string | undefined,
 ): UseQueryResult<T, Error> => {
   return useQuery<WishlistItem[], Error, T>({
-    queryKey: ["Wishlist", id],
+    queryKey: ["wishlist", id],
     queryFn: () => {
       return getWishlistedProducts(id);
     },
