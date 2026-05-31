@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import SectionHeading from "@/pageComponents/forHome/sectionHeading/sectionHeading";
 import { sectionClass, containerClass } from "./brandStory.styles";
 import storyImg1 from "@/assets/pexels-823sl-2294361.webp";
-import storyImg2 from "@/assets/pexels-binyaminmellish-17840.webp";
+import storyImg2 from "@/assets/hero-image.webp";
 import storyImg3 from "@/assets/pexels-franki-frank-11513151.webp";
 import equipImg1 from "@/assets/bells.avif";
 import equipImg2 from "@/assets/mobileGear.avif";

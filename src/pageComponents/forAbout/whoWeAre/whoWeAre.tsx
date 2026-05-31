@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import storyImg1 from "@/assets/ripped.avif";
-import storyImg2 from "@/assets/pexels-binyaminmellish-17840.webp";
+import storyImg2 from "@/assets/hero-image.webp";
 import { useTranslation } from "react-i18next";
 
 const fade = (delay = 0) => ({

@@ -35,6 +35,10 @@ const ProductsHeroBanner = () => {
           className="w-full h-full object-cover md:object-[50%_65%] object-center"
         />
       </picture>
+
+      {/* Black layer that fades out to reveal the hero (image stays opacity:1) */}
+      <div className="absolute inset-0 bg-black pointer-events-none z-[2] hero-cover" />
+
       <div className={overlay()} />
 
       <motion.div

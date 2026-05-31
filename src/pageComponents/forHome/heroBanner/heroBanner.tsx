@@ -1,5 +1,5 @@
-import gymheroimg from "@/assets/pexels-binyaminmellish-17840.jpg";
-import gymheroimgWebp from "@/assets/pexels-binyaminmellish-17840.webp";
+import gymheroimg from "@/assets/hero-image.jpg";
+import gymheroimgWebp from "@/assets/hero-image.webp";
 import mobileHeroImg from "@/assets/ripped.avif";
 import {
   heroSectionClass,
@@ -38,6 +38,10 @@ const HeroBanner: React.FC = () => {
           className="w-full h-full object-cover md:object-[70%_30%] object-center"
         />
       </picture>
+
+      {/* Black layer over the image that fades out to reveal it. The image
+          itself stays at full opacity (paints immediately → no LCP penalty). */}
+      <div className="absolute inset-0 bg-black pointer-events-none z-[2] hero-cover" />
 
       {/* Overlay */}
       <div className={overlayClass()} />

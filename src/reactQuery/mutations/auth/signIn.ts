@@ -2,7 +2,7 @@ import { GuestSignIn, login } from "@/supabase/auth";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
-export const useSignIn = () => {
+export const useSignIn = (redirectTo = "/dashboard/main") => {
   const navigate = useNavigate();
 
   return useMutation<void, Error, { email: string; password: string }>({
@@ -10,13 +10,13 @@ export const useSignIn = () => {
     mutationFn: login,
 
     onSuccess: () => {
-      navigate("/dashboard/main");
+      navigate(redirectTo, { replace: true });
     },
     onError: () => {},
   });
 };
 
-export const useGuestSignIn = () => {
+export const useGuestSignIn = (redirectTo = "/dashboard/main") => {
   const navigate = useNavigate();
 
   return useMutation<void, Error>({
@@ -24,7 +24,7 @@ export const useGuestSignIn = () => {
     mutationFn: GuestSignIn,
 
     onSuccess: () => {
-      navigate("/dashboard/main");
+      navigate(redirectTo, { replace: true });
     },
   });
 };

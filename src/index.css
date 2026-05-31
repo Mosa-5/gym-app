@@ -13,17 +13,30 @@ body {
 
 @keyframes hero-zoom-in {
   from {
-    opacity: 0;
     transform: scale(1.08);
   }
   to {
-    opacity: 1;
     transform: scale(1);
   }
 }
 
 .hero-animate {
   animation: hero-zoom-in 0.6s ease-out both;
+}
+
+/* Black layer that fades out to reveal the hero. The image stays at full
+   opacity (paints immediately → no LCP penalty); only this cover animates. */
+@keyframes hero-reveal {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.hero-cover {
+  animation: hero-reveal 0.6s ease-out both;
 }
 
 html[lang="ka"],

@@ -12,7 +12,7 @@ import {
 } from "@/componentsShadcn/ui/form";
 import { Input } from "@/componentsShadcn/ui/input";
 import { useSignIn, useGuestSignIn } from "@/reactQuery/mutations/auth/signIn";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import {
   cardClass,
@@ -40,6 +40,13 @@ const formSchema = z.object({
 
 const FormElement = () => {
   const { t } = useTranslation();
+  const location = useLocation();
+
+  // Where the user was headed before being bounced to sign-in (set by the
+  // auth guard); fall back to home when they came here directly.
+  const from = location.state?.from
+    ? location.state.from.pathname + location.state.from.search
+    : "/dashboard/main";
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -49,8 +56,9 @@ const FormElement = () => {
     },
   });
 
-  const { mutate: login, isError, error, isPending } = useSignIn();
-  const { mutate: guestLogin, isPending: isGuestPending } = useGuestSignIn();
+  const { mutate: login, isError, error, isPending } = useSignIn(from);
+  const { mutate: guestLogin, isPending: isGuestPending } =
+    useGuestSignIn(from);
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     login(values);

@@ -23,6 +23,10 @@ const AboutHero = () => {
           backgroundPosition: "50% 40%",
         }}
       />
+
+      {/* Black layer that fades out to reveal the hero (background stays visible) */}
+      <div className="absolute inset-0 bg-black pointer-events-none z-[2] hero-cover" />
+
       <div className={overlay()} />
 
       <motion.div
