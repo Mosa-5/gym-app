@@ -4,17 +4,31 @@ updates:
   - package-ecosystem: npm
     directory: "/"
     schedule:
-      interval: weekly
+      interval: monthly
     open-pull-requests-limit: 10
     groups:
-      # One PR for all non-major updates to cut review noise; majors stay separate.
+      # One PR for all non-major updates to cut review noise.
       minor-and-patch:
         update-types:
           - minor
           - patch
+    ignore:
+      # Skip major bumps — they can break behavior, and CI only proves the app
+      # compiles, not that it still works. Revisit once there's a test suite.
+      - dependency-name: "*"
+        update-types:
+          - version-update:semver-major
 
   # Keep the GitHub Actions versions used in workflows up to date.
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
-      interval: weekly
+      interval: monthly
+    groups:
+      github-actions:
+        patterns:
+          - "*"
+    ignore:
+      - dependency-name: "*"
+        update-types:
+          - version-update:semver-major
