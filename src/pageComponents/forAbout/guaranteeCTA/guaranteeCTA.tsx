@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { Link } from "react-router-dom";
 import { guaranteePoints } from "./guaranteeCTA.data";
 import { ctaButton } from "./guaranteeCTA.styles";
@@ -14,7 +14,7 @@ const staggerContainer = (staggerChildren = 0.1) => ({
   },
 });
 
-const fadeVariant = {
+const fadeVariant: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,

@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { metricsData } from "./metrics.data";
 import { useTranslation } from "react-i18next";
 
@@ -12,7 +12,7 @@ const staggerContainer = (staggerChildren = 0.1) => ({
   },
 });
 
-const fadeVariant = {
+const fadeVariant: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
