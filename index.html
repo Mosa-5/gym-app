@@ -4,12 +4,13 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/logo.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700;800;900&family=Noto+Sans+Georgian:wght@300;400;500;600;700;800;900&display=swap"
-      rel="stylesheet"
-    />
+    <!--
+      Fonts are self-hosted (see src/fonts.css) rather than loaded from the
+      Google Fonts CDN, which put two render-blocking third-party origins in the
+      critical path. The preload links for the hero image and the Latin font are
+      injected at build time by the `inject-preloads` plugin in vite.config.ts,
+      because their filenames are content-hashed and cannot be written here.
+    -->
     <title>GymGear | Premium Lifting Gear</title>
     <meta
       name="description"

@@ -1,0 +1,53 @@
+/**
+ * Self-hosted fonts.
+ *
+ * Previously these came from the Google Fonts CDN, which put two third-party
+ * origins in the critical path: a render-blocking stylesheet from
+ * fonts.googleapis.com, then the woff2 from fonts.gstatic.com — each needing its
+ * own DNS + TCP + TLS handshake (~220 ms each measured on a fast wired
+ * connection, 300–600 ms typical on mobile). Serving them from our own origin
+ * removes both round trips; the files are also content-hashed by Vite and so get
+ * the same immutable caching as the rest of /assets.
+ *
+ * These @font-face blocks are copied from @fontsource-variable/*'s `wght.css`
+ * rather than importing it, deliberately: that file declares every subset the
+ * font ships (cyrillic, devanagari, greek, …) and Vite would emit ~13 woff2
+ * files into dist that nothing ever requests. This app is English + Georgian
+ * only, so it declares exactly the two subsets it uses.
+ *
+ * Both are *variable* fonts — one file covers the whole 100–900 weight range,
+ * which is why using six different weights costs no extra requests.
+ *
+ * `unicode-range` is what keeps the Georgian file from being downloaded by
+ * English visitors: the browser only fetches a font whose range matches
+ * characters actually being rendered.
+ *
+ * To update: `yarn upgrade @fontsource-variable/noto-sans
+ * @fontsource-variable/noto-sans-georgian`, then re-copy the two blocks below
+ * from `node_modules/@fontsource-variable/<pkg>/wght.css`.
+ */
+
+/* Latin — the default UI font. */
+@font-face {
+  font-family: "Noto Sans Variable";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url("@fontsource-variable/noto-sans/files/noto-sans-latin-wght-normal.woff2")
+    format("woff2-variations");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* Georgian — only downloaded when Georgian characters are actually rendered. */
+@font-face {
+  font-family: "Noto Sans Georgian Variable";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url("@fontsource-variable/noto-sans-georgian/files/noto-sans-georgian-georgian-wght-normal.woff2")
+    format("woff2-variations");
+  unicode-range: U+0589, U+10A0-10FF, U+1C90-1CBA, U+1CBD-1CBF, U+205A,
+    U+2D00-2D2F, U+2E31;
+}

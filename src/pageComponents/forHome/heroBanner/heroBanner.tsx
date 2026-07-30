@@ -10,9 +10,12 @@ import {
   paragraphClass,
   buttonContainerClass,
   buttonClass,
+  scrollCueClass,
+  scrollCueLabelClass,
 } from "./heroBanner.styles";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { ChevronDown } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 const HeroBanner: React.FC = () => {
@@ -39,8 +42,7 @@ const HeroBanner: React.FC = () => {
         />
       </picture>
 
-      {/* Black layer over the image that fades out to reveal it. The image
-          itself stays at full opacity (paints immediately → no LCP penalty). */}
+      {/* Black layer over the image that fades out to reveal it. */}
       <div className="absolute inset-0 bg-black pointer-events-none z-[2] hero-cover" />
 
       {/* Overlay */}
@@ -99,6 +101,19 @@ const HeroBanner: React.FC = () => {
             </button>
           </Link>
         </motion.div>
+      </motion.div>
+
+      {/* Decorative scroll cue — aria-hidden because it tells a sighted user
+          something the page structure already conveys to a screen reader. */}
+      <motion.div
+        aria-hidden="true"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5, delay: 0.8 }}
+        className={scrollCueClass()}
+      >
+        <span className={scrollCueLabelClass()}>{t("hero.scroll")}</span>
+        <ChevronDown className="w-5 h-5 2xl:w-6 2xl:h-6 scroll-cue-arrow" />
       </motion.div>
     </section>
   );

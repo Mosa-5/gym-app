@@ -2,7 +2,13 @@ import { cva } from "class-variance-authority";
 
 export const heroSectionClass = cva([
   "relative bg-black text-white flex items-center sm:items-end",
-  "h-[70vh] sm:h-[80vh] md:h-[90vh] 2xl:h-[92vh]",
+  // Mobile uses svh, not vh: on iOS/Android `vh` measures the viewport with the
+  // browser chrome *hidden*, so 94vh renders taller than what's actually on
+  // screen and the bottom of the hero sits under the URL bar. `svh` is the
+  // small (chrome-visible) viewport, so it always fits. 88 rather than 94 also
+  // leaves the next section peeking, which is the scroll cue. From sm: up there
+  // is no dynamic chrome, so svh and vh are identical and vh is used.
+  "h-[88svh] sm:h-[94vh]",
   "pb-0 sm:pb-20 md:pb-28 2xl:pb-40",
 ]);
 
@@ -40,6 +46,27 @@ export const paragraphClass = cva([
 export const buttonContainerClass = cva(
   "mt-5 sm:mt-6 flex gap-4 justify-center sm:justify-start",
 );
+
+/**
+ * Scroll cue, pinned to the bottom centre of the hero.
+ *
+ * Desktop/tablet only: on mobile the hero is deliberately 88svh so the next
+ * section already peeks above the fold, which is a stronger cue than an icon.
+ *
+ * `z-10` matches the hero's text content, which also sits above the `hero-cover`
+ * fade — so the cue behaves like the copy, not like the image.
+ */
+export const scrollCueClass = cva([
+  "hidden md:flex absolute z-10",
+  "bottom-6 2xl:bottom-10 left-1/2 -translate-x-1/2",
+  "flex-col items-center gap-2",
+  "text-neutral-400",
+]);
+
+export const scrollCueLabelClass = cva([
+  "text-[10px] 2xl:text-xs",
+  "font-semibold uppercase tracking-[0.25em]",
+]);
 
 export const buttonClass = cva([
   "flex items-center gap-2 rounded-full",

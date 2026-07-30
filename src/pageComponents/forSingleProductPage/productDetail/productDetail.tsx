@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Star } from "lucide-react";
-import { toast } from "sonner";
+import { notify } from "@/lib/notify";
 import { useTranslation } from "react-i18next";
 import { useAuthContext } from "@/context/auth/hooks/useAuthContext";
 import { useCartContext } from "@/context/cart/hooks/useCartContext";
@@ -50,15 +50,15 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
 
   const handleAddToCart = () => {
     addToCart({ ...product, quantity: 1 });
-    toast.success(t("common.addedToCart", { name: product.name }));
+    notify.success(t("common.addedToCart", { name: product.name }));
   };
 
   const handleAddToWishlist = () => {
     if (!user) {
-      toast.error(t("common.needSignIn"));
+      notify.error(t("common.needSignIn"));
       return;
     }
-    toast.success(t("common.addedToFavourites"));
+    notify.success(t("common.addedToFavourites"));
     addToWishlistMutate({ productId: product.id.toString(), userId: user.id });
   };
 

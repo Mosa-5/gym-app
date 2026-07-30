@@ -12,7 +12,7 @@ import {
   DialogTrigger,
 } from "@/componentsShadcn/ui/dialog";
 import { useDeleteReview } from "@/reactQuery/mutations/reviews";
-import { toast } from "sonner";
+import { notify } from "@/lib/notify";
 import { ThumbsUp, Trash2, ExternalLink, Star } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { crosshatchPattern } from "@/lib/crosshatchPattern";
@@ -51,7 +51,7 @@ const PersonalReviews = () => {
       reviewId: reviewId,
       productId: productId,
     });
-    toast("Review deleted");
+    notify.message("Review deleted");
   };
 
   const formatTimestamp = (isoString: string) =>

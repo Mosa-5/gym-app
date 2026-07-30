@@ -15,7 +15,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/componentsShadcn/ui/dialog";
-import { toast } from "sonner";
+import { notify } from "@/lib/notify";
 import { ThumbsUp, MessageSquarePlus, Star } from "lucide-react";
 import ReviewForm from "./ReviewForm";
 import { useTranslation } from "react-i18next";
@@ -64,15 +64,15 @@ const ReviewList: React.FC = () => {
 
   const onSubmit = (values: { rating: number; description: string }) => {
     if (values.description.trim() === "") {
-      toast(t("reviews.messageEmpty"));
+      notify.message(t("reviews.messageEmpty"));
       return;
     }
     if (!user || !user.id) {
-      toast(t("reviews.needSignIn"));
+      notify.message(t("reviews.needSignIn"));
       return;
     }
     if (!id) {
-      toast(t("reviews.invalidProductId"));
+      notify.message(t("reviews.invalidProductId"));
       return;
     }
 
@@ -86,10 +86,10 @@ const ReviewList: React.FC = () => {
       {
         onSuccess: () => {
           setOpen(false);
-          toast.success(t("reviews.submitSuccess"));
+          notify.success(t("reviews.submitSuccess"));
         },
         onError: () => {
-          toast.error(t("reviews.submitFailed"));
+          notify.error(t("reviews.submitFailed"));
         },
       },
     );

@@ -15,12 +15,21 @@ import { Loader } from "./pageComponents/loader/loader";
 import { useAuthContext } from "./context/auth/hooks/useAuthContext";
 import { supabase } from "./supabase/supabase";
 import ScrollToTop from "./convenienceTools/scrollTop";
-import { Toaster } from "./componentsShadcn/ui/sonner";
 import { useTranslation } from "react-i18next";
+
+// Home is the landing route ("/" redirects here), so lazy-loading it only buys a
+// guaranteed extra round trip before anything can render. Static import.
+import Main from "./pages/mainPage";
+
+// The toast renderer isn't needed for first paint. Lazy() still starts fetching
+// during the first render, so it mounts long before a click can fire a toast —
+// it just no longer sits in the render-blocking initial chunk.
+const Toaster = lazy(() =>
+  import("./componentsShadcn/ui/sonner").then((m) => ({ default: m.Toaster })),
+);
 
 const LogIn = lazy(() => import("./pageComponents/logIn/logIn"));
 const Register = lazy(() => import("./pageComponents/register/register"));
-const Main = lazy(() => import("./pages/mainPage"));
 const Products = lazy(() => import("./pages/productsPage"));
 const ProductDetail = lazy(() => import("./pages/singleProductPage"));
 const CartPage = lazy(() => import("./pages/cartPage"));
@@ -83,19 +92,14 @@ const App: React.FC = () => {
   return (
     <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
       <ScrollToTop />
-      <Toaster richColors position="bottom-right" />
+      <Suspense fallback={null}>
+        <Toaster richColors position="bottom-right" />
+      </Suspense>
       <Routes>
         <Route path="/" element={<Navigate to="dashboard/main" replace />} />
 
         <Route path="dashboard" element={<DashboardLayout />}>
-          <Route
-            path="main"
-            element={
-              <Suspense fallback={<Loader />}>
-                <Main />
-              </Suspense>
-            }
-          />
+          <Route path="main" element={<Main />} />
           <Route
             path="products"
             element={

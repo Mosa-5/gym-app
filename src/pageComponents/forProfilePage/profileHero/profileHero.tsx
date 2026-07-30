@@ -5,7 +5,7 @@ import { useUploadAvatar } from "@/reactQuery/mutations/profile";
 import { AvatarImage } from "@/componentsShadcn/ui/avatar";
 import { LogOut, Camera, MapPin } from "lucide-react";
 import { useRef } from "react";
-import { toast } from "sonner";
+import { notify } from "@/lib/notify";
 import { useTranslation } from "react-i18next";
 import { crosshatchPattern } from "@/lib/crosshatchPattern";
 
@@ -29,20 +29,20 @@ const ProfileHero = () => {
     if (!file || !user?.id) return;
 
     if (!file.type.startsWith("image/")) {
-      toast.error(t("profile.selectImage"));
+      notify.error(t("profile.selectImage"));
       return;
     }
 
     if (file.size > 5 * 1024 * 1024) {
-      toast.error(t("profile.imageTooLarge"));
+      notify.error(t("profile.imageTooLarge"));
       return;
     }
 
     uploadAvatar(
       { userId: user.id, file },
       {
-        onSuccess: () => toast.success(t("profile.avatarUpdated")),
-        onError: () => toast.error(t("profile.avatarFailed")),
+        onSuccess: () => notify.success(t("profile.avatarUpdated")),
+        onError: () => notify.error(t("profile.avatarFailed")),
       },
     );
 

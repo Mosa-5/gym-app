@@ -1,3 +1,5 @@
+@import "./fonts.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,7 +10,7 @@ body {
   overflow-x: hidden;
   padding: 0;
   width: 100%;
-  font-family: "Noto Sans", system-ui, sans-serif;
+  font-family: "Noto Sans Variable", system-ui, sans-serif;
 }
 
 @keyframes hero-zoom-in {
@@ -24,8 +26,9 @@ body {
   animation: hero-zoom-in 0.6s ease-out both;
 }
 
-/* Black layer that fades out to reveal the hero. The image stays at full
-   opacity (paints immediately → no LCP penalty); only this cover animates. */
+/* Black layer that fades out to reveal the hero. Purely a reveal animation —
+   it ends at opacity 0, so the persistent darkening for text legibility comes
+   from each hero's gradient overlay, not from this. */
 @keyframes hero-reveal {
   from {
     opacity: 1;
@@ -39,9 +42,36 @@ body {
   animation: hero-reveal 0.6s ease-out both;
 }
 
+/* Scroll cue at the bottom of the hero — a slow drift, not a bounce. */
+@keyframes scroll-cue {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translateY(6px);
+    opacity: 1;
+  }
+}
+
+.scroll-cue-arrow {
+  animation: scroll-cue 2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-cue-arrow {
+    animation: none;
+  }
+}
+
+/* Georgian pages: Georgian glyphs come from the Georgian font, Latin ones
+   (brand name, prices) fall through to Noto Sans — so no Latin subset of the
+   Georgian font needs downloading. */
 html[lang="ka"],
 html[lang="ka"] body {
-  font-family: "Noto Sans Georgian", system-ui, sans-serif;
+  font-family: "Noto Sans Georgian Variable", "Noto Sans Variable", system-ui,
+    sans-serif;
 }
 
 /* :root {

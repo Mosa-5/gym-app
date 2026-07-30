@@ -14,7 +14,7 @@ import {
 } from "@/reactQuery/query/products";
 import { mapProductTableData, type MappedProduct } from "@/supabase/products";
 import { motion } from "framer-motion";
-import { toast } from "sonner";
+import { notify } from "@/lib/notify";
 import { useCartContext } from "@/context/cart/hooks/useCartContext";
 import { useAuthContext } from "@/context/auth/hooks/useAuthContext";
 import { useAddToWishlist } from "@/reactQuery/mutations/wishlist";
@@ -83,18 +83,18 @@ const CarouselForPages: React.FC<CarouselProps> = ({
       description: product.description,
       image_url: product.image_url,
     });
-    toast.success(t("common.addedToCart", { name: product.name }));
+    notify.success(t("common.addedToCart", { name: product.name }));
   };
 
   const handleFavourite = (e: React.MouseEvent, productId: number) => {
     e.preventDefault();
     e.stopPropagation();
     if (!user) {
-      toast.error(t("products.loginForWishlist"));
+      notify.error(t("products.loginForWishlist"));
       return;
     }
     addToWishlist({ userId: user.id, productId: String(productId) });
-    toast.success(t("products.addedToWishlist"));
+    notify.success(t("products.addedToWishlist"));
   };
 
   // Select the products based on carouselType

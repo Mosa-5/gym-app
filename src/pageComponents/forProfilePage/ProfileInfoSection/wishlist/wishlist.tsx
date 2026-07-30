@@ -3,7 +3,7 @@ import { useGetWishlistedProducts } from "@/reactQuery/query/wishlist";
 import emptyWishlistsSvg from "@/assets/undraw_wishlist_71gv.svg";
 import { Link } from "react-router-dom";
 import { useDeleteWishlistItem } from "@/reactQuery/mutations/wishlist";
-import { toast } from "sonner";
+import { notify } from "@/lib/notify";
 import { mapWishlistItemData } from "@/supabase/wishlist";
 import { Trash2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
@@ -27,7 +27,7 @@ const Wishlist = () => {
   ) => {
     e.preventDefault();
     deleteWishlistItem({ userId: userId, productId: productId });
-    toast(t("wishlist.removed"));
+    notify.message(t("wishlist.removed"));
   };
 
   if (isLoading) return null;

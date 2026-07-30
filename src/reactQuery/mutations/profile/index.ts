@@ -1,7 +1,7 @@
 import { fillProfileInfo, uploadAvatar } from "../../../supabase/account";
 import { FillProfileInfoPayload } from "../../../supabase/account/index.types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { toast } from "sonner";
+import { notify } from "@/lib/notify";
 
 export const useFillProfile = () => {
   const queryClient = useQueryClient();
@@ -18,10 +18,10 @@ export const useFillProfile = () => {
         queryKey: ["profile", id],
         exact: true,
       });
-      toast.success("Profile updated successfully.");
+      notify.success("Profile updated successfully.");
     },
     onError: () => {
-      toast.error("Failed to update profile. Please try again.");
+      notify.error("Failed to update profile. Please try again.");
     },
   });
 };
@@ -39,10 +39,10 @@ export const useUploadAvatar = () => {
       queryClient.invalidateQueries({
         queryKey: ["profile"],
       });
-      toast.success("Avatar updated successfully.");
+      notify.success("Avatar updated successfully.");
     },
     onError: () => {
-      toast.error("Failed to upload avatar. Please try again.");
+      notify.error("Failed to upload avatar. Please try again.");
     },
   });
 };

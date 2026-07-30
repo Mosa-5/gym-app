@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { toast } from "sonner";
+import { notify } from "@/lib/notify";
 
 import SectionHeading from "@/pageComponents/forHome/sectionHeading/sectionHeading";
 import {
@@ -17,10 +17,10 @@ const Newsletter = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!email.trim()) {
-      toast.error(t("newsletter.emptyEmail"));
+      notify.error(t("newsletter.emptyEmail"));
       return;
     }
-    toast.success(t("newsletter.success"));
+    notify.success(t("newsletter.success"));
     setEmail("");
   };
 

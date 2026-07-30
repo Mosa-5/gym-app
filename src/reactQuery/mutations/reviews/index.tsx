@@ -1,6 +1,6 @@
 import { deleteReview, toggleLike, writeReview } from "@/supabase/reviews";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { toast } from "sonner";
+import { notify } from "@/lib/notify";
 
 export const useWriteReview = () => {
   const queryClient = useQueryClient();
@@ -92,7 +92,7 @@ export const useToggleLike = () => {
     },
 
     onError: () => {
-      toast("Must be logged in");
+      notify.message("Must be logged in");
     },
   });
 };

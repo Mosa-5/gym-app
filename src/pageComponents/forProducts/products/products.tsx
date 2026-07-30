@@ -5,7 +5,7 @@ import { useCartContext } from "@/context/cart/hooks/useCartContext";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import ProductCard from "./productCard";
-import { toast } from "sonner";
+import { notify } from "@/lib/notify";
 import { useAuthContext } from "@/context/auth/hooks/useAuthContext";
 import { useAddToWishlist } from "@/reactQuery/mutations/wishlist";
 import type { FilterState } from "@/pageComponents/forProducts/filter/filter";
@@ -51,17 +51,17 @@ const ProductGrid: React.FC<{
   };
 
   const onAddToCart = (product: MappedProduct) => {
-    toast.success(t("products.addedToCart", { name: product.name }));
+    notify.success(t("products.addedToCart", { name: product.name }));
     handleAddToCart(product);
   };
 
   const onAddToWishlist = (product: MappedProduct) => {
     if (!user) {
-      toast.error(t("products.loginForWishlist"));
+      notify.error(t("products.loginForWishlist"));
       return;
     }
     addToWishlist({ userId: user.id, productId: String(product.id) });
-    toast.success(t("products.addedToWishlist"));
+    notify.success(t("products.addedToWishlist"));
   };
 
   const { data, isLoading, isError } = useGetFilteredProducts({

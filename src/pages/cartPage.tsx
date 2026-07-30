@@ -1,7 +1,7 @@
 import { useCartContext } from "@/context/cart/hooks/useCartContext";
 import { usePlaceOrder } from "@/reactQuery/mutations/order";
 import { useAuthContext } from "@/context/auth/hooks/useAuthContext";
-import { toast } from "sonner";
+import { notify } from "@/lib/notify";
 import { useTranslation } from "react-i18next";
 import CartHero from "@/pageComponents/forCartPage/cartHero/cartHero";
 import CartItemRow from "@/pageComponents/forCartPage/cartItemRow/cartItemRow";
@@ -33,7 +33,7 @@ const CartPage = () => {
   const handlePlaceOrder = () => {
     if (cart.length === 0) return;
     if (user === null) {
-      toast.error(t("cart.needSignIn"));
+      notify.error(t("cart.needSignIn"));
       return;
     }
 
@@ -50,7 +50,7 @@ const CartPage = () => {
 
     placeOrder(
       { userId: user.id, items: orderItems, totalPrice: totalCost },
-      { onError: () => toast.error(t("cart.orderFailed")) },
+      { onError: () => notify.error(t("cart.orderFailed")) },
     );
   };
 
