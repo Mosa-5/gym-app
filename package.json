@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "ts-check": "tsc -b",
+    "optimize:images": "node scripts/optimize-images.mjs",
     "preview": "vite preview",
     "generate-supabase-types": "supabase gen types typescript --project-id ibmntluopsbktoqjaubs --schema public > src/supabase/supabase.types.ts",
     "prepare": "husky"
