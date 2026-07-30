@@ -3,10 +3,14 @@ import { mapSingleOrdersData } from "@/supabase/order";
 import { useParams, Link } from "react-router-dom";
 import { Package, ArrowLeft, Truck } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { useDocumentMeta } from "@/convenienceTools/useDocumentMeta";
 
 const OrderDetail = () => {
   const { t } = useTranslation();
   const { OrderId } = useParams();
+
+  // Personal transactional page — keep it out of search results.
+  useDocumentMeta({ title: t("seo.orderTitle"), noindex: true });
   const {
     data: userOrder = {
       status: "idk",

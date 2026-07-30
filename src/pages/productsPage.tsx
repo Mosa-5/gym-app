@@ -5,8 +5,17 @@ import ProductGrid from "@/pageComponents/forProducts/products/products";
 import Filters from "@/pageComponents/forProducts/filter/filter";
 import FiltersMobile from "@/pageComponents/forProducts/filter/filterMobile";
 import { useProductFilters } from "@/pageComponents/forProducts/hooks/useProductFilters";
+import { useTranslation } from "react-i18next";
+import { useDocumentMeta } from "@/convenienceTools/useDocumentMeta";
 
 const Products = () => {
+  const { t } = useTranslation();
+
+  useDocumentMeta({
+    title: t("seo.shopTitle"),
+    description: t("seo.shopDescription"),
+  });
+
   const {
     mainRef,
     searchQuery,

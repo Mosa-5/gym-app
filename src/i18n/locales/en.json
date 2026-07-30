@@ -282,5 +282,21 @@
     "rateStars": "Rate {{count}} stars",
     "previousPage": "Previous page",
     "nextPage": "Next page"
+  },
+  "seo": {
+    "homeTitle": "Home",
+    "homeDescription": "Premium lifting belts, straps, knee sleeves and wrist wraps for athletes who demand the best. Browse the full range and read real reviews.",
+    "shopTitle": "Shop",
+    "shopDescription": "Browse the full GymGear range: lever belts, lifting straps, knee sleeves and wrist wraps. Filter by category and price, sorted how you like.",
+    "aboutTitle": "About Us",
+    "aboutDescription": "Built by lifters, for lifters. How GymGear is made, the standards we hold our gear to, and the guarantee behind it.",
+    "cartTitle": "Your Cart",
+    "cartDescription": "Review the items in your cart and place your order.",
+    "profileTitle": "My Profile",
+    "orderTitle": "Order Details",
+    "signInTitle": "Sign In",
+    "registerTitle": "Create an Account",
+    "notFoundTitle": "Page Not Found",
+    "productDescription": "{{name}}, {{price}}. Read reviews and add it to your cart at GymGear."
   }
 }

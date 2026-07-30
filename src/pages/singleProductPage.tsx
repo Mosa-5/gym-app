@@ -6,6 +6,7 @@ import ProductDetail from "@/pageComponents/forSingleProductPage/productDetail/p
 import { Loader } from "@/pageComponents/loader/loader";
 import { useGetSingleProduct } from "@/reactQuery/query/products";
 import { mapSingleProductTableData } from "@/supabase/products";
+import { useDocumentMeta } from "@/convenienceTools/useDocumentMeta";
 
 const SingleProductPage: React.FC = () => {
   const { t } = useTranslation();
@@ -20,6 +21,18 @@ const SingleProductPage: React.FC = () => {
     },
     id,
   );
+
+  // Left undefined while loading so the tab shows the site default rather than
+  // "undefined — GymGear"; it fills in once the product arrives.
+  useDocumentMeta({
+    title: product?.name,
+    description: product
+      ? t("seo.productDescription", {
+          name: product.name,
+          price: `$${product.price}`,
+        })
+      : undefined,
+  });
 
   if (isLoading) return <Loader />;
 

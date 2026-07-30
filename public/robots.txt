@@ -1,0 +1,6 @@
+# Private routes (profile, orders, auth, 404) are handled with <meta name="robots"
+# content="noindex"> from useDocumentMeta, not with Disallow. Disallow blocks
+# crawling, so the crawler would never see the noindex — and the URL could still
+# surface as a bare link.
+User-agent: *
+Allow: /

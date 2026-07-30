@@ -7,9 +7,15 @@ import ReviewsSocialProof from "@/pageComponents/forHome/reviewsSocialProof/revi
 import Newsletter from "@/pageComponents/forHome/newsletter/newsletter";
 import FreshPicksCarousel from "@/pageComponents/forHome/freshPicksCarousel/carousel";
 import { useTranslation } from "react-i18next";
+import { useDocumentMeta } from "@/convenienceTools/useDocumentMeta";
 
 const Main = () => {
   const { t } = useTranslation();
+
+  useDocumentMeta({
+    title: t("seo.homeTitle"),
+    description: t("seo.homeDescription"),
+  });
 
   return (
     <>

@@ -1,7 +1,14 @@
 import ProfileHero from "@/pageComponents/forProfilePage/profileHero/profileHero";
 import ProfileTabs from "@/pageComponents/forProfilePage/profileTabs/profileTabs";
+import { useTranslation } from "react-i18next";
+import { useDocumentMeta } from "@/convenienceTools/useDocumentMeta";
 
 const Profile = () => {
+  const { t } = useTranslation();
+
+  // Auth-guarded and personal — keep it out of search results.
+  useDocumentMeta({ title: t("seo.profileTitle"), noindex: true });
+
   return (
     <>
       <ProfileHero />

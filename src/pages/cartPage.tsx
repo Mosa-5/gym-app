@@ -8,6 +8,7 @@ import CartItemRow from "@/pageComponents/forCartPage/cartItemRow/cartItemRow";
 import CouponRow from "@/pageComponents/forCartPage/couponRow/couponRow";
 import OrderSummary from "@/pageComponents/forCartPage/orderSummary/orderSummary";
 import EmptyCart from "@/pageComponents/forCartPage/emptyCart/emptyCart";
+import { useDocumentMeta } from "@/convenienceTools/useDocumentMeta";
 
 const DELIVERY_COST = 2;
 
@@ -16,6 +17,11 @@ const CartPage = () => {
   const { cart, removeFromCart, clearCart, changeQuantity } = useCartContext();
   const { user } = useAuthContext();
   const { mutate: placeOrder, isPending } = usePlaceOrder();
+
+  useDocumentMeta({
+    title: t("seo.cartTitle"),
+    description: t("seo.cartDescription"),
+  });
 
   const totalCost = cart.reduce(
     (acc, item) => acc + Number(item.price) * item.quantity,
