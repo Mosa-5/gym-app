@@ -34,7 +34,19 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const BACKUP = join(ROOT, "product-images-backup", "original");
 const OUTPUT = join(ROOT, "product-images-backup", "optimized");
 
+/**
+ * Two widths, uploaded side by side, selected per device by `srcset`.
+ *
+ * 768 — the detail page's main image renders up to 512 CSS px, and desktop cards
+ *       up to 320. One file has to cover both.
+ * 384 — every card slot on a phone: 96-176 CSS px, so 384 covers them at DPR2
+ *       and covers the two smaller ones at DPR3 too. The largest slot
+ *       (fresh-picks, 176px) upgrades itself to 768 on a DPR3 screen, which is
+ *       srcset working as intended rather than a gap. Sizing the small set to
+ *       cover that one case as well would have cost 2x on every other image.
+ */
 const TARGET_WIDTH = 768;
+const SMALL_WIDTH = 384;
 const QUALITY = 78;
 /** One year. The current objects are served with max-age=3600. */
 const CACHE_CONTROL = "31536000";
@@ -91,25 +103,40 @@ for (const url of urls) {
   const original = readFileSync(backupPath);
   const { width } = await sharp(original).metadata();
 
-  let pipeline = sharp(original);
-  if (width > TARGET_WIDTH) {
-    pipeline = pipeline.resize(TARGET_WIDTH, TARGET_WIDTH, { fit: "inside" });
-  }
-  const optimized = await pipeline.webp({ quality: QUALITY, effort: 6 }).toBuffer();
+  const encode = async (targetWidth) => {
+    let pipeline = sharp(original);
+    if (width > targetWidth) {
+      pipeline = pipeline.resize(targetWidth, targetWidth, { fit: "inside" });
+    }
+    return pipeline.webp({ quality: QUALITY, effort: 6 }).toBuffer();
+  };
+
+  const optimized = await encode(TARGET_WIDTH);
+  const small = await encode(SMALL_WIDTH);
 
   // Same object path as the original, so the stored URL keeps working. The
   // extension may now say .jpg while the bytes are WebP — harmless, because the
   // Content-Type header is what browsers actually obey.
   const objectPath = decodeURIComponent(url.split("/object/public/")[1]);
+  // `foo.webp` -> `foo-sm.webp`. Must stay in sync with smVariant() in
+  // src/lib/productImage.ts, which derives this URL on the client.
+  const smallPath = objectPath.replace(/(\.[a-z0-9]+)$/i, "-sm$1");
+  const smallName = name.replace(/(\.[a-z0-9]+)$/i, "-sm$1");
+
   writeFileSync(join(OUTPUT, name), optimized);
+  writeFileSync(join(OUTPUT, smallName), small);
 
   totalBefore += original.length;
-  totalAfter += optimized.length;
-  results.push({ name, objectPath, optimized, before: original.length });
+  totalAfter += optimized.length + small.length;
+  results.push(
+    { name, objectPath, optimized, before: original.length },
+    { name: smallName, objectPath: smallPath, optimized: small, before: 0 },
+  );
 
   console.log(
     `  ${width}px ${kb(original.length).padStart(9)}  ->  ` +
-      `${Math.min(width, TARGET_WIDTH)}px ${kb(optimized.length).padStart(9)}   ${name}`,
+      `${Math.min(width, TARGET_WIDTH)}px ${kb(optimized.length).padStart(9)} + ` +
+      `${Math.min(width, SMALL_WIDTH)}px ${kb(small.length).padStart(8)}   ${name}`,
   );
 }
 

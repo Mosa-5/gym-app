@@ -3,17 +3,55 @@ import { motion, AnimatePresence } from "framer-motion";
 import SectionHeading from "@/pageComponents/forHome/sectionHeading/sectionHeading";
 import { sectionClass, containerClass } from "./brandStory.styles";
 import storyImg1 from "@/assets/pexels-823sl-2294361.webp";
+import storyImg1Sm from "@/assets/pexels-823sl-2294361-sm.webp";
 import storyImg2 from "@/assets/hero-image.webp";
+import storyImg2Sm from "@/assets/hero-image-sm.webp";
 import storyImg3 from "@/assets/pexels-franki-frank-11513151.webp";
+import storyImg3Sm from "@/assets/pexels-franki-frank-11513151-sm.webp";
 import equipImg1 from "@/assets/bells.avif";
+import equipImg1Sm from "@/assets/bells-sm.avif";
 import equipImg2 from "@/assets/mobileGear.avif";
 import equipImg3 from "@/assets/BeltHeader_1a.webp";
+import equipImg3Sm from "@/assets/BeltHeader_1a-sm.webp";
 import { useTranslation } from "react-i18next";
 import "./brandStory.css";
 
 const INTERVAL = 9000;
-const PEOPLE_IMAGES = [storyImg1, storyImg2, storyImg3];
-const EQUIP_IMAGES = [equipImg1, equipImg2, equipImg3];
+/**
+ * Each card carries two sources. The full-size files are shared with the heroes
+ * that need them (up to 1920px), but these cards render at roughly 380 CSS px on
+ * a phone — so mobile gets a 760px variant instead, cutting this section's
+ * payload from 504 kB to 96 kB. Regenerate the variants with
+ * `yarn optimize:images`.
+ *
+ * mobileGear has no `sm` variant: at 687px it is already narrower than the
+ * variant width.
+ */
+type CardImage = { full: string; sm: string };
+
+const PEOPLE_IMAGES: CardImage[] = [
+  { full: storyImg1, sm: storyImg1Sm },
+  { full: storyImg2, sm: storyImg2Sm },
+  { full: storyImg3, sm: storyImg3Sm },
+];
+const EQUIP_IMAGES: CardImage[] = [
+  { full: equipImg1, sm: equipImg1Sm },
+  { full: equipImg2, sm: equipImg2 },
+  { full: equipImg3, sm: equipImg3Sm },
+];
+
+/** Picks the 760px file below the `md` breakpoint, the full file above it. */
+const CardImg = ({ image }: { image: CardImage }) => (
+  <picture>
+    <source media="(max-width: 767px)" srcSet={image.sm} />
+    <img
+      src={image.full}
+      alt=""
+      loading="lazy"
+      className="w-full h-full object-cover"
+    />
+  </picture>
+);
 const RADIUS = 13;
 const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
 
@@ -29,7 +67,7 @@ const ImagePair = ({
   flip,
   current,
 }: {
-  images: string[];
+  images: CardImage[];
   flip?: boolean;
   current: number;
 }) => {
@@ -48,12 +86,7 @@ const ImagePair = ({
             : "translate-x-0 lg:translate-x-10"
         } translate-y-5 lg:translate-y-10`}
       >
-        <img
-          src={back}
-          alt=""
-          loading="lazy"
-          className="w-full h-full object-cover"
-        />
+        <CardImg image={back} />
       </div>
 
       {/* Middle card */}
@@ -64,12 +97,7 @@ const ImagePair = ({
             : "translate-x-0 lg:translate-x-5"
         } translate-y-2 lg:translate-y-5`}
       >
-        <img
-          src={mid}
-          alt=""
-          loading="lazy"
-          className="w-full h-full object-cover"
-        />
+        <CardImg image={mid} />
       </div>
 
       {/* Front card — animates in */}
@@ -82,12 +110,7 @@ const ImagePair = ({
           exit={{ opacity: 0, scale: 0.97 }}
           transition={{ duration: 0.7, ease: "easeInOut" }}
         >
-          <img
-            src={front}
-            alt=""
-            loading="lazy"
-            className="w-full h-full object-cover"
-          />
+          <CardImg image={front} />
 
           {/* Circular timer */}
           <div className="absolute bottom-3 right-3 z-20 w-10 h-10">

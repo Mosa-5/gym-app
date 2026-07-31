@@ -13,6 +13,7 @@ import { useTranslation } from "react-i18next";
 import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
 import SectionHeading from "@/pageComponents/forHome/sectionHeading/sectionHeading";
 import { crosshatchPattern } from "@/lib/crosshatchPattern";
+import { productSrcSet } from "@/lib/productImage";
 
 interface CarouselProps {
   productType?: string;
@@ -224,7 +225,12 @@ const FreshPicksCarousel: React.FC<CarouselProps> = ({
             className="!text-white [&_h2]:!text-white [&_span]:!text-white [&_span]:!opacity-20"
           />
           <div className="w-full max-w-3xl 2xl:max-w-5xl mx-auto">
+            {/* Matches the carousel scene... */}
             <div className="h-[240px] sm:h-[340px] 2xl:h-[420px]" />
+            {/* ...and the controls row below it. Both are needed: reserving only
+                the scene left the section ~80px short, so it still grew when the
+                data landed (a measured 0.002 CLS). */}
+            <div className="mt-8 2xl:mt-10 h-12 2xl:h-16" />
           </div>
         </div>
       </div>
@@ -281,6 +287,11 @@ const FreshPicksCarousel: React.FC<CarouselProps> = ({
                     />
                     <img
                       src={product.image_url[0]}
+                      srcSet={productSrcSet(product.image_url[0])}
+                      // The largest card slot in the app. At DPR3 the 176px
+                      // mobile slot needs 528px, so this one upgrades itself to
+                      // the 768 file there; the smaller cards stay on 384.
+                      sizes="(min-width: 1536px) 320px, (min-width: 640px) 256px, 176px"
                       alt={product.name}
                       loading="lazy"
                       className="relative h-44 w-44 sm:h-64 sm:w-64 2xl:h-80 2xl:w-80 object-cover rounded-full shadow-lg"

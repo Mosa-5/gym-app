@@ -6,6 +6,7 @@ import type { MappedProduct } from "@/supabase/products";
 import { carouselItem, card, cardContent, image } from "./carousel.styles";
 import { crosshatchPattern } from "@/lib/crosshatchPattern";
 import { useTranslation } from "react-i18next";
+import { productSrcSet } from "@/lib/productImage";
 
 interface CarouselCardProps {
   product: MappedProduct;
@@ -50,6 +51,8 @@ const CarouselCard: React.FC<CarouselCardProps> = ({
             <CardContent className={cardContent() + " relative z-10"}>
               <img
                 src={product.image_url[0]}
+                srcSet={productSrcSet(product.image_url[0])}
+                sizes="(min-width: 1536px) 288px, (min-width: 1024px) 224px, (min-width: 640px) 160px, 144px"
                 alt={product.name}
                 loading="lazy"
                 // Only the 1:1 ratio is used, not these pixel values — the CSS

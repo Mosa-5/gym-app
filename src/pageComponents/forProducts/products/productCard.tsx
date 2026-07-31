@@ -4,6 +4,7 @@ import { ShoppingBag, Star, Heart } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import type { MappedProduct } from "@/supabase/products";
 import { crosshatchPattern } from "@/lib/crosshatchPattern";
+import { productSrcSet } from "@/lib/productImage";
 
 const gridItem = {
   hidden: { opacity: 0, y: 20 },
@@ -52,6 +53,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
         <div className="relative z-10 flex flex-col items-center p-3 pb-4 gap-1 sm:p-5 sm:pb-6 sm:gap-2 2xl:p-6 2xl:pb-8">
           <img
             src={product.image_url[0]}
+            srcSet={productSrcSet(product.image_url[0])}
+            sizes="(min-width: 1536px) 208px, (min-width: 640px) 160px, 96px"
             alt={product.name}
             loading="lazy"
             // Reserves the width the CSS leaves as `auto`. See carouselCard.

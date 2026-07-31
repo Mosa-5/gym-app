@@ -57,6 +57,30 @@ const ENCODE = {
   ".png": ["png", { quality: 80, palette: true, compressionLevel: 9 }],
 };
 
+/**
+ * Second pass: derived `-sm` variants for images that are ALSO used somewhere
+ * much smaller than their primary use.
+ *
+ * The brand-story cards render these at roughly 380 CSS px on a phone, but each
+ * file is sized for a full-bleed hero or a desktop card. One file cannot serve
+ * both, so the component picks per breakpoint with <picture media>. Unlike the
+ * TARGETS pass above this writes a *new* file rather than resizing in place —
+ * the originals are still needed at full size elsewhere.
+ *
+ * 760px = ~380 CSS px at 2x DPR.
+ */
+const CARD_VARIANT_WIDTH = 760;
+const CARD_VARIANTS = [
+  "pexels-823sl-2294361.webp",
+  "hero-image.webp",
+  "pexels-franki-frank-11513151.webp",
+  "bells.avif",
+  "BeltHeader_1a.webp",
+  // mobileGear.avif is deliberately absent: at 687px it is already narrower
+  // than the variant width, and it doubles as the *mobile* shop hero, where it
+  // is if anything under-sized.
+];
+
 const kb = (bytes) => `${(bytes / 1024).toFixed(1)} kB`;
 
 let totalBefore = 0;
@@ -113,4 +137,43 @@ const label = DRY_RUN ? "would resize" : "resized";
 console.log(
   `\n${label} ${resized} file(s): ${kb(totalBefore)} ⭢ ${kb(totalAfter)} ` +
     `(-${Math.round((1 - totalAfter / totalBefore) * 100)}%)`,
+);
+
+console.log(`\n-- card variants (${CARD_VARIANT_WIDTH}px, for mobile) --`);
+let variantBefore = 0;
+let variantAfter = 0;
+
+for (const name of CARD_VARIANTS) {
+  const source = join(ASSETS, name);
+  const ext = extname(name).toLowerCase();
+  const target = join(ASSETS, name.replace(ext, `-sm${ext}`));
+
+  const input = await readFile(source);
+  const { width } = await sharp(input).metadata();
+  variantBefore += input.length;
+
+  if (width <= CARD_VARIANT_WIDTH) {
+    console.log(`  ok  ${name} — ${width}px, no smaller variant needed`);
+    continue;
+  }
+
+  const resizer = sharp(input).resize({ width: CARD_VARIANT_WIDTH });
+  const output =
+    ext === ".avif"
+      ? await resizer.avif({ quality: 60, effort: 6 }).toBuffer()
+      : await resizer.webp({ quality: 78, effort: 6 }).toBuffer();
+
+  if (!DRY_RUN) await writeFile(target, output);
+  variantAfter += output.length;
+
+  const saved = Math.round((1 - output.length / input.length) * 100);
+  console.log(
+    `  ->  ${name} — ${width}px ${kb(input.length)}  ⭢  ${CARD_VARIANT_WIDTH}px ` +
+      `${kb(output.length)}  (-${saved}%)`,
+  );
+}
+
+console.log(
+  `\nmobile card payload: ${kb(variantBefore)} ⭢ ${kb(variantAfter)} ` +
+    `(-${Math.round((1 - variantAfter / variantBefore) * 100)}%)`,
 );
