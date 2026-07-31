@@ -68,28 +68,36 @@ const FreshPicksCarousel: React.FC<CarouselProps> = ({
   // Keep ref in sync with state
   rotationRef.current = rotation;
 
-  const { data: productWithCategory = [] } = useGetProductListWithCategory(
-    { queryOptions: { select: mapProductTableData } },
-    productType,
-  );
+  const { data: productWithCategory = [], isPending: categoryPending } =
+    useGetProductListWithCategory(
+      { queryOptions: { select: mapProductTableData } },
+      productType,
+    );
 
-  const { data: productBestSelling = [] } = useGetProductListWithBestSelling({
-    queryOptions: { select: mapProductTableData },
-  });
+  const { data: productBestSelling = [], isPending: bestSellingPending } =
+    useGetProductListWithBestSelling({
+      queryOptions: { select: mapProductTableData },
+    });
 
-  const { data: productWorstSelling = [] } = useGetProductListWithWorstSelling({
-    queryOptions: { select: mapProductTableData },
-  });
+  const { data: productWorstSelling = [], isPending: worstSellingPending } =
+    useGetProductListWithWorstSelling({
+      queryOptions: { select: mapProductTableData },
+    });
 
-  const products = (() => {
+  // The pending flag has to travel with the data: `data` defaults to [], so
+  // length alone cannot tell "still fetching" apart from "genuinely empty".
+  const { products, isPending } = (() => {
     switch (carouselType) {
       case "bestSelling":
-        return productBestSelling;
+        return { products: productBestSelling, isPending: bestSellingPending };
       case "worstSelling":
-        return productWorstSelling;
+        return {
+          products: productWorstSelling,
+          isPending: worstSellingPending,
+        };
       case "category":
       default:
-        return productWithCategory;
+        return { products: productWithCategory, isPending: categoryPending };
     }
   })();
 
@@ -192,17 +200,39 @@ const FreshPicksCarousel: React.FC<CarouselProps> = ({
     return lerpSlot(RING[slotA], RING[slotB], frac);
   };
 
-  if (total === 0) return null;
+  const sectionBackground = {
+    background:
+      "linear-gradient(135deg, rgb(var(--color-brand)) 0%, rgb(120 15 15) 100%)",
+    borderBottom: "1px solid rgb(var(--color-brand))",
+  };
+
+  if (total === 0) {
+    // Resolved and genuinely empty — nothing to show.
+    if (!isPending) return null;
+
+    // Still fetching. Render the shell rather than nothing: the products come
+    // from a Supabase round trip that cannot even start until React has
+    // mounted, so returning null here left a white page-background gap below
+    // the hero that the red section then popped into. The heading is static,
+    // so it can paint immediately, and the reserved height matches the
+    // carousel scene below.
+    return (
+      <div className={wrapper()} style={sectionBackground} aria-busy="true">
+        <div className="relative z-10 w-full flex flex-col items-center gap-7">
+          <SectionHeading
+            text={headerText}
+            className="!text-white [&_h2]:!text-white [&_span]:!text-white [&_span]:!opacity-20"
+          />
+          <div className="w-full max-w-3xl 2xl:max-w-5xl mx-auto">
+            <div className="h-[240px] sm:h-[340px] 2xl:h-[420px]" />
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div
-      className={wrapper()}
-      style={{
-        background:
-          "linear-gradient(135deg, rgb(var(--color-brand)) 0%, rgb(120 15 15) 100%)",
-        borderBottom: "1px solid rgb(var(--color-brand))",
-      }}
-    >
+    <div className={wrapper()} style={sectionBackground}>
       {/* Subtle noise texture */}
       <div
         className="absolute inset-0 pointer-events-none opacity-[0.06] z-[1]"

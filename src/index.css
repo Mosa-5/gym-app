@@ -42,6 +42,24 @@ body {
   animation: hero-reveal 0.6s ease-out both;
 }
 
+/* Mobile: show the hero image immediately, no reveal.
+   On a throttled phone the image is the slowest thing to arrive, and these two
+   animations add another 600ms of "arrived but not visible yet" on top. The
+   text keeps its entrance animation.
+
+   Note the cover is `display: none`, not `animation: none` — it is a plain
+   black div whose only opacity comes from the keyframes, so cancelling the
+   animation would leave it sitting opaque over the image forever. */
+@media (max-width: 767px) {
+  .hero-animate {
+    animation: none;
+  }
+
+  .hero-cover {
+    display: none;
+  }
+}
+
 /* Scroll cue at the bottom of the hero — a slow drift, not a bounce. */
 @keyframes scroll-cue {
   0%,

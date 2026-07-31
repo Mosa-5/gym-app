@@ -42,7 +42,15 @@ const Footer = () => {
           <div className={socialContainerClass()}>
             <span className={socialLabelClass()}>{t("footer.followUs")}</span>
             {socialLinks.map((social, index) => (
-              <a key={index} href={social.href} className={socialLinkClass()}>
+              <a
+                key={index}
+                href={social.href}
+                // Icon-only link: without this a screen reader announces just
+                // "link". Platform names are proper nouns, so they are not
+                // translated.
+                aria-label={social.title}
+                className={socialLinkClass()}
+              >
                 {social.icon}
               </a>
             ))}
