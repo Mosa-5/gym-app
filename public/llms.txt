@@ -1,0 +1,39 @@
+# GymGear
+
+> An online store for gym equipment and lifting apparel: lever belts, lifting
+> straps, knee sleeves and wrist wraps. Visitors can browse and filter the
+> catalogue, read and write product reviews, keep a wishlist, and place orders.
+
+The site is available in English and Georgian. Language is chosen per visitor and
+does not change the URL, so every page below serves both.
+
+**Note for automated readers:** this is a client-side rendered single-page app.
+The HTML at every URL is the same near-empty shell, and the content is built by
+JavaScript in the browser. If you do not execute JavaScript you will see no page
+content. The `<title>` and description in the shell describe the site as a whole,
+not the individual page you requested.
+
+## Main pages
+
+- [Home](https://gym-app-7y5y.vercel.app/dashboard/main): featured and
+  best-selling products, categories, brand story, and customer reviews.
+- [Shop](https://gym-app-7y5y.vercel.app/dashboard/products): the full catalogue,
+  with text search, category filters, a price-range filter, and sorting by price
+  or name.
+- [About](https://gym-app-7y5y.vercel.app/dashboard/about): who makes the gear,
+  the standards it is held to, and the guarantee.
+- [Cart](https://gym-app-7y5y.vercel.app/dashboard/cartPage): the visitor's
+  basket and order summary. Placing an order requires an account.
+
+## Products
+
+Individual products live at `/dashboard/productDetail/<id>`, where `<id>` is a
+numeric product id. Each page has images, price, description, an average star
+rating, and customer reviews. Product ids are not enumerable from a static file;
+reach these pages by following links from the Shop page.
+
+## Not for indexing
+
+These require signing in or contain personal data, and are marked `noindex`:
+`/dashboard/profilePage`, `/dashboard/orders/<id>`, `/auth/signIn`,
+`/auth/register`.

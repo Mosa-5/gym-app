@@ -282,7 +282,9 @@
     "addToWishlist": "Add to wishlist",
     "rateStars": "Rate {{count}} stars",
     "previousPage": "Previous page",
-    "nextPage": "Next page"
+    "nextPage": "Next page",
+    "previousProduct": "Previous product",
+    "nextProduct": "Next product"
   },
   "seo": {
     "homeTitle": "Home",

@@ -70,8 +70,8 @@ body {
    Georgian font needs downloading. */
 html[lang="ka"],
 html[lang="ka"] body {
-  font-family: "Noto Sans Georgian Variable", "Noto Sans Variable", system-ui,
-    sans-serif;
+  font-family:
+    "Noto Sans Georgian Variable", "Noto Sans Variable", system-ui, sans-serif;
 }
 
 /* :root {
@@ -276,6 +276,12 @@ table {
     --color-brand: 180 30 30;
     /* Brand hover — lighter accent for hover/focus states */
     --color-brand-hover: 210 45 45;
+    /* Brand on dark — brand red used as TEXT on a near-black surface (header,
+       footer, advert banner). --color-brand itself is tuned to carry white text
+       on top of it (6.7:1), which makes it too dark to read as text on black:
+       it measures 2.97:1 there, under the 3:1 minimum. This lighter red is
+       4.6:1 on #0a0a0a. Do not use it as a background. */
+    --color-brand-on-dark: 214 73 73;
     /* Destructive — error messages, delete buttons */
     --color-destructive: 239 68 68;
     /* Destructive hover — hover state for destructive actions */

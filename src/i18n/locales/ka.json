@@ -282,7 +282,9 @@
     "addToWishlist": "სურვილების სიაში დამატება",
     "rateStars": "შეფასება {{count}} ვარსკვლავით",
     "previousPage": "წინა გვერდი",
-    "nextPage": "შემდეგი გვერდი"
+    "nextPage": "შემდეგი გვერდი",
+    "previousProduct": "წინა პროდუქტი",
+    "nextProduct": "შემდეგი პროდუქტი"
   },
   "seo": {
     "homeTitle": "მთავარი",

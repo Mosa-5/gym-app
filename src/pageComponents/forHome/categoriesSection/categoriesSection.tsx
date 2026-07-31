@@ -95,6 +95,13 @@ const CategoriesSection = () => {
                         >
                           <div className="w-[220px] sm:w-[220px] md:w-[280px] lg:w-[320px] 2xl:w-[400px]">
                             <img
+                              // `w-full h-auto` leaves the height unknown until
+                              // load, so this is the worst CLS offender on the
+                              // page. All four category assets are square, so a
+                              // 1:1 ratio is correct for every one of them —
+                              // revisit if a non-square asset is ever added.
+                              width={800}
+                              height={800}
                               src={category.image}
                               alt={t(category.nameKey)}
                               loading="lazy"

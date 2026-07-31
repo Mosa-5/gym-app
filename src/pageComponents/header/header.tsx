@@ -50,7 +50,7 @@ const Header: React.FC = () => {
             </svg>
           </div>
           <h1 className={logoClass()}>
-            Gym<span className="text-brand">Gear</span>
+            Gym<span className="text-brand-on-dark">Gear</span>
           </h1>
         </Link>
 
@@ -87,6 +87,7 @@ const Header: React.FC = () => {
             </Link>
           ) : (
             <Link
+              aria-label={t("nav.signIn")}
               className="hidden md:flex items-center justify-center w-8 h-8 2xl:w-10 2xl:h-10 rounded-full bg-neutral-800/80 hover:bg-neutral-700 transition-colors duration-200"
               to={"/auth/signin"}
             >

@@ -23,7 +23,7 @@ const Footer = () => {
         <div className={flexContainerClass()}>
           <div className={flexItemClass()}>
             <h1 className={headingClass()}>
-              Gym<span className="text-brand">Gear</span>
+              Gym<span className="text-brand-on-dark">Gear</span>
             </h1>
           </div>
 

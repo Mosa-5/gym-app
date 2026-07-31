@@ -54,6 +54,9 @@ const ProductCard: React.FC<ProductCardProps> = ({
             src={product.image_url[0]}
             alt={product.name}
             loading="lazy"
+            // Reserves the width the CSS leaves as `auto`. See carouselCard.
+            width={768}
+            height={768}
             className="h-24 sm:h-40 2xl:h-52 object-contain rounded-full mb-4 sm:mb-6"
           />
           <h3 className="text-xs sm:text-sm 2xl:text-lg font-semibold text-start w-full max-w-60 tracking-wide text-white truncate">

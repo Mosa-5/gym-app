@@ -52,6 +52,12 @@ const CarouselCard: React.FC<CarouselCardProps> = ({
                 src={product.image_url[0]}
                 alt={product.name}
                 loading="lazy"
+                // Only the 1:1 ratio is used, not these pixel values — the CSS
+                // above still sets the rendered size. Without it the card has no
+                // width until the image loads, and the row reflows (CLS).
+                // Every product image in Storage is square (768x768).
+                width={768}
+                height={768}
                 className={image()}
               />
               <p className="text-sm 2xl:text-lg font-semibold text-start w-full max-w-60 tracking-wide text-white truncate">

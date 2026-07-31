@@ -24,3 +24,6 @@ dist-ssr
 *.sln
 *.sw?
 package-lock.json
+
+# Local working copies of Supabase product images (originals + resized)
+product-images-backup/

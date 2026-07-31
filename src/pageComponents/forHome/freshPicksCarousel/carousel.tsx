@@ -9,6 +9,7 @@ import {
 import { mapProductTableData } from "@/supabase/products";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
 import SectionHeading from "@/pageComponents/forHome/sectionHeading/sectionHeading";
 import { crosshatchPattern } from "@/lib/crosshatchPattern";
@@ -57,6 +58,7 @@ const FreshPicksCarousel: React.FC<CarouselProps> = ({
   headerText,
   carouselType,
 }) => {
+  const { t } = useTranslation();
   const [rotation, setRotation] = useState(0);
   const rotationRef = useRef(0); // always holds the latest rotation value
   const targetRotation = useRef(0);
@@ -265,6 +267,7 @@ const FreshPicksCarousel: React.FC<CarouselProps> = ({
           <div className="flex justify-center gap-6 2xl:gap-5 mt-8 2xl:mt-10 bg-black/20 backdrop-blur-sm w-fit mx-auto rounded-full">
             <Button
               onClick={goPrev}
+              aria-label={t("a11y.previousProduct")}
               variant="outline"
               size="icon"
               className="h-12 w-12 2xl:h-16 2xl:w-16 rounded-full bg-white/15 text-white hover:bg-white/25 hover:text-white border-white/20"
@@ -280,6 +283,7 @@ const FreshPicksCarousel: React.FC<CarouselProps> = ({
             </Link>
             <Button
               onClick={goNext}
+              aria-label={t("a11y.nextProduct")}
               variant="outline"
               size="icon"
               className="h-12 w-12 2xl:h-16 2xl:w-16 rounded-full bg-white/15 text-white hover:bg-white/25 hover:text-white border-white/20"

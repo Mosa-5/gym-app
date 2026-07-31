@@ -15,6 +15,7 @@ export default {
         brand: {
           DEFAULT: "rgb(var(--color-brand) / <alpha-value>)",
           hover: "rgb(var(--color-brand-hover) / <alpha-value>)",
+          "on-dark": "rgb(var(--color-brand-on-dark) / <alpha-value>)",
         },
         destructive: {
           DEFAULT: "rgb(var(--color-destructive) / <alpha-value>)",
