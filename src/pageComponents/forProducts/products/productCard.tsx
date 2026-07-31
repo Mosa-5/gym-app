@@ -57,10 +57,12 @@ const ProductCard: React.FC<ProductCardProps> = ({
             sizes="(min-width: 1536px) 208px, (min-width: 640px) 160px, 96px"
             alt={product.name}
             loading="lazy"
-            // Reserves the width the CSS leaves as `auto`. See carouselCard.
+            // Aspect ratio for CLS. `w-auto` below is required alongside these:
+            // they double as presentational hints setting `width: 768px`, which
+            // nothing in preflight overrides. See carousel.styles.ts.
             width={768}
             height={768}
-            className="h-24 sm:h-40 2xl:h-52 object-contain rounded-full mb-4 sm:mb-6"
+            className="h-24 sm:h-40 2xl:h-52 w-auto object-contain rounded-full mb-4 sm:mb-6"
           />
           <h3 className="text-xs sm:text-sm 2xl:text-lg font-semibold text-start w-full max-w-60 tracking-wide text-white truncate">
             {product.name}

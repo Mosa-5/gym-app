@@ -33,7 +33,12 @@ export const cardContent = cva([
 ]);
 
 export const image = cva([
-  "h-36 sm:h-40 lg:h-56 2xl:h-72 object-contain rounded-full",
+  // `w-auto` is load-bearing. The <img> carries width/height attributes for the
+  // aspect ratio (CLS), but those attributes are ALSO presentational hints that
+  // set `width: 768px`. Nothing in Tailwind's preflight sets `width`, so without
+  // an explicit rule here the hint wins, the element stretches to its container,
+  // and `rounded-full` turns into an ellipse with the image letterboxed inside.
+  "h-36 sm:h-40 lg:h-56 2xl:h-72 w-auto object-contain rounded-full",
   "mb-5 sm:mb-6 lg:mb-10",
 ]);
 
