@@ -50,6 +50,13 @@ export const useGetProductListWithCategory = <T = Product[]>(
       return getProductListWithCategory(productType);
     },
     staleTime: 60 * 1000,
+    // Without this the query fires with `productType: undefined`, which sends
+    // `category=ilike.` and matches nothing. The carousel components call all
+    // three product hooks unconditionally and pick one by `carouselType`, so on
+    // the home page that was a wasted round trip per carousel; on the product
+    // page it fired once before the product (and therefore its category) had
+    // even loaded.
+    enabled: !!productType,
     ...queryOptions,
   });
 };

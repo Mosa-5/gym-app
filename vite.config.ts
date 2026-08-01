@@ -1,4 +1,7 @@
-import { defineConfig, Plugin } from "vite";
+// `defineConfig` comes from vitest/config, not vite — it is a superset that
+// also types the `test` block below. Everything else behaves identically.
+import { defineConfig } from "vitest/config";
+import type { Plugin } from "vite";
 import react from "@vitejs/plugin-react";
 import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
 
@@ -39,7 +42,10 @@ const injectPreloads = (): Plugin => ({
     };
 
     const desktopHero = findOne(
-      /assets\/hero-image-[\w-]+\.webp$/,
+      // `(?!sm-)` excludes hero-image-sm.webp, the smaller variant the
+      // brand-story cards use. Without it this matched two files, and the
+      // "exactly 1" guard correctly emitted no preload at all.
+      /assets\/hero-image-(?!sm-)[\w-]+\.webp$/,
       "hero webp",
     );
     const mobileHero = findOne(/assets\/ripped-[\w-]+\.avif$/, "hero avif");
@@ -109,6 +115,34 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": "/src",
+    },
+  },
+  test: {
+    environment: "jsdom",
+    globals: true,
+    setupFiles: ["./src/test/setup.ts"],
+    // Vitest reuses this whole config, so the `@` alias (80 files), asset
+    // imports (28) and CSS imports all resolve exactly as they do in the app —
+    // which is the reason for using Vitest over a standalone runner here.
+    css: false,
+    /**
+     * `src/supabase/supabase.tsx` calls createClient() at module scope, so any
+     * test that transitively imports the data layer needs these present.
+     * createClient does no I/O on construction, so dummy values are fine — and
+     * this keeps CI working without real credentials.
+     */
+    env: {
+      VITE_SUPABASE_URL: "http://localhost:54321",
+      VITE_SUPABASE_PUBLISHABLE_KEY: "sb_publishable_test",
+    },
+    coverage: {
+      provider: "v8",
+      include: ["src/**/*.{ts,tsx}"],
+      exclude: [
+        "src/**/*.styles.ts",
+        "src/**/*.data.*",
+        "src/supabase/supabase.types.ts",
+      ],
     },
   },
   build: {
