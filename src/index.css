@@ -60,29 +60,6 @@ body {
   }
 }
 
-/* Scroll cue at the bottom of the hero — a slow drift, not a bounce. */
-@keyframes scroll-cue {
-  0%,
-  100% {
-    transform: translateY(0);
-    opacity: 0.55;
-  }
-  50% {
-    transform: translateY(6px);
-    opacity: 1;
-  }
-}
-
-.scroll-cue-arrow {
-  animation: scroll-cue 2s ease-in-out infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .scroll-cue-arrow {
-    animation: none;
-  }
-}
-
 /* Georgian pages: Georgian glyphs come from the Georgian font, Latin ones
    (brand name, prices) fall through to Noto Sans — so no Latin subset of the
    Georgian font needs downloading. */

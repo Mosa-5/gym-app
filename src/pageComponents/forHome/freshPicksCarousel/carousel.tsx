@@ -10,7 +10,7 @@ import { mapProductTableData } from "@/supabase/products";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
+import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
 import SectionHeading from "@/pageComponents/forHome/sectionHeading/sectionHeading";
 import { crosshatchPattern } from "@/lib/crosshatchPattern";
 import { productSrcSet } from "@/lib/productImage";
@@ -291,7 +291,7 @@ const FreshPicksCarousel: React.FC<CarouselProps> = ({
                       // The largest card slot in the app. At DPR3 the 176px
                       // mobile slot needs 528px, so this one upgrades itself to
                       // the 768 file there; the smaller cards stay on 384.
-                      sizes="(min-width: 1536px) 320px, (min-width: 640px) 256px, 176px"
+                      sizes="(min-width: 1600px) 320px, (min-width: 640px) 256px, 176px"
                       alt={product.name}
                       loading="lazy"
                       className="relative h-44 w-44 sm:h-64 sm:w-64 2xl:h-80 2xl:w-80 object-cover rounded-full shadow-lg"
@@ -311,9 +311,11 @@ const FreshPicksCarousel: React.FC<CarouselProps> = ({
               aria-label={t("a11y.previousProduct")}
               variant="outline"
               size="icon"
-              className="h-12 w-12 2xl:h-16 2xl:w-16 rounded-full bg-white/15 text-white hover:bg-white/25 hover:text-white border-white/20"
+              // Icon size goes on the button: Button's [&_svg]:size-4 beats
+              // any size class on the icon itself.
+              className="h-12 w-12 2xl:h-16 2xl:w-16 rounded-full bg-white/15 text-white hover:bg-white/25 hover:text-white border-white/20 [&_svg]:size-5 2xl:[&_svg]:size-6"
             >
-              <ArrowLeft className="h-5 w-5 2xl:h-7 2xl:w-7" />
+              <ChevronLeft strokeWidth={3} />
             </Button>
             <Link
               to={`/dashboard/productDetail/${products[((Math.round(rotation) % total) + total) % total]?.id}`}
@@ -327,9 +329,9 @@ const FreshPicksCarousel: React.FC<CarouselProps> = ({
               aria-label={t("a11y.nextProduct")}
               variant="outline"
               size="icon"
-              className="h-12 w-12 2xl:h-16 2xl:w-16 rounded-full bg-white/15 text-white hover:bg-white/25 hover:text-white border-white/20"
+              className="h-12 w-12 2xl:h-16 2xl:w-16 rounded-full bg-white/15 text-white hover:bg-white/25 hover:text-white border-white/20 [&_svg]:size-5 2xl:[&_svg]:size-6"
             >
-              <ArrowRight className="h-5 w-5 2xl:h-7 2xl:w-7" />
+              <ChevronRight strokeWidth={3} />
             </Button>
           </div>
         </div>

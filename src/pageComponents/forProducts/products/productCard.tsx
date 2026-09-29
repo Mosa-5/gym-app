@@ -54,7 +54,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
           <img
             src={product.image_url[0]}
             srcSet={productSrcSet(product.image_url[0])}
-            sizes="(min-width: 1536px) 208px, (min-width: 640px) 160px, 96px"
+            sizes="(min-width: 1600px) 208px, (min-width: 640px) 160px, 96px"
             alt={product.name}
             loading="lazy"
             // Aspect ratio for CLS. `w-auto` below is required alongside these:

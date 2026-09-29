@@ -2,7 +2,7 @@ import * as React from "react";
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from "embla-carousel-react";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/componentsShadcn/ui/button";
@@ -204,7 +204,9 @@ const CarouselPrevious = React.forwardRef<
       variant={variant}
       size={size}
       className={cn(
-        "absolute h-16 w-16 rounded-full bg-black text-white hover:text-white hover:bg-neutral-800 border-none dark:bg-neutral-200 dark:text-black dark:hover:bg-neutral-300",
+        // [&_svg]:size-6 overrides Button's own [&_svg]:size-4; a size class on
+        // the icon itself loses to that selector and does nothing.
+        "absolute h-16 w-16 rounded-full bg-black text-white hover:text-white hover:bg-neutral-800 border-none dark:bg-neutral-200 dark:text-black dark:hover:bg-neutral-300 [&_svg]:size-6",
         orientation === "horizontal"
           ? "-left-12 top-1/2 -translate-y-1/2"
           : "-top-12 left-1/2 -translate-x-1/2 rotate-90",
@@ -214,7 +216,7 @@ const CarouselPrevious = React.forwardRef<
       onClick={scrollPrev}
       {...props}
     >
-      <ArrowLeft className="h-8 w-8" />
+      <ChevronLeft strokeWidth={3} />
       <span className="sr-only">Previous slide</span>
     </Button>
   );
@@ -233,7 +235,7 @@ const CarouselNext = React.forwardRef<
       variant={variant}
       size={size}
       className={cn(
-        "absolute h-16 w-16 rounded-full bg-black text-white hover:text-white hover:bg-neutral-800 border-none dark:bg-neutral-200 dark:text-black dark:hover:bg-neutral-300",
+        "absolute h-16 w-16 rounded-full bg-black text-white hover:text-white hover:bg-neutral-800 border-none dark:bg-neutral-200 dark:text-black dark:hover:bg-neutral-300 [&_svg]:size-6",
         orientation === "horizontal"
           ? "-right-12 top-1/2 -translate-y-1/2"
           : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",
@@ -243,7 +245,7 @@ const CarouselNext = React.forwardRef<
       onClick={scrollNext}
       {...props}
     >
-      <ArrowRight className="h-8 w-8" />
+      <ChevronRight strokeWidth={3} />
       <span className="sr-only">Next slide</span>
     </Button>
   );

@@ -6,6 +6,11 @@ export default {
   content: ["./index.html", "./src/**/*.{ts,tsx,js,jsx}"],
   theme: {
     extend: {
+      screens: {
+        // Raised from 1536px so a 1920 screen at 125% scaling (1536px wide)
+        // gets the laptop layout in every browser. See breakpoints.md.
+        "2xl": "1600px",
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",

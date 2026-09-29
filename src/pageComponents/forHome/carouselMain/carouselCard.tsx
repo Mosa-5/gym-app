@@ -52,7 +52,7 @@ const CarouselCard: React.FC<CarouselCardProps> = ({
               <img
                 src={product.image_url[0]}
                 srcSet={productSrcSet(product.image_url[0])}
-                sizes="(min-width: 1536px) 288px, (min-width: 1024px) 224px, (min-width: 640px) 160px, 144px"
+                sizes="(min-width: 1600px) 288px, (min-width: 1024px) 224px, (min-width: 640px) 160px, 144px"
                 alt={product.name}
                 loading="lazy"
                 // Only the 1:1 ratio is used, not these pixel values — the CSS
