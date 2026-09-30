@@ -13,7 +13,9 @@ const AuthLayout: React.FC = () => {
         }}
       />
 
-      <div className="absolute top-4 right-6 z-20 w-9 h-9 2xl:w-11 2xl:h-11 bg-brand hover:bg-brand-hover transition-colors duration-200 rounded-full flex items-center justify-center [&_button]:text-white [&_button]:hover:text-white">
+      {/* Position only: the switch brings its own dark pill and red thumb,
+          which read fine on this light page. */}
+      <div className="absolute top-4 right-6 z-20">
         <LanguageChanger />
       </div>
 

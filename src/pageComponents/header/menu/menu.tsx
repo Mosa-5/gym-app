@@ -8,7 +8,6 @@ import {
   SheetTrigger,
 } from "../../../componentsShadcn/ui/sheet";
 import LanguageChanger from "../language/language";
-import ThemeToggle from "@/componentsShadcn/theme/themeButton/mode-toggle";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "@/context/auth/hooks/useAuthContext";
 import {
@@ -98,9 +97,12 @@ const Menu = () => {
               )}
             </div>
 
-            <div className="flex items-center justify-between px-4 pt-4 border-t border-neutral-800 mt-2 [&_button]:scale-150">
-              <LanguageChanger />
-              <ThemeToggle />
+            <div className="flex items-center justify-between px-4 pt-4 border-t border-neutral-800 mt-2">
+              {/* Scale the switch as a whole; scaling each of its buttons
+                  would make them overlap and leave the thumb behind. */}
+              <div className="origin-left scale-125">
+                <LanguageChanger />
+              </div>
             </div>
           </SheetHeader>
         </SheetContent>

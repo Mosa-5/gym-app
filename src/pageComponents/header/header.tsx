@@ -1,6 +1,5 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import ThemeToggle from "../../componentsShadcn/theme/themeButton/mode-toggle";
 import Menu from "./menu/menu";
 import LanguageChanger from "./language/language";
 import {
@@ -8,6 +7,8 @@ import {
   containerClass,
   logoClass,
   rightSectionClass,
+  accountLinkClass,
+  accountLabelClass,
 } from "./header.styles";
 import ShoppingCart from "../menuCart/menuCart";
 import { useAuthContext } from "@/context/auth/hooks/useAuthContext";
@@ -76,30 +77,39 @@ const Header: React.FC = () => {
           {/* Divider */}
           <div className="hidden md:block w-px h-5 2xl:h-7 bg-neutral-700" />
 
+          {/* Below lg the labels are hidden, so each link keeps an aria-label
+              to stay named for screen readers when it's icon-only. */}
           {user ? (
-            <Link className="hidden md:flex" to={"/dashboard/profilePage"}>
-              <Avatar className="h-8 w-8 2xl:h-10 2xl:w-10 ring-2 ring-brand/50 hover:ring-brand transition-all duration-200">
+            <Link
+              aria-label={t("nav.profile")}
+              className={accountLinkClass()}
+              to={"/dashboard/profilePage"}
+            >
+              {/* 4px smaller than the login circle (h-8 / 2xl:h-10): the 2px
+                  ring is drawn outside the box, so ring included they match.
+                  The margin puts back the space the ring takes. */}
+              <Avatar className="h-7 w-7 2xl:h-9 2xl:w-9 m-0.5 ring-2 ring-brand/50 group-hover:ring-brand transition-all duration-200">
                 <AvatarImage src={profileData?.avatar_url} />
                 <AvatarFallback className="bg-neutral-800 text-xs font-bold text-neutral-300">
                   CN
                 </AvatarFallback>
               </Avatar>
+              <span className={accountLabelClass()}>{t("nav.profile")}</span>
             </Link>
           ) : (
             <Link
-              aria-label={t("nav.signIn")}
-              className="hidden md:flex items-center justify-center w-8 h-8 2xl:w-10 2xl:h-10 rounded-full bg-neutral-800/80 hover:bg-neutral-700 transition-colors duration-200"
+              aria-label={t("nav.login")}
+              className={accountLinkClass()}
               to={"/auth/signin"}
             >
-              <User className="w-4 h-4 2xl:w-5 2xl:h-5 text-neutral-300" />
+              <span className="flex items-center justify-center w-8 h-8 2xl:w-10 2xl:h-10 rounded-full bg-neutral-800/80 group-hover:bg-neutral-700 transition-colors duration-200">
+                <User className="w-4 h-4 2xl:w-5 2xl:h-5 text-neutral-300" />
+              </span>
+              <span className={accountLabelClass()}>{t("nav.login")}</span>
             </Link>
           )}
 
           <ShoppingCart />
-
-          <div className="hidden md:flex">
-            <ThemeToggle />
-          </div>
         </div>
       </div>
     </header>

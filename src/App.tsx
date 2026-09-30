@@ -7,7 +7,6 @@ import {
   useSearchParams,
 } from "react-router-dom";
 import DashboardLayout from "./layouts/dashboardLayout";
-import { ThemeProvider } from "./componentsShadcn/theme/theme-provider";
 import AuthGuardLogIn from "./pageComponents/route-guards/auth/forSignIn";
 import AuthGuardLogOut from "./pageComponents/route-guards/auth/forSignOut";
 import AuthLayout from "./layouts/authLayout";
@@ -90,7 +89,7 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
+    <>
       <ScrollToTop />
       <Suspense fallback={null}>
         <Toaster richColors position="bottom-right" />
@@ -186,7 +185,7 @@ const App: React.FC = () => {
           }
         />
       </Routes>
-    </ThemeProvider>
+    </>
   );
 };
 

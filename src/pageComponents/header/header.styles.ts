@@ -17,3 +17,17 @@ export const logoClass = cva([
   "cursor-pointer duration-200 font-[Inter,system-ui,sans-serif]",
 ]);
 export const rightSectionClass = cva("flex items-center gap-5 2xl:gap-7");
+
+// Avatar/icon plus "Profile"/"Login". `group` lets hovering anywhere on the
+// link light up both the icon and the label.
+export const accountLinkClass = cva(
+  "group hidden md:flex items-center gap-2.5 2xl:gap-3",
+);
+
+// Same type as the nav links. Hidden below lg, where the header is too narrow
+// for another word next to the nav links.
+export const accountLabelClass = cva([
+  "hidden lg:inline",
+  "text-[13px] 2xl:text-[16px] font-semibold uppercase tracking-wider",
+  "text-neutral-400 group-hover:text-white transition-colors duration-200",
+]);

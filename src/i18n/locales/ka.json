@@ -5,7 +5,9 @@
     "about": "ჩვენ შესახებ",
     "myProfile": "ჩემი პროფილი",
     "signIn": "შესვლა",
-    "signOut": "გასვლა"
+    "signOut": "გასვლა",
+    "profile": "პროფილი",
+    "login": "შესვლა"
   },
   "hero": {
     "headlinePrefix": "ივარჯიშე",
@@ -270,7 +272,11 @@
     "yourReview": "შენი შეფასება",
     "reviewPlaceholder": "გაუზიარე შენი გამოცდილება ამ პროდუქტზე...",
     "goToSlide": "გადასვლა სლაიდზე {{number}}",
-    "toggleTheme": "თემის გადართვა"
+    "toggleTheme": "თემის გადართვა",
+    "lang": {
+      "en": "ინგ",
+      "ka": "ქარ"
+    }
   },
   "a11y": {
     "openMenu": "მენიუს გახსნა",
@@ -283,7 +289,8 @@
     "previousPage": "წინა გვერდი",
     "nextPage": "შემდეგი გვერდი",
     "previousProduct": "წინა პროდუქტი",
-    "nextProduct": "შემდეგი პროდუქტი"
+    "nextProduct": "შემდეგი პროდუქტი",
+    "language": "ენა"
   },
   "seo": {
     "homeTitle": "მთავარი",

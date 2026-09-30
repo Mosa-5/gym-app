@@ -5,7 +5,9 @@
     "about": "About",
     "myProfile": "My Profile",
     "signIn": "Sign In",
-    "signOut": "Sign Out"
+    "signOut": "Sign Out",
+    "profile": "Profile",
+    "login": "Login"
   },
   "hero": {
     "headlinePrefix": "Lift",
@@ -270,7 +272,11 @@
     "yourReview": "Your Review",
     "reviewPlaceholder": "Share your experience with this product...",
     "goToSlide": "Go to slide {{number}}",
-    "toggleTheme": "Toggle theme"
+    "toggleTheme": "Toggle theme",
+    "lang": {
+      "en": "EN",
+      "ka": "KA"
+    }
   },
   "a11y": {
     "openMenu": "Open menu",
@@ -283,7 +289,8 @@
     "previousPage": "Previous page",
     "nextPage": "Next page",
     "previousProduct": "Previous product",
-    "nextProduct": "Next product"
+    "nextProduct": "Next product",
+    "language": "Language"
   },
   "seo": {
     "homeTitle": "Home",
