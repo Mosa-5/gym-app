@@ -105,7 +105,7 @@ const ReviewList: React.FC = () => {
   };
 
   return (
-    <section className="flex mb-20 2xl:mb-28 flex-col items-center px-6 md:px-20 2xl:px-0 gap-6 2xl:gap-10">
+    <section className="flex mb-20 2xl:mb-28 flex-col items-center px-4 md:px-20 2xl:px-0 gap-6 2xl:gap-10">
       <h2 className="text-2xl sm:text-3xl 2xl:text-5xl font-black uppercase tracking-tight text-neutral-900 dark:text-white w-full max-w-screen-lg 2xl:max-w-[1400px] text-center">
         {t("reviews.reviews")}
       </h2>

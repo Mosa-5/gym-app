@@ -22,12 +22,16 @@ interface ColorSwatchesProps {
 const ColorSwatches: React.FC<ColorSwatchesProps> = ({ product }) => {
   const { t } = useTranslation();
 
-  const { data: variants = [] } = useGetProductVariants(
+  const { data: variants = [], isPending } = useGetProductVariants(
     {},
     product.variant_group,
   );
 
-  if (variants.length < 2) return null;
+  // A product with no group never has swatches, so nothing is reserved for it.
+  if (!product.variant_group) return null;
+  // A group of one has no choice to offer. Checked only once loaded, so the
+  // row still holds its place while the colours are on their way.
+  if (!isPending && variants.length < 2) return null;
 
   // Falls back to the raw colour word when a locale has no entry for it, so a
   // colour added to the database shows up before its translation exists.
@@ -49,6 +53,16 @@ const ColorSwatches: React.FC<ColorSwatchesProps> = ({ product }) => {
       </p>
 
       <ul className="flex flex-wrap items-center gap-3 2xl:gap-4 mt-3">
+        {/* Placeholders while the group loads. They are the same size as real
+            swatches, so the row keeps its height and the buttons below it
+            don't jump once the colours arrive. */}
+        {isPending &&
+          [0, 1, 2].map((i) => (
+            <li key={`placeholder-${i}`} aria-hidden="true">
+              <span className="block w-10 h-10 2xl:w-12 2xl:h-12 rounded-full bg-neutral-200 dark:bg-neutral-800" />
+            </li>
+          ))}
+
         {variants.map((variant) => {
           const isCurrent = variant.id === product.id;
           const fill = variant.color ? swatchFor(variant.color) : undefined;

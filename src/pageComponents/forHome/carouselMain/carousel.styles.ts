@@ -12,13 +12,31 @@ export const heading = cva([
 ]);
 
 export const carousel = cva([
-  "w-[97%] sm:w-[85%] lg:w-[80%] 2xl:w-[90%]",
+  // A fixed gutter on phones rather than the old `w-[97%]`, whose 1.5% margin
+  // grew with the screen (~6px at 375, ~10px at 639). From sm: up the width
+  // percentages already inset the track, so the padding comes back off.
+  "w-full px-4 sm:px-0",
+  "sm:w-[85%] lg:w-[80%] 2xl:w-[90%]",
   "max-w-5xl 2xl:max-w-[1560px]",
 ]);
 
 export const carouselItem = cva([
   "basis-[56%] sm:basis-1/2 lg:basis-1/3 2xl:basis-1/4",
   "pl-0 sm:pl-4 py-4",
+  // A percentage basis drifts a long way inside one breakpoint band — at 1023px
+  // half the track is 435px, so two cards filled the row and then halved at lg.
+  // The cap holds them steady below lg and lets the spare width show more of
+  // the next card instead; the floor keeps them from being cramped at lg, where
+  // a third of the track is only ~273px.
+  //
+  // Both go on the slide rather than the card because CarouselItem is
+  // `min-w-0 shrink-0 grow-0`: it is exactly its basis, so a card sized past it
+  // would overflow onto its neighbour instead of widening it. Each value is the
+  // card width plus this slide's 16px gutter and the card's own 4px wrapper.
+  // The base floor only bites on phones, where 56% of a narrow track leaves the
+  // card under 224px; from sm: up the basis is already past it. Note the phone
+  // slide has no gutter and a 2px wrapper, so its offset is 4 rather than 24.
+  "min-w-[228px] max-w-[248px] lg:max-w-none lg:min-w-[314px]",
 ]);
 
 export const card = cva([

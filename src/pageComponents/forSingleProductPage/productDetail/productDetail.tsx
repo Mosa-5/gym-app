@@ -7,6 +7,7 @@ import { useCartContext } from "@/context/cart/hooks/useCartContext";
 import { useAddToWishlist } from "@/reactQuery/mutations/wishlist";
 import { useGetProductReviews } from "@/reactQuery/query/reviews";
 import ColorSwatches from "./colorSwatches";
+import { productSrcSet } from "@/lib/productImage";
 
 interface Product {
   id: number;
@@ -66,14 +67,27 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
   };
 
   return (
-    <div className="flex justify-center p-6 2xl:p-16">
+    <div className="flex justify-center px-4 py-6 2xl:p-16">
       <div className="max-w-sm sm:max-w-md flex flex-col items-center md:flex-row md:max-w-screen-lg 2xl:max-w-[1400px] gap-10 2xl:gap-20 w-full justify-between p-5 2xl:p-10">
-        {/* Image Section */}
-        <div className="flex flex-col items-center">
-          <div className="max-w-xs md:max-w-sm 2xl:max-w-lg flex justify-center items-center">
+        {/* Image Section. The column carries the width: without it this was a
+            flex item sized by its own content, so the circle's percentage had
+            nothing definite to resolve against and only settled once the image
+            had loaded — most visible when moving between colours, where every
+            image is a fresh download. */}
+        <div className="flex flex-col items-center w-full max-w-xs md:max-w-sm 2xl:max-w-lg">
+          {/* Width comes from the column above; aspect-square supplies the
+              height, so the circle holds its final size before the file
+              arrives rather than taking it from the loaded image. */}
+          <div className="w-full aspect-square rounded-full bg-neutral-100 dark:bg-neutral-800 flex justify-center items-center overflow-hidden">
             <img
               src={mainImage || product.image_url?.[0]}
+              srcSet={mainImage ? productSrcSet(mainImage) : undefined}
+              sizes="(min-width: 1600px) 512px, (min-width: 768px) 384px, 320px"
               alt={product.name}
+              // Every product image in Storage is square (768x768); these only
+              // supply the 1:1 ratio, the CSS above sets the rendered size.
+              width={768}
+              height={768}
               className="w-full h-full object-cover rounded-full"
             />
           </div>
@@ -140,9 +154,11 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
 
           <ColorSwatches product={product} />
 
-          {/* Side by side from sm: up; stacked on phones, where two uppercase
-              labels on one row would each wrap to two lines. */}
-          <div className="flex flex-col sm:flex-row gap-3 2xl:gap-4 mt-8 2xl:mt-12">
+          {/* Side by side from lg: up. Below that they stack: on phones there
+              isn't the width, and between md and lg the text column is already
+              squeezed beside the image, so two uppercase labels on one row
+              would each wrap to two lines. */}
+          <div className="flex flex-col lg:flex-row gap-3 2xl:gap-4 mt-8 2xl:mt-12">
             <button
               onClick={handleAddToCart}
               className="flex-1 bg-brand hover:bg-brand-hover text-white font-bold text-sm 2xl:text-base uppercase tracking-wider rounded-full py-3.5 2xl:py-5 transition-colors duration-200 cursor-pointer"
