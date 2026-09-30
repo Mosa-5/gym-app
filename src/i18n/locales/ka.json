@@ -281,6 +281,7 @@
   "a11y": {
     "openMenu": "მენიუს გახსნა",
     "openCart": "კალათის გახსნა",
+    "closeCart": "კალათის დახურვა",
     "decreaseQuantity": "რაოდენობის შემცირება",
     "increaseQuantity": "რაოდენობის გაზრდა",
     "removeItem": "ნივთის წაშლა",
@@ -307,5 +308,18 @@
     "registerTitle": "ანგარიშის შექმნა",
     "notFoundTitle": "გვერდი ვერ მოიძებნა",
     "productDescription": "{{name}}, {{price}}. წაიკითხეთ შეფასებები და დაამატეთ კალათაში GymGear-ზე."
+  },
+  "colors": {
+    "black": "შავი",
+    "white": "თეთრი",
+    "gray": "რუხი",
+    "navy": "მუქი ლურჯი",
+    "red": "წითელი",
+    "green": "მწვანე",
+    "tan": "ჩალისფერი",
+    "lilac": "იასამნისფერი"
+  },
+  "product": {
+    "color": "ფერი:"
   }
 }

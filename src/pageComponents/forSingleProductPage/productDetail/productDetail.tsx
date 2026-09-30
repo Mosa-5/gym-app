@@ -6,6 +6,7 @@ import { useAuthContext } from "@/context/auth/hooks/useAuthContext";
 import { useCartContext } from "@/context/cart/hooks/useCartContext";
 import { useAddToWishlist } from "@/reactQuery/mutations/wishlist";
 import { useGetProductReviews } from "@/reactQuery/query/reviews";
+import ColorSwatches from "./colorSwatches";
 
 interface Product {
   id: number;
@@ -15,6 +16,8 @@ interface Product {
   created_at: string;
   description: string;
   image_url: string[];
+  variant_group: string | null;
+  color: string | null;
 }
 
 interface ProductDetailProps {
@@ -135,16 +138,20 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
             {product.description}
           </p>
 
-          <div className="flex flex-col gap-3 2xl:gap-4 mt-8 2xl:mt-12">
+          <ColorSwatches product={product} />
+
+          {/* Side by side from sm: up; stacked on phones, where two uppercase
+              labels on one row would each wrap to two lines. */}
+          <div className="flex flex-col sm:flex-row gap-3 2xl:gap-4 mt-8 2xl:mt-12">
             <button
               onClick={handleAddToCart}
-              className="w-full bg-brand hover:bg-brand-hover text-white font-bold text-sm 2xl:text-base uppercase tracking-wider rounded-full py-3.5 2xl:py-5 transition-colors duration-200 cursor-pointer"
+              className="flex-1 bg-brand hover:bg-brand-hover text-white font-bold text-sm 2xl:text-base uppercase tracking-wider rounded-full py-3.5 2xl:py-5 transition-colors duration-200 cursor-pointer"
             >
               {t("common.addToCart")}
             </button>
             <button
               onClick={handleAddToWishlist}
-              className="w-full bg-transparent hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-900 dark:text-white font-bold text-sm 2xl:text-base uppercase tracking-wider rounded-full py-3.5 2xl:py-5 border border-neutral-300 dark:border-neutral-700 transition-colors duration-200 cursor-pointer"
+              className="flex-1 bg-transparent hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-900 dark:text-white font-bold text-sm 2xl:text-base uppercase tracking-wider rounded-full py-3.5 2xl:py-5 border border-neutral-300 dark:border-neutral-700 transition-colors duration-200 cursor-pointer"
             >
               {t("common.addToFavourites")}
             </button>

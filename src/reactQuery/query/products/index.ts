@@ -3,10 +3,13 @@ import {
   getProductListBestSelling,
   getProductListWithCategory,
   getProductListWorstSelling,
+  getProductVariants,
+  getRelatedProducts,
   getSingleProduct,
   PaginatedProducts,
   Product,
   ProductFilters,
+  ProductVariantRow,
 } from "@/supabase/products";
 import {
   useQuery,
@@ -82,6 +85,48 @@ export const useGetProductListWithWorstSelling = <T = Product[]>({
   return useQuery<Product[], Error, T>({
     queryKey: ["worstSellingProducts"],
     queryFn: getProductListWorstSelling,
+    staleTime: 60 * 1000,
+    ...queryOptions,
+  });
+};
+
+export const useGetRelatedProducts = <T = Product[]>(
+  {
+    queryOptions,
+  }: {
+    queryOptions?: Omit<UseQueryOptions<Product[], Error, T>, "queryKey">;
+  } = {},
+  category: string | undefined,
+  excludeId: number | undefined,
+): UseQueryResult<T, Error> => {
+  return useQuery<Product[], Error, T>({
+    queryKey: ["relatedProducts", category, excludeId],
+    queryFn: () => getRelatedProducts(category as string, excludeId as number),
+    // The carousel calls every product hook and picks one by `carouselType`,
+    // so this stays idle on the pages that aren't showing related products.
+    enabled: !!category && excludeId !== undefined,
+    staleTime: 60 * 1000,
+    ...queryOptions,
+  });
+};
+
+export const useGetProductVariants = <T = ProductVariantRow[]>(
+  {
+    queryOptions,
+  }: {
+    queryOptions?: Omit<
+      UseQueryOptions<ProductVariantRow[], Error, T>,
+      "queryKey"
+    >;
+  } = {},
+  variantGroup: string | null | undefined,
+): UseQueryResult<T, Error> => {
+  return useQuery<ProductVariantRow[], Error, T>({
+    queryKey: ["productVariants", variantGroup],
+    queryFn: () => getProductVariants(variantGroup as string),
+    // A product with no group has no colour options, so there is nothing to
+    // ask for — without this it would query for `variant_group=is.null`.
+    enabled: !!variantGroup,
     staleTime: 60 * 1000,
     ...queryOptions,
   });

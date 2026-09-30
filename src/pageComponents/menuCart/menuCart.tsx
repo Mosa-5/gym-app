@@ -6,7 +6,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/componentsShadcn/ui/sheet";
-import { ShoppingBag } from "lucide-react";
+import { ShoppingBag, X } from "lucide-react";
 import { useCartContext } from "@/context/cart/hooks/useCartContext";
 import { Link } from "react-router-dom";
 import emptyCartSVG from "@/assets/undraw_empty-cart_574u.svg";
@@ -20,6 +20,7 @@ import {
   headerClass,
   titleClass,
   itemCountClass,
+  closeButtonClass,
   scrollAreaClass,
   itemListClass,
   footerClass,
@@ -53,16 +54,23 @@ const ShoppingCart = () => {
         side="right"
         className={sheetContentClass()}
         aria-describedby={undefined}
+        hideClose
       >
         {/* Header */}
         <SheetHeader className={headerClass()}>
           <SheetTitle className={titleClass()}>
-            <ShoppingBag className="w-5 h-5 2xl:w-6 2xl:h-6" />
+            <ShoppingBag className="w-5 h-5 2xl:w-6 2xl:h-6 shrink-0" />
             {t("cart.yourCart")}
             <span className={itemCountClass()}>
               {totalItems} {totalItems === 1 ? t("cart.item") : t("cart.items")}
             </span>
           </SheetTitle>
+          <SheetClose
+            aria-label={t("a11y.closeCart")}
+            className={closeButtonClass()}
+          >
+            <X className="w-[18px] h-[18px] 2xl:w-5 2xl:h-5" />
+          </SheetClose>
         </SheetHeader>
 
         {/* Cart items */}

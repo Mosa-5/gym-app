@@ -14,7 +14,7 @@
     "test:coverage": "vitest run --coverage",
     "optimize:images": "node scripts/optimize-images.mjs",
     "preview": "vite preview",
-    "generate-supabase-types": "supabase gen types typescript --project-id ibmntluopsbktoqjaubs --schema public > src/supabase/supabase.types.ts",
+    "generate-supabase-types": "node scripts/generate-supabase-types.mjs",
     "prepare": "husky"
   },
   "dependencies": {

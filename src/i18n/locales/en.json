@@ -281,6 +281,7 @@
   "a11y": {
     "openMenu": "Open menu",
     "openCart": "Open cart",
+    "closeCart": "Close cart",
     "decreaseQuantity": "Decrease quantity",
     "increaseQuantity": "Increase quantity",
     "removeItem": "Remove item",
@@ -307,5 +308,18 @@
     "registerTitle": "Create an Account",
     "notFoundTitle": "Page Not Found",
     "productDescription": "{{name}}, {{price}}. Read reviews and add it to your cart at GymGear."
+  },
+  "colors": {
+    "black": "Black",
+    "white": "White",
+    "gray": "Gray",
+    "navy": "Navy",
+    "red": "Red",
+    "green": "Green",
+    "tan": "Tan",
+    "lilac": "Lilac"
+  },
+  "product": {
+    "color": "Color:"
   }
 }

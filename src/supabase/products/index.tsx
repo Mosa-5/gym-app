@@ -75,6 +75,9 @@ export type Product = {
   name: string | null;
   price: number | null;
   sales_number: number | null;
+  /** Colour options of one item share a `variant_group`; null means no options. */
+  variant_group: string | null;
+  color: string | null;
   reviews?: { rating: number | null }[];
 };
 
@@ -97,6 +100,8 @@ export const mapProductTableData = (datalist: Product[]) => {
       name: data.name || "",
       price: data.price ?? 0,
       id: data.id,
+      variant_group: data.variant_group,
+      color: data.color,
       avgRating,
     };
   });
@@ -126,7 +131,31 @@ export const mapSingleProductTableData = (data: Product) => ({
   name: data.name || "",
   price: data.price ?? 0,
   id: data.id,
+  variant_group: data.variant_group,
+  color: data.color,
 });
+
+/**
+ * The colour options of one item. Ordered by colour so the swatch row keeps a
+ * stable order no matter how rows come back.
+ */
+export const getProductVariants = async (variantGroup: string) => {
+  const { data, error } = await supabase
+    .from("product")
+    .select("id, name, price, color")
+    .eq("variant_group", variantGroup)
+    .order("color");
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  return data;
+};
+
+export type ProductVariantRow = Awaited<
+  ReturnType<typeof getProductVariants>
+>[number];
 
 export const getProductListWithCategory = async (
   productType: string | undefined,
@@ -141,6 +170,54 @@ export const getProductListWithCategory = async (
   }
 
   return data as Product[];
+};
+
+/**
+ * Paired categories for "You May Also Like". Each category has only one product
+ * in it (in several colours), so its own category often can't fill the row —
+ * these pairs top it up. Fixed rather than random so the carousel doesn't
+ * reshuffle between renders.
+ */
+const FALLBACK_CATEGORY: Record<string, string> = {
+  "lever-belts": "grip-tape",
+  "grip-tape": "lever-belts",
+  "knee-sleeves": "lifting-straps",
+  "lifting-straps": "knee-sleeves",
+};
+
+const RELATED_LIMIT = 6;
+
+/**
+ * Up to six products to show alongside `excludeId`: everything else in its own
+ * category first, then the paired category until the row is full.
+ *
+ * Both categories come back in one request and are ordered here, because the
+ * "own category first" priority isn't something the query can express.
+ */
+export const getRelatedProducts = async (
+  category: string,
+  excludeId: number,
+) => {
+  const fallback = FALLBACK_CATEGORY[category.toLowerCase()];
+
+  const { data, error } = await supabase
+    .from("product")
+    .select("*, reviews(rating)")
+    .in("category", fallback ? [category, fallback] : [category])
+    .neq("id", excludeId)
+    // Within each category the better sellers fill the slots first.
+    .order("sales_number", { ascending: false, nullsFirst: false });
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  const rows = (data as Product[]) || [];
+
+  return [
+    ...rows.filter((p) => p.category === category),
+    ...rows.filter((p) => p.category !== category),
+  ].slice(0, RELATED_LIMIT);
 };
 
 export const getProductListBestSelling = async () => {

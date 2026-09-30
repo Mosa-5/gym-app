@@ -59,6 +59,7 @@ export type Database = {
       product: {
         Row: {
           category: string | null;
+          color: string | null;
           created_at: string;
           description: string | null;
           id: number;
@@ -66,9 +67,11 @@ export type Database = {
           name: string | null;
           price: number | null;
           sales_number: number | null;
+          variant_group: string | null;
         };
         Insert: {
           category?: string | null;
+          color?: string | null;
           created_at?: string;
           description?: string | null;
           id?: number;
@@ -76,9 +79,11 @@ export type Database = {
           name?: string | null;
           price?: number | null;
           sales_number?: number | null;
+          variant_group?: string | null;
         };
         Update: {
           category?: string | null;
+          color?: string | null;
           created_at?: string;
           description?: string | null;
           id?: number;
@@ -86,6 +91,7 @@ export type Database = {
           name?: string | null;
           price?: number | null;
           sales_number?: number | null;
+          variant_group?: string | null;
         };
         Relationships: [];
       };

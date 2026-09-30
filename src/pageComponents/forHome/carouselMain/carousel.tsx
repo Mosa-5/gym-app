@@ -9,7 +9,7 @@ import {
 import { wrapper, carousel } from "./carousel.styles";
 import {
   useGetProductListWithBestSelling,
-  useGetProductListWithCategory,
+  useGetRelatedProducts,
   useGetProductListWithWorstSelling,
 } from "@/reactQuery/query/products";
 import { mapProductTableData, type MappedProduct } from "@/supabase/products";
@@ -26,12 +26,15 @@ interface CarouselProps {
   productType?: string;
   headerText: string;
   carouselType: "bestSelling" | "category" | "worstSelling";
+  /** Required by `carouselType="category"`, which excludes it from the row. */
+  currentProductId?: number;
 }
 
 const CarouselForPages: React.FC<CarouselProps> = ({
   productType,
   headerText,
   carouselType,
+  currentProductId,
 }) => {
   const { t } = useTranslation();
   const [api, setApi] = useState<CarouselApi>();
@@ -53,9 +56,10 @@ const CarouselForPages: React.FC<CarouselProps> = ({
     };
   }, [api]);
 
-  const { data: productWithCategory = [] } = useGetProductListWithCategory(
+  const { data: relatedProducts = [] } = useGetRelatedProducts(
     { queryOptions: { select: mapProductTableData } },
     productType,
+    currentProductId,
   );
 
   const { data: productBestSelling = [] } = useGetProductListWithBestSelling({
@@ -106,7 +110,7 @@ const CarouselForPages: React.FC<CarouselProps> = ({
         return productWorstSelling;
       case "category":
       default:
-        return productWithCategory;
+        return relatedProducts;
     }
   })();
 

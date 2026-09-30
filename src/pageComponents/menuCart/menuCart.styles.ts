@@ -19,19 +19,33 @@ export const sheetContentClass = cva([
   "text-white p-0 flex flex-col",
 ]);
 
+// One row: title (with the item count) on the left, close button on the right.
+// flex-row and space-y-0 override SheetHeader's stacked default.
 export const headerClass = cva([
+  "flex-row items-center justify-between gap-3 space-y-0",
   "px-6 pt-6 pb-4 2xl:px-8 2xl:pt-8 2xl:pb-5",
-  "border-b border-neutral-800 pr-14",
+  "border-b border-neutral-800",
 ]);
 
 export const titleClass = cva([
-  "flex items-center gap-3 text-white",
+  "flex flex-wrap items-center gap-x-3 gap-y-1 min-w-0 text-white text-left",
   "text-lg 2xl:text-xl font-bold uppercase tracking-wider",
 ]);
 
-export const itemCountClass = cva(
-  "ml-auto text-sm 2xl:text-base font-semibold text-neutral-400",
-);
+export const itemCountClass = cva([
+  "text-sm 2xl:text-base font-semibold text-neutral-400",
+  "normal-case tracking-normal",
+]);
+
+// 36px target (40px at 2xl). It replaces the sheet's built-in 16px corner X,
+// which was too small to hit comfortably.
+export const closeButtonClass = cva([
+  "shrink-0 flex items-center justify-center rounded-full cursor-pointer",
+  "w-9 h-9 2xl:w-10 2xl:h-10",
+  "bg-neutral-800/80 text-neutral-300",
+  "hover:bg-neutral-700 hover:text-white transition-colors duration-200",
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white",
+]);
 
 export const scrollAreaClass = cva(
   "flex-1 overflow-y-auto px-6 py-4 2xl:px-8 2xl:py-6",

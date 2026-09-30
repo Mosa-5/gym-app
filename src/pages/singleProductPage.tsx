@@ -41,6 +41,7 @@ const SingleProductPage: React.FC = () => {
       {product && <ProductDetail product={product} />}
       <CarouselForPages
         productType={product?.category}
+        currentProductId={product?.id}
         headerText={t("common.youMayAlsoLike")}
         carouselType="category"
       />
